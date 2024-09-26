@@ -1,0 +1,13 @@
+
+# Ignore all .idea directory
+.idea/
+
+# Ignore target directories
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Ignore the out directory
+out/
+
+

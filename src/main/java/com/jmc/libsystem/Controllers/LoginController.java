@@ -4,7 +4,6 @@ import javafx.scene.control.*;
 
 public class LoginController {
 
-
     public ChoiceBox acc_selector;
     public Label acc_lbl;
     public TextField acc_fld;

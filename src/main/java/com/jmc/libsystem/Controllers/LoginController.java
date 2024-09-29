@@ -18,6 +18,8 @@ public class LoginController implements Initializable {
     public Label error_lbl;
     public Label acc_lbl;
     public TextField acc_fld;
+    public Button sign_up_btn;
+    public Button forget_password_btn;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -30,14 +32,25 @@ public class LoginController implements Initializable {
                 observable -> Model.getInstance().getViewFactory().setLoginAccountType(acc_selector.getValue()));
         // de set gia tri cho type login moi khi co thay doi
         login_btn.setOnAction(event -> onLogin());
+
     }
 
     private void onLogin() {
         Stage stage = (Stage) login_btn.getScene().getWindow();
+
         if (Model.getInstance().getViewFactory().getLoginAccountType() == AccountType.USER) {
+            // Evaluate Client Login Credentials
+            Model.getInstance().evaluateClientCred(acc_fld.getText(), password_fld.getText());
+            if (Model.getInstance().getUserLoginSuccessFlag()) {
                 Model.getInstance().getViewFactory().showUserWindow();
+
+                Model.getInstance().getViewFactory().closeStage(stage);
+            } else {
+                // Truong hop khong dang nhap thanh cong
+                error_lbl.setText("No Such Login Credentials");
+            }
         } else
-            Model.getInstance().getViewFactory().showAdminWindow();
-        Model.getInstance().getViewFactory().closeStage(stage);
+            Model.getInstance().getViewFactory().showAdminWindow(); // Đang xư lý mẫu cho User nên phần Admin chỉ để
+        // đơn giản như này
     }
 }

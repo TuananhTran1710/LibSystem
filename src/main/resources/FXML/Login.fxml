@@ -9,26 +9,50 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../Styles/Login.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.LoginController">
-    <VBox prefHeight="400.0" prefWidth="200.0" styleClass="login_logo_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane prefHeight="440.0" prefWidth="635.0" stylesheets="@../Styles/Login.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.LoginController">
+    <VBox layoutX="-0.8" prefHeight="400.0" prefWidth="201.0" styleClass="login_logo_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="0.0">
 
         <FontAwesomeIconView glyphName="BOOK" size="30" />
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LIBRARY" />
     </VBox>
-    <VBox layoutX="336.0" layoutY="75.0" prefHeight="350.0" prefWidth="350.0" styleClass="login_form_container" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
+    <VBox layoutX="336.0" layoutY="75.0" prefHeight="396.0" prefWidth="390.0" styleClass="login_form_container" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="20.0">
         <Label id="choice-prompt-text" text="Choose Your Account Type" />
         <ChoiceBox fx:id="acc_selector" prefWidth="120.0" styleClass="account_selector" />
         <Label fx:id="acc_lbl" text="Account: " />
         <TextField fx:id="acc_fld" styleClass="input_field" />
         <Label text="Password:" />
         <PasswordField fx:id="password_fld" styleClass="input_field" />
-        <Button fx:id="login_btn" mnemonicParsing="false" text="Login">
+        <Button fx:id="login_btn" mnemonicParsing="false" prefHeight="32.0" prefWidth="394.0" style="-fx-background-color: #132A13; -fx-text-fill: #FFFFFF;" text="Login">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
+         <font>
+            <Font size="14.0" />
+         </font>
         </Button>
+      <Button fx:id="forget_password_btn" mnemonicParsing="false" prefHeight="30.0" prefWidth="390.0" style="-fx-background-color: transparent;" text="Forget password?" textFill="#2038e7" underline="true">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </Button>
+      <Line endX="282.69287109375" endY="-3.31390380859375" startX="673.185791015625" startY="-3.3138692378997803" />
+        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <Button fx:id="sign_up_btn" layoutX="214.0" layoutY="1.0" mnemonicParsing="false"
+                    style="-fx-background-color: #132A13; -fx-text-fill: #FFFFFF;" text="Sign up!">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Button>
+            <Label layoutX="124.0" layoutY="4.0" text="Not a user?">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Label>
+        </AnchorPane>
         <Label fx:id="error_lbl" styleClass="error_lbl" />
     </VBox>
 </AnchorPane>

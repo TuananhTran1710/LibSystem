@@ -1,15 +1,28 @@
 package com.jmc.libsystem.Views;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ViewFactory {
     private AccountType loginAccountType;
-
+    //Users View
+    private AnchorPane dashboardView;
+    private final ObjectProperty<UserMenuOptions> userSelectedMenuItem;
+    
     public ViewFactory() {
         this.loginAccountType = AccountType.USER; // gia trị mặc định ban dau của type
+        userSelectedMenuItem = new SimpleObjectProperty<>();
+    }
+
+    public ObjectProperty<UserMenuOptions> getUserSelectedMenuItem() {
+        return userSelectedMenuItem;
     }
 
     public AccountType getLoginAccountType() {
@@ -20,7 +33,21 @@ public class ViewFactory {
         this.loginAccountType = type;
     }
 
-    // -----------------------------------------------------------------------
+    //--------------------------------ANCHOR USERS----------------------
+    public AnchorPane getDashboardView() {
+        // anchorPane giong nhu la mot loai Parent
+        // tuong duong voi moi khi ta se khai bao Parent root
+        if (dashboardView == null) {
+            try {
+                dashboardView = new FXMLLoader(getClass().getResource("/Fxml/User/Dashboard.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return dashboardView;
+    }
+
+    // -----------------------------------Function Show Window------------------------------------
     public void showLoginWindow() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         createStage(loader);

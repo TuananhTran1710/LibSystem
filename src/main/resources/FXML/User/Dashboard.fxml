@@ -5,6 +5,6 @@
 <AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../../Styles/Dashboard.css"
             xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.jmc.libsystem.Controllers.User.DashboardController">
-    <Text fx:id="user_name" layoutX="91.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="user_name"
+    <Text fx:id="user_name_lbl" layoutX="91.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="user_name"
           text="Hi, TuanAnh" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0"/>
 </AnchorPane>

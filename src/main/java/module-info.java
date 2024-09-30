@@ -6,6 +6,7 @@ module com.jmc.libsystem {
     requires transitive javafx.graphics;
     requires java.desktop;
     requires javafx.base;
+    requires org.apache.logging.log4j.core;
 
     opens com.jmc.libsystem to javafx.fxml;
 

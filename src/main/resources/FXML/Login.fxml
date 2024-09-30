@@ -53,6 +53,5 @@
                 </font>
             </Label>
         </AnchorPane>
-        <Label fx:id="error_lbl" styleClass="error_lbl" />
     </VBox>
 </AnchorPane>

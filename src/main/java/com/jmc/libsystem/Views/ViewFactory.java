@@ -26,9 +26,13 @@ public class ViewFactory {
         createStage(loader);
     }
 
+    public void showSignUpWindow() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Sign-up.fxml"));
+        createStage(loader);
+    }
+
     public void showUserWindow() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/User/User.fxml"));
-
         createStage(loader);
     }
 

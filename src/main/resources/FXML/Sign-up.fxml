@@ -1,9 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.jmc.libsystem.Controllers.SignUpController"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
+<AnchorPane prefHeight="440.0" prefWidth="635.0" stylesheets="@../Styles/Login.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.SignUpController">
+    <VBox layoutX="-0.8" prefHeight="400.0" prefWidth="201.0" styleClass="login_logo_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="0.0">
+
+        <FontAwesomeIconView glyphName="BOOK" size="30" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LIBRARY" />
+    </VBox>
+    <VBox layoutX="336.0" layoutY="75.0" prefHeight="396.0" prefWidth="390.0" styleClass="login_form_container" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="20.0">
+      <Label prefHeight="19.0" prefWidth="394.0" text="You can only sign up as users" textFill="#e71caa">
+         <graphic>
+            <FontAwesomeIconView glyphName="EXCLAMATION_TRIANGLE" size="20" />
+         </graphic>
+      </Label>
+        <Label text="Account: " />
+        <TextField fx:id="acc_fld" styleClass="input_field" />
+        <Label text="Password:" />
+        <PasswordField fx:id="password_fld" styleClass="input_field" />
+        <Button fx:id="sign_up_btn" mnemonicParsing="false" prefHeight="32.0" prefWidth="394.0" style="-fx-background-color: #132A13; -fx-text-fill: #FFFFFF;" text="Sign up">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+        <Line endX="282.69287109375" endY="-3.31390380859375" startX="673.185791015625" startY="-3.3138692378997803" />
+        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <Button fx:id="login_btn" layoutX="214.0" layoutY="1.0" mnemonicParsing="false" style="-fx-background-color: #132A13; -fx-text-fill: #FFFFFF;" text="Login">
+                <font>
+                    <Font size="14.0" />
+                </font>
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </Button>
+            <Label layoutX="76.0" layoutY="6.0" text="Already a member?">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+        </AnchorPane>
+    </VBox>
 </AnchorPane>

@@ -15,7 +15,6 @@ public class LoginController implements Initializable {
     public ChoiceBox<AccountType> acc_selector;
     public PasswordField password_fld;
     public Button login_btn;
-    public Label error_lbl;
     public Label acc_lbl;
     public TextField acc_fld;
     public Button sign_up_btn;
@@ -32,25 +31,28 @@ public class LoginController implements Initializable {
                 observable -> Model.getInstance().getViewFactory().setLoginAccountType(acc_selector.getValue()));
         // de set gia tri cho type login moi khi co thay doi
         login_btn.setOnAction(event -> onLogin());
-
+        sign_up_btn.setOnAction(event -> convertToSignUp());
     }
 
     private void onLogin() {
         Stage stage = (Stage) login_btn.getScene().getWindow();
 
         if (Model.getInstance().getViewFactory().getLoginAccountType() == AccountType.USER) {
-            // Evaluate Client Login Credentials
-            Model.getInstance().evaluateClientCred(acc_fld.getText(), password_fld.getText());
+            // Evaluate User Login Credentials
+            Model.getInstance().evaluateUserCredToLogin(acc_fld.getText(), password_fld.getText());
             if (Model.getInstance().getUserLoginSuccessFlag()) {
                 Model.getInstance().getViewFactory().showUserWindow();
-
                 Model.getInstance().getViewFactory().closeStage(stage);
-            } else {
-                // Truong hop khong dang nhap thanh cong
-                error_lbl.setText("No Such Login Credentials");
             }
         } else
             Model.getInstance().getViewFactory().showAdminWindow(); // Đang xư lý mẫu cho User nên phần Admin chỉ để
         // đơn giản như này
+    }
+
+
+    private void convertToSignUp() {
+        Stage stage = (Stage) sign_up_btn.getScene().getWindow();
+        Model.getInstance().getViewFactory().showSignUpWindow();
+        Model.getInstance().getViewFactory().closeStage(stage);
     }
 }

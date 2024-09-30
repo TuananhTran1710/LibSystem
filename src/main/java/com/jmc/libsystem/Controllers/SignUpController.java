@@ -3,10 +3,7 @@ package com.jmc.libsystem.Controllers;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.Views.AccountType;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -17,12 +14,27 @@ public class SignUpController implements Initializable {
     public PasswordField password_fld;
     public Button sign_up_btn;
     public Button login_btn;
+    public CheckBox show_password_cb;
+    public TextField password_visible_fld;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sign_up_btn.setOnAction(event -> onSignUp());
         login_btn.setOnAction(event -> convertToLogin());
+        show_password_cb.setOnAction(event -> showPassword());
+    }
+
+    private void showPassword() {
+        if (show_password_cb.isSelected()) {
+            password_visible_fld.setVisible(true);
+            password_visible_fld.setText(password_fld.getText());
+            password_fld.setVisible(false);
+        } else {
+            password_visible_fld.setVisible(false);
+            password_fld.setText(password_visible_fld.getText());
+            password_fld.setVisible(true);
+        }
     }
 
     private void onSignUp() {

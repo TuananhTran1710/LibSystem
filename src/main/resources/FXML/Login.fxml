@@ -3,6 +3,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -25,7 +26,15 @@
         <Label fx:id="acc_lbl" text="Account: " />
         <TextField fx:id="acc_fld" styleClass="input_field" />
         <Label text="Password:" />
-        <PasswordField fx:id="password_fld" styleClass="input_field" />
+        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <PasswordField fx:id="password_fld" prefWidth="392.0" styleClass="input_field" />
+         <TextField fx:id="password_visible_fld" prefHeight="35.0" prefWidth="392.0" styleClass="input_field" visible="false" />
+        </AnchorPane>
+      <CheckBox fx:id="show_password_cb" mnemonicParsing="false" styleClass="login_form_container" text="Show Password">
+         <font>
+            <Font name="Calibri Bold" size="14.0" />
+         </font>
+      </CheckBox>
         <Button fx:id="login_btn" mnemonicParsing="false" prefHeight="32.0" prefWidth="394.0" style="-fx-background-color: #132A13; -fx-text-fill: #FFFFFF;" text="Login">
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -41,15 +50,14 @@
       </Button>
       <Line endX="282.69287109375" endY="-3.31390380859375" startX="673.185791015625" startY="-3.3138692378997803" />
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
-            <Button fx:id="sign_up_btn" layoutX="214.0" layoutY="1.0" mnemonicParsing="false"
-                    style="-fx-background-color: #132A13; -fx-text-fill: #FFFFFF;" text="Sign up!">
+            <Button fx:id="sign_up_btn" layoutX="214.0" layoutY="1.0" mnemonicParsing="false" style="-fx-background-color: #132A13; -fx-text-fill: #FFFFFF;" text="Sign up!">
                 <font>
-                    <Font size="14.0"/>
+                    <Font size="14.0" />
                 </font>
             </Button>
             <Label layoutX="124.0" layoutY="4.0" text="Not a user?">
                 <font>
-                    <Font size="14.0"/>
+                    <Font size="14.0" />
                 </font>
             </Label>
         </AnchorPane>

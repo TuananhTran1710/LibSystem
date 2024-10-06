@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="180.0" styleClass="main_menu_container" stylesheets="@../../Styles/UserMenu.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.UserMenuController">
-    <AnchorPane prefHeight="730.0" prefWidth="160.0">
+    <AnchorPane prefHeight="730.0" prefWidth="160.0" styleClass="left_container">
         <VBox layoutX="14.0" layoutY="14.0" prefHeight="80.0" prefWidth="160.0" styleClass="title_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <FontAwesomeIconView glyphName="BOOK" size="30" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Library" />
@@ -20,9 +20,14 @@
                     <FontAwesomeIconView glyphName="HOME" size="20" />
                 </graphic>
             </Button>
+         <Button fx:id="my_book_btn" layoutX="30.0" layoutY="80.0" mnemonicParsing="false" text="My Book">
+            <graphic>
+               <FontAwesomeIconView glyphName="LIST_ALT" size="20" />
+            </graphic>
+         </Button>
             <Button fx:id="search_btn" mnemonicParsing="false" text="Search">
                 <graphic>
-                    <FontAwesomeIconView glyphName="SEARCH" size="20" />
+                    <FontAwesomeIconView glyphName="" size="20" text="" />
                 </graphic>
             </Button>
             <Button fx:id="favourite_btn" mnemonicParsing="false" text="Favourite">

@@ -15,6 +15,7 @@ public class UserMenuController implements Initializable {
     public Button profile_btn;
     public Button logout_btn;
     public Button report_btn;
+    public Button my_book_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -27,6 +28,7 @@ public class UserMenuController implements Initializable {
     }
 
     private void convertToLogin() {
+        Model.getInstance().setUserLoginSuccessFlag(false);
         Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.LOGOUT);
     }
 

@@ -2,7 +2,6 @@ package com.jmc.libsystem.Controllers;
 
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.Views.AccountType;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;

@@ -7,6 +7,9 @@ module com.jmc.libsystem {
     requires java.desktop;
     requires javafx.base;
     requires org.apache.logging.log4j.core;
+    requires com.fasterxml.jackson.databind;  // Thêm module Jackson Databind
+    requires org.apache.httpcomponents.client5.httpclient5;  // Thêm HttpClient 5
+    requires org.apache.httpcomponents.core5.httpcore5;  // Thêm HttpCore 5
 
     opens com.jmc.libsystem to javafx.fxml;
 

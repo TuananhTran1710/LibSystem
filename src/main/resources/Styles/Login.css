@@ -69,6 +69,8 @@
     -fx-font-size: 1.2em;
 }
 
-.error_lbl {
-    -fx-text-fill: #FF0000;
+.lbl {
+    -fx-text-fill: #132a13;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: bold;
 }

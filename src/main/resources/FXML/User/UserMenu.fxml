@@ -27,7 +27,7 @@
          </Button>
             <Button fx:id="search_btn" mnemonicParsing="false" text="Search">
                 <graphic>
-                    <FontAwesomeIconView glyphName="" size="20" text="" />
+                    <FontAwesomeIconView glyphName="SEARCH" size="20" text="" />
                 </graphic>
             </Button>
             <Button fx:id="favourite_btn" mnemonicParsing="false" text="Favourite">

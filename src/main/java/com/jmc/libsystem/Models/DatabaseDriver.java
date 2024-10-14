@@ -18,12 +18,12 @@ public class DatabaseDriver {
 
 
     // User Section
-    public ResultSet getUserDataForLogin(String username, String password) {
+    public ResultSet getUserDataForLogin(String email, String password) {
         ResultSet resultSet = null;
         try {
-            String query = "SELECT * FROM users WHERE username = ? AND password = ?";
+            String query = "SELECT * FROM user WHERE email = ? AND password = ?";
             PreparedStatement preparedStatement = this.conn.prepareStatement(query);
-            preparedStatement.setString(1, username);
+            preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
             resultSet = preparedStatement.executeQuery();
         } catch (SQLException e) {
@@ -32,13 +32,13 @@ public class DatabaseDriver {
         return resultSet;
     }
 
-    //lam the nay tuc la tren csdl, cac username phai khac nhau (PK) --> Can chinh lai table trong csdl
-    public ResultSet getUserDataForSignUp(String username) {
+    //lam the nay tuc la tren csdl, cac email phai khac nhau (PK) --> Can chinh lai table trong csdl
+    public ResultSet getUserDataForSignUp(String email) {
         ResultSet resultSet = null;
         try {
-            String query = "SELECT * FROM users WHERE username = ?";
+            String query = "SELECT * FROM user WHERE email = ?";
             PreparedStatement preparedStatement = this.conn.prepareStatement(query);
-            preparedStatement.setString(1, username);
+            preparedStatement.setString(1, email);
             resultSet = preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();

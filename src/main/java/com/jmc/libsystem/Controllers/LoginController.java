@@ -16,7 +16,7 @@ public class LoginController implements Initializable {
     public PasswordField password_fld;
     public Button login_btn;
     public Label acc_lbl;
-    public TextField acc_fld;
+    public TextField email_fld;
     public Button sign_up_btn;
     public Button forget_password_btn;
     public CheckBox show_password_cb;    // phan show password de lam sau
@@ -51,10 +51,12 @@ public class LoginController implements Initializable {
 
     private void onLogin() {
         Stage stage = (Stage) login_btn.getScene().getWindow();
-
+        if(show_password_cb.isSelected()){
+            password_fld.setText(password_visible_fld.getText());
+        }
         if (Model.getInstance().getViewFactory().getLoginAccountType() == AccountType.USER) {
             // Evaluate User Login Credentials
-            Model.getInstance().evaluateUserCredToLogin(acc_fld.getText(), password_fld.getText());
+            Model.getInstance().evaluateUserCredToLogin(email_fld.getText(), password_fld.getText());
             if (Model.getInstance().getUserLoginSuccessFlag()) {
                 Model.getInstance().getViewFactory().showUserWindow();
                 Model.getInstance().getViewFactory().closeStage(stage);

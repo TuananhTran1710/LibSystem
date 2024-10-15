@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="510.0" prefWidth="635.0" stylesheets="@../Styles/Login.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.SignUpController">
+    <VBox layoutX="-0.8" prefHeight="400.0" prefWidth="201.0" styleClass="login_logo_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="0.0">
+
+        <FontAwesomeIconView glyphName="BOOK" size="30" />
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LIBRARY" />
+    </VBox>
+    <VBox layoutX="221.0" layoutY="4.0" prefHeight="442.0" prefWidth="392.0" styleClass="login_form_container" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="4.0">
+      <Label prefHeight="19.0" prefWidth="394.0" text="You can only sign up as users" textFill="#e71caa">
+         <graphic>
+            <FontAwesomeIconView glyphName="EXCLAMATION_TRIANGLE" size="20" />
+         </graphic>
+      </Label>
+      <Label text="User ID:" />
+      <TextField fx:id="user_id_fld" styleClass="input_field" />
+      <Label text="Full Name:" />
+      <TextField fx:id="fullname_fld" prefHeight="26.0" prefWidth="158.0" styleClass="input_field" />
+        <Label text="Email: " />
+        <TextField fx:id="email_fld" styleClass="input_field" />
+        <Label text="Password:" />
+        <AnchorPane prefHeight="30.0" prefWidth="392.0">
+            <PasswordField fx:id="password_fld" prefWidth="392.0" styleClass="input_field" />
+            <TextField fx:id="password_visible_fld" prefHeight="35.0" prefWidth="392.0" styleClass="input_field" visible="false" />
+        </AnchorPane>
+      <CheckBox fx:id="show_password_cb" mnemonicParsing="false" styleClass="login_form_container" text="Show Password">
+         <font>
+            <Font name="Calibri Bold" size="14.0" />
+         </font>
+      </CheckBox>
+        <AnchorPane prefHeight="49.0" prefWidth="392.0">
+            <Button fx:id="sign_up_btn" layoutX="-1.0" layoutY="-2.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="394.0" style="-fx-background-color: #132A13; -fx-text-fill: #FFFFFF;" text="Sign up">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Button>
+        </AnchorPane>
+    </VBox>
+      <Label layoutX="318.0" layoutY="459.0" styleClass="lbl" text="Already a member?">
+          <font>
+              <Font size="14.0" />
+          </font>
+      </Label>
+      <Button fx:id="login_btn" layoutX="452.0" layoutY="454.0" mnemonicParsing="false" style="-fx-background-color: #132A13; -fx-text-fill: #FFFFFF;" text="Login">
+          <font>
+              <Font size="14.0" />
+          </font>
+          <cursor>
+              <Cursor fx:constant="HAND" />
+          </cursor>
+      </Button>
+</AnchorPane>

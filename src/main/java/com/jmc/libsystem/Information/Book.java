@@ -13,11 +13,12 @@ public class Book {
     private int ratingCount;
     private int pageCount;
     private String language;
-
-    public Book(String title, String author, String thumbnailUrl) {
+    private String infoLink;
+    public Book(String title, String author, String thumbnailUrl, String infoLink) {
         this.title = title;
         this.author = author;
         this.thumbnailUrl = thumbnailUrl;
+        this.infoLink = infoLink;
     }
 
     public String getTitle() {
@@ -30,5 +31,9 @@ public class Book {
 
     public String getThumbnailUrl() {
         return thumbnailUrl;
+    }
+
+    public String getInfoLink(){
+        return infoLink;
     }
 }

@@ -11,6 +11,7 @@ module com.jmc.libsystem {
     requires org.apache.httpcomponents.client5.httpclient5;
     requires org.apache.httpcomponents.core5.httpcore5;
     requires java.sql;
+    requires java.desktop;
 
     opens com.jmc.libsystem to javafx.fxml, com.google.gson;
     exports com.jmc.libsystem;

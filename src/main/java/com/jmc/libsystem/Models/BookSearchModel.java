@@ -43,9 +43,9 @@ public class BookSearchModel {
                 }
 
                 String thumbnailUrl = volumeInfo.has("imageLinks") ? volumeInfo.get("imageLinks").get("thumbnail").asText() : "";
-
+                String link = volumeInfo.get("infoLink").asText();
                 //thêm cái book vừa mới lôi ra vào danh sách kết quả
-                bookList.add(new Book(title, authors, thumbnailUrl));
+                bookList.add(new Book(title, authors, thumbnailUrl, link));
             }
         }
         return bookList;

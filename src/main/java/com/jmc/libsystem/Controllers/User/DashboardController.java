@@ -13,7 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
@@ -76,6 +78,17 @@ public class DashboardController implements Initializable {
                 bookCoverImageView.setFitWidth(80); // Chiểu rộng
             }
 
+            // Thêm sự kiện nhấn vào ảnh bìa để mở đường link
+            bookCoverImageView.setOnMouseClicked(event -> {
+                if(event.getClickCount() == 2){
+                    try {
+                        Desktop.getDesktop().browse(new URI(book.getInfoLink()));
+                    } catch (IOException | URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
             // Tạo Label cho tên sách
             String shortTitle = book.getTitle();
             if (shortTitle.length() > 12) {
@@ -100,4 +113,7 @@ public class DashboardController implements Initializable {
             resultList_hb.getChildren().add(bookBox);
         }
     }
+
+    
+
 }

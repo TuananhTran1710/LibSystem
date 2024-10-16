@@ -1,5 +1,6 @@
 package com.jmc.libsystem.Controllers;
 
+import com.jmc.libsystem.Models.EvaluateInfo;
 import com.jmc.libsystem.Models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -42,20 +43,19 @@ public class SignUpController implements Initializable {
         //xu ly xac nhan thong tin dang ky
         Stage stage = (Stage) sign_up_btn.getScene().getWindow();
 
-        if(show_password_cb.isSelected()){
+        if (show_password_cb.isSelected()) {
             password_fld.setText(password_visible_fld.getText());
         }
 
         // Evaluate User Sign Up Credentials
-        if(!email_fld.getText().trim().isEmpty() && !password_fld.getText().trim().isEmpty()
-         &&!user_id_fld.getText().trim().isEmpty() && !fullname_fld.getText().trim().isEmpty()) {
-            Model.getInstance().evaluateUserCredToSignup(email_fld.getText(), password_fld.getText(), user_id_fld.getText(), fullname_fld.getText());
-            if (Model.getInstance().getUserLoginSuccessFlag()) {
+        if (!email_fld.getText().trim().isEmpty() && !password_fld.getText().trim().isEmpty()
+                && !user_id_fld.getText().trim().isEmpty() && !fullname_fld.getText().trim().isEmpty()) {
+            EvaluateInfo.evaluateUserCredToSignup(email_fld.getText(), password_fld.getText(), user_id_fld.getText(), fullname_fld.getText());
+            if (Model.getInstance().getLoginFlag()) {
                 Model.getInstance().getViewFactory().showUserWindow();
                 Model.getInstance().getViewFactory().closeStage(stage);
             }
-        }
-        else{
+        } else {
             System.out.println("Please fill in all information!");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Please fill in all information!");

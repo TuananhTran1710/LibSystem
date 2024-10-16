@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="440.0" prefWidth="635.0" stylesheets="@../Styles/Login.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.LoginController">
-    <VBox layoutX="-0.8" prefHeight="400.0" prefWidth="201.0" styleClass="login_logo_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="0.0">
+    <VBox prefHeight="400.0" prefWidth="201.0" styleClass="login_logo_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
 
         <FontAwesomeIconView glyphName="BOOK" size="30" />
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LIBRARY" />

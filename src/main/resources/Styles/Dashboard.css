@@ -30,7 +30,7 @@
 
 .title_container Button:hover {
     -fx-text-fill: #1A4314;
-    -fx-background-color: rgba(19, 42, 19, 0.1);
+    /* -fx-background-color: rgba(19, 42, 19, 0.1); */
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
 }
@@ -61,14 +61,13 @@
     -fx-background-color: #132A13;
     -fx-text-fill: #FFFFFF;
     -fx-background-radius: 0 10px 10px 0;
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
     -fx-graphic-text-gap: 10px;
     -fx-font-size: 1.2em;
 }
 .search_button FontAwesomeIconView {
     -fx-fill: #FFFFFF;
 }
-
-.search_button Button {}
 
 .search_button:hover {
     -fx-cursor: hand;
@@ -98,8 +97,8 @@
 }
 
 .feature Button:hover {
-    -fx-text-fill: #1A4314;
-    -fx-background-color: rgba(19, 42, 19, 0.1);
+    /* -fx-text-fill: #FFFFFF; */
+    /* -fx-background-color: rgba(19, 42, 19, 0.1); */
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
 }
@@ -149,15 +148,6 @@
     -fx-background-color: #0B4619;
     -fx-opacity: 1.0;
 }
-
-
-
-
-
-
-
-
-
 
 
 

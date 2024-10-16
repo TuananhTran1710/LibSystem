@@ -10,27 +10,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+// class nayf lam nhiem vu chuyen doi giua cac cua so
 public class ViewFactory {
-    private AccountType loginAccountType;
     //Users View
     private AnchorPane dashboardView;
     private final ObjectProperty<UserMenuOptions> userSelectedMenuItem;
-    
+
     public ViewFactory() {
-        this.loginAccountType = AccountType.USER; // gia trị mặc định ban dau của type
         userSelectedMenuItem = new SimpleObjectProperty<>();
     }
 
     public ObjectProperty<UserMenuOptions> getUserSelectedMenuItem() {
         return userSelectedMenuItem;
-    }
-
-    public AccountType getLoginAccountType() {
-        return loginAccountType;
-    }
-
-    public void setLoginAccountType(AccountType type) {
-        this.loginAccountType = type;
     }
 
     //--------------------------------ANCHOR USERS----------------------
@@ -55,6 +46,11 @@ public class ViewFactory {
 
     public void showSignUpWindow() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Sign-up.fxml"));
+        createStage(loader);
+    }
+
+    public void showForgetPasswordWindow() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Forget-password.fxml"));
         createStage(loader);
     }
 
@@ -87,4 +83,5 @@ public class ViewFactory {
     public void closeStage(Stage stage) {
         stage.close();
     }
+
 }

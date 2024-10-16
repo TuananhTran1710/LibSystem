@@ -14,6 +14,8 @@ public class Book {
     private int pageCount;
     private String language;
     private String infoLink;
+
+
     public Book(String title, String author, String thumbnailUrl, String infoLink) {
         this.title = title;
         this.author = author;

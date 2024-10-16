@@ -56,7 +56,7 @@
               <Font size="14.0" />
           </font>
       </Label>
-      <Button fx:id="login_btn" layoutX="452.0" layoutY="454.0" mnemonicParsing="false" style="-fx-background-color: #132A13; -fx-text-fill: #FFFFFF;" text="Login">
+      <Button fx:id="login_btn" layoutX="452.0" layoutY="454.0" mnemonicParsing="false" style="-fx-background-color: #132A13; -fx-text-fill: #FFFFFF;" styleClass="outerbutton" text="Login">
           <font>
               <Font size="14.0" />
           </font>

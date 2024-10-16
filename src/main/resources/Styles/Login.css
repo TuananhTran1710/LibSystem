@@ -57,8 +57,14 @@
     -fx-font-weight: bold;
 }
 
+.login_form_container Button{
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
+}
+
 .login_form_container Button:hover {
     -fx-cursor : hand;
+    -fx-background-color: rgba(19, 42, 19, 0.1);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
     /* tức là khi lướt chuột cho button thì con trỏ chuột sẽ chuyển thành 1 kiểu bàn tay (thử là biết) */
 }
 
@@ -73,4 +79,24 @@
     -fx-text-fill: #132a13;
     -fx-font-size: 1.1em;
     -fx-font-weight: bold;
+}
+
+
+
+.outetbutton {
+    -fx-background-color: #132A13;
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
+    -fx-graphic-text-gap: 10px;
+    -fx-font-size: 1.2em;
+}
+
+.outerbutton FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+.outerbutton:hover {
+    -fx-cursor: hand;
+    -fx-opacity: 1.0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
 }

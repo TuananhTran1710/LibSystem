@@ -12,11 +12,11 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class GoogleBooksService {
+public class APIDriver {
     private static final String API_URL = "https://www.googleapis.com/books/v1/volumes";
 
-    // Phương thức gửi yêu cầu tới API Google Books
-    public static String searchBooks(String query) throws URISyntaxException, IOException {
+    // Phương thức gửi yêu cầu tới API Google Books và trả về chuối JSon
+    public static String getJsonString(String query) throws URISyntaxException, IOException {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             URI uri = new URIBuilder(API_URL)
                     .addParameter("q", query)

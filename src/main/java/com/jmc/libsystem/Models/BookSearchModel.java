@@ -9,10 +9,13 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class BookSearchModel {
-    public static List<Book> searchBook(String keyword) throws URISyntaxException, IOException {
+
+    // method để phân tích chuỗi JSon để lấy ra list Book
+    public static List<Book> getListBookFromJson(String keyword) throws URISyntaxException, IOException {
         // gọi gg service để lấy dữ liệu api
-        String jsonReponse = GoogleBooksService.searchBooks(keyword);
+        String jsonReponse = APIDriver.getJsonString(keyword);
         //tạo danh sách sách được trả về
         List<Book> bookList = new ArrayList<>();
 
@@ -26,10 +29,13 @@ public class BookSearchModel {
 
         JsonNode items = rootNode.get("items");
 
-        if(items != null) {
-            for(JsonNode item : items) {
+        if (items != null) {
+            for (JsonNode item : items) {
+                // lay volumeInfo cua moi quyen sach
                 JsonNode volumeInfo = item.get("volumeInfo");
+                //lay title
                 String title = volumeInfo.get("title").asText();
+                //lay tac gia
                 String authors;
                 JsonNode authorsNode = volumeInfo.get("authors");
                 if (authorsNode != null && authorsNode.isArray()) {
@@ -42,8 +48,12 @@ public class BookSearchModel {
                     authors = "N/A"; // Nếu không có tác giả
                 }
 
+                // lay link anh bia cua sach
                 String thumbnailUrl = volumeInfo.has("imageLinks") ? volumeInfo.get("imageLinks").get("thumbnail").asText() : "";
+
+                // lay link den web cua sach
                 String link = volumeInfo.get("infoLink").asText();
+
                 //thêm cái book vừa mới lôi ra vào danh sách kết quả
                 bookList.add(new Book(title, authors, thumbnailUrl, link));
             }

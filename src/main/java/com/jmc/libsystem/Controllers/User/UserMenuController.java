@@ -28,7 +28,7 @@ public class UserMenuController implements Initializable {
     }
 
     private void convertToLogin() {
-        Model.getInstance().setUserLoginSuccessFlag(false);
+        Model.getInstance().setLoginFlag(false);
         Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.LOGOUT);
     }
 

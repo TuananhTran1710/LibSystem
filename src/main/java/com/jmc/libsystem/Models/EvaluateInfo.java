@@ -59,7 +59,7 @@ public class EvaluateInfo {
 
                 String queryInsert = "Insert into user (email, password, user_id, fullName, borrow_table_name, favorite_table_name) values (?, ?, ?, ?, ?, ?)";
 
-                Model.getInstance().setMyUser(new User(email, password, user_id, fullName, 0, 100, 20, "active", borrow_table_name, favorite_table_name));
+                Model.getInstance().setMyUser(new User(user_id, fullName, email, password, 0, 100, 20, "active", borrow_table_name, favorite_table_name));
 
                 try (PreparedStatement preparedStatementInsert = DatabaseDriver.getConn().prepareStatement(queryInsert)) {
                     preparedStatementInsert.setString(1, email);

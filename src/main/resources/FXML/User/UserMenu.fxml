@@ -25,7 +25,7 @@
                <FontAwesomeIconView glyphName="LIST_ALT" size="20" />
             </graphic>
          </Button>
-            <Button fx:id="search_btn" mnemonicParsing="false" text="Search">
+            <Button fx:id="search_btn" mnemonicParsing="false" text="Propose">
                 <graphic>
                     <FontAwesomeIconView glyphName="SEARCH" size="20" text="" />
                 </graphic>

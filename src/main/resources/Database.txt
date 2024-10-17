@@ -2,21 +2,23 @@
 CREATE TABLE Book (
     google_book_id VARCHAR(50) PRIMARY KEY,  -- ID từ Google Books API làm khóa chính
     title VARCHAR(255) NOT NULL,
-    authors TEXT,                             -- Danh sách tác giả từ API
     published_date VARCHAR(20),
+    authors TEXT,       // de don gian thi tam thoi khong luu tru tac gia nhu mot entity
     description TEXT,
     thumbnail_url VARCHAR(255),
     average_rating FLOAT,
     rating_count int,
     page_count INT,
     quantity int,
+    state varchar(20),
+    -- state : publishing or deleted
     numberOfIssued int,
     language VARCHAR(10)
-);
+) COLLATE utf8mb4_bin;
 
 create table Category(
 	`cat_name` varchar(100) primary key
-);
+)COLLATE utf8mb4_bin;
 
 CREATE TABLE Book_Category (
     google_book_id VARCHAR(50),
@@ -24,7 +26,7 @@ CREATE TABLE Book_Category (
     PRIMARY KEY (google_book_id, cat_name),
     FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id),
     FOREIGN KEY (cat_name) REFERENCES Category(cat_name)
-);
+)COLLATE utf8mb4_bin;
 
 
 -- Bảng User
@@ -39,7 +41,7 @@ CREATE TABLE User (
     state VARCHAR(20) DEFAULT 'active',
     borrow_table_name VARCHAR(50),
     favorite_table_name VARCHAR(50)
-);
+)COLLATE utf8mb4_bin;
 
 -- Tạo bảng feedback để chứa đánh giá của người dùng về sách
 CREATE TABLE Feedback (
@@ -50,7 +52,7 @@ CREATE TABLE Feedback (
     comment TEXT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
-);
+)COLLATE utf8mb4_bin;
 
 -- Tạo bảng lịch sử mượn trả chung cho tất cả user (Chỉ admin có thể xem)
 CREATE TABLE BorrowHistory (
@@ -63,14 +65,14 @@ CREATE TABLE BorrowHistory (
     note TEXT,
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
-);
+)COLLATE utf8mb4_bin;
 
 CREATE TABLE Admin (
     admin_id VARCHAR(20) PRIMARY KEY,
     fullName varchar(50),
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL
-);
+)COLLATE utf8mb4_bin;
 
 -- Bảng xử lý phiên thao tác admin với user (Đăng ký, sửa, xóa)
 CREATE TABLE AdminUserAction (
@@ -78,10 +80,10 @@ CREATE TABLE AdminUserAction (
     user_id VARCHAR(20),
     admin_id VARCHAR(20),
     action_type VARCHAR(50),  -- Đăng ký, sửa, xóa
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    date DATE,
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (admin_id) REFERENCES Admin(admin_id)
-);
+)COLLATE utf8mb4_bin;
 
 -- Bảng xử lý phiên thao tác admin với sách (Sửa, xóa, thêm, tăng giảm số lượng, v.v.)
 CREATE TABLE AdminBookAction (
@@ -90,10 +92,10 @@ CREATE TABLE AdminBookAction (
     admin_id VARCHAR(20),
     quantity int,
     action VARCHAR(50),  -- Sửa, xóa, thêm, tăng giảm số lượng
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    date DATE,
     FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id),
     FOREIGN KEY (admin_id) REFERENCES Admin(admin_id)
-);
+)COLLATE utf8mb4_bin;
 
 
 create table BookRecommended (
@@ -104,19 +106,9 @@ create table BookRecommended (
     FOREIGN KEY (user_id) REFERENCES user(user_id),
     state varchar(20)
     -- state : in queue or accepted
-);
+)COLLATE utf8mb4_bin;
 
-alter table adminbookaction
-	add column quantity int;
 
-alter table adminbookaction
-    drop column timestamp;
 
-alter table adminbookaction
-	add column date DATE;
 
-alter table adminuseraction
-	drop column timestamp;
 
-alter table adminuseraction
-	add column date DATE;

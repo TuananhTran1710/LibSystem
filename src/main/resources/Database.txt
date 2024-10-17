@@ -1,0 +1,122 @@
+-- Tạo bảng lưu trữ thông tin sách
+CREATE TABLE Book (
+    google_book_id VARCHAR(50) PRIMARY KEY,  -- ID từ Google Books API làm khóa chính
+    title VARCHAR(255) NOT NULL,
+    authors TEXT,                             -- Danh sách tác giả từ API
+    published_date VARCHAR(20),
+    description TEXT,
+    thumbnail_url VARCHAR(255),
+    average_rating FLOAT,
+    rating_count int,
+    page_count INT,
+    quantity int,
+    numberOfIssued int,
+    language VARCHAR(10)
+);
+
+create table Category(
+	`cat_name` varchar(100) primary key
+);
+
+CREATE TABLE Book_Category (
+    google_book_id VARCHAR(50),
+    cat_name VARCHAR(100),
+    PRIMARY KEY (google_book_id, cat_name),
+    FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id),
+    FOREIGN KEY (cat_name) REFERENCES Category(cat_name)
+);
+
+
+-- Bảng User
+CREATE TABLE User (
+    user_id VARCHAR(20) PRIMARY KEY,
+    fullName varchar(50),
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    attendance_score INT DEFAULT 0,
+    reputation_score INT DEFAULT 100,
+    max_books INT DEFAULT 20,
+    state VARCHAR(20) DEFAULT 'active',
+    borrow_table_name VARCHAR(50),
+    favorite_table_name VARCHAR(50)
+);
+
+-- Tạo bảng feedback để chứa đánh giá của người dùng về sách
+CREATE TABLE Feedback (
+    feedback_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(20),
+    google_book_id VARCHAR(50),
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+    comment TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
+);
+
+-- Tạo bảng lịch sử mượn trả chung cho tất cả user (Chỉ admin có thể xem)
+CREATE TABLE BorrowHistory (
+    history_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(20),
+    google_book_id VARCHAR(50),
+    borrow_date DATE NOT NULL,
+    return_date DATE,
+    state VARCHAR(20),
+    note TEXT,
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
+);
+
+CREATE TABLE Admin (
+    admin_id VARCHAR(20) PRIMARY KEY,
+    fullName varchar(50),
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Bảng xử lý phiên thao tác admin với user (Đăng ký, sửa, xóa)
+CREATE TABLE AdminUserAction (
+    action_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(20),
+    admin_id VARCHAR(20),
+    action_type VARCHAR(50),  -- Đăng ký, sửa, xóa
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (admin_id) REFERENCES Admin(admin_id)
+);
+
+-- Bảng xử lý phiên thao tác admin với sách (Sửa, xóa, thêm, tăng giảm số lượng, v.v.)
+CREATE TABLE AdminBookAction (
+    action_id INT AUTO_INCREMENT PRIMARY KEY,
+    google_book_id VARCHAR(50),
+    admin_id VARCHAR(20),
+    quantity int,
+    action VARCHAR(50),  -- Sửa, xóa, thêm, tăng giảm số lượng
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id),
+    FOREIGN KEY (admin_id) REFERENCES Admin(admin_id)
+);
+
+
+create table BookRecommended (
+	rcm_id int auto_increment primary key,
+    google_book_id varchar(50),
+    user_id varchar(20),
+    FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    state varchar(20)
+    -- state : in queue or accepted
+);
+
+alter table adminbookaction
+	add column quantity int;
+
+alter table adminbookaction
+    drop column timestamp;
+
+alter table adminbookaction
+	add column date DATE;
+
+alter table adminuseraction
+	drop column timestamp;
+
+alter table adminuseraction
+	add column date DATE;

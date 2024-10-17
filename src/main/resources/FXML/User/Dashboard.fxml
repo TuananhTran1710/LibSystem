@@ -36,7 +36,9 @@
       <FontAwesomeIconView glyphName="UNIVERSITY" layoutX="14.0" layoutY="31.0" size="14" />
       <Line endX="695.0" layoutX="109.0" layoutY="37.0" startX="-105.0" />
       <ScrollPane hbarPolicy="ALWAYS" layoutX="4.0" layoutY="55.0" prefHeight="165.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="4.0">
-         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="200.0" />
+         <content>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+         </content>
       </ScrollPane>
       <Button layoutX="724.0" layoutY="6.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="See more..." AnchorPane.bottomAnchor="188.4" AnchorPane.rightAnchor="3.2000000000000455" />
    </AnchorPane>
@@ -45,7 +47,9 @@
       <FontAwesomeIconView glyphName="UNIVERSITY" layoutX="14.0" layoutY="30.0" size="14" text="" wrappingWidth="16.0" />
       <Line endX="695.0" layoutX="109.0" layoutY="36.0" startX="-105.0" />
       <ScrollPane hbarPolicy="ALWAYS" layoutX="4.0" layoutY="41.0" prefHeight="166.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="4.0">
-         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="118.0" prefWidth="200.0" />
+         <content>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+         </content>
       </ScrollPane>
       <Button layoutX="724.0" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="See more..." textFill="#e71515" AnchorPane.bottomAnchor="180.6" AnchorPane.rightAnchor="3.2000000000000455" />
    </AnchorPane>

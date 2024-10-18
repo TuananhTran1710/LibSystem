@@ -15,8 +15,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 public class ShowListBookFound {
-    
-    public static void show(List<Book> bookList, HBox resultList_hb){
+
+    public static void show(List<Book> bookList, HBox resultList_hb) {
         resultList_hb.getChildren().clear();
 
         for (Book book : bookList) {
@@ -45,7 +45,7 @@ public class ShowListBookFound {
 
             // Thêm sự kiện nhấn vào ảnh bìa để mở đường link
             bookCoverImageView.setOnMouseClicked(event -> {
-                if(event.getClickCount() == 2){
+                if (event.getClickCount() == 2) {
                     try {
                         Desktop.getDesktop().browse(new URI(book.getInfoLink()));
                     } catch (IOException | URISyntaxException e) {
@@ -63,7 +63,7 @@ public class ShowListBookFound {
             titleLabel.setStyle("-fx-font-weight: bold;");
 
             //Tạo Label cho tác giả
-            String shortAuthor = book.getAuthor();
+            String shortAuthor = book.getAuthors();
             if (shortAuthor.length() > 12) {
                 shortAuthor = shortAuthor.substring(0, 12) + "...";
             }

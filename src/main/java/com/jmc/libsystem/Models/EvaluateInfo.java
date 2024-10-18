@@ -20,8 +20,8 @@ public class EvaluateInfo {
                 resultSet.next();
                 if (type == AccountType.USER) {
                     Model.getInstance().setMyUser(new User(resultSet.getString("user_id"), resultSet.getString("fullName"), email, password,
-                            resultSet.getInt("attendance_score"), resultSet.getInt("reputation_score"), resultSet.getInt("max_books"), resultSet.getString("state"),
-                            resultSet.getString("borrow_table_name"), resultSet.getString("favorite_table_name")));
+                            resultSet.getInt("attendance_score"), resultSet.getInt("reputation_score"), resultSet.getInt("max_books"), resultSet.getString("state")
+                    ));
                 } else {
                     Model.getInstance().setMyAdmin(new Admin(resultSet.getString("admin_id"), resultSet.getString("fullName"), email, password));
                 }
@@ -54,20 +54,14 @@ public class EvaluateInfo {
             if (!resultSet.isBeforeFirst()) { // check xem email ton tai chua?
                 Model.getInstance().setLoginFlag(true);
 
-                String borrow_table_name = "Issued" + user_id;
-                String favorite_table_name = "Favorite" + user_id;
-
-                String queryInsert = "Insert into user (email, password, user_id, fullName, borrow_table_name, favorite_table_name) values (?, ?, ?, ?, ?, ?)";
-
-                Model.getInstance().setMyUser(new User(user_id, fullName, email, password, 0, 100, 20, "active", borrow_table_name, favorite_table_name));
+                String queryInsert = "Insert into user (email, password, user_id, fullName) values (?, ?, ?, ?, ?, ?)";
+                Model.getInstance().setMyUser(new User(user_id, fullName, email, password, 0, 100, 20, "active"));
 
                 try (PreparedStatement preparedStatementInsert = DatabaseDriver.getConn().prepareStatement(queryInsert)) {
                     preparedStatementInsert.setString(1, email);
                     preparedStatementInsert.setString(2, password);
                     preparedStatementInsert.setString(3, user_id);
                     preparedStatementInsert.setString(4, fullName);
-                    preparedStatementInsert.setString(5, borrow_table_name);
-                    preparedStatementInsert.setString(6, favorite_table_name);
 
                     preparedStatementInsert.executeUpdate();
                 } catch (SQLException e) {

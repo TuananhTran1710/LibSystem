@@ -3,7 +3,7 @@ CREATE TABLE Book (
     google_book_id VARCHAR(50) PRIMARY KEY,  -- ID từ Google Books API làm khóa chính
     title VARCHAR(255) NOT NULL,
     published_date VARCHAR(20),
-    authors TEXT,       // de don gian thi tam thoi khong luu tru tac gia nhu mot entity
+    authors TEXT,
     description TEXT,
     thumbnail_url VARCHAR(255),
     average_rating FLOAT,
@@ -107,8 +107,4 @@ create table BookRecommended (
     state varchar(20)
     -- state : in queue or accepted
 )COLLATE utf8mb4_bin;
-
-
-
-
 

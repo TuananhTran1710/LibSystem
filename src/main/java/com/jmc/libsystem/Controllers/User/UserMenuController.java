@@ -1,6 +1,7 @@
 package com.jmc.libsystem.Controllers.User;
 
 import com.jmc.libsystem.Models.Model;
+import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.Views.UserMenuOptions;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -28,6 +29,11 @@ public class UserMenuController implements Initializable {
     }
 
     private void convertToLogin() {
+        // backend data
+        int score = Model.getInstance().getMyUser().getReputation_score();
+        String user_id = Model.getInstance().getMyUser().getId();
+        QueryAccountData.getReputation(score, user_id);
+        //
         Model.getInstance().setLoginFlag(false);
         Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.LOGOUT);
     }

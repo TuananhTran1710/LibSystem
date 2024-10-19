@@ -75,4 +75,39 @@ public class QueryAccountData {
         }
         return resultSet;
     }
+
+    //select and update fields in database
+    public static int selectReputation() {
+        String query = "Update user set reputation_score = ? where user_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setInt(1, score);
+            preparedStatement.setString(2, user_id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static int selectMaxBook() {
+
+    }
+
+    public static String selectState() {
+
+    }
+
+    public static void updateReputation(int score) {
+
+    }
+
+    public static void updateMaxBook(int num) {
+
+    }
+
+    public static void updateState(String state) {
+
+    }
+
+
 }

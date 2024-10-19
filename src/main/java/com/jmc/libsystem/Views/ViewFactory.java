@@ -1,9 +1,14 @@
 package com.jmc.libsystem.Views;
 
+import com.jmc.libsystem.Controllers.LoginController;
+import com.jmc.libsystem.Models.Model;
+import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -77,8 +82,41 @@ public class ViewFactory {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Library");
+
+        stage.setOnCloseRequest(event -> {
+            try {
+                event.consume();
+                exit(stage);
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
+
         stage.show();
     }
+
+    public void exit(Stage stage) throws IOException {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Close Window");
+        alert.setHeaderText("Confirm to exit program");
+        alert.setContentText("Do you want to exit ?");
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            System.out.println("Exit successfully");
+            stage.close();
+
+            // backend data
+            if (LoginController.loginAccountType == AccountType.USER) {
+                int score = Model.getInstance().getMyUser().getReputation_score();
+                String user_id = Model.getInstance().getMyUser().getId();
+                QueryAccountData.getReputation(score, user_id);
+            }
+        }
+    }
+
 
     public void closeStage(Stage stage) {
         stage.close();

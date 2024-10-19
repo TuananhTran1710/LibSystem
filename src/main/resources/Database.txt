@@ -4,6 +4,7 @@ CREATE TABLE Book (
     title VARCHAR(255) NOT NULL,
     published_date VARCHAR(20),
     authors TEXT,
+    category TEXT,
     description TEXT,
     thumbnail_url VARCHAR(255),
     average_rating FLOAT,
@@ -15,6 +16,41 @@ CREATE TABLE Book (
     numberOfIssued int,
     language VARCHAR(10)
 ) COLLATE utf8mb4_bin;
+
+INSERT INTO Book (
+    google_book_id,
+    title,
+    published_date,
+    authors,
+    category,
+    description,
+    thumbnail_url,
+    average_rating,
+    rating_count,
+    page_count,
+    quantity,
+    state,
+    numberOfIssued,
+    language
+)
+VALUES (
+    '1',  -- google_book_id
+    'Math',  -- title
+    '1925',  -- published_date
+    'F. Scott Fitzgerald',  -- authors
+    'Fiction',  -- category
+    'A novel set in the Roaring Twenties, a tale of wealth, love, and tragedy.',  -- description
+    'https://books.google.com/books/content?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=1&source=gbs_api',  -- thumbnail_url
+    4.3,  -- average_rating
+    1520,  -- rating_count
+    180,  -- page_count
+    10,  -- quantity
+    'publishing',  -- state
+    3,  -- numberOfIssued
+    'en'  -- language
+);
+
+
 
 create table Category(
 	`cat_name` varchar(100) primary key
@@ -28,6 +64,8 @@ CREATE TABLE Book_Category (
     FOREIGN KEY (cat_name) REFERENCES Category(cat_name)
 )COLLATE utf8mb4_bin;
 
+drop table book_category;
+drop table category;
 
 -- Bảng User
 CREATE TABLE User (
@@ -106,7 +144,10 @@ create table BookRecommended (
     -- state : in queue or accepted
 )COLLATE utf8mb4_bin;
 
+insert into admin (admin_id, fullName, email, password) values ('23020024', 'VTTH', 'thuhuong', '7');
 
 alter table user
-	drop column borrow_table_name,
-    drop column favorite_table_name;
+	drop column attendance_score;
+
+select user_id, fullName from user where FULLNAME COLLATE utf8mb4_general_ci LIKE '%T%';
+

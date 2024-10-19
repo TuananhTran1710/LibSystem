@@ -30,9 +30,9 @@
                     <FontAwesomeIconView glyphName="SEARCH" size="20" text="" />
                 </graphic>
             </Button>
-            <Button fx:id="favourite_btn" mnemonicParsing="false" text="Favourite">
+            <Button fx:id="favourite_btn" mnemonicParsing="false" text="Propose">
                 <graphic>
-                    <FontAwesomeIconView glyphName="HEART" size="20" />
+                    <FontAwesomeIconView glyphName="LIGHTBULB_ALT" size="20" />
                 </graphic>
             </Button>
             <Line endX="120.0" />
@@ -47,7 +47,7 @@
                 </graphic>
             </Button>
         </VBox>
-        <VBox prefHeight="120.0" prefWidth="130.0" styleClass="report_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+        <VBox layoutX="15.0" layoutY="610.0" prefHeight="138.0" prefWidth="142.0" styleClass="report_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="14.0">
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Report Suggestion/Bug ?" />
             <Label text="Use this to report any errors or suggestions" />
             <Button fx:id="report_btn" mnemonicParsing="false" text="Report">

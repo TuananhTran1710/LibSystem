@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Book {
     private String id;
     private String title;
-    private String author;
+    private String authors;
     private LocalDate publishedDate;
     private String description;
     private String thumbnailUrl;
@@ -14,28 +14,29 @@ public class Book {
     private int pageCount;
     private String language;
     private String infoLink;
+    private int quantity;
+    private int numberOfIssued;
+    private String category;
 
-
-    public Book(String title, String author, String thumbnailUrl, String infoLink) {
+    public Book(String title, String authors, String thumbnailUrl) {
         this.title = title;
-        this.author = author;
+        this.authors = authors;
         this.thumbnailUrl = thumbnailUrl;
-        this.infoLink = infoLink;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthors() {
+        return authors;
     }
 
     public String getThumbnailUrl() {
         return thumbnailUrl;
     }
 
-    public String getInfoLink(){
+    public String getInfoLink() {
         return infoLink;
     }
 }

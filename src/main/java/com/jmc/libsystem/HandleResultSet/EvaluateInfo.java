@@ -1,7 +1,10 @@
-package com.jmc.libsystem.Models;
+package com.jmc.libsystem.HandleResultSet;
 
 import com.jmc.libsystem.Information.Admin;
 import com.jmc.libsystem.Information.User;
+import com.jmc.libsystem.Models.DatabaseDriver;
+import com.jmc.libsystem.Models.Model;
+import com.jmc.libsystem.QueryDatabase.HandleAccountDatabase;
 import com.jmc.libsystem.Views.AccountType;
 import javafx.scene.control.Alert;
 
@@ -13,15 +16,15 @@ public class EvaluateInfo {
 
     // su dung de xac nhan thong tin login co thanh cong ?
     public static void evaluateInfoToLogin(String email, String password, AccountType type) {
-        ResultSet resultSet = DatabaseDriver.getDataForLogin(email, password, type);
+        ResultSet resultSet = HandleAccountDatabase.getDataForLogin(email, password, type);
         try {
             if (resultSet.isBeforeFirst()) { // isBeforeFirst check xem co it nhat 1 dong la khach hang hay khong
                 Model.getInstance().setLoginFlag(true);
                 resultSet.next();
                 if (type == AccountType.USER) {
                     Model.getInstance().setMyUser(new User(resultSet.getString("user_id"), resultSet.getString("fullName"), email, password,
-                            resultSet.getInt("attendance_score"), resultSet.getInt("reputation_score"), resultSet.getInt("max_books"), resultSet.getString("state"),
-                            resultSet.getString("borrow_table_name"), resultSet.getString("favorite_table_name")));
+                            resultSet.getInt("attendance_score"), resultSet.getInt("reputation_score"), resultSet.getInt("max_books"), resultSet.getString("state")
+                    ));
                 } else {
                     Model.getInstance().setMyAdmin(new Admin(resultSet.getString("admin_id"), resultSet.getString("fullName"), email, password));
                 }
@@ -49,25 +52,19 @@ public class EvaluateInfo {
     public static void evaluateUserCredToSignup(String email, String password, String user_id, String fullName) {
 
         //String password duoc truyen vao nham muc dich co du lieu de Insert vao database khi thong tin sign-up hop le
-        ResultSet resultSet = DatabaseDriver.getUserDataForSignUp(email, user_id);
+        ResultSet resultSet = HandleAccountDatabase.getUserDataForSignUp(email, user_id);
         try {
             if (!resultSet.isBeforeFirst()) { // check xem email ton tai chua?
                 Model.getInstance().setLoginFlag(true);
 
-                String borrow_table_name = "Issued" + user_id;
-                String favorite_table_name = "Favorite" + user_id;
-
-                String queryInsert = "Insert into user (email, password, user_id, fullName, borrow_table_name, favorite_table_name) values (?, ?, ?, ?, ?, ?)";
-
-                Model.getInstance().setMyUser(new User(email, password, user_id, fullName, 0, 100, 20, "active", borrow_table_name, favorite_table_name));
+                String queryInsert = "Insert into user (email, password, user_id, fullName) values (?, ?, ?, ?, ?, ?)";
+                Model.getInstance().setMyUser(new User(user_id, fullName, email, password, 0, 100, 20, "active"));
 
                 try (PreparedStatement preparedStatementInsert = DatabaseDriver.getConn().prepareStatement(queryInsert)) {
                     preparedStatementInsert.setString(1, email);
                     preparedStatementInsert.setString(2, password);
                     preparedStatementInsert.setString(3, user_id);
                     preparedStatementInsert.setString(4, fullName);
-                    preparedStatementInsert.setString(5, borrow_table_name);
-                    preparedStatementInsert.setString(6, favorite_table_name);
 
                     preparedStatementInsert.executeUpdate();
                 } catch (SQLException e) {
@@ -91,7 +88,7 @@ public class EvaluateInfo {
     // su dung de xac nhan thong tin xu ly forget password
     public static void evaluateInfoToGetPassword(String email, String id, AccountType type) {
 
-        ResultSet resultSet = DatabaseDriver.getDataForForgetPassword(email, id, type);
+        ResultSet resultSet = HandleAccountDatabase.getDataForForgetPassword(email, id, type);
         try {
             if (resultSet.isBeforeFirst()) { // check xem email ton tai chua?
                 resultSet.next();

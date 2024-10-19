@@ -1,6 +1,6 @@
 package com.jmc.libsystem.Controllers;
 
-import com.jmc.libsystem.Models.EvaluateInfo;
+import com.jmc.libsystem.HandleResultSet.EvaluateInfo;
 import com.jmc.libsystem.Models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;

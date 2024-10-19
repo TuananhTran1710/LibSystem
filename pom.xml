@@ -87,6 +87,13 @@
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>11.1.0</version> <!-- Chọn phiên bản tương thích với Java của bạn -->
+        </dependency>
+
+
     </dependencies>
 
     <build>

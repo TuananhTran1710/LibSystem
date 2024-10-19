@@ -47,6 +47,7 @@
 
 .menu_container Button:hover {
     -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
 }
 
 .menu_container Button FontAwesomeIconView{
@@ -95,6 +96,7 @@
 
 .report_container Button:hover {
     -fx-cursor: hand;
+     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
 }
 
 
@@ -103,23 +105,7 @@
 }
 
 
-.button {
-    -fx-background-color: #132A13;
-    -fx-text-fill: #FFFFFF;
-    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
-    -fx-graphic-text-gap: 10px;
-    -fx-font-size: 1.2em;
-}
 
-.button FontAwesomeIconView {
-    -fx-fill: #FFFFFF;
-}
-
-.button:hover {
-    -fx-cursor: hand;
-    -fx-opacity: 1.0;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
-}
 
 
 

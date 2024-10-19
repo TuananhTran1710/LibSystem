@@ -1,7 +1,7 @@
 package com.jmc.libsystem.HandleResultSet;
 
 import com.jmc.libsystem.Information.Book;
-import com.jmc.libsystem.QueryDatabase.HandleBookDatabase;
+import com.jmc.libsystem.QueryDatabase.QueryBookData;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SearchBookDatabase {
     public static List<Book> getBookFromResultSet(String keyword) {
-        ResultSet resultSet = HandleBookDatabase.getBookData(keyword);
+        ResultSet resultSet = QueryBookData.getBookData(keyword);
         List<Book> listBook = new ArrayList<>();
 
         try {

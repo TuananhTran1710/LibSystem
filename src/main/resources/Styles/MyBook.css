@@ -3,78 +3,6 @@
     -fx-background-color: #EEEEEE;
 }
 
-/* title */
-.title_container {
-    -fx-background-color: #EEEEEE;
-    -fx-alignment: top_center;
-}
-
-.title_container Label{
-    -fx-fill: #000000;
-    -fx-font-size: 2.5em;
-    -fx-font-family: "Calibri Light";
-}
-
-.title_container FontAwesomeIconView{
-    -fx-fill: #FFFFFF;
-}
-
-.title_container Button{
-   -fx-background-color: #132A13;
-   -fx-text-fill: #132A13;
-   -fx-font-size: 1.1em;
-   -fx-alignment: center;
-   -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
-   -fx-padding: 10px;
-}
-
-.title_container Button:hover {
-    -fx-text-fill: #1A4314;
-    /* -fx-background-color: rgba(19, 42, 19, 0.1); */
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
-}
-
-/* textfiled để search */
-.search_field {
-    -fx-background-color: rgba(19, 42, 19, 0.05);
-    -fx-border-color: #132A13;
-    -fx-border-radius: 10px 0 0 10px;
-    -fx-background-radius: 10px;
-    -fx-padding: 8px;
-    -fx-font-size: 14px;
-    -fx-text-fill: #666666;
-}
-
-.search_field:focused {
-    -fx-border-color: #2a572a;
-    -fx-background-color: #FFFFFF;
-}
-
-.search_field:hover {
-    -fx-border-color: #2a572a;
-}
-
-/* search button */
-.search_button {
-    -fx-pref-width: 100;
-    -fx-background-color: #132A13;
-    -fx-text-fill: #FFFFFF;
-    -fx-background-radius: 0 10px 10px 0;
-    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
-    -fx-graphic-text-gap: 10px;
-    -fx-font-size: 1.2em;
-}
-.search_button FontAwesomeIconView {
-    -fx-fill: #FFFFFF;
-}
-
-.search_button:hover {
-    -fx-cursor: hand;
-    -fx-opacity: 1.0;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
-}
-
 /* 2 vùng bên dưới */
 .feature {
     -fx-background-color: #EEEEEE;
@@ -82,6 +10,7 @@
 
 .feature FontAwesomeIconView {
     -fx-fill: #132A13;
+    -fx-size: 15;
 }
 
 .feature Label{
@@ -147,4 +76,39 @@
 .scroll-pane .scroll-bar:vertical .thumb:pressed {
     -fx-background-color: #0B4619;
     -fx-opacity: 1.0;
+}
+
+/* vbox là các ô thống kê*/
+.book VBox {
+    -fx-border-color: #132A13;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #FFFFFF;
+}
+
+/* hbox là nơi lưu phần mục và số lượng*/
+
+.book HBox {
+    -fx-alignment: center;
+}
+
+/* số sách mượn */
+#NumberBorrow {
+    -fx-font-family: "Pacifico";
+    -fx-font-size: 4.5em;
+}
+/* số sách trả */
+#NumberReturn {
+    -fx-font-family: "Pacifico";
+    -fx-font-size: 4.5em;
+}
+/* số sách yêu thích */
+#NumberFavorite {
+    -fx-font-family: "Pacifico";
+    -fx-font-size: 4.5em;
+}
+/* dòng tiêu đề */
+#List {
+    -fx-font-family: "Britannic Bold";
+    -fx-font-size: 2em;
 }

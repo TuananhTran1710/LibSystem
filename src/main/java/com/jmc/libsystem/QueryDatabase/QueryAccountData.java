@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class HandleAccountDatabase {
+public class QueryAccountData {
     // User Section
     public static ResultSet getDataForLogin(String email, String password, AccountType type) {
         ResultSet resultSet = null;

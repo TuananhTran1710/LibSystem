@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class HandleBookDatabase {
+public class QueryBookData {
     public static ResultSet getBookData(String keyWord) {
         ResultSet resultSet = null;
         String type = DashboardController.typeSearch.toString();

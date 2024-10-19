@@ -1,7 +1,10 @@
-package com.jmc.libsystem.Models;
+package com.jmc.libsystem.HandleResultSet;
 
 import com.jmc.libsystem.Information.Admin;
 import com.jmc.libsystem.Information.User;
+import com.jmc.libsystem.Models.DatabaseDriver;
+import com.jmc.libsystem.Models.Model;
+import com.jmc.libsystem.QueryDatabase.HandleAccountDatabase;
 import com.jmc.libsystem.Views.AccountType;
 import javafx.scene.control.Alert;
 
@@ -13,7 +16,7 @@ public class EvaluateInfo {
 
     // su dung de xac nhan thong tin login co thanh cong ?
     public static void evaluateInfoToLogin(String email, String password, AccountType type) {
-        ResultSet resultSet = DatabaseDriver.getDataForLogin(email, password, type);
+        ResultSet resultSet = HandleAccountDatabase.getDataForLogin(email, password, type);
         try {
             if (resultSet.isBeforeFirst()) { // isBeforeFirst check xem co it nhat 1 dong la khach hang hay khong
                 Model.getInstance().setLoginFlag(true);
@@ -49,7 +52,7 @@ public class EvaluateInfo {
     public static void evaluateUserCredToSignup(String email, String password, String user_id, String fullName) {
 
         //String password duoc truyen vao nham muc dich co du lieu de Insert vao database khi thong tin sign-up hop le
-        ResultSet resultSet = DatabaseDriver.getUserDataForSignUp(email, user_id);
+        ResultSet resultSet = HandleAccountDatabase.getUserDataForSignUp(email, user_id);
         try {
             if (!resultSet.isBeforeFirst()) { // check xem email ton tai chua?
                 Model.getInstance().setLoginFlag(true);
@@ -85,7 +88,7 @@ public class EvaluateInfo {
     // su dung de xac nhan thong tin xu ly forget password
     public static void evaluateInfoToGetPassword(String email, String id, AccountType type) {
 
-        ResultSet resultSet = DatabaseDriver.getDataForForgetPassword(email, id, type);
+        ResultSet resultSet = HandleAccountDatabase.getDataForForgetPassword(email, id, type);
         try {
             if (resultSet.isBeforeFirst()) { // check xem email ton tai chua?
                 resultSet.next();

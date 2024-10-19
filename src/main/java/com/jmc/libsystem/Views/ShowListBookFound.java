@@ -8,16 +8,28 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 public class ShowListBookFound {
 
     public static void show(List<Book> bookList, HBox resultList_hb) {
         resultList_hb.getChildren().clear();
+
+        if (bookList.isEmpty()) {
+            ImageView image = new ImageView();
+            // Tải ảnh từ tài nguyên
+            Image bookCoverImage = new Image(ShowListBookFound.class.getResource("/Images/notfound.png").toString());
+            image.setImage(bookCoverImage);
+
+            // Đặt chiều cao và chiều rộng cố định cho ảnh
+            image.setFitHeight(142);
+            image.setFitWidth(760);
+            image.setPreserveRatio(false);  // Giữ nguyên tỉ lệ ảnh
+
+            // Thêm ảnh vào HBox
+            resultList_hb.getChildren().add(image);
+            return;
+        }
 
         for (Book book : bookList) {
             VBox bookBox = new VBox();
@@ -46,11 +58,7 @@ public class ShowListBookFound {
             // Thêm sự kiện nhấn vào ảnh bìa để mở đường link
             bookCoverImageView.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2) {
-                    try {
-                        Desktop.getDesktop().browse(new URI(book.getInfoLink()));
-                    } catch (IOException | URISyntaxException e) {
-                        e.printStackTrace();
-                    }
+                    // xu ly su kien an vao thi hien trang book preview ra
                 }
             });
 

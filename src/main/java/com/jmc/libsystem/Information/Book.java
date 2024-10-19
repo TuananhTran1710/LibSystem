@@ -16,12 +16,12 @@ public class Book {
     private String infoLink;
     private int quantity;
     private int numberOfIssued;
+    private String category;
 
-    public Book(String title, String authors, String thumbnailUrl, String infoLink) {
+    public Book(String title, String authors, String thumbnailUrl) {
         this.title = title;
         this.authors = authors;
         this.thumbnailUrl = thumbnailUrl;
-        this.infoLink = infoLink;
     }
 
     public String getTitle() {

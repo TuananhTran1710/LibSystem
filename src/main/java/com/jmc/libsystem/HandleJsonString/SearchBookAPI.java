@@ -1,8 +1,9 @@
-package com.jmc.libsystem.Models;
+package com.jmc.libsystem.HandleJsonString;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jmc.libsystem.Information.Book;
+import com.jmc.libsystem.Models.APIDriver;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class BookSearchModel {
+public class SearchBookAPI {
 
     // method để phân tích chuỗi JSon để lấy ra list Book
     public static List<Book> getListBookFromJson(String keyword) throws URISyntaxException, IOException {
@@ -51,11 +52,8 @@ public class BookSearchModel {
                 // lay link anh bia cua sach
                 String thumbnailUrl = volumeInfo.has("imageLinks") ? volumeInfo.get("imageLinks").get("thumbnail").asText() : "";
 
-                // lay link den web cua sach
-                String link = volumeInfo.get("infoLink").asText();
-
                 //thêm cái book vừa mới lôi ra vào danh sách kết quả
-                bookList.add(new Book(title, authors, thumbnailUrl, link));
+                bookList.add(new Book(title, authors, thumbnailUrl));
             }
         }
         return bookList;

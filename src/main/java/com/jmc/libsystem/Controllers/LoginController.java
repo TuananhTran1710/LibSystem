@@ -1,6 +1,6 @@
 package com.jmc.libsystem.Controllers;
 
-import com.jmc.libsystem.Models.EvaluateInfo;
+import com.jmc.libsystem.HandleResultSet.EvaluateInfo;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.Views.AccountType;
 import javafx.collections.FXCollections;

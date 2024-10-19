@@ -39,8 +39,6 @@ CREATE TABLE User (
     reputation_score INT DEFAULT 100,
     max_books INT DEFAULT 20,
     state VARCHAR(20) DEFAULT 'active',
-    borrow_table_name VARCHAR(50),
-    favorite_table_name VARCHAR(50)
 )COLLATE utf8mb4_bin;
 
 -- Tạo bảng feedback để chứa đánh giá của người dùng về sách
@@ -108,3 +106,7 @@ create table BookRecommended (
     -- state : in queue or accepted
 )COLLATE utf8mb4_bin;
 
+
+alter table user
+	drop column borrow_table_name,
+    drop column favorite_table_name;

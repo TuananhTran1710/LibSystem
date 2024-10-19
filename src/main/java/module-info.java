@@ -1,9 +1,6 @@
 module com.jmc.libsystem {
-    requires transitive javafx.controls;
     requires javafx.fxml;
     requires de.jensd.fx.glyphs.fontawesome;
-    requires transitive javafx.graphics;
-    requires javafx.base;
     requires org.apache.logging.log4j.core;
     requires com.google.gson;
     requires java.net.http;
@@ -11,6 +8,7 @@ module com.jmc.libsystem {
     requires org.apache.httpcomponents.client5.httpclient5;
     requires org.apache.httpcomponents.core5.httpcore5;
     requires java.sql;
+    requires org.controlsfx.controls;
     requires java.desktop;
 
     opens com.jmc.libsystem to javafx.fxml, com.google.gson;
@@ -23,5 +21,8 @@ module com.jmc.libsystem {
     exports com.jmc.libsystem.Views;
     exports com.jmc.libsystem.Information;
     opens com.jmc.libsystem.Information to com.google.gson, javafx.fxml;
+    exports com.jmc.libsystem.QueryDatabase;
+    exports com.jmc.libsystem.HandleResultSet;
+    exports com.jmc.libsystem.HandleJsonString;
 
 }

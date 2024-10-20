@@ -34,6 +34,7 @@ public class QueryBorrowHistory {
                 int cnt = resultSet.getInt(1);
 
                 Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Notice");
                 alert.setContentText("You have " + cnt + " overdue books. Please visit MyBook section and return the books to the library soon!");
                 alert.show();
             }

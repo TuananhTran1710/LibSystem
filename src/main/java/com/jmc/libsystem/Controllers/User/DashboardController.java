@@ -24,6 +24,11 @@ public class DashboardController implements Initializable {
     public HBox resultList_hb;
     public ChoiceBox<SearchCriteria> choice_box;
     public static SearchCriteria typeSearch;
+    public Button notice_btn;
+    public HBox reading_hbox;
+    public Button reading_btn;
+    public HBox popular_hbox;
+    public Button popular_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -35,6 +40,11 @@ public class DashboardController implements Initializable {
 
         name_lbl.setText("Hi " + Model.getInstance().getMyUser().getFullName() + "!");
         search_btn.setOnAction(event -> searhBooks());
+        notice_btn.setOnAction(event -> displayNotice());
+    }
+
+    private void displayNotice() {
+
     }
 
     public void searhBooks() {

@@ -75,6 +75,7 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
 }
 
+
 /* 2 vùng bên dưới */
 .feature {
     -fx-background-color: #EEEEEE;

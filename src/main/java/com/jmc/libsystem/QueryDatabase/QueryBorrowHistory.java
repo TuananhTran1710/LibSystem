@@ -1,6 +1,7 @@
 package com.jmc.libsystem.QueryDatabase;
 
 import com.jmc.libsystem.Models.DatabaseDriver;
+import javafx.scene.control.Alert;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,10 +29,15 @@ public class QueryBorrowHistory {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, user_id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.isBeforeFirst()) {
 
+            if (resultSet.next() && resultSet.getInt(1) > 0) {
+                int cnt = resultSet.getInt(1);
 
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("You have " + cnt + " overdue books. Please visit MyBook section and return the books to the library soon!");
+                alert.show();
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

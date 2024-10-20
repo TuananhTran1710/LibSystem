@@ -4,18 +4,15 @@ import java.time.LocalDate;
 
 public class Book {
     private String id;
-    private String title;
-    private String authors;
+    private final String title;
+    private final String authors;
     private LocalDate publishedDate;
     private String description;
-    private String thumbnailUrl;
-    private double avgRate;
-    private int ratingCount;
+    private final String thumbnailUrl;
     private int pageCount;
     private String language;
     private String infoLink;
     private int quantity;
-    private int numberOfIssued;
     private String category;
 
     public Book(String title, String authors, String thumbnailUrl) {

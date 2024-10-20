@@ -1,8 +1,5 @@
 package com.jmc.libsystem.Views;
 
-import com.jmc.libsystem.Controllers.LoginController;
-import com.jmc.libsystem.Models.Model;
-import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
@@ -107,13 +104,6 @@ public class ViewFactory {
         if (alert.showAndWait().get() == ButtonType.OK) {
             System.out.println("Exit successfully");
             stage.close();
-
-            // backend data
-            if (LoginController.loginAccountType == AccountType.USER) {
-                int score = Model.getInstance().getMyUser().getReputation_score();
-                String user_id = Model.getInstance().getMyUser().getId();
-                QueryAccountData.getReputation(score, user_id);
-            }
         }
     }
 

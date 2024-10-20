@@ -7,6 +7,7 @@ import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBorrowHistory;
 import com.jmc.libsystem.Views.AccountType;
+import com.jmc.libsystem.Views.StateAccount;
 import javafx.scene.control.Alert;
 
 import java.sql.PreparedStatement;
@@ -23,6 +24,8 @@ public class EvaluateInfo {
                 resultSet.next();
                 if (type == AccountType.USER) {
                     if (QueryBorrowHistory.isBanned(resultSet.getString("user_id"))) {
+                        //update state of account
+                        QueryAccountData.updateState(StateAccount.BANNED.toString(), resultSet.getString("user_id"));
 
                         System.out.println("Account is banned because you violated the library policy");
                         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -30,8 +33,9 @@ public class EvaluateInfo {
                         alert.show();
                     } else {
                         Model.getInstance().setLoginFlag(true);
-                        Model.getInstance().setMyUser(new User(resultSet.getString("user_id"), resultSet.getString("fullName"), email, password, resultSet.getInt("reputation_score"), resultSet.getInt("max_books"), resultSet.getString("state")
-                        ));
+                        Model.getInstance().setMyUser(new User(resultSet.getString("user_id"), resultSet.getString("fullName"),
+                                email, password, resultSet.getString("state")));
+
                     }
                 } else {
                     Model.getInstance().setLoginFlag(true);
@@ -67,7 +71,7 @@ public class EvaluateInfo {
                 Model.getInstance().setLoginFlag(true);
 
                 String queryInsert = "Insert into user (email, password, user_id, fullName) values (?, ?, ?, ?, ?, ?)";
-                Model.getInstance().setMyUser(new User(user_id, fullName, email, password, 100, 20, "active"));
+                Model.getInstance().setMyUser(new User(user_id, fullName, email, password, "active"));
 
                 try (PreparedStatement preparedStatementInsert = DatabaseDriver.getConn().prepareStatement(queryInsert)) {
                     preparedStatementInsert.setString(1, email);

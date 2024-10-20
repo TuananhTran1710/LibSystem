@@ -75,4 +75,32 @@ public class QueryAccountData {
         }
         return resultSet;
     }
+
+
+    //select and update fields in database
+
+    public static String selectState(String user_id) {
+        String query = "select state from user where user_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, user_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.getString(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void updateState(String state, String user_id) {
+        String query = "Update user set state = ? where user_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, state);
+            preparedStatement.setString(2, user_id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

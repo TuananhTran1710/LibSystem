@@ -1,6 +1,7 @@
 package com.jmc.libsystem.QueryDatabase;
 
 import com.jmc.libsystem.Models.DatabaseDriver;
+import com.jmc.libsystem.Views.StateAccount;
 import javafx.scene.control.Alert;
 
 import java.sql.PreparedStatement;
@@ -11,13 +12,26 @@ public class QueryBorrowHistory {
     public static boolean isBanned(String user_id) {
         String query = "SELECT * FROM borrowhistory WHERE user_id = ? AND DATEDIFF(CURDATE(), borrow_date) > 120";
         try {
-
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, user_id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             // Nếu có bản ghi trả về, có nghĩa là có lần mượn quá hạn
             return resultSet.next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void updateUserBanned() {
+        String query = "SELECT user_id FROM borrowhistory WHERE DATEDIFF(CURDATE(), borrow_date) > 120";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                QueryAccountData.updateState(StateAccount.BANNED.toString(), resultSet.getString(1));
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

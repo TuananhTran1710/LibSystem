@@ -39,6 +39,8 @@ public class EvaluateInfo {
                     }
                 } else {
                     Model.getInstance().setLoginFlag(true);
+                    //update state of all user
+                    QueryBorrowHistory.updateUserBanned();
                     Model.getInstance().setMyAdmin(new Admin(resultSet.getString("admin_id"), resultSet.getString("fullName"), email, password));
                 }
             } else {

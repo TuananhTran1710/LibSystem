@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../Styles/MyBook.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.MyBookController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../../Styles/MyBook.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.MyBookController">
    <children>
-      <AnchorPane layoutX="25.0" layoutY="526.0" prefHeight="209.0" prefWidth="800.0" styleClass="feature" stylesheets="@../Styles/MyBook.css" AnchorPane.leftAnchor="25.0">
+      <AnchorPane layoutX="25.0" layoutY="526.0" prefHeight="209.0" prefWidth="800.0" styleClass="feature" stylesheets="@../../Styles/MyBook.css" AnchorPane.leftAnchor="25.0">
          <children>
             <Label layoutX="38.0" layoutY="6.0" text="Favourite" />
             <FontAwesomeIconView glyphName="HEART" layoutX="15.0" layoutY="23.0" size="15" />
@@ -26,7 +26,7 @@
             <Button layoutX="708.0" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="See more..." />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="25.0" layoutY="289.0" prefHeight="209.0" prefWidth="800.0" styleClass="feature" stylesheets="@../Styles/MyBook.css">
+      <AnchorPane layoutX="25.0" layoutY="289.0" prefHeight="209.0" prefWidth="800.0" styleClass="feature" stylesheets="@../../Styles/MyBook.css">
          <children>
             <Label layoutX="37.0" layoutY="5.0" text="Borrowed" />
             <FontAwesomeIconView glyphName="INBOX" layoutX="15.0" layoutY="24.0" size="17" />
@@ -39,14 +39,14 @@
             <Button layoutX="707.0" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="See more..." />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="45.0" layoutY="58.0" prefHeight="200.0" prefWidth="250.0" styleClass="book" stylesheets="@../Styles/MyBook.css" AnchorPane.leftAnchor="45.0">
+      <AnchorPane layoutX="45.0" layoutY="58.0" prefHeight="200.0" prefWidth="250.0" styleClass="book" stylesheets="@../../Styles/MyBook.css" AnchorPane.leftAnchor="45.0">
          <children>
             <VBox layoutX="8.0" prefHeight="191.0" prefWidth="234.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="18.0">
                <children>
                   <ImageView fitHeight="58.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Images/book-borrow-icon.png" />
+                        <Image url="@../../Images/book-borrow-icon.png" />
                      </image>
                   </ImageView>
                   <Label id="List" alignment="CENTER" text="Borrow Book" />
@@ -59,14 +59,14 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="305.0" layoutY="58.0" prefHeight="200.0" prefWidth="250.0" styleClass="book" stylesheets="@../Styles/MyBook.css">
+      <AnchorPane layoutX="305.0" layoutY="58.0" prefHeight="200.0" prefWidth="250.0" styleClass="book" stylesheets="@../../Styles/MyBook.css">
          <children>
             <VBox layoutX="7.0" prefHeight="191.0" prefWidth="234.0" />
             <HBox prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="20.0">
                <children>
                   <ImageView fitHeight="58.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Images/book-return-128.png" />
+                        <Image url="@../../Images/book-return-128.png" />
                      </image>
                   </ImageView>
                   <Label id="List" text="Return Book" />
@@ -79,14 +79,14 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="566.0" layoutY="58.0" prefHeight="200.0" prefWidth="250.0" styleClass="book" stylesheets="@../Styles/MyBook.css">
+      <AnchorPane layoutX="566.0" layoutY="58.0" prefHeight="200.0" prefWidth="250.0" styleClass="book" stylesheets="@../../Styles/MyBook.css">
          <children>
             <VBox layoutX="4.0" prefHeight="191.0" prefWidth="234.0" />
             <HBox alignment="CENTER_LEFT" layoutX="30.0" prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="18.0">
                <children>
                   <ImageView fitHeight="58.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Images/favorite-book.png" />
+                        <Image url="@../../Images/favorite-book.png" />
                      </image>
                   </ImageView>
                   <Label id="List" layoutX="12.0" text="Favorite Book" />

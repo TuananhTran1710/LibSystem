@@ -1,13 +1,12 @@
 package com.jmc.libsystem.QueryDatabase;
 
-import com.jmc.libsystem.Controllers.User.DashboardController;
 import com.jmc.libsystem.Models.DatabaseDriver;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class QueryUserBook {
+public class QueryBorrowHistory {
     public static ResultSet Borrow (String userId) {
         ResultSet resultSet = null;
         String query = "SELECT COUNT(*) AS total_borrows " +

@@ -1,20 +1,15 @@
-package com.jmc.libsystem.Controllers;
+package com.jmc.libsystem.Controllers.User;
 
-import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.Model;
-import com.jmc.libsystem.QueryDatabase.QueryBookData;
-import com.jmc.libsystem.QueryDatabase.QueryUserBook;
+import com.jmc.libsystem.QueryDatabase.QueryBorrowHistory;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 
 public class MyBookController implements Initializable {
 
@@ -39,7 +34,7 @@ public class MyBookController implements Initializable {
     }
 
     private int getBorrowBook(String userId) throws SQLException {
-        ResultSet resultSet = QueryUserBook.Borrow(userId);
+        ResultSet resultSet = QueryBorrowHistory.Borrow(userId);
         if (resultSet.next()) {
             int totalBorrows = resultSet.getInt("total_borrows");
             return totalBorrows;
@@ -50,7 +45,7 @@ public class MyBookController implements Initializable {
     }
 
     private int getReturnBook(String userId) throws SQLException {
-        ResultSet resultSet = QueryUserBook.Return(userId);
+        ResultSet resultSet = QueryBorrowHistory.Return(userId);
         if (resultSet.next()) {
             int totalReturn = resultSet.getInt("total_return");
             return totalReturn;

@@ -37,7 +37,7 @@ CREATE TABLE Feedback (
 )COLLATE utf8mb4_bin;
 
 -- Tạo bảng lịch sử mượn trả chung cho tất cả user (Chỉ admin có thể xem)
-CREATE TABLE BorrowHistory (
+CREATE TABLE BookLoans (
     history_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(20),
     google_book_id VARCHAR(50),
@@ -57,7 +57,7 @@ CREATE TABLE Admin (
 )COLLATE utf8mb4_bin;
 
 -- Bảng xử lý phiên thao tác admin với user (Đăng ký, sửa, xóa)
-CREATE TABLE AdminUserAction (
+CREATE TABLE AdminUser (
     action_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(20),
     admin_id VARCHAR(20),
@@ -68,7 +68,7 @@ CREATE TABLE AdminUserAction (
 )COLLATE utf8mb4_bin;
 
 -- Bảng xử lý phiên thao tác admin với sách (Sửa, xóa, thêm, tăng giảm số lượng, v.v.)
-CREATE TABLE AdminBookAction (
+CREATE TABLE AdminBook (
     action_id INT AUTO_INCREMENT PRIMARY KEY,
     google_book_id VARCHAR(50),
     admin_id VARCHAR(20),
@@ -80,7 +80,7 @@ CREATE TABLE AdminBookAction (
 )COLLATE utf8mb4_bin;
 
 
-create table BookRecommended (
+create table BookRcm (
 	rcm_id int auto_increment primary key,
     google_book_id varchar(50),
     user_id varchar(20),

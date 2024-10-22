@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class QueryBorrowHistory {
+public class QueryBookLoans {
     public static boolean isBanned(String user_id) {
         String query = "SELECT * FROM borrowhistory WHERE user_id = ? AND DATEDIFF(CURDATE(), borrow_date) > 120";
         try {

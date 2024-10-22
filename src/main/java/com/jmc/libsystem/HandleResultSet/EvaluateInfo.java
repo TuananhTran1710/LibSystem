@@ -63,7 +63,7 @@ public class EvaluateInfo {
             if (!resultSet.isBeforeFirst()) { // check xem email ton tai chua?
                 Model.getInstance().setLoginFlag(true);
 
-                String queryInsert = "Insert into user (email, password, user_id, fullName) values (?, ?, ?, ?, ?, ?)";
+                String queryInsert = "Insert into user (email, password, user_id, fullName) values (?, ?, ?, ?)";
                 Model.getInstance().setMyUser(new User(user_id, fullName, email, password, 0, 100, 20, "active"));
 
                 try (PreparedStatement preparedStatementInsert = DatabaseDriver.getConn().prepareStatement(queryInsert)) {

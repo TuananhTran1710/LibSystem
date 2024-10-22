@@ -10,9 +10,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../Styles/MyBook.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.MyBook">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../Styles/MyBook.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.MyBookController">
    <children>
       <AnchorPane layoutX="25.0" layoutY="526.0" prefHeight="209.0" prefWidth="800.0" styleClass="feature" stylesheets="@../Styles/MyBook.css" AnchorPane.leftAnchor="25.0">
          <children>
@@ -55,7 +54,7 @@
             </HBox>
             <HBox layoutY="98.4" prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="80.0">
                <children>
-                  <Label id="NumberBorrow" alignment="CENTER" prefHeight="90.0" prefWidth="33.0" text="0" />
+                  <Label id="NumberBorrow" fx:id="NumberBorrow" alignment="CENTER" prefHeight="90.0" prefWidth="33.0" text="0" />
                </children>
             </HBox>
          </children>
@@ -75,7 +74,7 @@
             </HBox>
             <HBox prefHeight="70.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="80.0">
                <children>
-                  <Label id="NumberReturn" text="0" />
+                  <Label id="NumberReturn" fx:id="NumberReturn" text="0" />
                </children>
             </HBox>
          </children>
@@ -93,13 +92,9 @@
                   <Label id="List" layoutX="12.0" text="Favorite Book" />
                </children>
             </HBox>
-            <HBox prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="80.0">
+            <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="80.0">
                <children>
-                  <Label id="NumberFavorite" alignment="CENTER" text="0">
-                     <font>
-                        <Font name="Arial" size="96.0" />
-                     </font>
-                  </Label>
+                  <Label id="NumberFavorite" fx:id="NumberFavorite" text="0" />
                </children>
             </HBox>
          </children>

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class QueryBookLoans {
     public static boolean isBanned(String user_id) {
-        String query = "SELECT * FROM borrowhistory WHERE user_id = ? AND DATEDIFF(CURDATE(), borrow_date) > 120";
+        String query = "SELECT * FROM bookloans WHERE user_id = ? AND DATEDIFF(CURDATE(), borrow_date) > 120";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, user_id);
@@ -24,7 +24,7 @@ public class QueryBookLoans {
     }
 
     public static void updateUserBanned() {
-        String query = "SELECT user_id FROM borrowhistory WHERE DATEDIFF(CURDATE(), borrow_date) > 120";
+        String query = "SELECT user_id FROM bookloans WHERE DATEDIFF(CURDATE(), borrow_date) > 120";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -38,7 +38,7 @@ public class QueryBookLoans {
     }
 
     public static void noticeBookOverdue(String user_id) {
-        String query = "SELECT count(*) FROM borrowhistory WHERE user_id = ? AND DATEDIFF(CURDATE(), borrow_date) > 60";
+        String query = "SELECT count(*) FROM bookloans WHERE user_id = ? AND DATEDIFF(CURDATE(), borrow_date) > 60";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, user_id);
@@ -62,7 +62,7 @@ public class QueryBookLoans {
     public static ResultSet Borrow(String userId) {
         ResultSet resultSet = null;
         String query = "SELECT COUNT(*) AS total_borrows " +
-                "FROM borrow_history " +
+                "FROM bookloans " +
                 "WHERE user_id = ?";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
@@ -77,7 +77,7 @@ public class QueryBookLoans {
     public static ResultSet Return(String userId) {
         ResultSet resultSet = null;
         String query = "SELECT COUNT(CASE WHEN return_date IS NOT NULL THEN 1 END) AS total_returns " +
-                "FROM borrow_history " +
+                "FROM bookloans " +
                 "WHERE user_id = ?";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);

@@ -4,6 +4,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -77,8 +79,34 @@ public class ViewFactory {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Library");
+
+        stage.setOnCloseRequest(event -> {
+            try {
+                event.consume();
+                exit(stage);
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
+
         stage.show();
     }
+
+    public void exit(Stage stage) throws IOException {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Close Window");
+        alert.setHeaderText("Confirm to exit program");
+        alert.setContentText("Do you want to exit ?");
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            System.out.println("Exit successfully");
+            stage.close();
+        }
+    }
+
 
     public void closeStage(Stage stage) {
         stage.close();

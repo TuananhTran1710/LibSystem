@@ -2,6 +2,7 @@ package com.jmc.libsystem.Controllers;
 
 import com.jmc.libsystem.HandleResultSet.EvaluateInfo;
 import com.jmc.libsystem.Models.Model;
+import com.jmc.libsystem.QueryDatabase.QueryBorrowHistory;
 import com.jmc.libsystem.Views.AccountType;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
@@ -68,9 +69,13 @@ public class LoginController implements Initializable {
         EvaluateInfo.evaluateInfoToLogin(email_fld.getText(), password_fld.getText(), loginAccountType);
 
         if (Model.getInstance().getLoginFlag()) {
-            if (loginAccountType == AccountType.USER)
+            if (loginAccountType == AccountType.USER) {
                 Model.getInstance().getViewFactory().showUserWindow();
-            else Model.getInstance().getViewFactory().showAdminWindow();
+
+                // notice about num of book which must return
+                QueryBorrowHistory.noticeBookOverdue(Model.getInstance().getMyUser().getId());
+
+            } else Model.getInstance().getViewFactory().showAdminWindow();
 
             Model.getInstance().getViewFactory().closeStage(stage);
         }

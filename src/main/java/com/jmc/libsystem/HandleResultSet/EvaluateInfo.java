@@ -5,13 +5,14 @@ import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.DatabaseDriver;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
+import com.jmc.libsystem.QueryDatabase.QueryBorrowHistory;
 import com.jmc.libsystem.Views.AccountType;
+import com.jmc.libsystem.Views.StateAccount;
 import javafx.scene.control.Alert;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class EvaluateInfo {
 
@@ -20,18 +21,24 @@ public class EvaluateInfo {
         ResultSet resultSet = QueryAccountData.getDataForLogin(email, password, type);
         try {
             if (resultSet.isBeforeFirst()) { // isBeforeFirst check xem co it nhat 1 dong la khach hang hay khong
-                Model.getInstance().setLoginFlag(true);
                 resultSet.next();
                 if (type == AccountType.USER) {
+                    if (QueryBorrowHistory.isBanned(resultSet.getString("user_id"))) {
+                        //update state of account
+                        QueryAccountData.updateState(StateAccount.BANNED.toString(), resultSet.getString("user_id"));
 
-                    String user_id = resultSet.getString("user_id");
-                    LocalDate today = LocalDate.now();
+                        System.out.println("Account is banned because you violated the library policy");
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setContentText("Account is banned because you violated the library policy");
+                        alert.show();
+                    } else {
+                        Model.getInstance().setLoginFlag(true);
+                        Model.getInstance().setMyUser(new User(resultSet.getString("user_id"), resultSet.getString("fullName"),
+                                email, password, resultSet.getString("state")));
 
-
-                    Model.getInstance().setMyUser(new User(resultSet.getString("user_id"), resultSet.getString("fullName"), email, password,
-                            resultSet.getInt("attendance_score"), resultSet.getInt("reputation_score"), resultSet.getInt("max_books"), resultSet.getString("state")
-                    ));
+                    }
                 } else {
+                    Model.getInstance().setLoginFlag(true);
                     Model.getInstance().setMyAdmin(new Admin(resultSet.getString("admin_id"), resultSet.getString("fullName"), email, password));
                 }
             } else {

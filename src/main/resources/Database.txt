@@ -1,5 +1,5 @@
 -- Tạo bảng lưu trữ thông tin sách
-CREATE TABLE Book (
+CREATE TABLE IF NOT EXISTS Book (
     google_book_id VARCHAR(50) PRIMARY KEY,  -- ID từ Google Books API làm khóa chính
     title VARCHAR(255) NOT NULL,
     published_date VARCHAR(20),
@@ -50,13 +50,11 @@ VALUES (
     'en'  -- language
 );
 
-
-
-create table Category(
+CREATE TABLE IF NOT EXISTS Category(
 	`cat_name` varchar(100) primary key
 )COLLATE utf8mb4_bin;
 
-CREATE TABLE Book_Category (
+CREATE TABLE IF NOT EXISTS Book_Category (
     google_book_id VARCHAR(50),
     cat_name VARCHAR(100),
     PRIMARY KEY (google_book_id, cat_name),
@@ -68,7 +66,7 @@ drop table book_category;
 drop table category;
 
 -- Bảng User
-CREATE TABLE User (
+CREATE TABLE IF NOT EXISTS User (
     user_id VARCHAR(20) PRIMARY KEY,
     fullName varchar(50),
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -76,11 +74,11 @@ CREATE TABLE User (
     attendance_score INT DEFAULT 0,
     reputation_score INT DEFAULT 100,
     max_books INT DEFAULT 20,
-    state VARCHAR(20) DEFAULT 'active',
+    state VARCHAR(20) DEFAULT 'active'
 )COLLATE utf8mb4_bin;
 
 -- Tạo bảng feedback để chứa đánh giá của người dùng về sách
-CREATE TABLE Feedback (
+CREATE TABLE IF NOT EXISTS Feedback (
     feedback_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(20),
     google_book_id VARCHAR(50),
@@ -91,7 +89,7 @@ CREATE TABLE Feedback (
 )COLLATE utf8mb4_bin;
 
 -- Tạo bảng lịch sử mượn trả chung cho tất cả user (Chỉ admin có thể xem)
-CREATE TABLE BorrowHistory (
+CREATE TABLE IF NOT EXISTS BorrowHistory (
     history_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(20),
     google_book_id VARCHAR(50),
@@ -103,7 +101,7 @@ CREATE TABLE BorrowHistory (
     FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
 )COLLATE utf8mb4_bin;
 
-CREATE TABLE Admin (
+CREATE TABLE IF NOT EXISTS Admin (
     admin_id VARCHAR(20) PRIMARY KEY,
     fullName varchar(50),
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -111,7 +109,7 @@ CREATE TABLE Admin (
 )COLLATE utf8mb4_bin;
 
 -- Bảng xử lý phiên thao tác admin với user (Đăng ký, sửa, xóa)
-CREATE TABLE AdminUserAction (
+CREATE TABLE IF NOT EXISTS AdminUserAction (
     action_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(20),
     admin_id VARCHAR(20),
@@ -122,7 +120,7 @@ CREATE TABLE AdminUserAction (
 )COLLATE utf8mb4_bin;
 
 -- Bảng xử lý phiên thao tác admin với sách (Sửa, xóa, thêm, tăng giảm số lượng, v.v.)
-CREATE TABLE AdminBookAction (
+CREATE TABLE IF NOT EXISTS AdminBookAction (
     action_id INT AUTO_INCREMENT PRIMARY KEY,
     google_book_id VARCHAR(50),
     admin_id VARCHAR(20),
@@ -134,7 +132,7 @@ CREATE TABLE AdminBookAction (
 )COLLATE utf8mb4_bin;
 
 
-create table BookRecommended (
+CREATE TABLE IF NOT EXISTS BookRecommended (
 	rcm_id int auto_increment primary key,
     google_book_id varchar(50),
     user_id varchar(20),

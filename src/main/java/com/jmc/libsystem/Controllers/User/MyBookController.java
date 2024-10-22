@@ -1,7 +1,7 @@
 package com.jmc.libsystem.Controllers.User;
 
 import com.jmc.libsystem.Models.Model;
-import com.jmc.libsystem.QueryDatabase.QueryBorrowHistory;
+import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
@@ -20,20 +20,18 @@ public class MyBookController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         NumberFavorite.setText("0");
         String user_id = Model.getInstance().getMyUser().getId();
-        int borrow = 0;
-        int returns = 0;
         try {
-            borrow = getBorrowBook(user_id);
-            returns = getReturnBook(user_id);
+            int borrow = getBorrowBook(user_id);
+            int returns = getReturnBook(user_id);
+            NumberBorrow.setText(Integer.toString(borrow));
+            NumberReturn.setText(Integer.toString(returns));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        NumberBorrow.setText(Integer.toString(borrow));
-        NumberReturn.setText(Integer.toString(returns));
     }
 
     private int getBorrowBook(String userId) throws SQLException {
-        try (ResultSet resultSet = QueryBorrowHistory.Borrow(userId)) {
+        try (ResultSet resultSet = QueryBookLoans.Borrow(userId)) {
             if (resultSet.next()) {
                 int totalBorrows = resultSet.getInt("total_borrows");
                 return totalBorrows;
@@ -45,7 +43,7 @@ public class MyBookController implements Initializable {
     }
 
     private int getReturnBook(String userId) throws SQLException {
-        try (ResultSet resultSet = QueryBorrowHistory.Return(userId)) {
+        try (ResultSet resultSet = QueryBookLoans.Return(userId)) {
             if (resultSet.next()) {
                 int totalReturn = resultSet.getInt("total_return");
                 return totalReturn;
@@ -55,6 +53,4 @@ public class MyBookController implements Initializable {
             }
         }
     }
-
-
 }

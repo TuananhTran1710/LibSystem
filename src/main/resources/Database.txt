@@ -1,5 +1,5 @@
 -- Tạo bảng lưu trữ thông tin sách
-CREATE TABLE IF NOT EXISTS Book (
+CREATE TABLE Book (
     google_book_id VARCHAR(50) PRIMARY KEY,  -- ID từ Google Books API làm khóa chính
     title VARCHAR(255) NOT NULL,
     published_date VARCHAR(20),
@@ -7,78 +7,26 @@ CREATE TABLE IF NOT EXISTS Book (
     category TEXT,
     description TEXT,
     thumbnail_url VARCHAR(255),
-    average_rating FLOAT,
-    rating_count int,
     page_count INT,
     quantity int,
     state varchar(20),
     -- state : publishing or deleted
-    numberOfIssued int,
     language VARCHAR(10)
 ) COLLATE utf8mb4_bin;
 
-INSERT INTO Book (
-    google_book_id,
-    title,
-    published_date,
-    authors,
-    category,
-    description,
-    thumbnail_url,
-    average_rating,
-    rating_count,
-    page_count,
-    quantity,
-    state,
-    numberOfIssued,
-    language
-)
-VALUES (
-    '1',  -- google_book_id
-    'Math',  -- title
-    '1925',  -- published_date
-    'F. Scott Fitzgerald',  -- authors
-    'Fiction',  -- category
-    'A novel set in the Roaring Twenties, a tale of wealth, love, and tragedy.',  -- description
-    'https://books.google.com/books/content?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=1&source=gbs_api',  -- thumbnail_url
-    4.3,  -- average_rating
-    1520,  -- rating_count
-    180,  -- page_count
-    10,  -- quantity
-    'publishing',  -- state
-    3,  -- numberOfIssued
-    'en'  -- language
-);
-
-CREATE TABLE IF NOT EXISTS Category(
-	`cat_name` varchar(100) primary key
-)COLLATE utf8mb4_bin;
-
-CREATE TABLE IF NOT EXISTS Book_Category (
-    google_book_id VARCHAR(50),
-    cat_name VARCHAR(100),
-    PRIMARY KEY (google_book_id, cat_name),
-    FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id),
-    FOREIGN KEY (cat_name) REFERENCES Category(cat_name)
-)COLLATE utf8mb4_bin;
-
-drop table book_category;
-drop table category;
 
 -- Bảng User
-CREATE TABLE IF NOT EXISTS User (
+CREATE TABLE User (
     user_id VARCHAR(20) PRIMARY KEY,
     fullName varchar(50),
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    attendance_score INT DEFAULT 0,
-    reputation_score INT DEFAULT 100,
-    max_books INT DEFAULT 20,
     state VARCHAR(20) DEFAULT 'active'
 )COLLATE utf8mb4_bin;
 
+
 -- Tạo bảng feedback để chứa đánh giá của người dùng về sách
-CREATE TABLE IF NOT EXISTS Feedback (
+CREATE TABLE Feedback (
     feedback_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(20),
     google_book_id VARCHAR(50),
@@ -89,7 +37,7 @@ CREATE TABLE IF NOT EXISTS Feedback (
 )COLLATE utf8mb4_bin;
 
 -- Tạo bảng lịch sử mượn trả chung cho tất cả user (Chỉ admin có thể xem)
-CREATE TABLE IF NOT EXISTS BorrowHistory (
+CREATE TABLE BookLoans (
     history_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(20),
     google_book_id VARCHAR(50),
@@ -101,7 +49,7 @@ CREATE TABLE IF NOT EXISTS BorrowHistory (
     FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
 )COLLATE utf8mb4_bin;
 
-CREATE TABLE IF NOT EXISTS Admin (
+CREATE TABLE Admin (
     admin_id VARCHAR(20) PRIMARY KEY,
     fullName varchar(50),
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -109,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Admin (
 )COLLATE utf8mb4_bin;
 
 -- Bảng xử lý phiên thao tác admin với user (Đăng ký, sửa, xóa)
-CREATE TABLE IF NOT EXISTS AdminUserAction (
+CREATE TABLE AdminUser (
     action_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(20),
     admin_id VARCHAR(20),
@@ -120,7 +68,7 @@ CREATE TABLE IF NOT EXISTS AdminUserAction (
 )COLLATE utf8mb4_bin;
 
 -- Bảng xử lý phiên thao tác admin với sách (Sửa, xóa, thêm, tăng giảm số lượng, v.v.)
-CREATE TABLE IF NOT EXISTS AdminBookAction (
+CREATE TABLE AdminBook (
     action_id INT AUTO_INCREMENT PRIMARY KEY,
     google_book_id VARCHAR(50),
     admin_id VARCHAR(20),
@@ -132,7 +80,7 @@ CREATE TABLE IF NOT EXISTS AdminBookAction (
 )COLLATE utf8mb4_bin;
 
 
-CREATE TABLE IF NOT EXISTS BookRecommended (
+create table BookRcm (
 	rcm_id int auto_increment primary key,
     google_book_id varchar(50),
     user_id varchar(20),
@@ -141,11 +89,3 @@ CREATE TABLE IF NOT EXISTS BookRecommended (
     state varchar(20)
     -- state : in queue or accepted
 )COLLATE utf8mb4_bin;
-
-insert into admin (admin_id, fullName, email, password) values ('23020024', 'VTTH', 'thuhuong', '7');
-
-alter table user
-	drop column attendance_score;
-
-select user_id, fullName from user where FULLNAME COLLATE utf8mb4_general_ci LIKE '%T%';
-

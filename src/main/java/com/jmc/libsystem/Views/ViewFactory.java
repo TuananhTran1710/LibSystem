@@ -80,7 +80,7 @@ public class ViewFactory {
         stage.setScene(scene);
         stage.setTitle("Library");
 
-        stage.setOnCloseRequest(event -> {
+        stage.setOnCloseRequest(event -> {     // khong nhan su kien khi goi stage.close()
             try {
                 event.consume();
                 exit(stage);

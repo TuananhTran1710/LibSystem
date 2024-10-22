@@ -5,7 +5,7 @@ import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.DatabaseDriver;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
-import com.jmc.libsystem.QueryDatabase.QueryBorrowHistory;
+import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.Views.AccountType;
 import com.jmc.libsystem.Views.StateAccount;
 import javafx.scene.control.Alert;
@@ -23,7 +23,7 @@ public class EvaluateInfo {
             if (resultSet.isBeforeFirst()) { // isBeforeFirst check xem co it nhat 1 dong la khach hang hay khong
                 resultSet.next();
                 if (type == AccountType.USER) {
-                    if (QueryBorrowHistory.isBanned(resultSet.getString("user_id"))) {
+                    if (QueryBookLoans.isBanned(resultSet.getString("user_id"))) {
                         //update state of account
                         QueryAccountData.updateState(StateAccount.BANNED.toString(), resultSet.getString("user_id"));
 
@@ -39,6 +39,8 @@ public class EvaluateInfo {
                     }
                 } else {
                     Model.getInstance().setLoginFlag(true);
+                    //update state of all user
+                    QueryBookLoans.updateUserBanned();
                     Model.getInstance().setMyAdmin(new Admin(resultSet.getString("admin_id"), resultSet.getString("fullName"), email, password));
                 }
             } else {
@@ -71,7 +73,7 @@ public class EvaluateInfo {
                 Model.getInstance().setLoginFlag(true);
 
                 String queryInsert = "Insert into user (email, password, user_id, fullName) values (?, ?, ?, ?)";
-                Model.getInstance().setMyUser(new User(user_id, fullName, email, password, 0, 100, 20, "active"));
+                Model.getInstance().setMyUser(new User(user_id, fullName, email, password, "active"));
 
                 try (PreparedStatement preparedStatementInsert = DatabaseDriver.getConn().prepareStatement(queryInsert)) {
                     preparedStatementInsert.setString(1, email);

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<AnchorPane prefHeight="400.0" prefWidth="400.0" styleClass="book_rcm_container"
+            stylesheets="@../../Styles/BookRcm.css" xmlns="http://javafx.com/javafx/22"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.jmc.libsystem.Controllers.Book.BookRcmController">
+    <AnchorPane prefHeight="40.0" prefWidth="400.0" styleClass="logo_container" AnchorPane.topAnchor="0.0">
+        <Button layoutX="-3.0" layoutY="11.0" mnemonicParsing="false" AnchorPane.leftAnchor="10.0"
+                AnchorPane.topAnchor="9.0">
+            <graphic>
+                <FontAwesomeIconView glyphName="ARROW_LEFT" size="20"/>
+            </graphic>
+        </Button>
+        <Label layoutX="98.0" layoutY="8.0" text="Book suggestion window"/>
+        <Button layoutX="362.0" layoutY="6.0" mnemonicParsing="false">
+            <graphic>
+                <FontAwesomeIconView glyphName="SAVE" size="25"/>
+            </graphic>
+        </Button>
+    </AnchorPane>
+    <VBox layoutX="100.0" layoutY="61.0" prefHeight="330.0" prefWidth="360.0" spacing="10.0" styleClass="book_detail"
+          AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0">
+        <Label styleClass="title" text="Book title"/>
+        <HBox prefHeight="190.0" prefWidth="360.0">
+            <AnchorPane prefHeight="200.0" prefWidth="170.0">
+                <ImageView fitHeight="188.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true"/>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="160.0">
+                <Button layoutX="14.0" layoutY="70.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="115.0"
+                        text="Suggest">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="LIGHTBULB_ALT" size="20"/>
+                    </graphic>
+                </Button>
+            </AnchorPane>
+        </HBox>
+        <AnchorPane prefHeight="100.0" prefWidth="360.0">
+            <VBox layoutX="11.2" prefHeight="90.0" prefWidth="300.0" AnchorPane.bottomAnchor="4.0"
+                  AnchorPane.leftAnchor="0.0">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Summary:"/>
+                <Label text="Label"/>
+            </VBox>
+        </AnchorPane>
+    </VBox>
+</AnchorPane>

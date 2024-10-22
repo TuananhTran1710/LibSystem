@@ -14,6 +14,7 @@ public class Book {
     private String infoLink;
     private int quantity;
     private String category;
+    private String state;
 
     public Book(String title, String authors, String thumbnailUrl) {
         this.title = title;

@@ -1,0 +1,159 @@
+.book_preview_container {
+    -fx-background-color: #EEEEEE;
+}
+
+/* logo */
+.logo_container {
+    -fx-background-color: #132A13;
+}
+
+.logo_container FontAwesomeIconView {
+    -fx-fill: #EEEEEE;
+}
+
+.logo_container Label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Calibri Light";
+    -fx-font-size: 1.7em;
+}
+
+.logo_container Button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+.logo_container Button:hover {
+    -fx-cursor: hand;
+}
+
+.logo_container Button:hover FontAwesomeIconView {
+    -fx-effect: dropshadow(gaussian, rgba(173, 216, 230, 0.7), 30, 0.5, 0, 0);
+}
+
+/* ảnh, điểm đánh giá và 2 button mượn và chia sẻ */
+.detail {
+    -fx-background-color: #EEEEEE;
+}
+
+.detail Label {
+    -fx-fill: #000000;
+    -fx-font-size: 2.5em;
+    -fx-font-family: "Calibri Light";
+}
+
+.detail Button {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #132A13;
+    -fx-border-width: 2px;
+    -fx-text-fill: #132A13;
+    -fx-font-size: 1.2em;
+    -fx-alignment: left;
+    -fx-graphic-text-gap: 30px;
+    -fx-padding: 5px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 11;
+}
+
+.detail Button:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+/* ngôi sao bên dưới sách */
+.star FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+/* titled pane */
+.tit_container {
+    -fx-border-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Calibri Light";
+    -fx-font-size: 1.2em;
+}
+
+.tit_container .title {
+    -fx-background-color: #132A13;
+    -fx-text-fill: #FFFFFF;
+}
+
+.tit_container .arrow {
+    -fx-background-color: #FFFFFF;
+}
+
+.tit_container .content {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Calibri Light";
+    -fx-font-size: 1.2em;
+    -fx-spacing: 10;
+}
+
+.tit_container .content Label {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Calibri Light";
+    -fx-font-size: 1.2em;
+    -fx-spacing: 10;
+}
+
+/* comment */
+.comment_container {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-text-fill: #132A13;
+    -fx-font-size: 1.2em;
+}
+
+.comment_container FontAwesomeIconView {
+    -fx-fill: #132A13;
+}
+
+.comment_container .star FontAwesomeIconView {
+    -fx-fill: rgba(19, 42, 19, 0.1);
+}
+
+.comment_container Button {
+    -fx-background-color: #132A13;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 30;
+}
+
+.comment_container Button:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+.comment_container ToggleButton {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent;
+}
+
+.comment_container Label {
+    -fx-graphic-text-gap: 10px;
+}
+
+.comment_container AnchorPane {
+    -fx-border-color: #132A13;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10;
+}
+
+.comment_container TextArea {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: rgba(19, 42, 19, 0.1);
+}
+
+.comment_container TextArea .content {
+    -fx-background-radius: 10;
+}
+
+.comment_container TextArea .viewport {
+    -fx-background-radius: 10;
+}
+
+.comment_container .title {
+    -fx-font-size: 1.6em;
+    -fx-font-weight: bold;
+}

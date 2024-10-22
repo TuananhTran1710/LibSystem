@@ -49,7 +49,8 @@ public class QueryBorrowHistory {
 
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Notice");
-                alert.setContentText("You have " + cnt + " overdue books. Please visit MyBook section and return the books to the library soon!");
+                alert.setContentText("You have " + cnt
+                        + " overdue books. Please visit MyBook section and return the books to the library soon!");
                 alert.show();
             }
 
@@ -58,5 +59,34 @@ public class QueryBorrowHistory {
         }
     }
 
+    public static ResultSet Borrow(String userId) {
+        ResultSet resultSet = null;
+        String query = "SELECT COUNT(*) AS total_borrows " +
+                "FROM borrow_history " +
+                "WHERE user_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, userId);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public static ResultSet Return(String userId) {
+        ResultSet resultSet = null;
+        String query = "SELECT COUNT(CASE WHEN return_date IS NOT NULL THEN 1 END) AS total_returns " +
+                "FROM borrow_history " +
+                "WHERE user_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, userId);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
 
 }

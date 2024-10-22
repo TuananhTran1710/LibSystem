@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Line?>
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../../Styles/MyBook.css"
+            xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.jmc.libsystem.Controllers.User.MyBookController">
+    <AnchorPane layoutX="25.0" layoutY="526.0" prefHeight="209.0" prefWidth="800.0" styleClass="feature"
+                stylesheets="@../../Styles/MyBook.css" AnchorPane.leftAnchor="25.0">
+        <Label layoutX="38.0" layoutY="6.0" text="Favourite"/>
+        <FontAwesomeIconView glyphName="HEART" layoutX="15.0" layoutY="23.0" size="15"/>
+        <Line endX="672.2000122070312" layoutX="115.0" layoutY="32.0" startX="-100.0"/>
+        <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="43.0" prefHeight="153.0" prefWidth="774.0"
+                    vbarPolicy="NEVER">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="129.0" prefWidth="200.0"/>
+        </ScrollPane>
+        <Button layoutX="708.0" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0"
+                text="See more..."/>
+    </AnchorPane>
+    <AnchorPane layoutX="25.0" layoutY="289.0" prefHeight="209.0" prefWidth="800.0" styleClass="feature"
+                stylesheets="@../../Styles/MyBook.css">
+        <Label layoutX="37.0" layoutY="5.0" text="Borrowed"/>
+        <FontAwesomeIconView glyphName="INBOX" layoutX="15.0" layoutY="24.0" size="17"/>
+        <Line endX="672.2000122070312" layoutX="115.0" layoutY="32.0" startX="-100.0"/>
+        <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="43.0" prefHeight="153.0" prefWidth="774.0"
+                    vbarPolicy="NEVER">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="128.0" prefWidth="200.0"/>
+        </ScrollPane>
+        <Button layoutX="707.0" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0"
+                text="See more..."/>
+    </AnchorPane>
+    <AnchorPane layoutX="45.0" layoutY="58.0" prefHeight="200.0" prefWidth="250.0" styleClass="book"
+                stylesheets="@../../Styles/MyBook.css" AnchorPane.leftAnchor="45.0">
+        <VBox layoutX="8.0" prefHeight="191.0" prefWidth="234.0"/>
+        <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0"
+              AnchorPane.topAnchor="18.0">
+            <ImageView fitHeight="58.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../Images/book-borrow-icon.png"/>
+            </ImageView>
+            <Label id="List" alignment="CENTER" text="Borrow Book"/>
+        </HBox>
+        <HBox layoutY="98.4" prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0"
+              AnchorPane.topAnchor="80.0">
+            <Label id="NumberBorrow" fx:id="NumberBorrow" alignment="CENTER" prefHeight="90.0" prefWidth="33.0"
+                   text="0"/>
+        </HBox>
+    </AnchorPane>
+    <AnchorPane layoutX="305.0" layoutY="58.0" prefHeight="200.0" prefWidth="250.0" styleClass="book"
+                stylesheets="@../../Styles/MyBook.css">
+        <VBox layoutX="7.0" prefHeight="191.0" prefWidth="234.0"/>
+        <HBox prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="20.0">
+            <ImageView fitHeight="58.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../Images/book-return-128.png"/>
+            </ImageView>
+            <Label id="List" text="Return Book"/>
+        </HBox>
+        <HBox prefHeight="70.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="80.0">
+            <Label id="NumberReturn" fx:id="NumberReturn" text="0"/>
+        </HBox>
+    </AnchorPane>
+    <AnchorPane layoutX="566.0" layoutY="58.0" prefHeight="200.0" prefWidth="250.0" styleClass="book"
+                stylesheets="@../../Styles/MyBook.css">
+        <VBox layoutX="4.0" prefHeight="191.0" prefWidth="234.0"/>
+        <HBox alignment="CENTER_LEFT" layoutX="30.0" prefHeight="80.0" prefWidth="200.0"
+              AnchorPane.leftAnchor="24.0"
+              AnchorPane.topAnchor="18.0">
+            <ImageView fitHeight="58.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../Images/favorite-book.png"/>
+            </ImageView>
+            <Label id="List" layoutX="12.0" text="Favorite Book"/>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="80.0">
+            <Label id="NumberFavorite" fx:id="NumberFavorite" text="0"/>
+        </HBox>
+    </AnchorPane>
+</AnchorPane>

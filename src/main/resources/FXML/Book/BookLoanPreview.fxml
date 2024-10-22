@@ -21,51 +21,47 @@
     <TitledPane animated="false" layoutX="425.0" layoutY="122.0" prefHeight="170.0" prefWidth="300.0"
                 styleClass="tit_container" text="Reader Policy" AnchorPane.rightAnchor="50.0"
                 AnchorPane.topAnchor="140.0">
-        <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Maximum books to borrow: 10,000" AnchorPane.topAnchor="10.0"/>
-                <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Maximum borrowing period: 1 day" AnchorPane.topAnchor="35.0"/>
-                <Text layoutX="16.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Maximum renewals: 10,000 times" AnchorPane.topAnchor="60.0"/>
-                <Text layoutX="14.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Renewal period: 1 day"
-                      AnchorPane.topAnchor="85.0"/>
-            </AnchorPane>
-        </content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="Maximum books to borrow: 10,000" AnchorPane.topAnchor="10.0"/>
+            <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="Maximum borrowing period: 1 day" AnchorPane.topAnchor="35.0"/>
+            <Text layoutX="16.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="Maximum renewals: 10,000 times" AnchorPane.topAnchor="60.0"/>
+            <Text layoutX="14.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Renewal period: 1 day"
+                  AnchorPane.topAnchor="85.0"/>
+        </AnchorPane>
     </TitledPane>
     <TitledPane animated="false" layoutX="252.0" layoutY="390.4" prefHeight="300.0" prefWidth="350.0"
                 styleClass="tit_container" text="Document Information" AnchorPane.rightAnchor="50.0"
                 AnchorPane.topAnchor="400.0">
-        <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                <VBox layoutX="21.0" layoutY="8.0" prefHeight="240.0" prefWidth="310.0" spacing="10.0"
-                      AnchorPane.topAnchor="10.0">
-                    <HBox prefHeight="50.0" prefWidth="706.0" spacing="5.0">
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Authors:"/>
-                        <Label text="Label"/>
-                    </HBox>
-                    <HBox layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="706.0" spacing="5.0">
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publication Year:"/>
-                        <Label text="Label"/>
-                    </HBox>
-                    <HBox layoutX="10.0" layoutY="60.0" prefHeight="50.0" prefWidth="706.0" spacing="5.0">
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of books published:"/>
-                        <Label text="Label"/>
-                    </HBox>
-                    <HBox layoutX="10.0" layoutY="161.0" prefHeight="50.0" prefWidth="706.0" spacing="5.0">
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Size:"/>
-                        <Label text="Label"/>
-                    </HBox>
-                    <HBox prefHeight="50.0" prefWidth="310.0">
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Summary:"/>
-                    </HBox>
-                    <AnchorPane prefHeight="146.0" prefWidth="298.0">
-                        <Label layoutY="5.0" text="Label" AnchorPane.leftAnchor="3.0"/>
-                    </AnchorPane>
-                </VBox>
-            </AnchorPane>
-        </content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <VBox layoutX="21.0" layoutY="8.0" prefHeight="240.0" prefWidth="310.0" spacing="10.0"
+                  AnchorPane.topAnchor="10.0">
+                <HBox prefHeight="50.0" prefWidth="706.0" spacing="5.0">
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Authors:"/>
+                    <Label text="Label"/>
+                </HBox>
+                <HBox layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="706.0" spacing="5.0">
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publication Year:"/>
+                    <Label text="Label"/>
+                </HBox>
+                <HBox layoutX="10.0" layoutY="60.0" prefHeight="50.0" prefWidth="706.0" spacing="5.0">
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of books published:"/>
+                    <Label text="Label"/>
+                </HBox>
+                <HBox layoutX="10.0" layoutY="161.0" prefHeight="50.0" prefWidth="706.0" spacing="5.0">
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Size:"/>
+                    <Label text="Label"/>
+                </HBox>
+                <HBox prefHeight="50.0" prefWidth="310.0">
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Summary:"/>
+                </HBox>
+                <AnchorPane prefHeight="146.0" prefWidth="298.0">
+                    <Label layoutY="5.0" text="Label" AnchorPane.leftAnchor="3.0"/>
+                </AnchorPane>
+            </VBox>
+        </AnchorPane>
     </TitledPane>
     <VBox layoutX="50.0" layoutY="85.0" prefHeight="300.0" prefWidth="350.0" spacing="10.0" styleClass="detail"
           AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="90.0">

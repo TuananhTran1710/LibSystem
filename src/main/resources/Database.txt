@@ -1,3 +1,12 @@
+1.git checkout main
+2.git pull origin main
+3.git checkout A
+4.git merge main
+5. solve conflic
+6. push len A
+
+
+
 -- Tạo bảng lưu trữ thông tin sách
 CREATE TABLE Book (
     google_book_id VARCHAR(50) PRIMARY KEY,  -- ID từ Google Books API làm khóa chính
@@ -89,3 +98,4 @@ create table BookRcm (
     state varchar(20)
     -- state : in queue or accepted
 )COLLATE utf8mb4_bin;
+

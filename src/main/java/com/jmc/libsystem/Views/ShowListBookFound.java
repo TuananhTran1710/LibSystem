@@ -1,6 +1,7 @@
 package com.jmc.libsystem.Views;
 
 import com.jmc.libsystem.Information.Book;
+import com.jmc.libsystem.Models.Model;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -57,8 +58,9 @@ public class ShowListBookFound {
 
             // Thêm sự kiện nhấn vào ảnh bìa để mở đường link
             bookCoverImageView.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2) {
+                if (event.getClickCount() == 1) {
                     // xu ly su kien an vao thi hien trang book preview ra
+                    Model.getInstance().getViewFactory().getBookWindowProperty().set(BookWindow.BOOKPREVIEW);
                 }
             });
 

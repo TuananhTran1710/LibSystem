@@ -16,10 +16,11 @@ module com.jmc.libsystem {
     exports com.jmc.libsystem.Controllers;
     exports com.jmc.libsystem.Controllers.Admin;
     exports com.jmc.libsystem.Controllers.User;
-
+    exports com.jmc.libsystem.Controllers.Book;
     exports com.jmc.libsystem.Models;
     exports com.jmc.libsystem.Views;
     exports com.jmc.libsystem.Information;
+    
     opens com.jmc.libsystem.Information to com.google.gson, javafx.fxml;
     exports com.jmc.libsystem.QueryDatabase;
     exports com.jmc.libsystem.HandleResultSet;

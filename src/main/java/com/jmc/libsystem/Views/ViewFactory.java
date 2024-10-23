@@ -21,13 +21,21 @@ public class ViewFactory {
     private AnchorPane reportView;
     private AnchorPane proposeView;
     private AnchorPane profileView;
-
+    //book
+    private AnchorPane bookPreview;
+    private AnchorPane bookLoanPreview;
     //
     private final ObjectProperty<UserMenuOptions> userSelectedMenuItem;
+    private final ObjectProperty<BookWindow> bookWindow;
 
     public ViewFactory() {
+        bookWindow = new SimpleObjectProperty<>();
         userSelectedMenuItem = new SimpleObjectProperty<>();
-        userSelectedMenuItem.setValue(UserMenuOptions.DASHBOARD);
+    }
+
+
+    public ObjectProperty<BookWindow> getBookWindowProperty() {
+        return bookWindow;
     }
 
     public ObjectProperty<UserMenuOptions> getUserSelectedMenuItem() {
@@ -35,6 +43,7 @@ public class ViewFactory {
     }
 
     //--------------------------------ANCHOR USERS----------------------
+
     public AnchorPane getDashboardView() {
         // anchorPane giong nhu la mot loai Parent
         // tuong duong voi moi khi ta se khai bao Parent root
@@ -103,6 +112,27 @@ public class ViewFactory {
         return reportView;
     }
 
+    public AnchorPane getBookPreview() {
+        if (bookPreview == null) {
+            try {
+                bookPreview = new FXMLLoader(getClass().getResource("/Fxml/Book/BookPreview.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return bookPreview;
+    }
+
+    public AnchorPane getBookLoanPreview() {
+        if (bookLoanPreview == null) {
+            try {
+                bookLoanPreview = new FXMLLoader(getClass().getResource("/Fxml/Book/BookLoanPreview.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return bookLoanPreview;
+    }
 
 
     // -----------------------------------Function Show Window------------------------------------

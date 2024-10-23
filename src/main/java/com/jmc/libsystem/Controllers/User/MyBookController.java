@@ -45,7 +45,7 @@ public class MyBookController implements Initializable {
     private int getReturnBook(String userId) throws SQLException {
         try (ResultSet resultSet = QueryBookLoans.Return(userId)) {
             if (resultSet.next()) {
-                int totalReturn = resultSet.getInt("total_return");
+                int totalReturn = resultSet.getInt("total_returns");
                 return totalReturn;
             } else {
                 System.out.println("User not found.");

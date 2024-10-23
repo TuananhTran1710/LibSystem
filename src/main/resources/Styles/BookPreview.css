@@ -38,7 +38,7 @@
 }
 
 .detail Label {
-    -fx-fill: #000000;
+    -fx-text-fill: #000000; /* Changed from -fx-fill to -fx-text-fill */
     -fx-font-size: 2.5em;
     -fx-font-family: "Calibri Light";
 }
@@ -49,7 +49,7 @@
     -fx-border-width: 2px;
     -fx-text-fill: #132A13;
     -fx-font-size: 1.2em;
-    -fx-alignment: left;
+    -fx-alignment: CENTER_LEFT; /* Corrected from left to CENTER_LEFT */
     -fx-graphic-text-gap: 30px;
     -fx-padding: 5px;
     -fx-border-radius: 10;

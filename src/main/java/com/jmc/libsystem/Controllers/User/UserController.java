@@ -11,8 +11,26 @@ import java.util.ResourceBundle;
 public class UserController implements Initializable {
     public BorderPane user_parent;
 
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        handleChangeMenu();
+        showBookWindows();
+    }
+
+    private void showBookWindows() {
+        Model.getInstance().getViewFactory().getBookWindowProperty()
+                .addListener((observableValue, oldVal, newVal) -> {
+                    switch (newVal) {
+                        case BOOKLOANPREVIEW ->
+                                user_parent.setCenter(Model.getInstance().getViewFactory().getBookLoanPreview());
+                        default -> user_parent.setCenter(Model.getInstance().getViewFactory().getBookPreview());
+
+                    }
+                });
+    }
+
+    private void handleChangeMenu() {
         Model.getInstance().getViewFactory().getUserSelectedMenuItem()
                 .addListener((observableValue, oldVal, newVal) -> {
                     switch (newVal) {

@@ -2,8 +2,9 @@ package com.jmc.libsystem.Views;
 
 public enum UserMenuOptions {
     DASHBOARD,
+    MYBOOK,
     SEARCH,
-    FAVORITE,
+    PROPOSE,
     PROFILE,
     LOGOUT
 }

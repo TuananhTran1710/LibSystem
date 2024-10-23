@@ -16,10 +16,18 @@ import java.io.IOException;
 public class ViewFactory {
     //Users View
     private AnchorPane dashboardView;
+    private AnchorPane myBookView;
+    private AnchorPane searchView;
+    private AnchorPane reportView;
+    private AnchorPane proposeView;
+    private AnchorPane profileView;
+
+    //
     private final ObjectProperty<UserMenuOptions> userSelectedMenuItem;
 
     public ViewFactory() {
         userSelectedMenuItem = new SimpleObjectProperty<>();
+        userSelectedMenuItem.setValue(UserMenuOptions.DASHBOARD);
     }
 
     public ObjectProperty<UserMenuOptions> getUserSelectedMenuItem() {
@@ -39,6 +47,63 @@ public class ViewFactory {
         }
         return dashboardView;
     }
+
+    public AnchorPane getMyBookView() {
+        if (myBookView == null) {
+            try {
+                myBookView = new FXMLLoader(getClass().getResource("/Fxml/User/MyBook.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return myBookView;
+    }
+
+    public AnchorPane getSearchView() {
+        if (searchView == null) {
+            try {
+                searchView = new FXMLLoader(getClass().getResource("/Fxml/User/Search.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return searchView;
+    }
+
+    public AnchorPane getProposeView() {
+        if (proposeView == null) {
+            try {
+                proposeView = new FXMLLoader(getClass().getResource("/Fxml/User/Propose.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return proposeView;
+    }
+
+    public AnchorPane getProfileView() {
+        if (profileView == null) {
+            try {
+                profileView = new FXMLLoader(getClass().getResource("/Fxml/User/Profile.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return profileView;
+    }
+
+    public AnchorPane getReportView() {
+        if (reportView == null) {
+            try {
+                reportView = new FXMLLoader(getClass().getResource("/Fxml/User/Report.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return reportView;
+    }
+
+
 
     // -----------------------------------Function Show Window------------------------------------
     public void showLoginWindow() {

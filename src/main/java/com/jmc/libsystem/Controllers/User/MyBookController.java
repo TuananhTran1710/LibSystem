@@ -6,7 +6,9 @@ import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBorrowHistory;
 import com.jmc.libsystem.QueryDatabase.QueryFavoriteBook;
 import com.jmc.libsystem.Views.ShowListBookFound;
+import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -16,7 +18,6 @@ import java.util.ResourceBundle;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-
 public class MyBookController implements Initializable {
 
     public Label NumberBorrow;
@@ -46,24 +47,26 @@ public class MyBookController implements Initializable {
     }
 
     private int getBorrowBook(String userId) throws SQLException {
-        ResultSet resultSet = QueryBorrowHistory.Borrow(userId);
-        if (resultSet.next()) {
-            int totalBorrows = resultSet.getInt("total_borrows");
-            return totalBorrows;
-        } else {
-            System.out.println("User not found.");
-            return 0;
+        try (ResultSet resultSet = QueryBookLoans.Borrow(userId)) {
+            if (resultSet.next()) {
+                int totalBorrows = resultSet.getInt("total_borrows");
+                return totalBorrows;
+            } else {
+                System.out.println("User not found.");
+                return 0;
+            }
         }
     }
 
     private int getReturnBook(String userId) throws SQLException {
-        ResultSet resultSet = QueryBorrowHistory.Return(userId);
-        if (resultSet.next()) {
-            int totalReturn = resultSet.getInt("total_return");
-            return totalReturn;
-        } else {
-            System.out.println("User not found.");
-            return 0;
+        try (ResultSet resultSet = QueryBookLoans.Return(userId)) {
+            if (resultSet.next()) {
+                int totalReturn = resultSet.getInt("total_returns");
+                return totalReturn;
+            } else {
+                System.out.println("User not found.");
+                return 0;
+            }
         }
     }
 

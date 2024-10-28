@@ -32,4 +32,27 @@ public class SearchBookDatabase {
         }
         return listBook;
     }
+
+    public static List<Book> getBookFromResultSet(ResultSet BookData) {
+        List<Book> listBook = new ArrayList<>();
+
+        try {
+            if (!BookData.isBeforeFirst()) {
+
+                System.out.println("There isn't any book found");
+                // return empty list
+                return listBook;
+            } else {
+                while (BookData.next()) {
+                    String authors = BookData.getString("authors");
+                    String title = BookData.getString("title");
+                    String imageBook = BookData.getString("thumbnail_url");
+                    listBook.add(new Book(title, authors, imageBook));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listBook;
+    }
 }

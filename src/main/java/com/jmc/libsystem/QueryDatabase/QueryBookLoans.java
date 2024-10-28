@@ -1,7 +1,9 @@
 package com.jmc.libsystem.QueryDatabase;
 
 import com.jmc.libsystem.Models.DatabaseDriver;
+
 import com.jmc.libsystem.Views.StateAccount;
+
 import javafx.scene.control.Alert;
 
 import java.sql.PreparedStatement;
@@ -32,13 +34,18 @@ public class QueryBookLoans {
             while (resultSet.next()) {
                 QueryAccountData.updateState(StateAccount.BANNED.toString(), resultSet.getString(1));
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     public static void noticeBookOverdue(String user_id) {
+
+        String query = "SELECT count(*) FROM borrowhistory WHERE user_id = ? AND DATEDIFF(CURDATE(), borrow_date) > 60";
+
         String query = "SELECT count(*) FROM bookloans WHERE user_id = ? AND DATEDIFF(CURDATE(), borrow_date) > 60";
+
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, user_id);
@@ -48,9 +55,13 @@ public class QueryBookLoans {
                 int cnt = resultSet.getInt(1);
 
                 Alert alert = new Alert(Alert.AlertType.WARNING);
+
+                alert.setContentText("You have " + cnt + " overdue books. Please visit MyBook section and return the books to the library soon!");
+
                 alert.setTitle("Notice");
                 alert.setContentText("You have " + cnt
                         + " overdue books. Please visit MyBook section and return the books to the library soon!");
+
                 alert.show();
             }
 
@@ -78,6 +89,21 @@ public class QueryBookLoans {
         ResultSet resultSet = null;
         String query = "SELECT COUNT(CASE WHEN return_date IS NOT NULL THEN 1 END) AS total_returns " +
                 "FROM bookloans " +
+                "WHERE user_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, userId);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    public static ResultSet getListBorrow (String userId) {
+        ResultSet resultSet = null;
+        String query = "SELECT title, authors, thumbnail_url " +
+                "FROM borrow_history " +
                 "WHERE user_id = ?";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);

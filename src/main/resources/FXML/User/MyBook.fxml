@@ -20,7 +20,7 @@
             <Line endX="672.2000122070312" layoutX="115.0" layoutY="32.0" startX="-100.0" />
             <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="43.0" prefHeight="153.0" prefWidth="774.0" vbarPolicy="NEVER">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="129.0" prefWidth="200.0" />
+                  <HBox fx:id="Favorite_HB" prefHeight="130.0" prefWidth="768.0" />
               </content>
             </ScrollPane>
             <Button layoutX="708.0" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="See more..." />
@@ -33,7 +33,7 @@
             <Line endX="672.2000122070312" layoutX="115.0" layoutY="32.0" startX="-100.0" />
             <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="43.0" prefHeight="153.0" prefWidth="774.0" vbarPolicy="NEVER">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="128.0" prefWidth="200.0" />
+                  <HBox fx:id="Borrow_HB" prefHeight="128.0" prefWidth="766.0" />
                </content>
             </ScrollPane>
             <Button layoutX="707.0" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="See more..." />

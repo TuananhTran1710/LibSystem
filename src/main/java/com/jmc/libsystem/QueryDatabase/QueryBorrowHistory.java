@@ -38,6 +38,21 @@ public class QueryBorrowHistory {
         }
         return resultSet;
     }
+
+    public static ResultSet getListBorrow (String userId) {
+        ResultSet resultSet = null;
+        String query = "SELECT title, authors, thumbnail_url " +
+                "FROM borrow_history " +
+                "WHERE user_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, userId);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
   
     public static boolean isBanned(String user_id) {
         String query = "SELECT * FROM borrowhistory WHERE user_id = ? AND DATEDIFF(CURDATE(), borrow_date) > 120";

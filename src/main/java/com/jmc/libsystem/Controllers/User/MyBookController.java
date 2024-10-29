@@ -41,7 +41,8 @@ public class MyBookController implements Initializable {
         NumberBorrow.setText(Integer.toString(borrow));
         NumberReturn.setText(Integer.toString(returns));
         NumberFavorite.setText(Integer.toString(favorite));
-//        showBorrowBook(user_id, Borrow_HB);
+        showBorrowBook(user_id, Borrow_HB);
+        showFavoriteBook(user_id, Favorite_HB);
     }
 
     private int getBorrowBook(String userId) throws SQLException {
@@ -79,11 +80,11 @@ public class MyBookController implements Initializable {
         }
     }
 
-//    private void showBorrowBook(String userId, HBox borrow_HB) {
-//        ResultSet resultSet = QueryBookLoans.getListBorrow(userId);
-//        List<Book> bookList = SearchBookDatabase.getBookFromResultSet(resultSet);
-//        ShowListBookFound.show(bookList, borrow_HB);
-//    }
+    private void showBorrowBook(String userId, HBox borrow_HB){
+        ResultSet resultSet = QueryBookLoans.getListBorrow(userId);
+        List<Book> bookList = SearchBookDatabase.getBookFromResultSet(resultSet);
+        ShowListBookFound.show(bookList, borrow_HB);
+    }
 
     private void showFavoriteBook(String userId, HBox favorite_HB) {
         ResultSet resultSet = QueryFavoriteBook.getListFavorite(userId);

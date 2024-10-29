@@ -102,3 +102,11 @@ create table BookRcm (
     state varchar(20)
     -- state : in queue or accepted
 )COLLATE utf8mb4_bin;
+
+create table favorite(
+    user_id VARCHAR(20),
+    google_book_id VARCHAR(50),
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
+)COLLATE utf8mb4_bin;
+

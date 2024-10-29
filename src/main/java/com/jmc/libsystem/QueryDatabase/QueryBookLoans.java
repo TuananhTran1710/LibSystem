@@ -39,8 +39,6 @@ public class QueryBookLoans {
     }
 
     public static void noticeBookOverdue(String user_id) {
-
-
         String query = "SELECT count(*) FROM bookloans WHERE user_id = ? AND DATEDIFF(CURDATE(), borrow_date) > 60";
 
         try {
@@ -94,20 +92,21 @@ public class QueryBookLoans {
         }
         return resultSet;
     }
-
-//    public static ResultSet getListBorrow(String userId) {
-//        ResultSet resultSet = null;
-//        String query = "SELECT boo " +
-//                "FROM bookloans " +
-//                "WHERE user_id = ?";
-//        try {
-//            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
-//            preparedStatement.setString(1, userId);
-//            resultSet = preparedStatement.executeQuery();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return resultSet;
-//    }
+    
+    public static ResultSet getListBorrow (String userId) {
+        ResultSet resultSet = null;
+        String query = "SELECT title, authors, thumbnail_url " +
+                "FROM bookloans " +
+                "INNER JOIN book on book.google_book_id = bookloans.google_book_id " +
+                "WHERE user_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, userId);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
 
 }

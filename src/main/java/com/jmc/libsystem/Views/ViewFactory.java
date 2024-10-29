@@ -26,16 +26,9 @@ public class ViewFactory {
     private AnchorPane bookLoanPreview;
     //
     private final ObjectProperty<UserMenuOptions> userSelectedMenuItem;
-    private final ObjectProperty<BookWindow> bookWindow;
 
     public ViewFactory() {
-        bookWindow = new SimpleObjectProperty<>();
         userSelectedMenuItem = new SimpleObjectProperty<>();
-    }
-
-
-    public ObjectProperty<BookWindow> getBookWindowProperty() {
-        return bookWindow;
     }
 
     public ObjectProperty<UserMenuOptions> getUserSelectedMenuItem() {

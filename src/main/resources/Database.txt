@@ -2,16 +2,14 @@
 2.git pull origin main
 3.git checkout A
 4.git merge main
-5. solve conflic
+5. solve conflict
 6. push len A
-
-
 
 -- Tạo bảng lưu trữ thông tin sách
 CREATE TABLE Book (
     google_book_id VARCHAR(50) PRIMARY KEY,  -- ID từ Google Books API làm khóa chính
     title VARCHAR(255) NOT NULL,
-    published_date VARCHAR(20),
+    published_year varchar(10),
     authors TEXT,
     category TEXT,
     description TEXT,
@@ -88,6 +86,12 @@ CREATE TABLE AdminBook (
     FOREIGN KEY (admin_id) REFERENCES Admin(admin_id)
 )COLLATE utf8mb4_bin;
 
+create table favorite(
+	user_id VARCHAR(20),
+    google_book_id VARCHAR(50),
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
+)COLLATE utf8mb4_bin;
 
 create table BookRcm (
 	rcm_id int auto_increment primary key,
@@ -98,4 +102,3 @@ create table BookRcm (
     state varchar(20)
     -- state : in queue or accepted
 )COLLATE utf8mb4_bin;
-

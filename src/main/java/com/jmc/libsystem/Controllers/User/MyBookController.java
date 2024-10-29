@@ -44,6 +44,7 @@ public class MyBookController implements Initializable {
         NumberReturn.setText(Integer.toString(returns));
         NumberFavorite.setText(Integer.toString(favorite));
         showBorrowBook(user_id, Borrow_HB);
+        showFavoriteBook(user_id, Favorite_HB);
     }
 
     private int getBorrowBook(String userId) throws SQLException {

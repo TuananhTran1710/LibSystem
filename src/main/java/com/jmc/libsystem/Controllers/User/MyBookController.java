@@ -6,9 +6,9 @@ import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.QueryDatabase.QueryFavoriteBook;
 import com.jmc.libsystem.Views.ShowListBookFound;
-import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -16,8 +16,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 public class MyBookController implements Initializable {
 
     public Label NumberBorrow;

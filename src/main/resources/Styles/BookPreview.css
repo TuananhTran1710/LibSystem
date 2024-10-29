@@ -143,6 +143,7 @@
 .comment_container TextArea {
     -fx-background-color: transparent;
     -fx-control-inner-background: rgba(19, 42, 19, 0.1);
+    -fx-text-fill: #132A13
 }
 
 .comment_container TextArea .content {

@@ -12,7 +12,7 @@ public class Model {
     private final DatabaseDriver databaseDriver;
     private boolean loginFlag;
 
-    Model() {
+    private Model() {
         this.databaseDriver = new DatabaseDriver();
         this.viewFactory = new ViewFactory();
         this.loginFlag = false;

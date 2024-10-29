@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../../Styles/MyBook.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.MyBookController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../../Styles/MyBook.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.MyBookController">
    <children>
       <AnchorPane layoutX="25.0" layoutY="526.0" prefHeight="209.0" prefWidth="800.0" styleClass="feature" stylesheets="@../../Styles/MyBook.css" AnchorPane.leftAnchor="25.0">
          <children>
@@ -100,3 +100,4 @@
          </children>
       </AnchorPane>
    </children>
+</AnchorPane>

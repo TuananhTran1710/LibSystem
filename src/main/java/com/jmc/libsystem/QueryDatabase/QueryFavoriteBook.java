@@ -26,6 +26,7 @@ public class QueryFavoriteBook {
         ResultSet resultSet = null;
         String query = "SELECT title, authors, thumbnail_url " +
                 "FROM favorite " +
+                "INNER JOIN book on book.google_book_id = favorite.google_book_id" +
                 "WHERE user_id = ?";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);

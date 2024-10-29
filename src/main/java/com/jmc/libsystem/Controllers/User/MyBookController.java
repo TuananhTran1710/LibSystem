@@ -3,7 +3,7 @@ package com.jmc.libsystem.Controllers.User;
 import com.jmc.libsystem.HandleResultSet.SearchBookDatabase;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.Model;
-import com.jmc.libsystem.QueryDatabase.QueryBorrowHistory;
+import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.QueryDatabase.QueryFavoriteBook;
 import com.jmc.libsystem.Views.ShowListBookFound;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
@@ -82,7 +82,7 @@ public class MyBookController implements Initializable {
     }
 
     private void showBorrowBook(String userId, HBox borrow_HB){
-        ResultSet resultSet = QueryBorrowHistory.getListBorrow(userId);
+        ResultSet resultSet = QueryBookLoans.getListBorrow(userId);
         List<Book> bookList = SearchBookDatabase.getBookFromResultSet(resultSet);
         ShowListBookFound.show(bookList, borrow_HB);
     }

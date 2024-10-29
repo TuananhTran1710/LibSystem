@@ -42,8 +42,6 @@ public class QueryBookLoans {
 
     public static void noticeBookOverdue(String user_id) {
 
-        String query = "SELECT count(*) FROM borrowhistory WHERE user_id = ? AND DATEDIFF(CURDATE(), borrow_date) > 60";
-
         String query = "SELECT count(*) FROM bookloans WHERE user_id = ? AND DATEDIFF(CURDATE(), borrow_date) > 60";
 
         try {
@@ -103,7 +101,7 @@ public class QueryBookLoans {
     public static ResultSet getListBorrow (String userId) {
         ResultSet resultSet = null;
         String query = "SELECT title, authors, thumbnail_url " +
-                "FROM borrow_history " +
+                "FROM bookloans " +
                 "WHERE user_id = ?";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);

@@ -1,9 +1,7 @@
 package com.jmc.libsystem.QueryDatabase;
 
 import com.jmc.libsystem.Models.DatabaseDriver;
-
 import com.jmc.libsystem.Views.StateAccount;
-
 import javafx.scene.control.Alert;
 
 import java.sql.PreparedStatement;
@@ -41,7 +39,6 @@ public class QueryBookLoans {
     }
 
     public static void noticeBookOverdue(String user_id) {
-
         String query = "SELECT count(*) FROM bookloans WHERE user_id = ? AND DATEDIFF(CURDATE(), borrow_date) > 60";
 
         try {
@@ -57,8 +54,6 @@ public class QueryBookLoans {
                 alert.setContentText("You have " + cnt + " overdue books. Please visit MyBook section and return the books to the library soon!");
 
                 alert.setTitle("Notice");
-                alert.setContentText("You have " + cnt
-                        + " overdue books. Please visit MyBook section and return the books to the library soon!");
 
                 alert.show();
             }
@@ -102,6 +97,7 @@ public class QueryBookLoans {
         ResultSet resultSet = null;
         String query = "SELECT title, authors, thumbnail_url " +
                 "FROM bookloans " +
+                "INNER JOIN book on book.google_book_id = bookloans.google_book_id " +
                 "WHERE user_id = ?";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);

@@ -26,9 +26,9 @@ public class DashboardController implements Initializable {
     public static SearchCriteria typeSearch;
     public Button notice_btn;
     public HBox reading_hbox;
-    public Button reading_btn;
     public HBox popular_hbox;
-    public Button popular_btn;
+    public ChoiceBox num_show_reading;
+    public ChoiceBox num_show_popular;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -43,8 +43,9 @@ public class DashboardController implements Initializable {
         notice_btn.setOnAction(event -> displayNotice());
     }
 
-    private void displayNotice() {
 
+    private void displayNotice() {
+        choice_box.setItems(FXCollections.observableArrayList(SearchCriteria.TITLE, SearchCriteria.CATEGORY, SearchCriteria.AUTHORS));
     }
 
     public void searhBooks() {

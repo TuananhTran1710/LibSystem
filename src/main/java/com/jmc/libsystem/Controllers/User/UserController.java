@@ -15,19 +15,6 @@ public class UserController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         handleChangeMenu();
-        showBookWindows();
-    }
-
-    private void showBookWindows() {
-        Model.getInstance().getViewFactory().getBookWindowProperty()
-                .addListener((observableValue, oldVal, newVal) -> {
-                    switch (newVal) {
-                        case BOOKLOANPREVIEW ->
-                                user_parent.setCenter(Model.getInstance().getViewFactory().getBookLoanPreview());
-                        default -> user_parent.setCenter(Model.getInstance().getViewFactory().getBookPreview());
-
-                    }
-                });
     }
 
     private void handleChangeMenu() {
@@ -39,6 +26,10 @@ public class UserController implements Initializable {
                             Stage stage = (Stage) user_parent.getScene().getWindow();
                             Model.getInstance().getViewFactory().closeStage(stage);
                         }
+                        case BOOKLOANPREVIEW ->
+                                user_parent.setCenter(Model.getInstance().getViewFactory().getBookLoanPreview());
+                        case BOOKPREVIEW ->
+                                user_parent.setCenter(Model.getInstance().getViewFactory().getBookPreview());
                         case SEARCH -> user_parent.setCenter(Model.getInstance().getViewFactory().getSearchView());
                         case PROFILE -> user_parent.setCenter(Model.getInstance().getViewFactory().getProfileView());
                         case PROPOSE -> user_parent.setCenter(Model.getInstance().getViewFactory().getProposeView());

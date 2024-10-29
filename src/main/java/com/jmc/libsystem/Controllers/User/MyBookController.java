@@ -3,11 +3,12 @@ package com.jmc.libsystem.Controllers.User;
 import com.jmc.libsystem.HandleResultSet.SearchBookDatabase;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.Model;
+import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.QueryDatabase.QueryFavoriteBook;
 import com.jmc.libsystem.Views.ShowListBookFound;
-import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -15,8 +16,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 public class MyBookController implements Initializable {
 
     public Label NumberBorrow;
@@ -43,6 +42,7 @@ public class MyBookController implements Initializable {
         NumberReturn.setText(Integer.toString(returns));
         NumberFavorite.setText(Integer.toString(favorite));
         showBorrowBook(user_id, Borrow_HB);
+        showFavoriteBook(user_id, Favorite_HB);
     }
 
     private int getBorrowBook(String userId) throws SQLException {

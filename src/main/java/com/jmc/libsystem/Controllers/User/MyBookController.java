@@ -80,15 +80,15 @@ public class MyBookController implements Initializable {
         }
     }
 
-    private void showBorrowBook(String userId, HBox borrow_HB){
+    private void showBorrowBook(String userId, HBox borrow_HB) {
         ResultSet resultSet = QueryBookLoans.getListBorrow(userId);
         List<Book> bookList = SearchBookDatabase.getBookFromResultSet(resultSet);
-        ShowListBookFound.show(bookList, borrow_HB);
+        ShowListBookFound.show(bookList, borrow_HB, 20);
     }
 
     private void showFavoriteBook(String userId, HBox favorite_HB) {
         ResultSet resultSet = QueryFavoriteBook.getListFavorite(userId);
         List<Book> bookList = SearchBookDatabase.getBookFromResultSet(resultSet);
-        ShowListBookFound.show(bookList, favorite_HB);
+        ShowListBookFound.show(bookList, favorite_HB, 20);
     }
 }

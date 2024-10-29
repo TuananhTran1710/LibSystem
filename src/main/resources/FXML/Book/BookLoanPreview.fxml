@@ -70,9 +70,9 @@
                         <FontAwesomeIconView glyphName="REPEAT" size="20" />
                     </graphic>
                 </Button>
-                <Button layoutX="14.0" layoutY="109.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="130.0" text="Share" AnchorPane.topAnchor="130.0">
+                <Button layoutX="14.0" layoutY="132.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="130.0" text="Like" AnchorPane.topAnchor="132.0">
                     <graphic>
-                        <FontAwesomeIconView glyphName="SHARE_ALT" size="20" />
+                        <FontAwesomeIconView glyphName="HEART" size="20" />
                     </graphic>
                 </Button>
                 <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="130.0" text="Open" AnchorPane.topAnchor="30.0">

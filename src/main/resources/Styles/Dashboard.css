@@ -56,7 +56,7 @@
 
 /* search button */
 .search_button {
-    -fx-pref-width: 110;
+
     -fx-background-color: #132A13;
     -fx-text-fill: #FFFFFF;
     -fx-background-radius: 10px 0 0 10px;

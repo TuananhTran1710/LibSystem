@@ -8,9 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class QueryBookData {
-    public static ResultSet getBookData(String keyWord) {
+    public static ResultSet getBookForSearch(String keyWord) {
         ResultSet resultSet = null;
         String type = DashboardController.typeSearch.toString();
+        // no limit num of book displayed
         String query = "SELECT title, authors, thumbnail_url FROM book WHERE " + type + " COLLATE utf8mb4_general_ci LIKE ?";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);

@@ -118,6 +118,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>com.jmc.libsystem.App</mainClass>
+                            
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

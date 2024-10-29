@@ -3,12 +3,12 @@ package com.jmc.libsystem.Controllers.User;
 import com.jmc.libsystem.HandleResultSet.SearchBookDatabase;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.Model;
-import com.jmc.libsystem.QueryDatabase.QueryBorrowHistory;
+import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.QueryDatabase.QueryFavoriteBook;
 import com.jmc.libsystem.Views.ShowListBookFound;
-import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -16,8 +16,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 public class MyBookController implements Initializable {
 
     public Label NumberBorrow;
@@ -43,7 +41,7 @@ public class MyBookController implements Initializable {
         NumberBorrow.setText(Integer.toString(borrow));
         NumberReturn.setText(Integer.toString(returns));
         NumberFavorite.setText(Integer.toString(favorite));
-        showBorrowBook(user_id, Borrow_HB);
+//        showBorrowBook(user_id, Borrow_HB);
     }
 
     private int getBorrowBook(String userId) throws SQLException {
@@ -81,11 +79,11 @@ public class MyBookController implements Initializable {
         }
     }
 
-    private void showBorrowBook(String userId, HBox borrow_HB){
-        ResultSet resultSet = QueryBorrowHistory.getListBorrow(userId);
-        List<Book> bookList = SearchBookDatabase.getBookFromResultSet(resultSet);
-        ShowListBookFound.show(bookList, borrow_HB);
-    }
+//    private void showBorrowBook(String userId, HBox borrow_HB) {
+//        ResultSet resultSet = QueryBookLoans.getListBorrow(userId);
+//        List<Book> bookList = SearchBookDatabase.getBookFromResultSet(resultSet);
+//        ShowListBookFound.show(bookList, borrow_HB);
+//    }
 
     private void showFavoriteBook(String userId, HBox favorite_HB) {
         ResultSet resultSet = QueryFavoriteBook.getListFavorite(userId);

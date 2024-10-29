@@ -60,7 +60,7 @@ public class ShowListBookFound {
             bookCoverImageView.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1) {
                     // xu ly su kien an vao thi hien trang book preview ra
-                    Model.getInstance().getViewFactory().getBookWindowProperty().set(BookWindow.BOOKPREVIEW);
+                    Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.BOOKLOANPREVIEW);
                 }
             });
 

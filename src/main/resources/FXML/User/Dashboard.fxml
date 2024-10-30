@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../../Styles/Dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.DashboardController">
     <TextField fx:id="search_tf" layoutX="24.0" layoutY="60.0" prefHeight="40.0" prefWidth="800.0" promptText="Search or type a command..." styleClass="search_field" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="60.0" />
-    <ChoiceBox fx:id="criteriaBox" layoutX="719.0" layoutY="62.0" prefHeight="36.0" prefWidth="90.0" styleClass="type-Search" AnchorPane.topAnchor="62.0" />
+    <ChoiceBox fx:id="criteriaBox" layoutX="719.0" layoutY="62.0" prefHeight="36.0" prefWidth="90.0" styleClass="type_Search_box" AnchorPane.topAnchor="62.0" />
     <Button fx:id="search_btn" layoutX="24.0" layoutY="59.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" styleClass="search_button" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="60.0">
         <graphic>
             <FontAwesomeIconView glyphName="SEARCH" rotate="-11.3" size="15" />

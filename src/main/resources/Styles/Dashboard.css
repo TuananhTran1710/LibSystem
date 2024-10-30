@@ -70,15 +70,15 @@
 }
 
 /* choice box */
-.type-Search {
+.type_Search_box {
     -fx-background-color: transparent;
 }
 
-.type-Search .arrow {
+.type_Search_box .arrow {
     -fx-background-color: transparent;
 }
 
-.type-Search:hover {
+.type_Search_box:hover {
     -fx-cursor: hand;
 }
 
@@ -94,7 +94,7 @@
     -fx-stroke: #696969;
 }
 
-/* show số lượng */
+/* show số lượng và dùng cho các choice box còn lại */
 .show_box {
     -fx-background-radius: 10px;
     -fx-background-color: rgba(19, 42, 19, 0.05);
@@ -130,8 +130,6 @@
 }
 
 .feature Button:hover {
-    /* -fx-text-fill: #FFFFFF; */
-    /* -fx-background-color: rgba(19, 42, 19, 0.1); */
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
 }

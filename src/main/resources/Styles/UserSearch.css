@@ -43,16 +43,28 @@
     -fx-cursor: hand;
 }
 
-.choice-box {
-    -fx-background-radius: 0 10px 10px 0;
+.type_Search_box {
     -fx-background-color: transparent;
 }
 
-.choice-box .arrow {
+.type_Search_box .arrow {
     -fx-background-color: transparent;
 }
 
-.choice-box:hover {
+.type_Search_box:hover {
+    -fx-cursor: hand;
+}
+
+.show_box {
+    -fx-background-radius: 10px;
+    -fx-background-color: rgba(19, 42, 19, 0.05);
+}
+
+.show_box .arrow {
+    -fx-background-color: #132A13;
+}
+
+.show_box:hover {
     -fx-cursor: hand;
 }
 
@@ -106,3 +118,4 @@
     -fx-background-color: #0B4619;
     -fx-opacity: 1.0;
 }
+

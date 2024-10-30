@@ -36,7 +36,13 @@ public class DashboardController implements Initializable {
 
     public static SearchCriteria typeSearch;
     public static int limitBookSearch;
-    public List<Book> books;
+    public static int limitBookPopular;
+    public static int limitBookReading;
+
+    public static List<Book> bookSearch;
+    public static List<Book> bookPopular;
+    public static List<Book> bookReading;
+
 
     public AutoCompletionBinding<String> autoCompletionBinding;
     public Set<String> titleSuggest = new HashSet<>();
@@ -46,39 +52,56 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        //
         criteriaBox.setItems(FXCollections.observableArrayList(SearchCriteria.TITLE, SearchCriteria.CATEGORY, SearchCriteria.AUTHORS));
         criteriaBox.setValue(SearchCriteria.TITLE);
-
+        //
         num_show_search.setItems(FXCollections.observableArrayList(20, 50, 100));
         num_show_search.setValue(20);
 
-        limitBookSearch = 20;
+        num_show_popular.setItems(FXCollections.observableArrayList(20, 50, 100));
+        num_show_popular.setValue(20);
+
+        num_show_reading.setItems(FXCollections.observableArrayList(20, 50, 100));
+        num_show_reading.setValue(20);
+        //
         typeSearch = SearchCriteria.TITLE;
-        books = new ArrayList<>();
-
         criteriaBox.valueProperty().addListener(observable -> typeSearch = criteriaBox.getValue());
+        //
+        limitBookSearch = 20;
+        limitBookPopular = 20;
+        limitBookReading = 20;
+        //
+        bookSearch = new ArrayList<>();
+        bookPopular = new ArrayList<>();
+        bookReading = new ArrayList<>();
+        //
+        num_show_search.valueProperty().addListener(observable -> modifyShowBookSearch());
+        num_show_reading.valueProperty().addListener(observable -> modifyShowBookReading());
+        num_show_popular.valueProperty().addListener(observable -> modifyShowBookPopular());
 
-        num_show_search.valueProperty().addListener(observable -> modifyShowBook());
-
+        //auto completion
         autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, titleSuggest);
         search_tf.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 switch (keyEvent.getCode()) {
                     case ENTER -> {
-                        autoCompletionLearnWord(search_tf.getText().trim());
-                        searhBooks(limitBookSearch);
-                        // move focus to something
-                        resultList_hb.requestFocus();
+                        if (!search_tf.getText().trim().isEmpty()) {
+                            autoCompletionLearnWord(search_tf.getText().trim());
+                            searhBooks(limitBookSearch);
+                            // move focus to something
+                            resultList_hb.requestFocus();
+                        }
                     }
                 }
             }
         });
-
+        //
         name_lbl.setText("Hi " + Model.getInstance().getMyUser().getFullName() + "!");
         search_btn.setOnAction(event -> searhBooks(limitBookSearch));
     }
+
 
     public void autoCompletionLearnWord(String newWord) {
         if (!titleSuggest.contains(newWord)) {
@@ -91,10 +114,25 @@ public class DashboardController implements Initializable {
         }
     }
 
-    public void modifyShowBook() {
+    public void modifyShowBookSearch() {
         limitBookSearch = num_show_search.getValue();
         searhBooks(limitBookSearch);
     }
+
+    public void modifyShowBookReading() {
+        limitBookReading = num_show_reading.getValue();
+        ShowListBookFound.show(bookReading, reading_hbox, limitBookReading);
+    }
+
+    public void modifyShowBookPopular() {
+        limitBookPopular = num_show_popular.getValue();
+        ShowListBookFound.show(bookPopular, popular_hbox, limitBookPopular);
+    }
+
+    public static void setListBookReading(List<Book> newListBook) {
+        bookReading = newListBook;
+    }
+
 
     public void searhBooks(int limit) {
         String keyWord = search_tf.getText();
@@ -104,13 +142,15 @@ public class DashboardController implements Initializable {
             autoCompletionLearnWord(keyWord);
 
             //gọi truy van de lay ket qua tu database
-            books = SearchBookDatabase.getBookFromResultSet(keyWord);
+            bookSearch = SearchBookDatabase.getBookFromResultSet(keyWord);
 
             //đẩy lên giao diện
-            ShowListBookFound.show(books, resultList_hb, limitBookSearch);
+            ShowListBookFound.show(bookSearch, resultList_hb, limitBookSearch);
         }
     }
 
+
+    //chua lam cai nay
     public void addTitleSetSuggestion() {
         // khi admin add sach vao thi cho truc tiep ten sach, ten tg, muc luc vao goi y luon
 
@@ -118,13 +158,23 @@ public class DashboardController implements Initializable {
 
     //this function is called when login successfully
     public static void reset() {
-        Label lb = (Label) Model.getInstance().getViewFactory().getDashboardView().lookup("#name_lbl");
+        Label name = (Label) Model.getInstance().getViewFactory().getDashboardView().lookup("#name_lbl");
         TextField search = (TextField) Model.getInstance().getViewFactory().getDashboardView().lookup("#search_tf");
         ChoiceBox<SearchCriteria> criteria = (ChoiceBox<SearchCriteria>) Model.getInstance().getViewFactory().getDashboardView().lookup("#criteriaBox");
-        ChoiceBox<Integer> limit = (ChoiceBox<Integer>) Model.getInstance().getViewFactory().getDashboardView().lookup("#num_show_search");
+        ChoiceBox<Integer> limitSearch = (ChoiceBox<Integer>) Model.getInstance().getViewFactory().getDashboardView().lookup("#num_show_search");
         HBox res = (HBox) Model.getInstance().getViewFactory().getDashboardView().lookup("#resultList_hb");
 
-        ResetDashboard.resetDashboard(search, criteria, lb, limit, res);
+        ResetDashboard.resetDashboard(search, criteria, name, limitSearch, res);
+    }
+
+    public static void resetReading() {
+        ChoiceBox<Integer> limitReading = (ChoiceBox<Integer>) Model.getInstance().getViewFactory().getDashboardView().lookup("#num_show_search");
+        ResetDashboard.updateReadingBox(limitReading);
+    }
+
+    // chua lam cai nay
+    public static void resetPopular() {
+        ChoiceBox<Integer> limitPopular = (ChoiceBox<Integer>) Model.getInstance().getViewFactory().getDashboardView().lookup("#num_show_popular");
     }
 
 }

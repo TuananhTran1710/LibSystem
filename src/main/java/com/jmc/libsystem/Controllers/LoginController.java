@@ -73,7 +73,7 @@ public class LoginController implements Initializable {
         if (Model.getInstance().getLoginFlag()) {
             if (loginAccountType == AccountType.USER) {
                 Model.getInstance().getViewFactory().showUserWindow();
-                Model.getInstance().getViewFactory().getUserSelectedMenuItem().setValue(UserMenuOptions.BOOKPREVIEW);
+                Model.getInstance().getViewFactory().getUserSelectedMenuItem().setValue(UserMenuOptions.DASHBOARD);
 
                 // notice about num of book which must return
                 QueryBookLoans.noticeBookOverdue(Model.getInstance().getMyUser().getId());

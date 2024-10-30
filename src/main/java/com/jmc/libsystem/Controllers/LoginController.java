@@ -1,9 +1,11 @@
 package com.jmc.libsystem.Controllers;
 
+import com.jmc.libsystem.Controllers.User.DashboardController;
 import com.jmc.libsystem.HandleResultSet.EvaluateInfo;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.Views.AccountType;
+import com.jmc.libsystem.Views.UserMenuOptions;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -71,9 +73,13 @@ public class LoginController implements Initializable {
         if (Model.getInstance().getLoginFlag()) {
             if (loginAccountType == AccountType.USER) {
                 Model.getInstance().getViewFactory().showUserWindow();
+                Model.getInstance().getViewFactory().getUserSelectedMenuItem().setValue(UserMenuOptions.DASHBOARD);
 
                 // notice about num of book which must return
                 QueryBookLoans.noticeBookOverdue(Model.getInstance().getMyUser().getId());
+
+                //call functions to reset window
+                DashboardController.reset();
 
             } else Model.getInstance().getViewFactory().showAdminWindow();
 

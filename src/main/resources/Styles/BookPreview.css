@@ -39,7 +39,7 @@
 
 .detail Label {
     -fx-text-fill: #000000; /* Changed from -fx-fill to -fx-text-fill */
-    -fx-font-size: 2.5em;
+    -fx-font-size: 1.9em;
     -fx-font-family: "Calibri Light";
 }
 

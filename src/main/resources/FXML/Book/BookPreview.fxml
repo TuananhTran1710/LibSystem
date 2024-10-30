@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="book_preview_container" stylesheets="@../../Styles/BookPreview.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Book.BookPreviewController">
-    <AnchorPane prefHeight="50.0" prefWidth="850.0" styleClass="logo_container">
+    <AnchorPane prefHeight="50.0" prefWidth="850.0" styleClass="logo_container" AnchorPane.topAnchor="20.0">
         <Button fx:id="back_btn" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="50.0">
             <graphic>
                 <FontAwesomeIconView glyphName="ARROW_LEFT" size="25" />
@@ -22,6 +22,7 @@
         </Button>
         <Label layoutX="343.0" layoutY="6.0" text="Book Preview" />
         <FontAwesomeIconView glyphName="BOOK" layoutX="805.0" layoutY="35.0" size="30" AnchorPane.leftAnchor="766.0" />
+      <Line endX="650.0" layoutX="363.0" layoutY="50.0" startX="-100.0" AnchorPane.leftAnchor="50.0" />
     </AnchorPane>
     <TitledPane animated="false" layoutX="425.0" layoutY="122.0" prefHeight="170.0" prefWidth="300.0" styleClass="tit_container" text="Reader Policy" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="140.0">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -150,5 +151,4 @@
             </VBox>
         </AnchorPane>
     </AnchorPane>
-   <Line endX="650.0" layoutX="425.0" layoutY="50.0" startX="-100.0" AnchorPane.leftAnchor="50.0" />
 </AnchorPane>

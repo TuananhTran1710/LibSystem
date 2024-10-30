@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="search_container" stylesheets="@../../Styles/UserSearch.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.SearchController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="search_container" stylesheets="@../../Styles/UserSearch.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.SearchController">
     <AnchorPane prefHeight="70.0" prefWidth="850.0" AnchorPane.topAnchor="0.0">
         <TextField fx:id="search_tf" layoutX="24.0" layoutY="60.0" prefHeight="40.0" prefWidth="800.0" promptText="Search or type a command..." styleClass="search_field" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="15.0" />
         <ChoiceBox fx:id="choice_box" layoutX="719.0" layoutY="62.0" prefHeight="36.0" prefWidth="90.0" AnchorPane.topAnchor="15.0" />

@@ -37,10 +37,11 @@
 /* textfiled để search */
 .search_field {
     -fx-background-color: rgba(19, 42, 19, 0.05);
+    -fx-border-width: 1px;
     -fx-border-color: #132A13;
-    -fx-border-radius: 0 10px 10px 0;
-    -fx-background-radius: 0 10px 10px 0;
-    -fx-padding: 8px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 0 0 0 50px;
     -fx-font-size: 14px;
     -fx-text-fill: #666666;
 }
@@ -56,23 +57,16 @@
 
 /* search button */
 .search_button {
-    -fx-pref-width: 110;
-    -fx-background-color: #132A13;
-    -fx-text-fill: #FFFFFF;
-    -fx-background-radius: 10px 0 0 10px;
-    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
-    -fx-graphic-text-gap: 10px;
-    -fx-font-size: 1.2em;
+    -fx-pref-width: 50;
+    -fx-background-color: transparent;
 }
 
 .search_button FontAwesomeIconView {
-    -fx-fill: #FFFFFF;
+    -fx-fill: #132A13;
 }
 
 .search_button:hover {
     -fx-cursor: hand;
-    -fx-opacity: 1.0;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
 }
 
 /* choice box */

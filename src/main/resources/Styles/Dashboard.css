@@ -70,16 +70,15 @@
 }
 
 /* choice box */
-.choice-box {
-    -fx-background-radius: 0 10px 10px 0;
+.type-Search {
     -fx-background-color: transparent;
 }
 
-.choice-box .arrow {
+.type-Search .arrow {
     -fx-background-color: transparent;
 }
 
-.choice-box:hover {
+.type-Search:hover {
     -fx-cursor: hand;
 }
 
@@ -93,6 +92,20 @@
 
 .line {
     -fx-stroke: #696969;
+}
+
+/* show số lượng */
+.show_box {
+    -fx-background-radius: 10px;
+    -fx-background-color: rgba(19, 42, 19, 0.05);
+}
+
+.show_box .arrow {
+    -fx-background-color: #132A13;
+}
+
+.show_box:hover {
+    -fx-cursor: hand;
 }
 
 /* 2 vùng bên dưới */

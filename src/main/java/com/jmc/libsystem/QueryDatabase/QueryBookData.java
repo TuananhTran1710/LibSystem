@@ -23,5 +23,20 @@ public class QueryBookData {
         }
         return resultSet;
     }
+
+    public static ResultSet getAllBook(String keyWord) {
+        ResultSet resultSet = null;
+        String type = DashboardController.typeSearch.toString();
+        // no limit num of book displayed
+        String query = "SELECT * FROM book";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
 }
 

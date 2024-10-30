@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class QueryFavoriteBook {
-    public static ResultSet Favorite (String userId) {
+    public static ResultSet getTotalFavorite(String userId) {
         ResultSet resultSet = null;
         String query = "SELECT COUNT(*) AS total_favorite " +
                 "FROM favorite " +
@@ -22,7 +22,7 @@ public class QueryFavoriteBook {
         return resultSet;
     }
 
-    public static ResultSet getListFavorite (String userId) {
+    public static ResultSet getListFavorite(String userId) {
         ResultSet resultSet = null;
         String query = "SELECT title, authors, thumbnail_url " +
                 "FROM favorite " +

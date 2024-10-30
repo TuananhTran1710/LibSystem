@@ -46,36 +46,36 @@ public class MyBookController implements Initializable {
     }
 
     private int getBorrowBook(String userId) throws SQLException {
-        try (ResultSet resultSet = QueryBookLoans.Borrow(userId)) {
+        try (ResultSet resultSet = QueryBookLoans.getTotalLoaned(userId)) {
             if (resultSet.next()) {
                 int totalBorrows = resultSet.getInt("total_borrows");
                 return totalBorrows;
             } else {
-                System.out.println("User not found.");
+                System.out.println("You haven't ever loaned any book");
                 return 0;
             }
         }
     }
 
     private int getReturnBook(String userId) throws SQLException {
-        try (ResultSet resultSet = QueryBookLoans.Return(userId)) {
+        try (ResultSet resultSet = QueryBookLoans.getTotalReturned(userId)) {
             if (resultSet.next()) {
                 int totalReturn = resultSet.getInt("total_returns");
                 return totalReturn;
             } else {
-                System.out.println("User not found.");
+                System.out.println("There wasn't any books returned");
                 return 0;
             }
         }
     }
 
     private int getFavoriteBook(String userId) throws SQLException {
-        ResultSet resultSet = QueryFavoriteBook.Favorite(userId);
+        ResultSet resultSet = QueryFavoriteBook.getTotalFavorite(userId);
         if (resultSet.next()) {
             int totalFavorite = resultSet.getInt("total_favorite");
             return totalFavorite;
         } else {
-            System.out.println("User not found.");
+            System.out.println("Your favorite book list is empty!");
             return 0;
         }
     }

@@ -72,21 +72,24 @@ public class LoginController implements Initializable {
 
         if (Model.getInstance().getLoginFlag()) {
             if (loginAccountType == AccountType.USER) {
-                Model.getInstance().getViewFactory().showUserWindow();
+                // phai set gia tri truoc roi moi goi showUserWindow() khong thi oldVal = null
                 Model.getInstance().getViewFactory().getUserSelectedMenuItem().setValue(UserMenuOptions.DASHBOARD);
+
+                Model.getInstance().getViewFactory().showUserWindow();
 
                 // notice about num of book which must return
                 QueryBookLoans.noticeBookOverdue(Model.getInstance().getMyUser().getId());
 
                 //call functions to reset window
                 DashboardController.reset();
+                DashboardController.resetReading();
+                DashboardController.resetPopular();
 
             } else Model.getInstance().getViewFactory().showAdminWindow();
 
             Model.getInstance().getViewFactory().closeStage(stage);
         }
     }
-
 
     private void convertToSignUp() {
         Stage stage = (Stage) sign_up_btn.getScene().getWindow();

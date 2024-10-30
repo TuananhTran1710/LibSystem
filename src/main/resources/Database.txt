@@ -110,3 +110,5 @@ create table favorite(
     FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
 )COLLATE utf8mb4_bin;
 
+alter table book
+add column linkInfo varchar(500);

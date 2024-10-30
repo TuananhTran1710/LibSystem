@@ -1,5 +1,6 @@
 package com.jmc.libsystem.Controllers;
 
+import com.jmc.libsystem.Controllers.User.DashboardController;
 import com.jmc.libsystem.HandleResultSet.EvaluateInfo;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
@@ -77,6 +78,8 @@ public class LoginController implements Initializable {
                 // notice about num of book which must return
                 QueryBookLoans.noticeBookOverdue(Model.getInstance().getMyUser().getId());
 
+                //call functions to reset window
+                DashboardController.reset();
 
             } else Model.getInstance().getViewFactory().showAdminWindow();
 

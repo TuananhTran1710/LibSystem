@@ -2,6 +2,7 @@ package com.jmc.libsystem.Controllers.User;
 
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.Views.UserMenuOptions;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
@@ -44,8 +45,11 @@ public class UserMenuController implements Initializable {
     }
 
     private void convertToLogin() {
-        Model.getInstance().setLoginFlag(false);
         Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.LOGOUT);
+        Model.getInstance().setLoginFlag(false);
+
+        // tao mot doi tuong moi de tranh thao tac voi listener cu (trong user controller)
+        Model.getInstance().getViewFactory().setUserSelectedMenuItem(new SimpleObjectProperty<>());
     }
 
     private void onDashBoard() {

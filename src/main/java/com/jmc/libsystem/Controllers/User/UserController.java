@@ -15,6 +15,7 @@ public class UserController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         user_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
+        user_parent.setLeft(Model.getInstance().getViewFactory().getUserMenu());
         handleChangeMenu();
     }
 

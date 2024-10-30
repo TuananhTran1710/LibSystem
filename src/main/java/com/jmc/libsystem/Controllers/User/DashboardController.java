@@ -41,6 +41,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         choice_box.setItems(FXCollections.observableArrayList(SearchCriteria.TITLE, SearchCriteria.CATEGORY, SearchCriteria.AUTHORS));
         choice_box.setValue(SearchCriteria.TITLE);
 
@@ -62,7 +63,7 @@ public class DashboardController implements Initializable {
                 switch (keyEvent.getCode()) {
                     case ENTER -> {
                         autoCompletionLearnWord(search_tf.getText().trim());
-                        searhBooks();
+                        searhBooks(limitBookSearch);
                         resultList_hb.requestFocus();
                     }
                 }
@@ -70,10 +71,10 @@ public class DashboardController implements Initializable {
         });
 
         name_lbl.setText("Hi " + Model.getInstance().getMyUser().getFullName() + "!");
-        search_btn.setOnAction(event -> searhBooks());
+        search_btn.setOnAction(event -> searhBooks(limitBookSearch));
     }
 
-    private void autoCompletionLearnWord(String newWord) {
+    public void autoCompletionLearnWord(String newWord) {
         if (!possibleSuggestion.contains(newWord)) {
             possibleSuggestion.add(newWord);
             if (autoCompletionBinding != null) {
@@ -84,31 +85,28 @@ public class DashboardController implements Initializable {
         }
     }
 
-    private void modifyShowBook() {
+    public void modifyShowBook() {
         limitBookSearch = num_show_search.getValue();
-        String keyWord = search_tf.getText().trim();
-
-        if (!keyWord.isEmpty()) {
-            books = SearchBookDatabase.getBookFromResultSet(keyWord);
-            ShowListBookFound.show(books, resultList_hb, limitBookSearch);
-
-            autoCompletionLearnWord(keyWord);
-        }
+        searhBooks(limitBookSearch);
     }
 
-    public void searhBooks() {
+    public void searhBooks(int limit) {
         String keyWord = search_tf.getText();
         keyWord = keyWord.trim();
         if (!keyWord.isEmpty()) {
 
             autoCompletionLearnWord(keyWord);
 
-            //gọi model để lấy kết quả từ api
+            //gọi truy van de lay ket qua tu database
             books = SearchBookDatabase.getBookFromResultSet(keyWord);
 
             //đẩy lên giao diện
             ShowListBookFound.show(books, resultList_hb, limitBookSearch);
-
         }
     }
+
+    public static void reset() {
+
+    }
+
 }

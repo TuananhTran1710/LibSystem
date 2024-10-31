@@ -119,3 +119,7 @@ add column countRating int;
 
 alter table book
 add column sumRatingStar int;
+
+
+alter table book
+ drop column linkInfo;

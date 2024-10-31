@@ -112,3 +112,10 @@ create table favorite(
 
 alter table book
 add column linkInfo varchar(500);
+
+alter table book
+add column countRating int;
+
+
+alter table book
+add column sumRatingStar int;

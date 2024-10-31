@@ -24,7 +24,7 @@ public class QueryFavoriteBook {
 
     public static ResultSet getListFavorite(String userId) {
         ResultSet resultSet = null;
-        String query = "SELECT title, authors, thumbnail_url " +
+        String query = "SELECT book.google_book_id, title, authors, thumbnail_url " +
                 "FROM favorite " +
                 "INNER JOIN book on book.google_book_id = favorite.google_book_id " +
                 "WHERE user_id = ?";

@@ -10,8 +10,8 @@ module com.jmc.libsystem {
     requires java.sql;
     requires org.controlsfx.controls;
     requires java.desktop;
+    requires jdk.compiler;
 
-    opens com.jmc.libsystem to javafx.fxml, com.google.gson;
     exports com.jmc.libsystem;
     exports com.jmc.libsystem.Controllers;
     exports com.jmc.libsystem.Controllers.Admin;
@@ -25,5 +25,6 @@ module com.jmc.libsystem {
     exports com.jmc.libsystem.QueryDatabase;
     exports com.jmc.libsystem.HandleResultSet;
     exports com.jmc.libsystem.HandleJsonString;
+    opens com.jmc.libsystem.Controllers to com.google.gson, javafx.fxml;
 
 }

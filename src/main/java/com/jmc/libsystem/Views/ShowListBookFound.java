@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ShowListBookFound {
 
-    public static void show(List<Book> bookList, HBox resultList_hb) {
+    public static void show(List<Book> bookList, HBox resultList_hb, int limit) {
         resultList_hb.getChildren().clear();
 
         if (bookList.isEmpty()) {
@@ -32,7 +32,8 @@ public class ShowListBookFound {
             return;
         }
 
-        for (Book book : bookList) {
+        for (int i = 0; i < Math.min(bookList.size(), limit); i++) {
+            Book book = bookList.get(i);
             VBox bookBox = new VBox();
             bookBox.setSpacing(5);
             bookBox.setPadding(new Insets(5));

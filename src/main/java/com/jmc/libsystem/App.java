@@ -10,6 +10,7 @@ public class App extends Application {
         Model.getInstance().getViewFactory().showLoginWindow();
     }
 
+
     public static void main(String[] args) {
         launch(args);
     }

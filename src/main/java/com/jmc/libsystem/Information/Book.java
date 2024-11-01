@@ -11,15 +11,27 @@ public class Book {
     private final String thumbnailUrl;
     private int pageCount;
     private String language;
-    private String infoLink;
     private int quantity;
     private String category;
     private String state;
+    private int countRating;
+    private int sumRatingStar;
+
+    public Book(String id, String title, String authors, String thumbnailUrl) {
+        this.id = id;
+        this.title = title;
+        this.authors = authors;
+        this.thumbnailUrl = thumbnailUrl;
+    }
 
     public Book(String title, String authors, String thumbnailUrl) {
         this.title = title;
         this.authors = authors;
         this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -34,7 +46,4 @@ public class Book {
         return thumbnailUrl;
     }
 
-    public String getInfoLink() {
-        return infoLink;
-    }
 }

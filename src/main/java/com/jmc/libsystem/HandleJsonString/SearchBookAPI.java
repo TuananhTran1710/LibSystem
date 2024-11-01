@@ -36,6 +36,8 @@ public class SearchBookAPI {
                 JsonNode volumeInfo = item.get("volumeInfo");
                 //lay title
                 String title = volumeInfo.get("title").asText();
+                //lay id, id nam ngoai volumeInfo
+                String id = item.get("id").asText();
                 //lay tac gia
                 String authors;
                 JsonNode authorsNode = volumeInfo.get("authors");
@@ -53,7 +55,7 @@ public class SearchBookAPI {
                 String thumbnailUrl = volumeInfo.has("imageLinks") ? volumeInfo.get("imageLinks").get("thumbnail").asText() : "";
 
                 //thêm cái book vừa mới lôi ra vào danh sách kết quả
-                bookList.add(new Book(title, authors, thumbnailUrl));
+                bookList.add(new Book(id, title, authors, thumbnailUrl));
             }
         }
         return bookList;

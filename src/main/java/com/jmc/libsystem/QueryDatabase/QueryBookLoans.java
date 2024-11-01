@@ -51,7 +51,7 @@ public class QueryBookLoans {
 
                 Alert alert = new Alert(Alert.AlertType.WARNING);
 
-                alert.setContentText("You have " + cnt + " overdue books. Please visit MyBook section and return the books to the library soon!");
+                alert.setContentText("You have " + cnt + " overdue bookSearch. Please visit MyBook section and return the bookSearch to the library soon!");
 
                 alert.setTitle("Notice");
 
@@ -63,7 +63,7 @@ public class QueryBookLoans {
         }
     }
 
-    public static ResultSet Borrow(String userId) {
+    public static ResultSet getTotalLoaned(String userId) {
         ResultSet resultSet = null;
         String query = "SELECT COUNT(*) AS total_borrows " +
                 "FROM bookloans " +
@@ -78,11 +78,9 @@ public class QueryBookLoans {
         return resultSet;
     }
 
-    public static ResultSet Return(String userId) {
+    public static ResultSet getTotalReturned(String userId) {
         ResultSet resultSet = null;
-        String query = "SELECT COUNT(CASE WHEN return_date IS NOT NULL THEN 1 END) AS total_returns " +
-                "FROM bookloans " +
-                "WHERE user_id = ?";
+        String query = "SELECT SUM(return_date IS NOT NULL) AS total_returns FROM bookloans WHERE user_id = ?";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, userId);
@@ -92,13 +90,13 @@ public class QueryBookLoans {
         }
         return resultSet;
     }
-    
-    public static ResultSet getListBorrow (String userId) {
+
+    public static ResultSet getListBorrow(String userId) {
         ResultSet resultSet = null;
-        String query = "SELECT title, authors, thumbnail_url " +
+        String query = "SELECT book.google_book_id, title, authors, thumbnail_url " +
                 "FROM bookloans " +
                 "INNER JOIN book on book.google_book_id = bookloans.google_book_id " +
-                "WHERE user_id = ?";
+                "WHERE user_id = ? and DATEDIFF(CURDATE(), borrow_date) < 60";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, userId);
@@ -108,5 +106,6 @@ public class QueryBookLoans {
         }
         return resultSet;
     }
+
 
 }

@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,11 +22,12 @@ public class ViewFactory {
     private AnchorPane reportView;
     private AnchorPane proposeView;
     private AnchorPane profileView;
+    private VBox userMenu;
     //book
     private AnchorPane bookPreview;
     private AnchorPane bookLoanPreview;
     //
-    private final ObjectProperty<UserMenuOptions> userSelectedMenuItem;
+    private ObjectProperty<UserMenuOptions> userSelectedMenuItem;
 
     public ViewFactory() {
         userSelectedMenuItem = new SimpleObjectProperty<>();
@@ -35,7 +37,13 @@ public class ViewFactory {
         return userSelectedMenuItem;
     }
 
+    public void setUserSelectedMenuItem(ObjectProperty<UserMenuOptions> userSelectedMenuItem) {
+        this.userSelectedMenuItem = userSelectedMenuItem;
+    }
     //--------------------------------ANCHOR USERS----------------------
+
+//tat ca cac ham get Anchor, VBox nay muc dich de tranh load file fxml nhieu lan,
+// vi khi load nhieu lan se goi lai initialize nhieu lan va dang ky nhieu su kien chong nhau
 
     public AnchorPane getDashboardView() {
         // anchorPane giong nhu la mot loai Parent
@@ -48,6 +56,17 @@ public class ViewFactory {
             }
         }
         return dashboardView;
+    }
+
+    public VBox getUserMenu() {
+        if (userMenu == null) {
+            try {
+                userMenu = new FXMLLoader(getClass().getResource("/Fxml/User/UserMenu.fxml")).load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return userMenu;
     }
 
     public AnchorPane getMyBookView() {
@@ -82,6 +101,7 @@ public class ViewFactory {
         }
         return proposeView;
     }
+
 
     public AnchorPane getProfileView() {
         if (profileView == null) {

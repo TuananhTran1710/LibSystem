@@ -20,7 +20,7 @@ public class APIDriver {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             URI uri = new URIBuilder(API_URL)
                     .addParameter("q", query)
-                    .addParameter("maxResults", String.valueOf(20)) // set gioi han ket qua tra ve la 20
+                    .addParameter("maxResults", String.valueOf(30)) // set gioi han ket qua tra ve la 20
                     .build();
 
             HttpGet request = new HttpGet(uri);

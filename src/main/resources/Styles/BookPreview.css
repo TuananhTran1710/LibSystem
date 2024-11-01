@@ -4,17 +4,17 @@
 
 /* logo */
 .logo_container {
-    -fx-background-color: #132A13;
+    -fx-background-color: #EEEEEE;
 }
 
 .logo_container FontAwesomeIconView {
-    -fx-fill: #EEEEEE;
+    -fx-fill: #132A13;;
 }
 
 .logo_container Label {
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: #132A13;;
     -fx-font-family: "Calibri Light";
-    -fx-font-size: 1.7em;
+    -fx-font-size: 2.5em;
 }
 
 .logo_container Button {
@@ -39,7 +39,7 @@
 
 .detail Label {
     -fx-text-fill: #000000; /* Changed from -fx-fill to -fx-text-fill */
-    -fx-font-size: 2.5em;
+    -fx-font-size: 1.9em;
     -fx-font-family: "Calibri Light";
 }
 

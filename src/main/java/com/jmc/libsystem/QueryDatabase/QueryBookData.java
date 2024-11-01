@@ -8,10 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class QueryBookData {
-    public static ResultSet getBookData(String keyWord) {
+    public static ResultSet getBookForSearch(String keyWord) {
         ResultSet resultSet = null;
         String type = DashboardController.typeSearch.toString();
-        String query = "SELECT title, authors, thumbnail_url FROM book WHERE " + type + " COLLATE utf8mb4_general_ci LIKE ?";
+        // no limit num of book displayed
+        String query = "SELECT google_book_id, title, authors, thumbnail_url FROM book WHERE " + type + " COLLATE utf8mb4_general_ci LIKE ?";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             // Thêm % vào từ khóa tìm kiếm cho LIKE
@@ -22,5 +23,21 @@ public class QueryBookData {
         }
         return resultSet;
     }
+
+    public static ResultSet getAllBook(String keyWord) {
+        ResultSet resultSet = null;
+        String type = DashboardController.typeSearch.toString();
+        // no limit num of book displayed
+        String query = "SELECT * FROM book";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
+
 }
 

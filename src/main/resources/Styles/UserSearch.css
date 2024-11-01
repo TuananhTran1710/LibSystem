@@ -1,0 +1,121 @@
+.search_container {
+    -fx-background-color: #EEEEEE;
+}
+
+.top {
+    -fx-background-color: #132A13;
+}
+
+.top FontAwesomeIconView {
+    -fx-fill: #EEEEEE;
+}
+
+.search_field {
+    -fx-background-color: rgba(19, 42, 19, 0.05);
+    -fx-border-width: 1px;
+    -fx-border-color: #132A13;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 0 0 0 50px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+}
+
+.search_field:focused {
+    -fx-border-color: #2a572a;
+    -fx-background-color: #FFFFFF;
+}
+
+.search_field:hover {
+    -fx-border-color: #2a572a;
+}
+
+.search_button {
+    -fx-pref-width: 50;
+    -fx-background-color: transparent;
+}
+
+.search_button FontAwesomeIconView {
+    -fx-fill: #132A13;
+}
+
+.search_button:hover {
+    -fx-cursor: hand;
+}
+
+.type_Search_box {
+    -fx-background-color: transparent;
+}
+
+.type_Search_box .arrow {
+    -fx-background-color: transparent;
+}
+
+.type_Search_box:hover {
+    -fx-cursor: hand;
+}
+
+.show_box {
+    -fx-background-radius: 10px;
+    -fx-background-color: rgba(19, 42, 19, 0.05);
+}
+
+.show_box .arrow {
+    -fx-background-color: #132A13;
+}
+
+.show_box:hover {
+    -fx-cursor: hand;
+}
+
+.sort_by {
+    -fx-fill: #696969;
+}
+
+.slider_fontawesome {
+    -fx-fill: #132A13;
+}
+
+.line {
+    -fx-stroke: #696969;
+}
+
+.scroll-pane {
+    -fx-border-color: #132A13;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #FFFFFF;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: rgba(19, 42, 19, 0.1);
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb,
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #132A13;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;
+    -fx-opacity: 0.8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 7, 0.5, 0, 0);
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb:hover,
+.scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #1A4314;
+    -fx-opacity: 1.0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+.scroll-pane .scroll-bar:horizontal,
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 2px;
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb:pressed,
+.scroll-pane .scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: #0B4619;
+    -fx-opacity: 1.0;
+}
+

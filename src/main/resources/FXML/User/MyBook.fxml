@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
+
 <AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../../Styles/MyBook.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.MyBookController">
    <children>
-      <AnchorPane layoutX="25.0" layoutY="526.0" prefHeight="209.0" prefWidth="800.0" styleClass="feature" stylesheets="@../../Styles/MyBook.css" AnchorPane.leftAnchor="25.0">
+      <AnchorPane layoutX="30.0" layoutY="486.0" prefHeight="209.0" prefWidth="800.0" styleClass="feature" stylesheets="@../../Styles/MyBook.css" AnchorPane.bottomAnchor="54.39999999999998" AnchorPane.leftAnchor="30.0">
          <children>
             <Label layoutX="38.0" layoutY="6.0" text="Favourite" />
             <FontAwesomeIconView glyphName="HEART" layoutX="15.0" layoutY="23.0" size="15" />
             <Line endX="672.2000122070312" layoutX="115.0" layoutY="32.0" startX="-100.0" />
-            <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="43.0" prefHeight="153.0" prefWidth="774.0" vbarPolicy="NEVER">
+            <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="43.0" prefHeight="163.0" prefWidth="774.0" vbarPolicy="NEVER">
               <content>
-                  <HBox fx:id="Favorite_HB" prefHeight="130.0" prefWidth="768.0" />
+                  <HBox fx:id="Favorite_HB" prefHeight="150.0" prefWidth="768.0" />
               </content>
             </ScrollPane>
-            <Button layoutX="708.0" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="See more..." />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="25.0" layoutY="289.0" prefHeight="209.0" prefWidth="800.0" styleClass="feature" stylesheets="@../../Styles/MyBook.css">
+      <AnchorPane layoutX="25.0" layoutY="230.0" prefHeight="229.0" prefWidth="800.0" styleClass="feature" stylesheets="@../../Styles/MyBook.css">
          <children>
             <Label layoutX="37.0" layoutY="5.0" text="Borrowed" />
             <FontAwesomeIconView glyphName="INBOX" layoutX="15.0" layoutY="24.0" size="17" />
             <Line endX="672.2000122070312" layoutX="115.0" layoutY="32.0" startX="-100.0" />
-            <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="43.0" prefHeight="153.0" prefWidth="774.0" vbarPolicy="NEVER">
+            <ScrollPane hbarPolicy="ALWAYS" layoutX="14.0" layoutY="43.0" prefHeight="163.0" prefWidth="774.0" vbarPolicy="NEVER">
                <content>
                   <HBox fx:id="Borrow_HB" prefHeight="128.0" prefWidth="766.0" />
                </content>
             </ScrollPane>
-            <Button layoutX="707.0" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="See more..." />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="45.0" layoutY="58.0" prefHeight="200.0" prefWidth="250.0" styleClass="book" stylesheets="@../../Styles/MyBook.css" AnchorPane.leftAnchor="45.0">
+      <AnchorPane layoutX="41.0" layoutY="17.0" prefHeight="200.0" prefWidth="250.0" scaleX="0.85" scaleY="0.85" styleClass="book" stylesheets="@../../Styles/MyBook.css" AnchorPane.leftAnchor="41.0">
          <children>
             <VBox layoutX="8.0" prefHeight="191.0" prefWidth="234.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="18.0">
@@ -53,7 +56,7 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="305.0" layoutY="58.0" prefHeight="200.0" prefWidth="250.0" styleClass="book" stylesheets="@../../Styles/MyBook.css">
+      <AnchorPane layoutX="305.0" layoutY="20.0" prefHeight="200.0" prefWidth="250.0" scaleX="0.85" scaleY="0.85" styleClass="book" stylesheets="@../../Styles/MyBook.css">
          <children>
             <VBox layoutX="7.0" prefHeight="191.0" prefWidth="234.0" />
             <HBox prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="20.0">
@@ -73,7 +76,7 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="566.0" layoutY="58.0" prefHeight="200.0" prefWidth="250.0" styleClass="book" stylesheets="@../../Styles/MyBook.css">
+      <AnchorPane layoutX="566.0" layoutY="20.0" prefHeight="200.0" prefWidth="250.0" scaleX="0.85" scaleY="0.85" styleClass="book" stylesheets="@../../Styles/MyBook.css">
          <children>
             <VBox layoutX="4.0" prefHeight="191.0" prefWidth="234.0" />
             <HBox alignment="CENTER_LEFT" layoutX="30.0" prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="18.0">

@@ -6,6 +6,8 @@ import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.QueryDatabase.QueryFavoriteBook;
 import com.jmc.libsystem.Views.ShowListBookFound;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -26,24 +28,53 @@ public class MyBookController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        NumberFavorite.setText("0");
-        String user_id = Model.getInstance().getMyUser().getId();
-        int borrow = 0;
-        int returns = 0;
-        int favorite = 0;
-        try {
-            borrow = getBorrowBook(user_id);
-            returns = getReturnBook(user_id);
-            favorite = getFavoriteBook(user_id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        NumberBorrow.setText(Integer.toString(borrow));
-        NumberReturn.setText(Integer.toString(returns));
-        NumberFavorite.setText(Integer.toString(favorite));
-        showBorrowBook(user_id, Borrow_HB);
-        showFavoriteBook(user_id, Favorite_HB);
+        refreshData();
     }
+
+    /*---------------------- run background--------------------*/
+
+    private void refreshData() {
+        Task<Void> dataLoadingTask = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                String user_id = Model.getInstance().getMyUser().getId();
+                int borrow = 0;
+                int returns = 0;
+                int favorite = 0;
+
+                try {
+                    borrow = getBorrowBook(user_id);
+                    returns = getReturnBook(user_id);
+                    favorite = getFavoriteBook(user_id);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                // Cập nhật giao diện người dùng trên JavaFX Application Thread
+                updateUI(borrow, returns, favorite, user_id);
+
+                return null;
+            }
+        };
+
+        // Chạy Task trong một Thread riêng
+        Thread thread = new Thread(dataLoadingTask);
+        thread.setDaemon(true); // Đặt daemon để tự động dừng khi ứng dụng đóng
+        thread.start();
+    }
+
+    private void updateUI(int borrow, int returns, int favorite, String user_id) {
+        // Sử dụng Platform.runLater để cập nhật giao diện trên JavaFX Application Thread
+        Platform.runLater(() -> {
+            NumberBorrow.setText(Integer.toString(borrow));
+            NumberReturn.setText(Integer.toString(returns));
+            NumberFavorite.setText(Integer.toString(favorite));
+            showBorrowBook(user_id, Borrow_HB);
+            showFavoriteBook(user_id, Favorite_HB);
+        });
+    }
+
+    /*-----------------------get data -----------------------*/
 
     private int getBorrowBook(String userId) throws SQLException {
         try (ResultSet resultSet = QueryBookLoans.Borrow(userId)) {
@@ -79,6 +110,8 @@ public class MyBookController implements Initializable {
             return 0;
         }
     }
+
+    /*----------------------- show listbook ------------------*/
 
     private void showBorrowBook(String userId, HBox borrow_HB){
         ResultSet resultSet = QueryBookLoans.getListBorrow(userId);

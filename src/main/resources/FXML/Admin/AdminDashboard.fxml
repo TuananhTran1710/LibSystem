@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750" prefWidth="850" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.AdminDashboardController">
+    <children>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="634.0" prefWidth="763.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="200.0">
+            <children>
+                <ScrollPane hbarPolicy="NEVER" prefHeight="638.0" prefWidth="796.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                        <HBox prefHeight="521.0" prefWidth="774.0" stylesheets="@../../Styles/AdminDashboard.css">
+                            <children>
+                                <TableView fx:id="listBook" prefHeight="522.0" prefWidth="773.0">
+                                    <columns>
+                                        <TableColumn prefWidth="128.0" text="Ảnh" />
+                                        <TableColumn prefWidth="128.0" text="Tên sách" />
+                                        <TableColumn prefWidth="128.0" text="Tác giả" />
+                                        <TableColumn prefWidth="128.0" text="Tổng số lượng" />
+                                        <TableColumn prefWidth="128.0" text="Tổng số đã mượn" />
+                                        <TableColumn prefWidth="132.80001220703127" text="Chỉnh sửa" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </HBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="49.0" layoutY="14.0" prefHeight="150.0" prefWidth="300.0" styleClass="book" stylesheets="@../../Styles/MyBook.css" AnchorPane.bottomAnchor="580.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="20.0">
+            <children>
+                <VBox layoutX="8.0" prefHeight="80.0" prefWidth="182.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                <ImageView fitHeight="120.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                    <image>
+                        <Image url="@../../Images/user.png" />
+                    </image>
+                </ImageView>
+                <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="200.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
+                    <children>
+                        <Label id="List" alignment="CENTER" text="USER">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="80.0" prefWidth="200.0" stylesheets="@../../Styles/AdminDashboard.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="30.0">
+                    <children>
+                        <Label id="NumberUser" fx:id="numberUser" alignment="CENTER" text="0" />
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="110.0" layoutY="30.0" prefHeight="150.0" prefWidth="300.0" styleClass="book" stylesheets="@../../Styles/MyBook.css" AnchorPane.bottomAnchor="580.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="20.0">
+            <children>
+                <VBox layoutX="8.0" prefHeight="80.0" prefWidth="182.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                <ImageView fitHeight="114.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                    <image>
+                        <Image url="@../../Images/book.png" />
+                    </image>
+                </ImageView>
+                <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="200.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
+                    <children>
+                        <Label id="List" alignment="CENTER" text="BOOK">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="80.0" prefWidth="200.0" stylesheets="@../../Styles/AdminDashboard.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="30.0">
+                    <children>
+                        <Label id="NumberBook" fx:id="numberBook" alignment="CENTER" text="0" />
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

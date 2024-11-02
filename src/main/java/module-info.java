@@ -10,6 +10,7 @@ module com.jmc.libsystem {
     requires java.sql;
     requires org.controlsfx.controls;
     requires java.desktop;
+    requires jdk.compiler;
 
     exports com.jmc.libsystem;
     exports com.jmc.libsystem.Controllers;

@@ -65,7 +65,7 @@ public class QueryBookLoans {
 
     public static ResultSet getTotalLoaned(String userId) {
         ResultSet resultSet = null;
-        String query = "SELECT COUNT(*) AS total_borrows " +
+        String query = "SELECT COUNT(DISTINCT google_book_id) AS total_borrows " +
                 "FROM bookloans " +
                 "WHERE user_id = ?";
         try {
@@ -80,7 +80,9 @@ public class QueryBookLoans {
 
     public static ResultSet getTotalReturned(String userId) {
         ResultSet resultSet = null;
-        String query = "SELECT SUM(return_date IS NOT NULL) AS total_returns FROM bookloans WHERE user_id = ?";
+        String query = "SELECT COUNT(DISTINCT google_book_id) AS total_returns " +
+                "FROM bookloans " +
+                "WHERE user_id = ? AND return_date IS NOT NULL";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, userId);
@@ -93,7 +95,7 @@ public class QueryBookLoans {
 
     public static ResultSet getListBorrow(String userId) {
         ResultSet resultSet = null;
-        String query = "SELECT title, authors, thumbnail_url " +
+        String query = "SELECT book.google_book_id, title, authors, thumbnail_url " +
                 "FROM bookloans " +
                 "INNER JOIN book on book.google_book_id = bookloans.google_book_id " +
                 "WHERE user_id = ? and DATEDIFF(CURDATE(), borrow_date) < 60";

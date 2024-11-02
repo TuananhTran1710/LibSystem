@@ -58,5 +58,6 @@ public class UserMenuController implements Initializable {
 
     private void onMyBook() {
         Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.MYBOOK);
+        MyBookController.getInstance().refreshData();
     }
 }

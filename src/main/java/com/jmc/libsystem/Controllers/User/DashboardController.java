@@ -133,6 +133,10 @@ public class DashboardController implements Initializable {
         bookReading = newListBook;
     }
 
+    public static void setListBookPopular(List<Book> newListBook) {
+        bookPopular = newListBook;
+    }
+
 
     public void searhBooks(int limit) {
         String keyWord = search_tf.getText();
@@ -168,13 +172,15 @@ public class DashboardController implements Initializable {
     }
 
     public static void resetReading() {
-        ChoiceBox<Integer> limitReading = (ChoiceBox<Integer>) Model.getInstance().getViewFactory().getDashboardView().lookup("#num_show_search");
-        ResetDashboard.updateReadingBox(limitReading);
+        ChoiceBox<Integer> limitReading = (ChoiceBox<Integer>) Model.getInstance().getViewFactory().getDashboardView().lookup("#num_show_reading");
+        HBox containResult = (HBox) Model.getInstance().getViewFactory().getDashboardView().lookup("#reading_hbox");
+        ResetDashboard.updateReadingBox(limitReading, containResult);
     }
 
-    // chua lam cai nay
     public static void resetPopular() {
         ChoiceBox<Integer> limitPopular = (ChoiceBox<Integer>) Model.getInstance().getViewFactory().getDashboardView().lookup("#num_show_popular");
+        HBox containResult = (HBox) Model.getInstance().getViewFactory().getDashboardView().lookup("#popular_hbox");
+        ResetDashboard.updatePopularBox(limitPopular, containResult);
     }
 
 }

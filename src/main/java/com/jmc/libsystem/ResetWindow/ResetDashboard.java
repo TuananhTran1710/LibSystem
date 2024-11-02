@@ -5,7 +5,9 @@ import com.jmc.libsystem.HandleResultSet.SearchBookDatabase;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
+import com.jmc.libsystem.QueryDatabase.RecommendationSystem;
 import com.jmc.libsystem.Views.SearchCriteria;
+import com.jmc.libsystem.Views.ShowListBookFound;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -26,16 +28,22 @@ public class ResetDashboard {
         resultListContainer.getChildren().clear();
     }
 
-    public static void updatePopularBox(ChoiceBox<Integer> limitPopularBox) {
-        limitPopularBox.setValue(20);
+    public static void updatePopularBox(ChoiceBox<Integer> limitPopularBox, HBox containResult) {
+        List<Book> book = RecommendationSystem.getListRecommend();
+        DashboardController.setListBookPopular(book);
+        if (limitPopularBox.getValue() != 20)
+            limitPopularBox.setValue(20);
+        else ShowListBookFound.show(book, containResult, 20);
     }
 
-    public static void updateReadingBox(ChoiceBox<Integer> limitReadingBox) {
+    public static void updateReadingBox(ChoiceBox<Integer> limitReadingBox, HBox containResult) {
         ResultSet resultSet = QueryBookLoans.getListBorrow(Model.getInstance().getMyUser().getId());
         List<Book> book = SearchBookDatabase.getBookFromResultSet(resultSet);
         DashboardController.setListBookReading(book);
 
-        limitReadingBox.setValue(20); // sau khi set thi lap tuc nhay vao ham modifyReading o Dashboard
+        if (limitReadingBox.getValue() != 20)
+            limitReadingBox.setValue(20); // sau khi set thi lap tuc nhay vao ham modifyReading o Dashboard
+        else ShowListBookFound.show(book, containResult, 20);
     }
 
 }

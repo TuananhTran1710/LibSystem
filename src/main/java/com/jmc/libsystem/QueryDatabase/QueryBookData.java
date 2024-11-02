@@ -12,7 +12,7 @@ public class QueryBookData {
         ResultSet resultSet = null;
         String type = DashboardController.typeSearch.toString();
         // no limit num of book displayed
-        String query = "SELECT title, authors, thumbnail_url FROM book WHERE " + type + " COLLATE utf8mb4_general_ci LIKE ?";
+        String query = "SELECT google_book_id, title, authors, thumbnail_url FROM book WHERE " + type + " COLLATE utf8mb4_general_ci LIKE ?";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             // Thêm % vào từ khóa tìm kiếm cho LIKE
@@ -37,6 +37,7 @@ public class QueryBookData {
         }
         return resultSet;
     }
+
 
 }
 

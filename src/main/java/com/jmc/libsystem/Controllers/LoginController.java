@@ -81,9 +81,9 @@ public class LoginController implements Initializable {
                 QueryBookLoans.noticeBookOverdue(Model.getInstance().getMyUser().getId());
 
                 //call functions to reset window
-                DashboardController.reset();
-                DashboardController.resetReading();
-                DashboardController.resetPopular();
+                DashboardController.getInstance().reset();
+                DashboardController.getInstance().resetReading();
+                DashboardController.getInstance().resetPopular();
 
             } else Model.getInstance().getViewFactory().showAdminWindow();
 

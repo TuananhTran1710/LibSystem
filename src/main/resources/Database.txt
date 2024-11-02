@@ -16,9 +16,12 @@ CREATE TABLE Book (
     thumbnail_url VARCHAR(255),
     page_count INT,
     quantity int,
+    countRating int,
+    sumRatingStar int,
+    countLoan int,   --  day la so luong muon tong cong (chi duoc cap nhat khi muon, khog cap nhat khi tra)
     state varchar(20),
     -- state : publishing or deleted
-    language VARCHAR(10)
+    language VARCHAR(20)
 ) COLLATE utf8mb4_bin;
 
 
@@ -29,8 +32,8 @@ CREATE TABLE User (
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     state VARCHAR(20) DEFAULT 'active'
+    -- state : banned, active, deleted
 )COLLATE utf8mb4_bin;
-
 
 -- Tạo bảng feedback để chứa đánh giá của người dùng về sách
 CREATE TABLE Feedback (
@@ -50,8 +53,7 @@ CREATE TABLE BookLoans (
     google_book_id VARCHAR(50),
     borrow_date DATE NOT NULL,
     return_date DATE,
-    state VARCHAR(20),
-    note TEXT,
+    due_date DATE,
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
 )COLLATE utf8mb4_bin;
@@ -63,29 +65,6 @@ CREATE TABLE Admin (
     password VARCHAR(255) NOT NULL
 )COLLATE utf8mb4_bin;
 
--- Bảng xử lý phiên thao tác admin với user (Đăng ký, sửa, xóa)
-CREATE TABLE AdminUser (
-    action_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id VARCHAR(20),
-    admin_id VARCHAR(20),
-    action_type VARCHAR(50),  -- Đăng ký, sửa, xóa
-    date DATE,
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
-    FOREIGN KEY (admin_id) REFERENCES Admin(admin_id)
-)COLLATE utf8mb4_bin;
-
--- Bảng xử lý phiên thao tác admin với sách (Sửa, xóa, thêm, tăng giảm số lượng, v.v.)
-CREATE TABLE AdminBook (
-    action_id INT AUTO_INCREMENT PRIMARY KEY,
-    google_book_id VARCHAR(50),
-    admin_id VARCHAR(20),
-    quantity int,
-    action VARCHAR(50),  -- Sửa, xóa, thêm, tăng giảm số lượng
-    date DATE,
-    FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id),
-    FOREIGN KEY (admin_id) REFERENCES Admin(admin_id)
-)COLLATE utf8mb4_bin;
-
 create table favorite(
 	user_id VARCHAR(20),
     google_book_id VARCHAR(50),
@@ -93,33 +72,91 @@ create table favorite(
     FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
 )COLLATE utf8mb4_bin;
 
+-- de xuat cho admin them sach vao
 create table BookRcm (
 	rcm_id int auto_increment primary key,
     google_book_id varchar(50),
     user_id varchar(20),
     FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id),
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
     state varchar(20)
-    -- state : in queue or accepted
+    -- state : in queue or accepted or ignored
 )COLLATE utf8mb4_bin;
 
-create table favorite(
-    user_id VARCHAR(20),
-    google_book_id VARCHAR(50),
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
-    FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
-)COLLATE utf8mb4_bin;
+DELIMITER //
 
-alter table book
-add column linkInfo varchar(500);
+CREATE TRIGGER trg_update_rating_after_insert
+AFTER INSERT ON Feedback
+FOR EACH ROW
+BEGIN
+    -- Cập nhật `sumRatingStar` và `countRating` của sách khi có feedback mới
+    UPDATE Book
+    SET sumRatingStar = sumRatingStar + NEW.rating,
+        countRating = countRating + 1
+    WHERE google_book_id = NEW.google_book_id;
+END//
 
-alter table book
-add column countRating int;
+DELIMITER ;
+
+alter table bookloans
+drop column state;
 
 
-alter table book
-add column sumRatingStar int;
+DELIMITER //
+
+CREATE TRIGGER trg_update_countLoan_after_insert
+AFTER INSERT ON BookLoans
+FOR EACH ROW
+BEGIN
+    -- Tăng `countLoan` của sách khi có bản ghi mượn mới
+    UPDATE Book
+    SET countLoan = countLoan + 1
+    WHERE google_book_id = NEW.google_book_id;
+END//
+
+DELIMITER ;
 
 
-alter table book
- drop column linkInfo;
+DELIMITER //
+
+CREATE TRIGGER trg_update_countLoan_after_return
+AFTER UPDATE ON BookLoans
+FOR EACH ROW
+BEGIN
+    -- Kiểm tra nếu `return_date` vừa được gán giá trị khác NULL
+    IF NEW.return_date IS NOT NULL AND OLD.return_date IS NULL THEN
+        -- Giảm `countLoan` của sách khi trả sách thành công
+        UPDATE Book
+        SET countLoan = countLoan - 1
+        WHERE google_book_id = NEW.google_book_id;
+    END IF;
+END//
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE EVENT evt_ban_overdue_users
+ON SCHEDULE EVERY 1 DAY
+DO
+BEGIN
+    UPDATE User u
+    SET u.state = 'banned'
+    WHERE u.state != 'banned'  -- Chỉ cập nhật nếu trạng thái chưa bị cấm
+    AND EXISTS (
+        SELECT 1
+        FROM BookLoans bl
+        WHERE bl.user_id = u.user_id
+        AND bl.return_date IS NULL  -- Sách chưa được trả
+        AND DATEDIFF(CURDATE(), bl.due_date) > 60  -- Quá hạn 60 ngày
+    );
+END//
+
+DELIMITER ;
+
+SET GLOBAL event_scheduler = ON;
+
+
+
+

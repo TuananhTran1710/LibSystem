@@ -36,11 +36,8 @@ public class UserController implements Initializable {
                         case PROFILE -> user_parent.setCenter(Model.getInstance().getViewFactory().getProfileView());
                         case PROPOSE -> user_parent.setCenter(Model.getInstance().getViewFactory().getProposeView());
                         case MYBOOK -> user_parent.setCenter(Model.getInstance().getViewFactory().getMyBookView());
-                        default -> {
-                            user_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
-                            DashboardController.resetPopular();
-                            DashboardController.resetReading();
-                        }
+                        default -> user_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
+
                     }
                 });
     }

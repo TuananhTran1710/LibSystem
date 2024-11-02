@@ -3,7 +3,8 @@ package com.jmc.libsystem.Controllers.User;
 import com.jmc.libsystem.HandleResultSet.SearchBookDatabase;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.Model;
-import com.jmc.libsystem.ResetWindow.ResetDashboard;
+import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
+import com.jmc.libsystem.QueryDatabase.RecommendationSystem;
 import com.jmc.libsystem.Views.SearchCriteria;
 import com.jmc.libsystem.Views.ShowListBookFound;
 import javafx.collections.FXCollections;
@@ -19,9 +20,21 @@ import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.*;
 
 public class DashboardController implements Initializable {
+    private static DashboardController instance;
+
+    public DashboardController() {
+        instance = this;
+    }
+
+    public static DashboardController getInstance() {
+        return instance;
+    }
+
+
     public TextField search_tf;
     public Button search_btn;
     public Label name_lbl;
@@ -129,14 +142,6 @@ public class DashboardController implements Initializable {
         ShowListBookFound.show(bookPopular, popular_hbox, limitBookPopular);
     }
 
-    public static void setListBookReading(List<Book> newListBook) {
-        bookReading = newListBook;
-    }
-
-    public static void setListBookPopular(List<Book> newListBook) {
-        bookPopular = newListBook;
-    }
-
 
     public void searhBooks(int limit) {
         String keyWord = search_tf.getText();
@@ -161,26 +166,28 @@ public class DashboardController implements Initializable {
     }
 
     //this function is called when login successfully
-    public static void reset() {
-        Label name = (Label) Model.getInstance().getViewFactory().getDashboardView().lookup("#name_lbl");
-        TextField search = (TextField) Model.getInstance().getViewFactory().getDashboardView().lookup("#search_tf");
-        ChoiceBox<SearchCriteria> criteria = (ChoiceBox<SearchCriteria>) Model.getInstance().getViewFactory().getDashboardView().lookup("#criteriaBox");
-        ChoiceBox<Integer> limitSearch = (ChoiceBox<Integer>) Model.getInstance().getViewFactory().getDashboardView().lookup("#num_show_search");
-        HBox res = (HBox) Model.getInstance().getViewFactory().getDashboardView().lookup("#resultList_hb");
-
-        ResetDashboard.resetDashboard(search, criteria, name, limitSearch, res);
+    public void reset() {
+        search_tf.clear();
+        criteriaBox.setValue(SearchCriteria.TITLE);
+        name_lbl.setText("Hi " + Model.getInstance().getMyUser().getFullName() + "!");
+        num_show_search.setValue(20);
+        resultList_hb.getChildren().clear();
     }
 
-    public static void resetReading() {
-        ChoiceBox<Integer> limitReading = (ChoiceBox<Integer>) Model.getInstance().getViewFactory().getDashboardView().lookup("#num_show_reading");
-        HBox containResult = (HBox) Model.getInstance().getViewFactory().getDashboardView().lookup("#reading_hbox");
-        ResetDashboard.updateReadingBox(limitReading, containResult);
+    public void resetReading() {
+        ResultSet resultSet = QueryBookLoans.getListBorrow(Model.getInstance().getMyUser().getId());
+        bookReading = SearchBookDatabase.getBookFromResultSet(resultSet);
+
+        if (num_show_reading.getValue() != 20)
+            num_show_reading.setValue(20); // sau khi set thi lap tuc nhay vao ham modifyReading o Dashboard
+        else ShowListBookFound.show(bookReading, reading_hbox, 20);
     }
 
-    public static void resetPopular() {
-        ChoiceBox<Integer> limitPopular = (ChoiceBox<Integer>) Model.getInstance().getViewFactory().getDashboardView().lookup("#num_show_popular");
-        HBox containResult = (HBox) Model.getInstance().getViewFactory().getDashboardView().lookup("#popular_hbox");
-        ResetDashboard.updatePopularBox(limitPopular, containResult);
+    public void resetPopular() {
+        bookPopular = RecommendationSystem.getListRecommend();
+        if (num_show_popular.getValue() != 20)
+            num_show_popular.setValue(20);
+        else ShowListBookFound.show(bookPopular, popular_hbox, 20);
     }
 
 }

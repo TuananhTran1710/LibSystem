@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750" prefWidth="850" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.AdminDashboardController">
+<AnchorPane prefHeight="750" prefWidth="850" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.AdminDashboardController">
     <children>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="634.0" prefWidth="763.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="200.0">
             <children>
@@ -21,12 +21,12 @@
                             <children>
                                 <TableView fx:id="listBook" prefHeight="522.0" prefWidth="773.0">
                                     <columns>
-                                        <TableColumn prefWidth="128.0" text="Ảnh" />
-                                        <TableColumn prefWidth="128.0" text="Tên sách" />
-                                        <TableColumn prefWidth="128.0" text="Tác giả" />
-                                        <TableColumn prefWidth="128.0" text="Tổng số lượng" />
-                                        <TableColumn prefWidth="128.0" text="Tổng số đã mượn" />
-                                        <TableColumn prefWidth="132.80001220703127" text="Chỉnh sửa" />
+                                        <TableColumn fx:id="imageColumn" prefWidth="128.0" text="Ảnh" />
+                                        <TableColumn fx:id="titleColumn" prefWidth="128.0" text="Tên sách" />
+                                        <TableColumn fx:id="authorsColumn" prefWidth="128.0" text="Tác giả" />
+                                        <TableColumn fx:id="quantityColumn" prefWidth="128.0" text="Tổng số lượng" />
+                                        <TableColumn fx:id="loanedColumn" prefWidth="128.0" text="Tổng số đã mượn" />
+                                        <TableColumn fx:id="editColumn" prefWidth="132.80001220703127" text="Chỉnh sửa" />
                                     </columns>
                                 </TableView>
                             </children>

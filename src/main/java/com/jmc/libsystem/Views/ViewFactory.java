@@ -1,6 +1,5 @@
 package com.jmc.libsystem.Views;
 
-import com.jmc.libsystem.Controllers.User.MyBookController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
@@ -24,23 +23,37 @@ public class ViewFactory {
     private AnchorPane proposeView;
     private AnchorPane profileView;
     private VBox userMenu;
+    //Admin View
+    private AnchorPane adminDashboardView;
+    private VBox adminMenu;
     //book
     private AnchorPane bookPreview;
     private AnchorPane bookLoanPreview;
     //
     private ObjectProperty<UserMenuOptions> userSelectedMenuItem;
+    private ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
 
     public ViewFactory() {
         userSelectedMenuItem = new SimpleObjectProperty<>();
+        adminSelectedMenuItem = new SimpleObjectProperty<>();
     }
 
     public ObjectProperty<UserMenuOptions> getUserSelectedMenuItem() {
         return userSelectedMenuItem;
     }
 
+    public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem() {
+        return adminSelectedMenuItem;
+    }
+
     public void setUserSelectedMenuItem(ObjectProperty<UserMenuOptions> userSelectedMenuItem) {
         this.userSelectedMenuItem = userSelectedMenuItem;
     }
+
+    public void setAdminSelectedMenuItem(ObjectProperty<AdminMenuOptions> adminSelectedMenuItem) {
+        this.adminSelectedMenuItem = adminSelectedMenuItem;
+    }
+
     //--------------------------------ANCHOR USERS----------------------
 
 //tat ca cac ham get Anchor, VBox nay muc dich de tranh load file fxml nhieu lan,
@@ -148,6 +161,31 @@ public class ViewFactory {
         return bookLoanPreview;
     }
 
+    //--------------------------------ANCHOR ADMIN----------------------
+
+    public AnchorPane getAdminDashboardView() {
+        // anchorPane giong nhu la mot loai Parent
+        // tuong duong voi moi khi ta se khai bao Parent root
+        if (adminDashboardView == null) {
+            try {
+                adminDashboardView = new FXMLLoader(getClass().getResource("/Fxml/User/AdminDashboard.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return adminDashboardView;
+    }
+
+    public VBox getAdminMenu() {
+        if (adminMenu == null) {
+            try {
+                adminMenu = new FXMLLoader(getClass().getResource("/Fxml/User/AdminMenu.fxml")).load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return adminMenu;
+    }
 
     // -----------------------------------Function Show Window------------------------------------
     public void showLoginWindow() {

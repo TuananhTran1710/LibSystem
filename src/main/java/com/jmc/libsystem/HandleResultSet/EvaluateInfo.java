@@ -39,7 +39,6 @@ public class EvaluateInfo {
                     }
                 } else {
                     Model.getInstance().setLoginFlag(true);
-                    //update state of all user
                     Model.getInstance().setMyAdmin(new Admin(resultSet.getString("admin_id"), resultSet.getString("fullName"), email, password));
                 }
             } else {
@@ -131,23 +130,31 @@ public class EvaluateInfo {
         try {
             if (resultSet.isBeforeFirst()) { // check xem email ton tai chua?
                 resultSet.next();
-                String state = resultSet.getString("state").toLowerCase();
-                if (state.equals("active")) {
+                if (type == AccountType.USER) {
+                    String state = resultSet.getString("state").toLowerCase();
+                    if (state.equals("active")) {
+                        String my_password = resultSet.getString("password");
+                        System.out.println("Get password successfully!");
+                        Alert notice = new Alert(Alert.AlertType.INFORMATION);
+                        notice.setContentText("Your password is " + my_password);
+                        notice.show();
+                    } else if (state.equals("deleted")) {
+                        System.out.println("Account is deleted!");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setContentText("Account is deteted. Please sign up again!");
+                        alert.show();
+                    } else {
+                        System.out.println("Account is banned because you violated the library policy");
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setContentText("Account is banned because you violated the library policy");
+                        alert.show();
+                    }
+                } else {
                     String my_password = resultSet.getString("password");
                     System.out.println("Get password successfully!");
                     Alert notice = new Alert(Alert.AlertType.INFORMATION);
                     notice.setContentText("Your password is " + my_password);
                     notice.show();
-                } else if (state.equals("deleted")) {
-                    System.out.println("Account is deleted!");
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Account is deteted. Please sign up again!");
-                    alert.show();
-                } else {
-                    System.out.println("Account is banned because you violated the library policy");
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setContentText("Account is banned because you violated the library policy");
-                    alert.show();
                 }
             } else {
                 System.out.println("Your ID and Email aren't correct or available!");

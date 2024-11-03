@@ -4,5 +4,7 @@ public enum AdminMenuOptions {
     DASHBOARD,
     USER,
     BOOK,
-    REPONSE
+    RESPONSE,
+    LOGOUT,
+    PROFILE,
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="180.0" styleClass="main_menu_container" stylesheets="@../../Styles/UserMenu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.AdminMenuController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="180.0" styleClass="main_menu_container" stylesheets="@../../Styles/UserMenu.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.AdminMenuController">
     <AnchorPane prefHeight="730.0" prefWidth="160.0" styleClass="left_container">
         <VBox layoutX="14.0" layoutY="14.0" prefHeight="80.0" prefWidth="160.0" styleClass="title_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <FontAwesomeIconView glyphName="BOOK" size="30" />
@@ -29,7 +29,7 @@
                <FontAwesomeIconView glyphName="BOOK" size="20" />
             </graphic>
             </Button>
-            <Button fx:id="reponse_btn" mnemonicParsing="false" text="Reponse">
+            <Button fx:id="response_btn" mnemonicParsing="false" text="Response">
                 <graphic>
                     <FontAwesomeIconView glyphName="EXCHANGE" size="20" />
                 </graphic>

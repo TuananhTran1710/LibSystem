@@ -16,6 +16,11 @@ public class Book {
     private String state;
     private int countRating;
     private int sumRatingStar;
+    private int numLoans;
+
+    public int getNumLoans() {
+        return numLoans;
+    }
 
     public Book(String id, String title, String authors, String thumbnailUrl) {
         this.id = id;
@@ -28,6 +33,14 @@ public class Book {
         this.title = title;
         this.authors = authors;
         this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public int getCountRating() {
+        return countRating;
+    }
+
+    public int getSumRatingStar() {
+        return sumRatingStar;
     }
 
     public String getId() {

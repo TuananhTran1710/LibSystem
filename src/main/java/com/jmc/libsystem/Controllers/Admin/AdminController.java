@@ -11,21 +11,17 @@ import java.util.ResourceBundle;
 public class AdminController {
     public BorderPane admin_parent;
 
-    public void initialize(URL arg0, ResourceBundle arg1) {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         admin_parent.setCenter(Model.getInstance().getViewFactory().getAdminDashboardView());
         admin_parent.setCenter(Model.getInstance().getViewFactory().getAdminMenu());
         handleChangeMenu();
+        System.out.println("admin can call");
     }
 
     private void handleChangeMenu() {
-        Model.getInstance().getViewFactory().getUserSelectedMenuItem()
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem()
                 .addListener((observableValue, oldVal, newVal) -> {
                     switch (newVal) {
-                        case LOGOUT -> {
-                            Model.getInstance().getViewFactory().showLoginWindow();
-                            Stage stage = (Stage) admin_parent.getScene().getWindow();
-                            Model.getInstance().getViewFactory().closeStage(stage);
-                        }
                         default -> {
                             admin_parent.setCenter(Model.getInstance().getViewFactory().getAdminDashboardView());
                         }

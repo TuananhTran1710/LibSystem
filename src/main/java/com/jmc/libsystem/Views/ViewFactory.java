@@ -168,7 +168,7 @@ public class ViewFactory {
         // tuong duong voi moi khi ta se khai bao Parent root
         if (adminDashboardView == null) {
             try {
-                adminDashboardView = new FXMLLoader(getClass().getResource("/Fxml/User/AdminDashboard.fxml")).load();
+                adminDashboardView = new FXMLLoader(getClass().getResource("/Fxml/Admin/AdminDashboard.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -179,7 +179,7 @@ public class ViewFactory {
     public VBox getAdminMenu() {
         if (adminMenu == null) {
             try {
-                adminMenu = new FXMLLoader(getClass().getResource("/Fxml/User/AdminMenu.fxml")).load();
+                adminMenu = new FXMLLoader(getClass().getResource("/Fxml/Admin/AdminMenu.fxml")).load();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -46,54 +46,85 @@
     -fx-opacity: 1.0;
 }
 
-/* vbox là các ô thống kê*/
-.book VBox {
-    -fx-border-color: #132A13;
-    -fx-border-width: 2px;
-    -fx-border-radius: 5px;
-    -fx-background-color: #FFFFFF;
-}
-
-/* hbox là nơi lưu phần mục và số lượng*/
-
-.book HBox {
-    -fx-alignment: center;
-}
-
+/* Định dạng cho toàn bộ table view */
 .table-view {
-    -fx-background-color: #f0f0f0;
-    -fx-border-color: #cccccc;
-    -fx-border-width: 1px;
+    -fx-background-color: white;
+    -fx-sticky: column;
 }
 
+/* Định dạng cho toàn bộ table view cột */
 .table-view .column-header {
-    -fx-background-color: #dddddd;
-    -fx-font-weight: bold;
+    -fx-background-color: white;
+    -fx-border-width: 0 0.25 1px 0;
+    -fx-border-color: gray;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: white;
+    -fx-text-fill: black;
 }
 
 .table-view .table-cell {
-    -fx-alignment: CENTER_LEFT;
-    -fx-padding: 10px;
+    -fx-alignment: CENTER;
 }
 
-.table-view .table-row-cell:odd {
-    -fx-background-color: #f5f5f5;
+.table-cell[text="Available"] {
+    -fx-background-color: #C2FDD0;
+    -fx-text-fill: black;
 }
 
-/* số người dùng đang sử dụng */
-#NumberUser {
-    -fx-font-family: "Pacifico";
-    -fx-font-size: 4em;
+.table-cell[text="Over"] {
+    -fx-background-color: #FBCDCD;
+    -fx-text-fill: black;
 }
 
-/* số sách đang có */
-#NumberBook {
-    -fx-font-family: "Pacifico";
-    -fx-font-size: 4em;
+.table-cell:contains("edit"):hover {
+    -fx-background-color: lightblue;
+    -fx-cursor: hand;
 }
 
 /* dòng tiêu đề */
-#List {
+#Title {
     -fx-font-family: "Britannic Bold";
-    -fx-font-size: 2em;
+    -fx-font-size: 3em;
 }
+
+.miniTitle{
+    -fx-font-family: "Book Antiqua";
+    -fx-font-size: 2em;
+    -fx-font-weight: bold;
+}
+
+.statistic {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+}
+
+.statistictitle {
+    -fx-font-family: "GeistSans";
+    -fx-font-size: 15px;
+    -fx-font-color: black;
+}
+
+.number {
+    -fx-font-family: "GeistSans";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.number-error {
+    -fx-font-family: "GeistSans";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: red;
+}
+
+.progress-bar {
+    -fx-accent: black;     /* Màu của thanh tiến trình */
+    -fx-control-inner-background: #F7F7F9; /* Màu nền */
+}
+

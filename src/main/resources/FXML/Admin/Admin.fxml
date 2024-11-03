@@ -5,5 +5,12 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.jmc.libsystem.Controllers.Admin.AdminController">
 
+    <left>
+        <fx:include source = "AdminMenu.fxml" />
+    </left>
+
+    <center>
+        <fx:include source = "CreateForm.fxml"/>
+    </center>
 
 </BorderPane>

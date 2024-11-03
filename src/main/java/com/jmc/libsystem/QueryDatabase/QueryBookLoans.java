@@ -1,11 +1,14 @@
 package com.jmc.libsystem.QueryDatabase;
 
 import com.jmc.libsystem.Models.DatabaseDriver;
+import com.jmc.libsystem.Models.Model;
 import javafx.scene.control.Alert;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class QueryBookLoans {
 
@@ -80,5 +83,51 @@ public class QueryBookLoans {
         return resultSet;
     }
 
+    public static boolean isBorrowed(String book_id) {
+        ResultSet resultSet;
+        String query = "SELECT * " +
+                "FROM bookloans " +
+                "WHERE user_id = ? and google_book_id = ? and return_date is null";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, Model.getInstance().getMyUser().getId());
+            preparedStatement.setString(2, book_id);
+            resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static void insertNewRecord(String book_id) {
+        String query = "INSERT INTO bookloans (user_id, google_book_id, borrow_date, due_date) VALUES (?, ?, ?, ?)";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, Model.getInstance().getMyUser().getId());
+            preparedStatement.setString(2, book_id);
+            preparedStatement.setDate(3, Date.valueOf(LocalDate.now()));
+            preparedStatement.setDate(4, Date.valueOf(LocalDate.now().plusDays(60)));
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateReturnBook(String book_id) {
+        String query = "update bookloans set return_date = ? where google_book_id = ? and user_id = ? and return_date is null";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setDate(1, Date.valueOf(LocalDate.now()));
+            preparedStatement.setString(2, book_id);
+            preparedStatement.setString(3, Model.getInstance().getMyUser().getId());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

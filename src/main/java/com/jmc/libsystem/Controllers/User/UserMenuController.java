@@ -54,14 +54,12 @@ public class UserMenuController implements Initializable {
 
     private void onDashBoard() {
         Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.DASHBOARD);
-        DashboardController.getInstance().reset();
-        DashboardController.getInstance().resetReading();
-        DashboardController.getInstance().resetPopular();
+        
 
     }
 
     private void onMyBook() {
         Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.MYBOOK);
-        MyBookController.getInstance().refreshData();
+
     }
 }

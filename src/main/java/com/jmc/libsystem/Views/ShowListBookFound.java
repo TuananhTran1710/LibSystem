@@ -1,5 +1,7 @@
 package com.jmc.libsystem.Views;
 
+import com.jmc.libsystem.Controllers.Book.BookDetailController;
+import com.jmc.libsystem.Controllers.User.UserController;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.Model;
 import javafx.geometry.Insets;
@@ -16,7 +18,7 @@ import java.util.List;
 
 public class ShowListBookFound {
 
-    private static final Image DEFAULT_BOOK_COVER = new Image(ShowListBookFound.class.getResource("/Images/library_icon.png").toString(), true);
+    public static final Image DEFAULT_BOOK_COVER = new Image(ShowListBookFound.class.getResource("/Images/library_icon.png").toString(), true);
 
     public static void show(List<Book> bookList, HBox resultList_hb, int limit) {
         resultList_hb.getChildren().clear();
@@ -77,7 +79,10 @@ public class ShowListBookFound {
         // Sự kiện click vào ảnh bìa để xem trước sách
         bookCoverImageView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
-                Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.BOOKLOANPREVIEW);
+                UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getBookLoanPreview());
+                BookDetailController.getInstance().setBook(book);
+                BookDetailController.getInstance().modifyButton();
+                BookDetailController.getInstance().setUpInfo(book);
             }
         });
 

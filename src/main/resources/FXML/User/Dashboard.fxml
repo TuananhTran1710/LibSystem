@@ -32,7 +32,7 @@
         <HBox fx:id="resultList_hb" prefHeight="100.0" prefWidth="200.0">
         </HBox>
     </ScrollPane>
-    <AnchorPane layoutX="20.0" layoutY="515.0" prefHeight="195.0" prefWidth="807.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="505.0">
+    <AnchorPane layoutX="20.0" layoutY="491.0" prefHeight="251.0" prefWidth="807.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="491.0">
         <Label layoutX="38.0" layoutY="26.0" text="Reading">
          <font>
             <Font size="20.0" />
@@ -45,7 +45,7 @@
         </ScrollPane>
         <ChoiceBox fx:id="num_show_reading" layoutX="755.0" layoutY="25.0" prefWidth="50.0" styleClass="show_box" />
     </AnchorPane>
-    <AnchorPane layoutX="21.0" layoutY="295.0" prefHeight="195.0" prefWidth="807.0">
+    <AnchorPane layoutX="21.0" layoutY="287.0" prefHeight="195.0" prefWidth="807.0">
         <Label layoutX="37.0" layoutY="6.0" text="Popular">
          <font>
             <Font size="20.0" />

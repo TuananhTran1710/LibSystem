@@ -7,6 +7,4 @@ public enum UserMenuOptions {
     PROPOSE,
     PROFILE,
     LOGOUT,
-    BOOKLOANPREVIEW,
-    BOOKPREVIEW
 }

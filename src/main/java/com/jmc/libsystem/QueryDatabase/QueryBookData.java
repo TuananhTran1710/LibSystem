@@ -38,6 +38,19 @@ public class QueryBookData {
         return resultSet;
     }
 
-
+    public static ResultSet getBookStatistic() {
+        ResultSet resultSet = null;
+        String query = "SELECT b.thumbnail_url, b.title, b.authors, b.quantity AS total_books, " +
+                "COUNT(bl.history_id) AS total_borrowed_books " +
+                "FROM book b LEFT JOIN bookloans bl ON b.google_book_id = bl.google_book_id " +
+                "GROUP BY b.google_book_id, b.title, b.authors;";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
 }
 

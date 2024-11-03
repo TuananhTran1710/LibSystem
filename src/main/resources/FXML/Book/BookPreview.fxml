@@ -15,8 +15,7 @@
 <?import javafx.scene.text.Text?>
 
 <ScrollPane fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0"
-            styleClass="book_preview_container" stylesheets="@../../Styles/BookPreview.css"
-            xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+            styleClass="book_preview_container" stylesheets="@../../Styles/BookPreview.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.jmc.libsystem.Controllers.Book.BookPreviewController">
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1300.0" prefWidth="835.0">
         <children>
@@ -68,7 +67,7 @@
             </TitledPane>
             <VBox layoutX="51.2" layoutY="85.0" prefHeight="482.0" prefWidth="350.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="90.0">
                   <ImageView fitHeight="282.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true" />
-                <Label text="Book title" />
+                <Label styleClass="book_title" text="Book title" />
             <HBox prefHeight="53.0" prefWidth="350.0" spacing="20.0">
                <children>
                         <Button fx:id="borrow_btn" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="button_1" text="Borrow">
@@ -83,7 +82,7 @@
                         </Button>
                </children>
             </HBox>
-                <HBox prefHeight="50.0" prefWidth="350.0" spacing="10.0" styleClass="star">
+                <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="350.0" spacing="10.0" styleClass="star">
                     <Label>
                         <graphic>
                             <FontAwesomeIconView glyphName="STAR" size="30" />
@@ -109,9 +108,9 @@
                             <FontAwesomeIconView glyphName="STAR" size="30" />
                         </graphic>
                     </Label>
-               <Label text="(Số đánh giá)" />
+               <Label styleClass="other_label" text="(Số đánh giá)" />
                 </HBox>
-            <Label text="Được mượn bao nhiêu lần" />
+            <Label styleClass="other_label" text="Được mượn bao nhiêu lần" />
             </VBox>
             <AnchorPane layoutX="36.0" layoutY="648.0" prefHeight="580.0" prefWidth="760.0" styleClass="comment_container" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="648.0">
                 <Text layoutX="50.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Comment" />

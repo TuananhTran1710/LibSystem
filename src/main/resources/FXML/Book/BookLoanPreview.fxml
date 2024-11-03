@@ -26,7 +26,7 @@
                         <FontAwesomeIconView glyphName="ARROW_LEFT" size="25" />
                     </graphic>
                 </Button>
-                <Label layoutX="343.0" layoutY="6.0" text="Book Preview" />
+                <Label layoutX="311.0" layoutY="6.0" text="Book Loan Preview" />
                 <FontAwesomeIconView glyphName="BOOK" layoutX="805.0" layoutY="35.0" size="30" AnchorPane.leftAnchor="766.0" />
                 <Line endX="650.0" layoutX="363.0" layoutY="50.0" startX="-100.0" AnchorPane.leftAnchor="50.0" />
             </AnchorPane>
@@ -68,10 +68,10 @@
             </TitledPane>
             <VBox layoutX="51.2" layoutY="85.0" prefHeight="482.0" prefWidth="350.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="90.0">
                 <ImageView fitHeight="282.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true" />
-                <Label text="Book title" />
+                <Label styleClass="book_title" text="Book title" />
                 <HBox prefHeight="53.0" prefWidth="350.0" spacing="20.0">
                     <children>
-                        <Button fx:id="borrow_btn" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="button_1" text="Return">
+                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="button_1" text="Return">
                             <graphic>
                                 <FontAwesomeIconView glyphName="REPLY" size="20" />
                             </graphic>
@@ -83,7 +83,7 @@
                         </Button>
                     </children>
                 </HBox>
-                <HBox prefHeight="50.0" prefWidth="350.0" spacing="10.0" styleClass="star">
+                <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="350.0" spacing="10.0" styleClass="star">
                     <Label>
                         <graphic>
                             <FontAwesomeIconView glyphName="STAR" size="30" />
@@ -109,9 +109,10 @@
                             <FontAwesomeIconView glyphName="STAR" size="30" />
                         </graphic>
                     </Label>
-                    <Label text="(Số đánh giá)" />
+                    <Label styleClass="other_label" text="(Số đánh giá)" />
                 </HBox>
-                <Label text="Được mượn bao nhiêu lần" />
+                <Label styleClass="other_label" text="Được mượn bao nhiêu lần" />
+            <Label styleClass="other_label" text="Số lượng còn lại" />
             </VBox>
             <AnchorPane layoutX="36.0" layoutY="648.0" prefHeight="580.0" prefWidth="760.0" styleClass="comment_container" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="648.0">
                 <Text layoutX="50.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Comment" />

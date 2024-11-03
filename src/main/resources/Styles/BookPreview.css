@@ -79,10 +79,16 @@
     -fx-background-color: transparent;
 }
 
-.detail Label {
-    -fx-text-fill: #000000; /* Changed from -fx-fill to -fx-text-fill */
+.detail .book_title {
+    -fx-text-fill: #000000;
     -fx-font-size: 1.9em;
-    -fx-font-family: "Calibri Light";
+    -fx-font-weight: bold;
+}
+
+.detail .other_label {
+    -fx-text-fill: #000000;
+        -fx-font-size: 1.4em;
+        -fx-font-family: "Calibri Light";
 }
 
 .button_1 {

@@ -12,26 +12,6 @@
     -fx-size: 15;
 }
 
-.feature Label {
-    -fx-fill: #132A13;
-    -fx-font-size: 1.7em;
-    -fx-font-family: "Calibri Light";
-}
-
-.feature Button {
-    -fx-pref-width: 80;
-    -fx-background-color: #132A13;
-    -fx-text-fill: #FFFFFF;
-}
-
-.feature Button:hover {
-    /* -fx-text-fill: #FFFFFF; */
-    /* -fx-background-color: rgba(19, 42, 19, 0.1); */
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
-}
-
-
 
 /* SCROLL PANE */
 .scroll-pane {
@@ -113,4 +93,19 @@
 #List {
     -fx-font-family: "Britannic Bold";
     -fx-font-size: 2em;
+}
+
+
+/* show số lượng và dùng cho các choice box còn lại */
+.show_box {
+    -fx-background-radius: 10px;
+    -fx-background-color: rgba(19, 42, 19, 0.05);
+}
+
+.show_box .arrow {
+    -fx-background-color: #132A13;
+}
+
+.show_box:hover {
+    -fx-cursor: hand;
 }

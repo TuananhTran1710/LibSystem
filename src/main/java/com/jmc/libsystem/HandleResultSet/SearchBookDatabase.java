@@ -21,11 +21,7 @@ public class SearchBookDatabase {
                 return listBook;
             } else {
                 while (resultSet.next()) {
-                    String id = resultSet.getString("google_book_id");
-                    String authors = resultSet.getString("authors");
-                    String title = resultSet.getString("title");
-                    String imageBook = resultSet.getString("thumbnail_url");
-                    listBook.add(new Book(id, title, authors, imageBook));
+                    listBook.add(Book.createBookFromResultSet(resultSet));
                 }
             }
         } catch (SQLException e) {
@@ -46,11 +42,7 @@ public class SearchBookDatabase {
                 return listBook;
             } else {
                 while (BookData.next()) {
-                    String id = BookData.getString("google_book_id");
-                    String authors = BookData.getString("authors");
-                    String title = BookData.getString("title");
-                    String imageBook = BookData.getString("thumbnail_url");
-                    listBook.add(new Book(id, title, authors, imageBook));
+                    listBook.add(Book.createBookFromResultSet(BookData));
                 }
             }
         } catch (SQLException e) {

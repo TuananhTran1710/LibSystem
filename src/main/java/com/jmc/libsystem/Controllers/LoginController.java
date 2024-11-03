@@ -5,6 +5,7 @@ import com.jmc.libsystem.HandleResultSet.EvaluateInfo;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.Views.AccountType;
+import com.jmc.libsystem.Views.AdminMenuOptions;
 import com.jmc.libsystem.Views.UserMenuOptions;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
@@ -85,7 +86,10 @@ public class LoginController implements Initializable {
                 DashboardController.getInstance().resetReading();
                 DashboardController.getInstance().resetPopular();
 
-            } else Model.getInstance().getViewFactory().showAdminWindow();
+            } else {
+                Model.getInstance().getViewFactory().getAdminSelectedMenuItem().setValue(AdminMenuOptions.DASHBOARD);
+                Model.getInstance().getViewFactory().showAdminWindow();
+            }
 
             Model.getInstance().getViewFactory().closeStage(stage);
         }

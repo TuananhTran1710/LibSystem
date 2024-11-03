@@ -2,7 +2,6 @@ package com.jmc.libsystem.QueryDatabase;
 
 import com.jmc.libsystem.Models.DatabaseDriver;
 import com.jmc.libsystem.Views.AccountType;
-import javafx.scene.control.Alert;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,27 +33,11 @@ public class QueryAccountData {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, email);
             resultSet = preparedStatement.executeQuery();
-            if (!resultSet.isBeforeFirst()) {
-                String query2 = "SELECT * FROM user WHERE user_id = ?";
-                preparedStatement = DatabaseDriver.getConn().prepareStatement(query2);
-                preparedStatement.setString(1, id);
-                resultSet = preparedStatement.executeQuery();
-                if (resultSet.isBeforeFirst()) {
-                    System.out.println("User already exist!");
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("You can't use this id!");
-                    alert.show();
-                }
-            } else {
-                System.out.println("User already exist!");
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("You can't use this email!");
-                alert.show();
-            }
+            return resultSet;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultSet;
+        return null;
     }
 
     public static ResultSet getDataForForgetPassword(String email, String id, AccountType type) {
@@ -74,33 +57,5 @@ public class QueryAccountData {
             e.printStackTrace();
         }
         return resultSet;
-    }
-
-
-    //select and update fields in database
-
-    public static String selectState(String user_id) {
-        String query = "select state from user where user_id = ?";
-        try {
-            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
-            preparedStatement.setString(1, user_id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.getString(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static void updateState(String state, String user_id) {
-        String query = "Update user set state = ? where user_id = ?";
-        try {
-            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
-            preparedStatement.setString(1, state);
-            preparedStatement.setString(2, user_id);
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

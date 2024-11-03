@@ -9,7 +9,7 @@
 CREATE TABLE Book (
     google_book_id VARCHAR(50) PRIMARY KEY,  -- ID từ Google Books API làm khóa chính
     title VARCHAR(255) NOT NULL,
-    published_year varchar(10),
+    publishDate date,
     authors TEXT,
     category TEXT,
     description TEXT,
@@ -18,12 +18,10 @@ CREATE TABLE Book (
     quantity int,
     countRating int,
     sumRatingStar int,
-    countLoan int,   --  day la so luong muon tong cong (chi duoc cap nhat khi muon, khog cap nhat khi tra)
-    state varchar(20),
-    -- state : publishing or deleted
+    totalLoan int, -- day la so luong dang muon
+    numBorrowing int,--  day la so luong muon tong cong (chi duoc cap nhat khi muon, khog cap nhat khi tra)
     language VARCHAR(20)
 ) COLLATE utf8mb4_bin;
-
 
 -- Bảng User
 CREATE TABLE User (
@@ -107,7 +105,8 @@ FOR EACH ROW
 BEGIN
     -- Tăng `countLoan` của sách khi có bản ghi mượn mới
     UPDATE Book
-    SET countLoan = countLoan + 1
+    SET totalLoan = totalLoan + 1,
+    numBorrowing = numBorrowing + 1
     WHERE google_book_id = NEW.google_book_id;
 END//
 
@@ -124,7 +123,7 @@ BEGIN
     IF NEW.return_date IS NOT NULL AND OLD.return_date IS NULL THEN
         -- Giảm `countLoan` của sách khi trả sách thành công
         UPDATE Book
-        SET countLoan = countLoan - 1
+        SET numBorrowing = numBorrowing - 1
         WHERE google_book_id = NEW.google_book_id;
     END IF;
 END//
@@ -153,6 +152,10 @@ END//
 DELIMITER ;
 
 SET GLOBAL event_scheduler = ON;
+
+
+
+
 
 
 

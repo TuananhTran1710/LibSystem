@@ -5,9 +5,7 @@ import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.DatabaseDriver;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
-import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.Views.AccountType;
-import com.jmc.libsystem.Views.StateAccount;
 import javafx.scene.control.Alert;
 
 import java.sql.PreparedStatement;
@@ -23,10 +21,12 @@ public class EvaluateInfo {
             if (resultSet.isBeforeFirst()) { // isBeforeFirst check xem co it nhat 1 dong la khach hang hay khong
                 resultSet.next();
                 if (type == AccountType.USER) {
-                    if (QueryBookLoans.isBanned(resultSet.getString("user_id"))) {
-                        //update state of account
-                        QueryAccountData.updateState(StateAccount.BANNED.toString(), resultSet.getString("user_id"));
-
+                    if (resultSet.getString("state").toLowerCase().equals("deleted")) {
+                        System.out.println("Account is removed from library system!");
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setContentText("Account is removed. Please sign up again!");
+                        alert.show();
+                    } else if (resultSet.getString("state").toLowerCase().equals("banned")) {
                         System.out.println("Account is banned because you violated the library policy");
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setContentText("Account is banned because you violated the library policy");
@@ -39,8 +39,6 @@ public class EvaluateInfo {
                     }
                 } else {
                     Model.getInstance().setLoginFlag(true);
-                    //update state of all user
-                    QueryBookLoans.updateUserBanned();
                     Model.getInstance().setMyAdmin(new Admin(resultSet.getString("admin_id"), resultSet.getString("fullName"), email, password));
                 }
             } else {
@@ -85,6 +83,31 @@ public class EvaluateInfo {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+            } else {
+                resultSet.next();
+                if (resultSet.getString("state").toLowerCase().equals("banned")) {
+                    System.out.println("Account was banned!");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Account was banned!");
+                    alert.show();
+                } else if (resultSet.getString("state").toLowerCase().equals("deleted")) {
+                    Model.getInstance().setLoginFlag(true);
+
+                    String queryInsert = "update user set email = ?, password = ?, fullName = ? where user_id = ?";
+                    Model.getInstance().setMyUser(new User(user_id, fullName, email, password, "active"));
+
+                    try (PreparedStatement preparedStatementInsert = DatabaseDriver.getConn().prepareStatement(queryInsert)) {
+                        preparedStatementInsert.setString(1, email);
+                        preparedStatementInsert.setString(2, password);
+                        preparedStatementInsert.setString(3, user_id);
+                        preparedStatementInsert.setString(4, fullName);
+
+                        preparedStatementInsert.executeUpdate();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,11 +130,32 @@ public class EvaluateInfo {
         try {
             if (resultSet.isBeforeFirst()) { // check xem email ton tai chua?
                 resultSet.next();
-                String my_password = resultSet.getString("password");
-                System.out.println("Get password successfully!");
-                Alert notice = new Alert(Alert.AlertType.INFORMATION);
-                notice.setContentText("Your password is " + my_password);
-                notice.show();
+                if (type == AccountType.USER) {
+                    String state = resultSet.getString("state").toLowerCase();
+                    if (state.equals("active")) {
+                        String my_password = resultSet.getString("password");
+                        System.out.println("Get password successfully!");
+                        Alert notice = new Alert(Alert.AlertType.INFORMATION);
+                        notice.setContentText("Your password is " + my_password);
+                        notice.show();
+                    } else if (state.equals("deleted")) {
+                        System.out.println("Account is deleted!");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setContentText("Account is deteted. Please sign up again!");
+                        alert.show();
+                    } else {
+                        System.out.println("Account is banned because you violated the library policy");
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setContentText("Account is banned because you violated the library policy");
+                        alert.show();
+                    }
+                } else {
+                    String my_password = resultSet.getString("password");
+                    System.out.println("Get password successfully!");
+                    Alert notice = new Alert(Alert.AlertType.INFORMATION);
+                    notice.setContentText("Your password is " + my_password);
+                    notice.show();
+                }
             } else {
                 System.out.println("Your ID and Email aren't correct or available!");
                 Alert alert = new Alert(Alert.AlertType.ERROR);

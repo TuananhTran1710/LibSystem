@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="book_preview_container" stylesheets="@../../Styles/BookPreview.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Book.BookPreviewController">
@@ -62,10 +61,10 @@
         </AnchorPane>
     </TitledPane>
     <VBox layoutX="50.0" layoutY="85.0" prefHeight="300.0" prefWidth="350.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="90.0">
-        <Label text="Book title" />
+        <Label fx:id="title" text="Book title" />
         <HBox prefHeight="200.0" prefWidth="350.0">
             <AnchorPane prefHeight="200.0" prefWidth="180.0">
-                <ImageView fitHeight="188.0" fitWidth="150.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0" />
+                <ImageView fx:id="image_book" fitHeight="188.0" fitWidth="150.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0" />
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="160.0">
                 <Button fx:id="borrow_btn" layoutX="14.0" layoutY="47.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="130.0" text="Borrow" AnchorPane.topAnchor="50.0">
@@ -73,7 +72,7 @@
                         <FontAwesomeIconView glyphName="CART_ARROW_DOWN" size="20" />
                     </graphic>
                 </Button>
-                <Button layoutX="14.0" layoutY="109.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="130.0" text="Like" AnchorPane.topAnchor="100.0">
+                <Button fx:id="like_btn" layoutX="14.0" layoutY="109.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="130.0" text="Like" AnchorPane.topAnchor="100.0">
                     <graphic>
                         <FontAwesomeIconView glyphName="HEART" size="20" />
                     </graphic>
@@ -113,7 +112,7 @@
         <FontAwesomeIconView glyphName="COMMENT" layoutX="20.0" layoutY="32.0" size="20" />
         <AnchorPane layoutX="50.0" layoutY="60.0" prefHeight="230.0" prefWidth="280.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
             <VBox layoutX="11.200000000000001" layoutY="5.0" prefHeight="200.0" prefWidth="250.0" spacing="10.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
-                <Label text="Fullname">
+                <Label fx:id="name_lbl" text="Fullname">
                     <graphic>
                         <FontAwesomeIconView glyphName="USER" size="20" />
                     </graphic>
@@ -152,9 +151,4 @@
             </VBox>
         </AnchorPane>
     </AnchorPane>
-   <Label layoutX="351.0" layoutY="97.0" text="Thêm phần xem cmt">
-      <font>
-         <Font size="18.0" />
-      </font>
-   </Label>
 </AnchorPane>

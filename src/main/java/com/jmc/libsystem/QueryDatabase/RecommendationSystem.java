@@ -100,6 +100,7 @@ public class RecommendationSystem {
 
             while (resultSet.next()) {
                 String[] categories = resultSet.getString("category").split(", ");
+                String[] authors = resultSet.getString("authors").split(", ");
                 // Tìm sách có bất kỳ thể loại hoặc tác giả nào khớp với danh sách đã mượn
                 for (String category : categories) {
                     query = "SELECT google_book_id FROM Book WHERE (category COLLATE utf8mb4_general_ci LIKE ?)";
@@ -118,7 +119,6 @@ public class RecommendationSystem {
                 }
 
 
-                String[] authors = resultSet.getString("authors").split(", ");
                 // Tìm sách có bất kỳ thể loại hoặc tác giả nào khớp với danh sách đã mượn
                 for (String author : authors) {
                     query = "SELECT google_book_id FROM Book WHERE (authors COLLATE utf8mb4_general_ci LIKE ?)";

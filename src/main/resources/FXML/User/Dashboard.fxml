@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../../Styles/Dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.DashboardController">
@@ -28,30 +29,36 @@
             </graphic>
         </Button>
     </AnchorPane>
-    <ScrollPane hbarPolicy="ALWAYS" layoutX="24.0" layoutY="107.0" prefHeight="178.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="24.0">
-        <HBox fx:id="resultList_hb" prefHeight="127.0" prefWidth="142.0" spacing="10">
+    <ScrollPane hbarPolicy="ALWAYS" layoutX="24.0" layoutY="107.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="24.0">
+        <HBox fx:id="resultList_hb" prefHeight="100.0" prefWidth="200.0" spacing="10">
             <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
         </HBox>
     </ScrollPane>
-    <AnchorPane layoutX="20.0" layoutY="515.0" prefHeight="195.0" prefWidth="807.0" styleClass="feature" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="505.0">
-        <Label layoutX="38.0" layoutY="21.0" text="Reading" />
-        <FontAwesomeIconView glyphName="UNIVERSITY" layoutX="14.0" layoutY="38.0" size="14" />
-        <Line endX="695.0" layoutX="108.0" layoutY="47.0" startX="-105.0" />
-        <ScrollPane hbarPolicy="ALWAYS" layoutX="4.0" layoutY="55.0" prefHeight="165.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="4.0">
+    <AnchorPane layoutX="20.0" layoutY="515.0" prefHeight="195.0" prefWidth="807.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="505.0">
+        <Label layoutX="38.0" layoutY="31.0" text="Reading">
+         <font>
+            <Font name="Calibri Light" size="20.0" />
+         </font></Label>
+        <FontAwesomeIconView glyphName="UNIVERSITY" layoutX="14.0" layoutY="47.0" size="14" />
+        <Line endX="695.0" layoutX="108.0" layoutY="55.0" startX="-105.0" />
+        <ScrollPane hbarPolicy="ALWAYS" layoutX="4.0" layoutY="61.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="4.0">
             <HBox fx:id="reading_hbox" prefHeight="100.0" prefWidth="200.0" />
         </ScrollPane>
-        <ChoiceBox fx:id="num_show_reading" layoutX="756.0" layoutY="7.0" prefWidth="50.0" styleClass="show_box" />
+        <ChoiceBox fx:id="num_show_reading" layoutX="755.0" layoutY="25.0" prefWidth="50.0" styleClass="show_box" />
     </AnchorPane>
-    <AnchorPane layoutX="21.0" layoutY="295.0" prefHeight="195.0" prefWidth="807.0" styleClass="feature">
-        <Label layoutX="37.0" layoutY="13.0" text="Popular" />
-        <FontAwesomeIconView glyphName="UNIVERSITY" layoutX="14.0" layoutY="30.0" size="14" text="" wrappingWidth="16.0" />
+    <AnchorPane layoutX="21.0" layoutY="295.0" prefHeight="195.0" prefWidth="807.0">
+        <Label layoutX="37.0" layoutY="11.0" text="Popular">
+         <font>
+            <Font name="Calibri Light" size="20.0" />
+         </font></Label>
+        <FontAwesomeIconView glyphName="UNIVERSITY" layoutX="14.0" layoutY="28.0" size="14" text="" wrappingWidth="16.0" />
         <Line endX="695.0" layoutX="109.0" layoutY="36.0" startX="-105.0" />
-        <ScrollPane hbarPolicy="ALWAYS" layoutX="4.0" layoutY="45.0" prefHeight="165.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="4.0">
+        <ScrollPane hbarPolicy="ALWAYS" layoutX="4.0" layoutY="42.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="4.0">
             <HBox fx:id="popular_hbox" prefHeight="100.0" prefWidth="200.0" />
         </ScrollPane>
-        <ChoiceBox fx:id="num_show_popular" layoutX="756.0" layoutY="-5.0" prefWidth="50.0" styleClass="show_box" />
+        <ChoiceBox fx:id="num_show_popular" layoutX="755.0" layoutY="5.0" prefWidth="50.0" styleClass="show_box" />
     </AnchorPane>
     <FontAwesomeIconView glyphName="SLIDERS" layoutX="800.0" layoutY="86.0" size="20" />
     <Text layoutX="675.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sort_by" text="Sort by:" />

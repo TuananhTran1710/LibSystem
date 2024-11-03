@@ -118,9 +118,9 @@
 }
 
 .feature Label {
-    -fx-fill: #132A13;
-    -fx-font-size: 1.7em;
-    -fx-font-family: "Calibri Light";
+   // -fx-fill: #132A13;
+   // -fx-font-size: 1.7em;
+   // -fx-font-family: "Calibri Light";
 }
 
 .feature Button {
@@ -179,3 +179,6 @@
     -fx-background-color: #0B4619;
     -fx-opacity: 1.0;
 }
+
+//
+

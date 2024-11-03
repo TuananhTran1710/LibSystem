@@ -98,9 +98,6 @@ END//
 
 DELIMITER ;
 
-alter table bookloans
-drop column state;
-
 
 DELIMITER //
 

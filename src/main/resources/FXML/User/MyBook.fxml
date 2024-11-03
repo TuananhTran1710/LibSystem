@@ -21,18 +21,18 @@
         <FontAwesomeIconView glyphName="HEART" layoutX="15.0" layoutY="37.0" size="15" />
         <Line endX="678.3999633789062" endY="1.9073486328125E-5" layoutX="116.0" layoutY="45.0" startX="-106.39998626708984" startY="1.9073486328125E-5" />
         <ScrollPane hbarPolicy="ALWAYS" layoutX="4.0" layoutY="53.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER">
-            <HBox fx:id="Favorite_HB" prefHeight="150.0" prefWidth="8.0" />
+            <HBox fx:id="Favorite_HB" prefHeight="100.0" prefWidth="200.0" />
         </ScrollPane>
     </AnchorPane>
     <AnchorPane layoutX="25.0" layoutY="230.0" prefHeight="229.0" prefWidth="800.0" styleClass="feature" stylesheets="@../../Styles/MyBook.css">
-        <Label layoutX="37.0" layoutY="6.0" text="Currently Borrowed">
+        <Label layoutX="37.0" layoutY="6.0" text="Borrowing">
          <font>
             <Font size="20.0" />
          </font></Label>
         <FontAwesomeIconView glyphName="INBOX" layoutX="15.0" layoutY="28.0" size="17" />
         <Line endX="681.5999755859375" layoutX="115.0" layoutY="35.0" startX="-105.60001373291016" />
         <ScrollPane hbarPolicy="ALWAYS" layoutX="4.0" layoutY="43.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER">
-            <HBox fx:id="Borrow_HB" prefHeight="128.0" prefWidth="766.0" />
+            <HBox fx:id="Borrow_HB" prefHeight="100.0" prefWidth="200.0" />
         </ScrollPane>
     </AnchorPane>
     <AnchorPane layoutX="41.0" layoutY="17.0" prefHeight="200.0" prefWidth="250.0" scaleX="0.85" scaleY="0.85" styleClass="book" stylesheets="@../../Styles/MyBook.css" AnchorPane.leftAnchor="41.0">

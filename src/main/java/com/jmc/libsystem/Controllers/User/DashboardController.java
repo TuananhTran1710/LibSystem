@@ -26,6 +26,7 @@ import java.util.*;
 public class DashboardController implements Initializable {
     private static DashboardController instance;
 
+
     public DashboardController() {
         instance = this;
     }
@@ -62,6 +63,8 @@ public class DashboardController implements Initializable {
     public Set<String> categorySuggest = new HashSet<>();
     public Set<String> authorSuggest = new HashSet<>();
 
+    public static boolean onBookPreview = false;
+    public static boolean onBookLoanPreview = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -92,18 +95,17 @@ public class DashboardController implements Initializable {
         num_show_search.valueProperty().addListener(observable -> modifyShowBookSearch());
         num_show_reading.valueProperty().addListener(observable -> modifyShowBookReading());
         num_show_popular.valueProperty().addListener(observable -> modifyShowBookPopular());
+        autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, titleSuggest);
 
         //auto completion
-        autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, titleSuggest);
         search_tf.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 switch (keyEvent.getCode()) {
                     case ENTER -> {
-                        if (!search_tf.getText().trim().isEmpty()) {
-                            autoCompletionLearnWord(search_tf.getText().trim());
+                        if (search_tf.isFocused() && !search_tf.getText().trim().isEmpty()) {
                             searhBooks(limitBookSearch);
-                            // move focus to something
+                            autoCompletionLearnWord(search_tf.getText().trim());
                             resultList_hb.requestFocus();
                         }
                     }

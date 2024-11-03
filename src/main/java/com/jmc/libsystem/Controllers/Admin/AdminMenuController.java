@@ -2,6 +2,7 @@ package com.jmc.libsystem.Controllers.Admin;
 
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.Views.AdminMenuOptions;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
@@ -23,6 +24,15 @@ public class AdminMenuController implements Initializable {
 
     private void addListensButton() {
         dashboard_btn.setOnAction(event -> onDashBoard());
+        logout_btn.setOnAction(event -> convertToLogin());
+    }
+
+    private void convertToLogin() {
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.LOGOUT);
+        Model.getInstance().setLoginFlag(false);
+
+        // tao mot doi tuong moi de tranh thao tac voi listener cu (trong admin controller)
+        Model.getInstance().getViewFactory().setAdminSelectedMenuItem(new SimpleObjectProperty<>());
     }
 
     private void onDashBoard() {

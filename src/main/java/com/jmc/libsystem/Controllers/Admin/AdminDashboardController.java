@@ -8,26 +8,8 @@ import java.util.ResourceBundle;
 public class AdminDashboardController implements Initializable {
 
     private static AdminDashboardController instance;
-//    @FXML
-//    private Label numberUser;
-//    @FXML
-//    private Label numberBook;
-//    @FXML
-//    private TableView<Map<String, Object>> listBook;
-//    @FXML
-//    private TableColumn<Map<String, Object>, String> imageColumn;
-//    @FXML
-//    private TableColumn<Map<String, Object>, String> titleColumn;
-//    @FXML
-//    private TableColumn<Map<String, Object>, String> authorsColumn;
-//    @FXML
-//    private TableColumn<Map<String, Object>, Integer> quantityColumn;
-//    @FXML
-//    private TableColumn<Map<String, Object>, Integer> loanedColumn;
-//    @FXML
-//    private TableColumn<Map<String, Object>, Void> editColumn;
 
-    //
+    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        refreshData();

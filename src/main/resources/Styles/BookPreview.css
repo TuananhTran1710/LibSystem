@@ -2,9 +2,51 @@
     -fx-background-color: #EEEEEE;
 }
 
+.book_preview_container .viewport {
+    -fx-background-color: transparent;
+}
+
+/* con lăn */
+.book_preview_container .scroll-bar:horizontal .thumb,
+.book_preview_container .scroll-bar:vertical .thumb {
+    -fx-background-color: #132A13;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;
+    -fx-opacity: 0.8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 7, 0.5, 0, 0);
+}
+
+/* hover con lăn */
+.book_preview_container .scroll-bar:horizontal .thumb:hover,
+.book_preview_container .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #1A4314;
+    -fx-opacity: 1.0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+/* thanh cuộn */
+.book_preview_container .scroll-bar:horizontal,
+.book_preview_container .scroll-bar:vertical {
+    -fx-background-color: #EEEEEE;
+    -fx-padding: 2px;
+}
+
+/* nhấn vào thanh cuộn */
+.book_preview_container .scroll-bar:horizontal .thumb:pressed,
+.book_preview_container .scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: #0B4619;
+    -fx-opacity: 1.0;
+}
+
+/* Định dạng cho toàn bộ table view */
+.table-view {
+    -fx-background-color: white;
+    -fx-sticky: column;
+}
+
 /* logo */
 .logo_container {
-    -fx-background-color: #EEEEEE;
+    -fx-background-color: transparent;
 }
 
 .logo_container FontAwesomeIconView {
@@ -34,7 +76,7 @@
 
 /* ảnh, điểm đánh giá và 2 button mượn và chia sẻ */
 .detail {
-    -fx-background-color: #EEEEEE;
+    -fx-background-color: transparent;
 }
 
 .detail Label {
@@ -50,7 +92,7 @@
     -fx-text-fill: #132A13;
     -fx-font-size: 1.2em;
     -fx-alignment: CENTER_LEFT; /* Corrected from left to CENTER_LEFT */
-    -fx-graphic-text-gap: 30px;
+    -fx-graphic-text-gap: 10px;
     -fx-padding: 5px;
     -fx-border-radius: 10;
     -fx-background-radius: 11;
@@ -100,7 +142,7 @@
 
 /* comment */
 .comment_container {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: transparent;
     -fx-background-radius: 10;
     -fx-text-fill: #132A13;
     -fx-font-size: 1.2em;
@@ -126,7 +168,7 @@
 }
 
 .comment_container ToggleButton {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
 
@@ -134,15 +176,50 @@
     -fx-graphic-text-gap: 10px;
 }
 
-.comment_container AnchorPane {
+.comment_container .surround {
     -fx-border-color: #132A13;
     -fx-border-width: 1px;
     -fx-border-radius: 10;
 }
 
+.comment_container .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.comment_container .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.comment_container .scroll-pane .scroll-bar:horizontal .thumb,
+.comment_container .scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+}
+
+.comment_container .scroll-pane .scroll-bar:horizontal .thumb:hover,
+.comment_container .scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #1A4314;
+    -fx-opacity: 1.0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+.comment_container .scroll-pane .scroll-bar:horizontal,
+.comment_container .scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-padding: 2px;
+}
+
+.scroll-pane .scroll-bar .increment-button,
+.scroll-pane .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+}
+
 .comment_container TextArea {
     -fx-background-color: transparent;
-    -fx-control-inner-background: rgba(19, 42, 19, 0.1);
+    -fx-border-color: #132A13;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10;
     -fx-text-fill: #132A13
 }
 

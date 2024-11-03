@@ -24,7 +24,6 @@ public class QueryBookData {
         return resultSet;
     }
 
-
     public static ResultSet getAllBook(String keyWord) {
         ResultSet resultSet = null;
         String type = DashboardController.typeSearch.toString();
@@ -47,6 +46,20 @@ public class QueryBookData {
                 "GROUP BY b.google_book_id, b.title, b.authors;";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public static ResultSet getCountBook(){
+        ResultSet resultSet = null;
+        try {
+            String query = "SELECT COUNT(*) as count FROM book;";
+
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+
             resultSet = preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -92,7 +92,7 @@ public class RecommendationSystem {
     }
 
     public static void calScoreBasedAuthorAndGenre(String user_id) {
-        String query = "SELECT DISTINCT b.category, b.authors FROM BookLoans bl JOIN Book b ON bl.google_book_id = b.google_book_id WHERE bl.user_id = ?";
+        String query = "SELECT DISTINCT b.category, b.authors FROM BookLoans bl natural JOIN Book b WHERE bl.user_id = ?";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, user_id);
@@ -102,7 +102,7 @@ public class RecommendationSystem {
                 String[] categories = resultSet.getString("category").split(", ");
                 // Tìm sách có bất kỳ thể loại hoặc tác giả nào khớp với danh sách đã mượn
                 for (String category : categories) {
-                    query = "SELECT google_book_id FROM Book WHERE (category COLLATE utf8mb4_general_ci LIKE ?) AND state != 'deleted'";
+                    query = "SELECT google_book_id FROM Book WHERE (category COLLATE utf8mb4_general_ci LIKE ?)";
                     try {
                         preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
                         preparedStatement.setString(1, "%" + category + "%");
@@ -121,7 +121,7 @@ public class RecommendationSystem {
                 String[] authors = resultSet.getString("authors").split(", ");
                 // Tìm sách có bất kỳ thể loại hoặc tác giả nào khớp với danh sách đã mượn
                 for (String author : authors) {
-                    query = "SELECT google_book_id FROM Book WHERE (authors COLLATE utf8mb4_general_ci LIKE ?) AND state != 'deleted'";
+                    query = "SELECT google_book_id FROM Book WHERE (authors COLLATE utf8mb4_general_ci LIKE ?)";
                     try {
                         preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
                         preparedStatement.setString(1, "%" + author + "%");

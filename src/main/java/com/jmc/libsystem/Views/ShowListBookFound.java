@@ -22,14 +22,23 @@ public class ShowListBookFound {
         resultList_hb.getChildren().clear();
 
         if (bookList.isEmpty()) {
+            VBox emptyBox = new VBox();
+            emptyBox.setAlignment(Pos.CENTER);
+            emptyBox.setSpacing(3);
+
             ImageView image = new ImageView();
-            Image notFoundImage = new Image(ShowListBookFound.class.getResource("/Images/notfound.png").toString());
+            Image notFoundImage = new Image(ShowListBookFound.class.getResource("/Images/empty.png").toString());
             image.setImage(notFoundImage);
-            image.setFitHeight(142);
-            image.setFitWidth(760);
+            image.setFitHeight(90);
+            image.setFitWidth(90);
             image.setPreserveRatio(false);
 
-            resultList_hb.getChildren().add(image);
+            Label messageLabel = new Label("No books found"); // hoặc "No favorite books yet"
+            messageLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #A0A0A0;");
+
+            emptyBox.getChildren().addAll(image, messageLabel);
+            resultList_hb.getChildren().add(emptyBox);
+            resultList_hb.setAlignment(Pos.CENTER); // Căn giữa nội dung trong HBox
             return;
         }
 
@@ -55,9 +64,15 @@ public class ShowListBookFound {
         } catch (Exception e) {
             bookCoverImageView.setImage(DEFAULT_BOOK_COVER);
         }
-        bookCoverImageView.setFitHeight(70);
-        bookCoverImageView.setFitWidth(70);
+        bookCoverImageView.setFitHeight(90);
+        bookCoverImageView.setFitWidth(90);
         bookCoverImageView.setPreserveRatio(false);
+
+        // Thêm CSS trực tiếp vào ImageView
+        bookCoverImageView.setStyle(
+                "-fx-cursor: hand; " +
+                        "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);"
+        );
 
         // Sự kiện click vào ảnh bìa để xem trước sách
         bookCoverImageView.setOnMouseClicked(event -> {
@@ -84,11 +99,19 @@ public class ShowListBookFound {
         ratingLabel.setStyle("-fx-font-size: 10px; -fx-text-fill: #FFA500;");
 
         // Số lượng đã mượn
-        Label borrowCountLabel = new Label("Picked:" + book.getNumLoans());
+        String totalLoan;
+        if (book.getTotalLoan() >= 1000) {
+            if (book.getTotalLoan() % 1000 == 0) totalLoan = book.getTotalLoan() / 1000 + "k";
+            else
+                totalLoan = String.format("%.1f", 1.0 * book.getTotalLoan() / 1000) + "k";
+        } else {
+            totalLoan = book.getTotalLoan() + "";
+        }
+        Label borrowCountLabel = new Label("Picked:" + totalLoan);
         borrowCountLabel.setStyle("-fx-font-size: 10px; -fx-text-fill: #555;");
 
         // Sắp xếp các thông tin trong hai dòng chính
-        HBox ratingAndBorrowBox = new HBox(4, ratingLabel, borrowCountLabel);
+        HBox ratingAndBorrowBox = new HBox(8, ratingLabel, borrowCountLabel);
         ratingAndBorrowBox.setAlignment(Pos.TOP_LEFT);
 
         // Thêm các thành phần vào VBox

@@ -7,38 +7,38 @@ import com.jmc.libsystem.Models.APIDriver;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class SearchBookAPI {
 
-    // method để phân tích chuỗi JSon để lấy ra list Book
+    // Method để phân tích chuỗi JSON và lấy ra list Book
     public static List<Book> getListBookFromJson(String keyword) throws URISyntaxException, IOException {
-        // gọi gg service để lấy dữ liệu api
-        String jsonReponse = APIDriver.getJsonString(keyword);
-        //tạo danh sách sách được trả về
+        // Gọi Google API để lấy dữ liệu JSON
+        String jsonResponse = APIDriver.getJsonString(keyword);
         List<Book> bookList = new ArrayList<>();
 
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode rootNode = mapper.readTree(jsonReponse);
+        JsonNode rootNode = mapper.readTree(jsonResponse);
 
         if (rootNode.has("error")) {
             System.out.println("Lỗi từ Google API: " + rootNode.get("error").get("message").asText());
-            return bookList; // Trả về danh sách trống
+            return bookList; // Trả về danh sách trống nếu có lỗi
         }
 
         JsonNode items = rootNode.get("items");
 
         if (items != null) {
             for (JsonNode item : items) {
-                // lay volumeInfo cua moi quyen sach
                 JsonNode volumeInfo = item.get("volumeInfo");
-                //lay title
-                String title = volumeInfo.get("title").asText();
-                //lay id, id nam ngoai volumeInfo
+
+                // Lấy các thông tin cần thiết từ JSON response
                 String id = item.get("id").asText();
-                //lay tac gia
+                String title = volumeInfo.has("title") ? volumeInfo.get("title").asText() : "N/A";
+
+                // Tác giả
                 String authors;
                 JsonNode authorsNode = volumeInfo.get("authors");
                 if (authorsNode != null && authorsNode.isArray()) {
@@ -46,16 +46,62 @@ public class SearchBookAPI {
                     for (JsonNode author : authorsNode) {
                         authorsList.add(author.asText());
                     }
-                    authors = String.join(", ", authorsList); // Nối các tên tác giả bằng dấu phẩy
+                    authors = String.join(", ", authorsList);
                 } else {
-                    authors = "N/A"; // Nếu không có tác giả
+                    authors = "N/A";
                 }
 
-                // lay link anh bia cua sach
-                String thumbnailUrl = volumeInfo.has("imageLinks") ? volumeInfo.get("imageLinks").get("thumbnail").asText() : "";
+                // Ngày xuất bản
+                LocalDate publishDate = null;
+                if (volumeInfo.has("publishedDate")) {
+                    String dateStr = volumeInfo.get("publishedDate").asText();
+                    try {
+                        publishDate = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    } catch (Exception e) {
+                        // Nếu không có định dạng chuẩn (chỉ có năm), bạn có thể tùy chỉnh parse
+                        publishDate = LocalDate.parse(dateStr + "2024-01-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    }
+                }
 
-                //thêm cái book vừa mới lôi ra vào danh sách kết quả
-                bookList.add(new Book(id, title, authors, thumbnailUrl));
+                // Mô tả
+                String description = volumeInfo.has("description") ? volumeInfo.get("description").asText() : "N/A";
+
+                // Ảnh bìa
+                String thumbnailUrl = volumeInfo.has("imageLinks") && volumeInfo.get("imageLinks").has("thumbnail")
+                        ? volumeInfo.get("imageLinks").get("thumbnail").asText()
+                        : "";
+
+                // Số trang
+                int pageCount = volumeInfo.has("pageCount") ? volumeInfo.get("pageCount").asInt() : 0;
+
+                // Ngôn ngữ
+                String language = volumeInfo.has("language") ? volumeInfo.get("language").asText() : "N/A";
+
+                // Thể loại
+
+                String cats;
+                JsonNode catsNode = volumeInfo.get("categories");
+                if (catsNode != null && catsNode.isArray()) {
+                    List<String> catsList = new ArrayList<>();
+                    for (JsonNode cat : catsNode) {
+                        catsList.add(cat.asText());
+                    }
+                    cats = String.join(", ", catsList);
+                } else {
+                    cats = "N/A";
+                }
+
+                // Đánh giá
+                int countRating = 0;
+                int sumRatingStar = 0;
+
+                // Số lượng mượn (giá trị mặc định)
+                int totalLoan = 0;
+                int numBorrowing = 0;
+                int quantity = 0; // số lượng mặc định
+
+                // Thêm sách vào danh sách
+                bookList.add(new Book(id, title, authors, publishDate, description, thumbnailUrl, pageCount, language, quantity, cats, countRating, sumRatingStar, totalLoan, numBorrowing));
             }
         }
         return bookList;

@@ -15,8 +15,8 @@
 <?import javafx.scene.text.Text?>
 
 <ScrollPane fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0"
-            styleClass="book_preview_container" stylesheets="@../../Styles/BookPreview.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.jmc.libsystem.Controllers.Book.BookPreviewController">
+            styleClass="book_preview_container" stylesheets="@../../Styles/BookPreview.css"
+            xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Book.BookPreviewController">
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1300.0" prefWidth="835.0">
         <children>
             <AnchorPane prefHeight="50.0" prefWidth="850.0" styleClass="logo_container" AnchorPane.topAnchor="20.0">
@@ -65,9 +65,16 @@
                     </VBox>
                 </AnchorPane>
             </TitledPane>
-            <VBox layoutX="51.2" layoutY="85.0" prefHeight="482.0" prefWidth="350.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="90.0">
+            <VBox fillWidth="false" layoutX="51.2" layoutY="85.0" prefHeight="500.0" prefWidth="350.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="90.0">
                   <ImageView fitHeight="282.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true" />
                 <Label styleClass="book_title" text="Book title" />
+            <HBox alignment="CENTER" prefHeight="26.0" prefWidth="120.0" spacing="4.0" styleClass="available_x_copies">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="(Available:" />
+                  <Label text="X" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="copies)" />
+               </children>
+            </HBox>
             <HBox prefHeight="53.0" prefWidth="350.0" spacing="20.0">
                <children>
                         <Button fx:id="borrow_btn" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="button_1" text="Borrow">

@@ -87,8 +87,13 @@
 
 .detail .other_label {
     -fx-text-fill: #000000;
-        -fx-font-size: 1.4em;
-        -fx-font-family: "Calibri Light";
+    -fx-font-size: 1.4em;
+    -fx-font-family: "Calibri Light";
+}
+
+.detail .available_x_copies {
+    -fx-background-color: rgba(220, 220, 220, 0.8);
+    -fx-background-radius: 10px;
 }
 
 .button_1 {

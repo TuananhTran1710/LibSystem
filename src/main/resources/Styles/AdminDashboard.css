@@ -68,19 +68,25 @@
     -fx-alignment: CENTER;
 }
 
-.table-cell[text="Available"] {
-    -fx-background-color: #C2FDD0;
-    -fx-text-fill: black;
+.table-view .table-row-cell:selected {
+    -fx-background-color: #C6E7F3;
+    -fx-font-weight: bold;
 }
 
-.table-cell[text="Over"] {
-    -fx-background-color: #FBCDCD;
-    -fx-text-fill: black;
+.status-cell {
+    -fx-alignment: CENTER;
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
 }
 
-.table-cell:contains("edit"):hover {
-    -fx-background-color: lightblue;
-    -fx-cursor: hand;
+.status-cell.in-stock {
+    -fx-background-color: lightgreen;
+    -fx-text-fill: green;
+}
+
+.status-cell.out-of-stock {
+    -fx-background-color: lightcoral;
+    -fx-text-fill: white;
 }
 
 /* dòng tiêu đề */

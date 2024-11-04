@@ -58,4 +58,19 @@ public class QueryAccountData {
         }
         return resultSet;
     }
+
+    public static ResultSet getCountUser(){
+        ResultSet resultSet = null;
+        try {
+            String query = "SELECT COUNT(*) as count FROM user;";
+
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
 }

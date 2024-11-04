@@ -69,6 +69,18 @@
     -fx-cursor: hand;
 }
 
+.sort_by {
+    -fx-fill: #696969;
+}
+
+.slider_fontawesome {
+    -fx-fill: #132A13;
+}
+
+.line {
+    -fx-stroke: #696969;
+}
+
 /* choice box */
 .type_Search_box {
     -fx-background-color: transparent;
@@ -80,18 +92,6 @@
 
 .type_Search_box:hover {
     -fx-cursor: hand;
-}
-
-.sort_by {
-    -fx-fill: #696969;
-}
-
-.slider_fontawesome {
-    -fx-fill: #132A13;
-}
-
-.line {
-    -fx-stroke: #696969;
 }
 
 /* show số lượng và dùng cho các choice box còn lại */

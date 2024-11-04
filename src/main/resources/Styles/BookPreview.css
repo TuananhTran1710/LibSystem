@@ -79,28 +79,62 @@
     -fx-background-color: transparent;
 }
 
-.detail Label {
-    -fx-text-fill: #000000; /* Changed from -fx-fill to -fx-text-fill */
+.detail .book_title {
+    -fx-text-fill: #000000;
     -fx-font-size: 1.9em;
+    -fx-font-weight: bold;
+}
+
+.detail .other_label {
+    -fx-text-fill: #000000;
+    -fx-font-size: 1.4em;
     -fx-font-family: "Calibri Light";
 }
 
-.detail Button {
-    -fx-background-color: #FFFFFF;
-    -fx-border-color: #132A13;
-    -fx-border-width: 2px;
-    -fx-text-fill: #132A13;
+.detail .available_x_copies {
+    -fx-background-color: rgba(220, 220, 220, 0.8);
+    -fx-background-radius: 10px;
+}
+
+.button_1 {
+    -fx-background-color: #132A13;
+    -fx-text-fill: #FFFFFF;
     -fx-font-size: 1.2em;
-    -fx-alignment: CENTER_LEFT; /* Corrected from left to CENTER_LEFT */
+    -fx-alignment: CENTER_LEFT;
     -fx-graphic-text-gap: 10px;
     -fx-padding: 5px;
     -fx-border-radius: 10;
     -fx-background-radius: 11;
 }
 
-.detail Button:hover {
+.button_1:hover{
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+.button_1 FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+.button_2 {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #132A13;
+    -fx-font-size: 1.2em;
+    -fx-alignment: CENTER_LEFT;
+    -fx-graphic-text-gap: 15px;
+    -fx-padding: 5px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 11;
+}
+
+.button_2:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+
+.button_2 FontAwesomeIconView {
+    -fx-fill: #132A13;
 }
 
 /* ngôi sao bên dưới sách */

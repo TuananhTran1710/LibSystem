@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<ScrollPane fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0"
+            xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="850.0">
+         <children>
+            <AnchorPane prefHeight="70.0" prefWidth="790.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Line endX="610.0" endY="-7.62939453125E-6" layoutX="175.0" layoutY="69.0" startX="-175.0" startY="-7.62939453125E-6" />
+                  <Text layoutX="7.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="46.0" layoutY="121.0" prefHeight="350.0" prefWidth="380.0" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="120.0" />
+            <AnchorPane layoutX="426.0" layoutY="121.0" prefHeight="350.0" prefWidth="380.0" AnchorPane.rightAnchor="20.0" />
+            <AnchorPane layoutX="56.0" layoutY="131.0" prefHeight="350.0" prefWidth="380.0" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="480.0" />
+         </children>
+    </AnchorPane>
+  </content>
+</ScrollPane>

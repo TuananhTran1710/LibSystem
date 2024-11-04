@@ -72,7 +72,7 @@ public class QueryBookLoans {
         String query = "SELECT * " +
                 "FROM bookloans " +
                 "natural JOIN book " +
-                "WHERE user_id = ? and DATEDIFF(CURDATE(), borrow_date) < 60";
+                "WHERE user_id = ? and DATEDIFF(CURDATE(), borrow_date) < 60 and return_date is null";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, userId);
@@ -83,7 +83,7 @@ public class QueryBookLoans {
         return resultSet;
     }
 
-    public static boolean isBorrowed(String book_id) {
+    public static boolean isBorrowing(String book_id) {
         ResultSet resultSet;
         String query = "SELECT * " +
                 "FROM bookloans " +

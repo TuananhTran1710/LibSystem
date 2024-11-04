@@ -1,5 +1,7 @@
 package com.jmc.libsystem.Controllers.Book;
 
+import com.jmc.libsystem.Controllers.User.DashboardController;
+import com.jmc.libsystem.Controllers.User.MyBookController;
 import com.jmc.libsystem.Controllers.User.UserController;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.Model;
@@ -68,7 +70,9 @@ public class BookDetailController implements Initializable {
         return_btn.setDisable(false);
         borrow_btn.setDisable(true);
         // truy van va them vao csdl bookLoan
-        QueryBookLoans.insertNewRecord(book.getId());
+        // can chinh
+        if (!QueryBookLoans.isBorrowing(book.getId()))
+            QueryBookLoans.insertNewRecord(book.getId());
     }
 
     private void toBorrowBook() {
@@ -101,16 +105,23 @@ public class BookDetailController implements Initializable {
         unlike_btn.setDisable(false);
 
         // truy van va them vao bang favorite
-        QueryFavoriteBook.insertNewRecord(book.getId());
+        // can chinh
+        if (!QueryFavoriteBook.isFavorite(book.getId()))
+            QueryFavoriteBook.insertNewRecord(book.getId());
     }
 
     private void moveMenuCurrent() {
         UserMenuOptions menuCurrent = Model.getInstance().getViewFactory().getUserSelectedMenuItem().getValue();
         switch (menuCurrent) {
-            case DASHBOARD ->
-                    UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
-            case MYBOOK ->
-                    UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getMyBookView());
+            case DASHBOARD -> {
+                UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
+                // de cho tiet kiem, chi reset phan reading
+                DashboardController.getInstance().resetReading();
+            }
+            case MYBOOK -> {
+                UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getMyBookView());
+                MyBookController.getInstance().refreshData();
+            }
             case SEARCH ->
                     UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getSearchView());
         }
@@ -132,7 +143,7 @@ public class BookDetailController implements Initializable {
     }
 
     public void modifyButton() {
-        if (QueryBookLoans.isBorrowed(book.getId())) toReturnBook();
+        if (QueryBookLoans.isBorrowing(book.getId())) toReturnBook();
         else toBorrowBook();
 
         if (QueryFavoriteBook.isFavorite(book.getId())) toUnlikeBook();

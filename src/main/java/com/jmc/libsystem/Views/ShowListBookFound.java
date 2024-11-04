@@ -35,12 +35,11 @@ public class ShowListBookFound {
             image.setFitWidth(90);
             image.setPreserveRatio(false);
 
-            Label messageLabel = new Label("No books found"); // hoặc "No favorite books yet"
+            Label messageLabel = new Label("No books found");
             messageLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #A0A0A0;");
 
             emptyBox.getChildren().addAll(image, messageLabel);
             resultList_hb.getChildren().add(emptyBox);
-            resultList_hb.setAlignment(Pos.CENTER); // Căn giữa nội dung trong HBox
             return;
         }
 

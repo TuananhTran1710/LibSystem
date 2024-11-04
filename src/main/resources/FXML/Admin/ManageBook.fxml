@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.ManageBookController">
-    <children>
-        <TextField layoutX="74.0" layoutY="26.0" prefHeight="26.0" prefWidth="105.0" text="search (from database)" />
-        <Label layoutX="100.0" layoutY="252.0" prefHeight="26.0" prefWidth="284.0" text="dưới đây là danh sách sách giống ở dashboard admin" />
-        <Label layoutX="194.0" layoutY="30.0" text="khi search thì đầu tiên tìm trong database trước, nếu chưa có thì gọi api" />
-        <ScrollPane layoutX="54.0" layoutY="83.0" prefHeight="92.0" prefWidth="507.0">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-            </content>
-        </ScrollPane>
-        <Label layoutX="149.0" layoutY="65.0" text="Các sách hiện ra : nếu đã có thì hiện như bthg, nếu chưa có thì hiện chưa có" />
-    </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.jmc.libsystem.Controllers.Admin.ManageBookController">
+    <TextField layoutX="74.0" layoutY="26.0" prefHeight="26.0" prefWidth="105.0" text="search (from database)"/>
+    <Label layoutX="100.0" layoutY="252.0" prefHeight="26.0" prefWidth="284.0"
+           text="dưới đây là danh sách sách giống ở dashboard admin"/>
+    <Label layoutX="194.0" layoutY="30.0"
+           text="khi search thì đầu tiên tìm trong database trước, nếu chưa có thì gọi api"/>
+    <ScrollPane layoutX="54.0" layoutY="83.0" prefHeight="92.0" prefWidth="507.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0"/>
+    </ScrollPane>
+    <Label layoutX="149.0" layoutY="65.0"
+           text="Các sách hiện ra : nếu đã có thì hiện như bthg, nếu chưa có thì hiện chưa có"/>
 </AnchorPane>

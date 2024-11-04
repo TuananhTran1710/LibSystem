@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 public class AdminDashboardController implements Initializable {
 
     private static AdminDashboardController instance;
+
     public TableView<Map<String, Object>> listBook;
     public TableColumn<Map<String, Object>, ImageView> imageColumn;
     public TableColumn<Map<String, Object>, String> titleColumn;
@@ -35,7 +36,6 @@ public class AdminDashboardController implements Initializable {
     public Label numberBook;
     public Label numberBookLoan;
     public Label numberOverBook;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

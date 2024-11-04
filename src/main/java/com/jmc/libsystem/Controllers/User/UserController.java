@@ -11,6 +11,16 @@ import java.util.ResourceBundle;
 public class UserController implements Initializable {
     public BorderPane user_parent;
 
+    private static UserController instance;
+
+    public static UserController getInstance() {
+        return instance;
+    }
+
+    public UserController() {
+        instance = this;
+    }
+
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -28,15 +38,19 @@ public class UserController implements Initializable {
                             Stage stage = (Stage) user_parent.getScene().getWindow();
                             Model.getInstance().getViewFactory().closeStage(stage);
                         }
-                        case BOOKLOANPREVIEW ->
-                                user_parent.setCenter(Model.getInstance().getViewFactory().getBookLoanPreview());
-                        case BOOKPREVIEW ->
-                                user_parent.setCenter(Model.getInstance().getViewFactory().getBookPreview());
                         case SEARCH -> user_parent.setCenter(Model.getInstance().getViewFactory().getSearchView());
                         case PROFILE -> user_parent.setCenter(Model.getInstance().getViewFactory().getProfileView());
                         case PROPOSE -> user_parent.setCenter(Model.getInstance().getViewFactory().getProposeView());
-                        case MYBOOK -> user_parent.setCenter(Model.getInstance().getViewFactory().getMyBookView());
-                        default -> user_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
+                        case MYBOOK -> {
+                            user_parent.setCenter(Model.getInstance().getViewFactory().getMyBookView());
+                            MyBookController.getInstance().refreshData();
+                        }
+                        default -> {
+                            user_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
+                            DashboardController.getInstance().reset();
+                            DashboardController.getInstance().resetReading();
+                            DashboardController.getInstance().resetPopular();
+                        }
 
                     }
                 });

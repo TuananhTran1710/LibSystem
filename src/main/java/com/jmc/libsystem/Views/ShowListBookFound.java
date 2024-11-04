@@ -78,7 +78,7 @@ public class ShowListBookFound {
         // Sự kiện click vào ảnh bìa để xem trước sách
         bookCoverImageView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
-                UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getBookLoanPreview());
+                UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getBookDetail());
                 BookDetailController.getInstance().setBook(book);
                 BookDetailController.getInstance().modifyButton();
                 BookDetailController.getInstance().setUpInfo(book);

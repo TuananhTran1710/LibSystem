@@ -22,19 +22,23 @@ import java.util.ResourceBundle;
 public class BookDetailController implements Initializable {
 
     private static BookDetailController instance;
-    public Text publish_date;
-    public Text pages;
-    public Text description;
-    public Label name_lbl;
-    public Label title;
-    public Text quantity;
-    public ImageView image_book;
-    public Button comment_btn;
-    public Button return_btn;
+
     public Button back_btn;
-    public Button like_btn;
+    public Label author_lbl;
+    public Label publishDate_lbl;
+    public Label quantity_lbl;
+    public Label pages_lbl;
+    public Text description_text;
+    public ImageView image;
+    public Label title;
+    public Label sumRating_lbl;
     public Button borrow_btn;
+    public Button like_btn;
+    public Button return_btn;
     public Button unlike_btn;
+    public Label totalLoan_lbl;
+    public Button comment_btn;
+
 
     private Book book;
 
@@ -130,17 +134,29 @@ public class BookDetailController implements Initializable {
 
     public void setUpInfo(Book book) {
         title.setText(book.getTitle());
+        author_lbl.setText(book.getAuthors());
+        publishDate_lbl.setText(book.getPublishDate().toString());
+        quantity_lbl.setText(String.valueOf(book.getQuantity()));
+        pages_lbl.setText(String.valueOf(book.getPageCount()));
+        description_text.setText(book.getDescription());
+        totalLoan_lbl.setText(String.valueOf(book.getTotalLoan()));
 
+        if (book.getCountRating() > 0) {
+            sumRating_lbl.setText(String.valueOf(book.getSumRatingStar()));
+        }
+
+        // Thiết lập hình ảnh bìa sách
         try {
             Image bookCoverImage = new Image(book.getThumbnailUrl(), true);
-            image_book.setImage(bookCoverImage);
+            image.setImage(bookCoverImage);
         } catch (Exception e) {
-            image_book.setImage(ShowListBookFound.DEFAULT_BOOK_COVER);
+            image.setImage(ShowListBookFound.DEFAULT_BOOK_COVER);
         }
-        image_book.setFitHeight(190);
-        image_book.setFitWidth(160);
-        image_book.setPreserveRatio(false);
+        image.setFitHeight(190);
+        image.setFitWidth(160);
+        image.setPreserveRatio(false);
     }
+
 
     public void modifyButton() {
         if (QueryBookLoans.isBorrowing(book.getId())) toReturnBook();

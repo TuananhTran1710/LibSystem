@@ -1,0 +1,138 @@
+.adminbook_container {
+    -fx-background-color: #EEEEEE;
+}
+
+/* Tiêu đề */
+.title_container {
+    -fx-font-size: 2em;
+    -fx-font-weight: bold;
+    -fx-text-fill: #132A13;
+    -fx-padding: 10px;
+}
+
+/* Chọn thêm xóa */
+.choose_action {
+    -fx-background-color: rgba(19, 42, 19, 0.1);
+}
+
+.choose_action ToggleButton {
+    -fx-background-color: transparent;
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.4em;
+}
+
+.choose_action FontAwesomeIconView {
+    -fx-fill: #132A13;
+}
+
+.choose_action ToggleButton:selected {
+    -fx-background-color: #132A13;
+    -fx-text-fill: #FFFFFF;
+}
+
+.choose_action ToggleButton:selected FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+/* Thanh tìm kiếm */
+.search_field {
+    -fx-background-color: rgba(19, 42, 19, 0.05);
+    -fx-border-width: 1px;
+    -fx-border-color: #132A13;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 0 0 0 50px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+}
+
+.search_field:focused {
+    -fx-border-color: #2a572a;
+    -fx-background-color: #FFFFFF;
+}
+
+.search_field:hover {
+    -fx-border-color: #2a572a;
+}
+
+.search_button {
+    -fx-pref-width: 50;
+    -fx-background-color: transparent;
+}
+
+.search_button FontAwesomeIconView {
+    -fx-fill: #132A13;
+}
+
+.search_button:hover {
+    -fx-cursor: hand;
+}
+
+.sort_by {
+    -fx-fill: #696969;
+}
+
+.slider_fontawesome {
+    -fx-fill: #132A13;
+}
+
+.line {
+    -fx-stroke: #696969;
+}
+
+.type_Search_box {
+    -fx-background-color: transparent;
+}
+
+.type_Search_box .arrow {
+    -fx-background-color: transparent;
+}
+
+.type_Search_box:hover {
+    -fx-cursor: hand;
+}
+
+/* BẢNG */
+.table-view {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: transparent;
+}
+
+/* tiêu đề */
+.table-view .column-header-background {
+    -fx-background-color: #132A13;
+}
+
+.table-view .column-header-background .label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+/* bên trong bảng */
+.table-view .table-row-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #132A13;
+}
+
+/* phân biệt dòng */
+.table-view .table-row-cell:odd {
+    -fx-background-color: #f9f9f9;
+}
+
+/* hover */
+.table-view .table-row-cell:hover {
+    -fx-background-color: rgba(19, 42, 19, 0.1);
+    -fx-text-fill: #000000;
+}
+
+/* viền tiêu đề */
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+

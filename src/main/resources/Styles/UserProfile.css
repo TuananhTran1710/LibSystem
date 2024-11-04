@@ -1,0 +1,63 @@
+.root-container {
+    -fx-background-color: #EEEEEE;
+    -fx-pref-width: 850;
+    -fx-pref-height: 750;
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #132A13;
+    -fx-alignment: center;
+    -fx-padding: 0 0 10 0;
+}
+
+.card {
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-background-radius: 5;
+}
+
+.card-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #132A13;
+    -fx-padding: 0 0 10 0;
+}
+
+.button {
+    -fx-background-color: #132A13;
+    -fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-background-color: #1e3e1e;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #132A13;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color:
+        transparent
+        transparent
+        derive(-fx-base, 80%)
+        transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}

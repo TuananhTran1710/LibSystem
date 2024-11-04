@@ -20,6 +20,10 @@
             <FontAwesomeIconView glyphName="SEARCH" rotate="-11.3" size="15" />
         </graphic>
     </Button>
+    <FontAwesomeIconView glyphName="SLIDERS" layoutX="800.0" layoutY="86.0" size="20" />
+    <Text layoutX="675.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sort_by" text="Sort by:" />
+    <Line endX="15.39996337890625" endY="9.400001525878906" layoutX="649.0" layoutY="81.0" startX="15.39996337890625" startY="-12.200004577636719" styleClass="line" />
+    <ChoiceBox fx:id="num_show_search" layoutX="607.0" layoutY="67.0" prefHeight="26.0" prefWidth="50.0" styleClass="show_box" />
     <AnchorPane prefHeight="48.0" prefWidth="850.0" styleClass="title_container" AnchorPane.bottomAnchor="701.6" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Label fx:id="name_lbl" layoutX="40.0" layoutY="7.0" styleClass="section_title" text="Label" />
         <Button fx:id="notice_btn" layoutX="784.0" layoutY="5.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" AnchorPane.rightAnchor="30.0">
@@ -58,8 +62,4 @@
         </ScrollPane>
         <ChoiceBox fx:id="num_show_popular" layoutX="755.0" layoutY="5.0" prefWidth="50.0" styleClass="show_box" />
     </AnchorPane>
-    <FontAwesomeIconView glyphName="SLIDERS" layoutX="800.0" layoutY="86.0" size="20" />
-    <Text layoutX="675.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sort_by" text="Sort by:" />
-    <Line endX="15.39996337890625" endY="9.400001525878906" layoutX="649.0" layoutY="81.0" startX="15.39996337890625" startY="-12.200004577636719" styleClass="line" />
-    <ChoiceBox fx:id="num_show_search" layoutX="607.0" layoutY="67.0" prefHeight="26.0" prefWidth="50.0" styleClass="show_box" />
 </AnchorPane>

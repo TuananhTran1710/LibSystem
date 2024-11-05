@@ -1,16 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="460.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.ProposeController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/Propose.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.ProposeController">
    <children>
-      <TextField layoutX="116.0" layoutY="47.0" text="Search từ api" />
-      <ScrollPane layoutX="91.0" layoutY="86.0" prefHeight="142.0" prefWidth="430.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="118.0" prefWidth="450.0" />
-        </content>
-      </ScrollPane>
+      <TextField fx:id="search_tf" layoutX="34.0" layoutY="70.0" prefHeight="40.0" prefWidth="800.0" promptText="Search or type a command..." styleClass="search_field" AnchorPane.leftAnchor="34.0" />
+      <ChoiceBox fx:id="criteriaBox" layoutX="729.0" layoutY="72.0" prefHeight="36.0" prefWidth="90.0" styleClass="type_Search_box" AnchorPane.rightAnchor="50.0" />
+      <Button fx:id="search_btn" layoutX="34.0" layoutY="69.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" styleClass="search_button">
+         <graphic>
+            <FontAwesomeIconView glyphName="SEARCH" rotate="-11.3" size="15" />
+         </graphic>
+      </Button>
+      <FontAwesomeIconView glyphName="SLIDERS" layoutX="810.0" layoutY="96.0" size="20" AnchorPane.rightAnchor="43.0" />
+      <Text layoutX="685.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sort_by" text="Sort by:" AnchorPane.rightAnchor="145.0" />
+      <Line endX="15.39996337890625" endY="9.400001525878906" layoutX="659.0" layoutY="91.0" startX="15.39996337890625" startY="-12.200004577636719" styleClass="line" AnchorPane.rightAnchor="191.0" />
+      <ChoiceBox fx:id="num_show_search" layoutX="617.0" layoutY="77.0" prefHeight="26.0" prefWidth="50.0" styleClass="show_box" AnchorPane.rightAnchor="203.0" />
+      <VBox layoutX="34.0" layoutY="144.0" prefHeight="260.0" prefWidth="780.0" spacing="20.0" styleClass="part" AnchorPane.leftAnchor="34.0" AnchorPane.topAnchor="130.0">
+         <children>
+            <HBox prefHeight="60.0" prefWidth="200.0" spacing="7.0">
+               <children>
+                  <Label styleClass="title" text="Search Results" />
+                  <FontAwesomeIconView glyphName="ANGLE_RIGHT" size="25" />
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <ScrollPane fx:id="scrollPane_search" hbarPolicy="ALWAYS" prefHeight="230.0" prefWidth="798.0" vbarPolicy="NEVER">
+               <content>
+                  <HBox fx:id="resultList_hb" prefHeight="100.0" prefWidth="200.0" />
+               </content>
+            </ScrollPane>
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="34.0" layoutY="441.0" prefHeight="260.0" prefWidth="780.0" spacing="20.0" styleClass="part" AnchorPane.leftAnchor="34.0" AnchorPane.topAnchor="450.0">
+         <children>
+            <HBox prefHeight="60.0" prefWidth="798.0" spacing="7.0">
+               <children>
+                  <Label styleClass="title" text="Your Previous Suggestions" />
+                  <FontAwesomeIconView glyphName="ANGLE_RIGHT" size="25" />
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <ScrollPane fx:id="scrollPane_search1" hbarPolicy="ALWAYS" prefHeight="230.0" prefWidth="798.0" vbarPolicy="NEVER">
+               <content>
+                  <HBox fx:id="resultList_hb1" prefHeight="100.0" prefWidth="200.0" />
+               </content>
+            </ScrollPane>
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>

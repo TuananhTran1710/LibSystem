@@ -2,14 +2,13 @@ package com.jmc.libsystem.Controllers.Admin;
 
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
+import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.concurrent.Task;
@@ -68,31 +67,13 @@ public class AdminDashboardController implements Initializable {
     }
 
     private void refreshData() {
-        /* liên kết các cột */
-        //imageColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("image")));
-        titleColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("title")));
-        authorsColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("authors")));
-        quantityColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((Integer) data.getValue().get("quantity")));
-        loanedColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((Integer) data.getValue().get("loaned")));
-        statusColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("status")));
-
-        imageColumn.setCellValueFactory(data -> {
-            Image image = (Image) data.getValue().get("image");
-            ImageView imageView = new ImageView(image);
-            imageView.setFitHeight(50); // Đặt chiều cao hình ảnh
-            imageView.setFitWidth(50);  // Đặt chiều rộng hình ảnh
-            return new SimpleObjectProperty<>(imageView);
-        });
-
-        ObservableList<Map<String, Object>> data = getBooks();
-        listBook.setItems(data);
+        getTableList();
         addMouseClickedToTable();
         try {
             getNumberData();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         showSortCategory();
         //add();
     }
@@ -177,7 +158,6 @@ public class AdminDashboardController implements Initializable {
         return data;
     }
 
-
     private void getNumberData() throws SQLException {
 
         ResultSet Users = QueryAccountData.getCountUser();
@@ -191,6 +171,30 @@ public class AdminDashboardController implements Initializable {
         ResultSet BookLoan = QueryBookData.getCountBookLoan();
         int numberBookLoans = getNumber(BookLoan);
         numberBookLoan.setText(Integer.toString(numberBookLoans));
+
+        ResultSet Overdue = QueryBookLoans.getCountOverdue();
+        int numberOverdue = getNumber(Overdue);
+        numberOverBook.setText(Integer.toString(numberOverdue));
+    }
+
+    private void getTableList(){
+        /* liên kết các cột */
+        titleColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("title")));
+        authorsColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("authors")));
+        quantityColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((Integer) data.getValue().get("quantity")));
+        loanedColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((Integer) data.getValue().get("loaned")));
+        statusColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("status")));
+
+        imageColumn.setCellValueFactory(data -> {
+            Image image = (Image) data.getValue().get("image");
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(50); // Đặt chiều cao hình ảnh
+            imageView.setFitWidth(50);  // Đặt chiều rộng hình ảnh
+            return new SimpleObjectProperty<>(imageView);
+        });
+
+        ObservableList<Map<String, Object>> data = getBooks();
+        listBook.setItems(data);
     }
 
     private int getNumber(ResultSet data) throws SQLException {

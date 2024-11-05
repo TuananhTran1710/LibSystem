@@ -130,4 +130,19 @@ public class QueryBookLoans {
         }
     }
 
+    public static ResultSet getCountOverdue(){
+        ResultSet resultSet = null;
+        String query = "SELECT COUNT(*) AS count " +
+                "FROM bookloans " +
+                "WHERE return_date IS NULL  " +
+                "  AND DATEDIFF(CURDATE(), borrow_date) > 60;";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
 }

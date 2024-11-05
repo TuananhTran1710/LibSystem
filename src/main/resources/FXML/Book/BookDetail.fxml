@@ -15,8 +15,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" styleClass="book_preview_container" stylesheets="@../../Styles/BookPreview.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Book.BookDetailController">
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1300.0" prefWidth="835.0">
+<ScrollPane fx:id="scrollPane" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" styleClass="book_preview_container" stylesheets="@../../Styles/BookDetail.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Book.BookDetailController">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1300.0" prefWidth="835.0" stylesheets="@../../Styles/BookDetail.css">
         <AnchorPane prefHeight="50.0" prefWidth="850.0" styleClass="logo_container" AnchorPane.topAnchor="20.0">
             <Button fx:id="back_btn" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="50.0">
                 <graphic>
@@ -42,20 +42,24 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Authors:" />
                         <Label fx:id="author_lbl" text="Label" wrapText="true" />
                     </HBox>
+                    <HBox layoutX="10.0" layoutY="94.0" prefHeight="50.0" prefWidth="706.0" spacing="5.0">
+                        <Label text="Categories: " />
+                        <Label fx:id="categories_lbl" text="Label" />
+                    </HBox>
                     <HBox layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="706.0" spacing="5.0">
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publish Date:" />
                         <Label fx:id="publishDate_lbl" text="Label" />
                     </HBox>
                     <HBox layoutX="10.0" layoutY="60.0" prefHeight="50.0" prefWidth="706.0" spacing="5.0">
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity in stock:" wrappingWidth="163.84921264648438" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity in stock:" wrappingWidth="103.04922485351562" />
                         <Label fx:id="quantity_lbl" text="Label" />
                     </HBox>
                     <HBox layoutX="10.0" layoutY="161.0" prefHeight="50.0" prefWidth="706.0" spacing="5.0">
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pages" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pages: " />
                         <Label fx:id="pages_lbl" text="Label" />
                     </HBox>
                     <HBox prefHeight="50.0" prefWidth="310.0">
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Summary:" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Summary: " />
                         <Label fx:id="description_lbl" text="Label" wrapText="true" />
                     </HBox>
                     <AnchorPane prefHeight="146.0" prefWidth="298.0" />
@@ -67,9 +71,10 @@
             <Label fx:id="title" styleClass="book_title" text="Book title" />
             <HBox alignment="CENTER" prefHeight="21.0" prefWidth="151.0" spacing="4.0" styleClass="available_x_copies">
                 <Label fx:id="available_lbl" text="Available: X Copies">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font></Label>
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
             </HBox>
             <HBox prefHeight="42.0" prefWidth="350.0" spacing="10.0" styleClass="star">
                 <Label>
@@ -98,9 +103,10 @@
                     </graphic>
                 </Label>
                 <Label fx:id="sumRating_lbl" text="(Số đánh giá)">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font></Label>
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
             </HBox>
             <AnchorPane prefHeight="43.0" prefWidth="350.0">
                 <Button fx:id="borrow_btn" layoutY="-5.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="button_1" text="Borrow">
@@ -125,9 +131,10 @@
                 </Button>
             </AnchorPane>
             <Label fx:id="totalLoan_lbl" text="Được mượn bao nhiêu lần" textFill="#3e3a3a">
-            <font>
-               <Font name="System Bold" size="15.0" />
-            </font></Label>
+                <font>
+                    <Font name="System Bold" size="15.0" />
+                </font>
+            </Label>
         </VBox>
         <AnchorPane layoutX="44.0" layoutY="584.8" prefHeight="573.0" prefWidth="742.0" styleClass="comment_container" AnchorPane.leftAnchor="44.0" AnchorPane.topAnchor="585.0">
             <Text layoutX="50.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Comment" />
@@ -135,7 +142,7 @@
             <AnchorPane layoutX="11.2" layoutY="60.0" prefHeight="518.0" prefWidth="721.0" styleClass="surround" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
                 <VBox layoutX="17.6" layoutY="5.0" prefHeight="490.0" prefWidth="687.0" spacing="10.0" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0">
                     <ScrollPane fitToWidth="true" prefHeight="282.0" prefWidth="686.0">
-                        <VBox prefHeight="270.0" prefWidth="659.0">
+                        <VBox prefHeight="170.0" prefWidth="685.0">
                             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Danh sách cmt là vùng này nhé" />
                         </VBox>
                     </ScrollPane>

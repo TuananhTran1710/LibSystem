@@ -7,7 +7,9 @@ import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.QueryDatabase.QueryFavoriteBook;
 import com.jmc.libsystem.Views.ShowListBookFound;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
@@ -24,6 +26,10 @@ public class MyBookController implements Initializable {
     public Label NumberFavorite;
     public HBox Borrow_HB;
     public HBox Favorite_HB;
+    public ScrollPane scrollPane_fav;
+    public ScrollPane scrollPane_borrow;
+    public ChoiceBox<Integer> num_show_fav;
+    public ChoiceBox<Integer> num_show_borrow;
 
     public MyBookController() {
         instance = this;
@@ -40,7 +46,7 @@ public class MyBookController implements Initializable {
 
     /*---------------------- refresh --------------------*/
 
-    public  void refreshData() {
+    public void refreshData() {
         String user_id = Model.getInstance().getMyUser().getId();
         int borrow = 0;
         int returns = 0;
@@ -60,6 +66,8 @@ public class MyBookController implements Initializable {
         showBorrowBook(user_id, Borrow_HB);
         showFavoriteBook(user_id, Favorite_HB);
 
+        scrollPane_borrow.setHvalue(0.0);
+        scrollPane_fav.setHvalue(0.0);
     }
 
     /*-----------------------get data -----------------------*/
@@ -101,7 +109,7 @@ public class MyBookController implements Initializable {
 
     /*----------------------- show listbook ------------------*/
 
-    private static void showBorrowBook(String userId, HBox borrow_HB){
+    private static void showBorrowBook(String userId, HBox borrow_HB) {
         ResultSet resultSet = QueryBookLoans.getListBorrow(userId);
         List<Book> bookList = SearchBookDatabase.getBookFromResultSet(resultSet);
         ShowListBookFound.show(bookList, borrow_HB, 20);

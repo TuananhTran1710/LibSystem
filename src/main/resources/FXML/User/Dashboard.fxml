@@ -32,7 +32,7 @@
             </graphic>
         </Button>
     </AnchorPane>
-    <ScrollPane hbarPolicy="ALWAYS" layoutX="24.0" layoutY="107.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="24.0">
+    <ScrollPane fx:id="scrollPane_search" hbarPolicy="ALWAYS" layoutX="24.0" layoutY="107.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="24.0">
         <HBox fx:id="resultList_hb" prefHeight="100.0" prefWidth="200.0">
         </HBox>
     </ScrollPane>
@@ -44,7 +44,7 @@
         </Label>
         <FontAwesomeIconView glyphName="UNIVERSITY" layoutX="14.0" layoutY="47.0" size="14" />
         <Line endX="695.0" layoutX="108.0" layoutY="55.0" startX="-105.0" />
-        <ScrollPane hbarPolicy="ALWAYS" layoutX="4.0" layoutY="61.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="4.0">
+        <ScrollPane fx:id="scrollPane_reading" hbarPolicy="ALWAYS" layoutX="4.0" layoutY="61.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="4.0">
             <HBox fx:id="reading_hbox" prefHeight="100.0" prefWidth="200.0" />
         </ScrollPane>
         <ChoiceBox fx:id="num_show_reading" layoutX="755.0" layoutY="25.0" prefWidth="50.0" styleClass="show_box" />
@@ -57,7 +57,7 @@
         </Label>
         <FontAwesomeIconView glyphName="UNIVERSITY" layoutX="14.0" layoutY="27.0" size="14" text="" wrappingWidth="16.0" />
         <Line endX="695.0" layoutX="109.0" layoutY="36.0" startX="-105.0" />
-        <ScrollPane hbarPolicy="ALWAYS" layoutX="4.0" layoutY="42.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="4.0">
+        <ScrollPane fx:id="scrollPane_popular" hbarPolicy="ALWAYS" layoutX="4.0" layoutY="42.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="4.0">
             <HBox fx:id="popular_hbox" prefHeight="100.0" prefWidth="200.0" />
         </ScrollPane>
         <ChoiceBox fx:id="num_show_popular" layoutX="755.0" layoutY="5.0" prefWidth="50.0" styleClass="show_box" />

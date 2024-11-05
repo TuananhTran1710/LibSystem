@@ -10,10 +10,7 @@ import com.jmc.libsystem.Views.ShowListBookFound;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
@@ -25,6 +22,9 @@ import java.util.*;
 
 public class DashboardController implements Initializable {
     private static DashboardController instance;
+    public ScrollPane scrollPane_popular;
+    public ScrollPane scrollPane_search;
+    public ScrollPane scrollPane_reading;
 
 
     public DashboardController() {
@@ -169,6 +169,7 @@ public class DashboardController implements Initializable {
 
     //this function is called when login successfully
     public void reset() {
+        scrollPane_search.setHvalue(0.0);
         search_tf.clear();
         criteriaBox.setValue(SearchCriteria.TITLE);
         name_lbl.setText("Hi " + Model.getInstance().getMyUser().getFullName() + "!");
@@ -177,6 +178,7 @@ public class DashboardController implements Initializable {
     }
 
     public void resetReading() {
+        scrollPane_reading.setHvalue(0.0);
         ResultSet resultSet = QueryBookLoans.getListBorrow(Model.getInstance().getMyUser().getId());
         bookReading = SearchBookDatabase.getBookFromResultSet(resultSet);
 
@@ -186,10 +188,17 @@ public class DashboardController implements Initializable {
     }
 
     public void resetPopular() {
+        scrollPane_popular.setHvalue(0.0);
         bookPopular = RecommendationSystem.getListRecommend();
         if (num_show_popular.getValue() != 20)
             num_show_popular.setValue(20);
         else ShowListBookFound.show(bookPopular, popular_hbox, 20);
+    }
+
+    public void resetAll() {
+        reset();
+        resetReading();
+        resetPopular();
     }
 
 }

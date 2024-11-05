@@ -24,7 +24,7 @@ public class EvaluateInfo {
                     if (resultSet.getString("state").toLowerCase().equals("deleted")) {
                         System.out.println("Account is removed from library system!");
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setContentText("Account is removed. Please sign up again!");
+                        alert.setContentText("Account is deteted. Please sign up again with this id and this email to recover your account!");
                         alert.show();
                     } else if (resultSet.getString("state").toLowerCase().equals("banned")) {
                         System.out.println("Account is banned because you violated the library policy");
@@ -93,14 +93,13 @@ public class EvaluateInfo {
                 } else if (resultSet.getString("state").toLowerCase().equals("deleted")) {
                     Model.getInstance().setLoginFlag(true);
 
-                    String queryInsert = "update user set email = ?, password = ?, fullName = ? where user_id = ?";
+                    String queryInsert = "update user set password = ?, fullName = ? where user_id = ?";
                     Model.getInstance().setMyUser(new User(user_id, fullName, email, password, "active"));
 
                     try (PreparedStatement preparedStatementInsert = DatabaseDriver.getConn().prepareStatement(queryInsert)) {
-                        preparedStatementInsert.setString(1, email);
-                        preparedStatementInsert.setString(2, password);
+                        preparedStatementInsert.setString(1, password);
+                        preparedStatementInsert.setString(2, fullName);
                         preparedStatementInsert.setString(3, user_id);
-                        preparedStatementInsert.setString(4, fullName);
 
                         preparedStatementInsert.executeUpdate();
                     } catch (SQLException e) {
@@ -128,7 +127,7 @@ public class EvaluateInfo {
 
         ResultSet resultSet = QueryAccountData.getDataForForgetPassword(email, id, type);
         try {
-            if (resultSet.isBeforeFirst()) { // check xem email ton tai chua?
+            if (resultSet.isBeforeFirst()) { // check xem email va id ton tai chua?
                 resultSet.next();
                 if (type == AccountType.USER) {
                     String state = resultSet.getString("state").toLowerCase();
@@ -141,7 +140,7 @@ public class EvaluateInfo {
                     } else if (state.equals("deleted")) {
                         System.out.println("Account is deleted!");
                         Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setContentText("Account is deteted. Please sign up again!");
+                        alert.setContentText("Account is deteted. Please sign up again with this id and this email to recover your account!");
                         alert.show();
                     } else {
                         System.out.println("Account is banned because you violated the library policy");

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,18 +18,18 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="book_preview_container" stylesheets="@../../Styles/BookPreview.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Book.BookDetailController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/BookDetailAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Book.BookDetailController">
     <AnchorPane prefHeight="50.0" prefWidth="850.0" styleClass="logo_container" AnchorPane.topAnchor="20.0">
         <Button fx:id="back_btn" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="50.0">
             <graphic>
                 <FontAwesomeIconView glyphName="ARROW_LEFT" size="25" />
             </graphic>
         </Button>
-        <Label layoutX="311.0" layoutY="8.0" text="Book Details" />
+        <Label layoutX="350.0" layoutY="8.0" text="Book Details" />
         <FontAwesomeIconView glyphName="BOOK" layoutX="766.0" layoutY="34.0" size="30" AnchorPane.leftAnchor="766.0" />
         <Line endX="400.0" layoutX="425.0" layoutY="50.0" startX="-350.0" AnchorPane.leftAnchor="50.0" />
     </AnchorPane>
-   <VBox alignment="CENTER" fillWidth="false" layoutX="50.0" layoutY="110.0" prefHeight="450.0" prefWidth="250.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="160.0">
+   <VBox alignment="CENTER" fillWidth="false" layoutX="51.2" layoutY="110.0" prefHeight="490.0" prefWidth="250.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="160.0">
       <children>
          <ImageView fitHeight="280.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true" />
          <HBox alignment="CENTER" prefHeight="50.0" prefWidth="350.0" spacing="10.0" styleClass="star">
@@ -60,37 +61,37 @@
                </Label>
             </children>
          </HBox>
-         <AnchorPane prefHeight="26.0" prefWidth="100.0">
+         <AnchorPane prefHeight="26.0" prefWidth="100.0" styleClass="in_stock">
             <children>
                <FontAwesomeIconView glyphName="ARCHIVE" layoutX="17.0" layoutY="16.0" />
                <Label layoutX="36.0" layoutY="3.0" text="X in stock" />
             </children>
          </AnchorPane>
-         <Button mnemonicParsing="false" text="Borrow" />
-         <Button mnemonicParsing="false" text="Share">
+         <Button alignment="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="180.0" styleClass="button_1" text="Borrow" textAlignment="CENTER" />
+         <Button alignment="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="180.0" styleClass="button_2" text="Share">
             <graphic>
                <FontAwesomeIconView glyphName="SHARE_ALT" />
             </graphic>
          </Button>
       </children>
    </VBox>
-   <VBox layoutX="389.0" layoutY="110.0" prefHeight="450.0" prefWidth="450.0" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="160.0">
+   <VBox layoutX="389.0" layoutY="110.0" prefHeight="490.0" prefWidth="474.0" styleClass="right_detail" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="160.0">
       <children>
-         <Label text="Book name" />
-         <HBox alignment="CENTER" prefHeight="60.0" prefWidth="409.0" spacing="10.0">
+         <Label styleClass="title" text="Book name" />
+         <HBox alignment="CENTER" prefHeight="40.0" prefWidth="451.0" spacing="6.0" styleClass="choose_action">
             <children>
-               <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" text="Overview" />
-               <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" text="Comments" />
-               <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" text="Borrow History" />
+               <ToggleButton mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" selected="true" text="Overview" />
+               <ToggleButton mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" text="Comments" />
+               <ToggleButton mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" text="Borrow History" />
             </children>
          </HBox>
-         <StackPane prefHeight="322.0" prefWidth="450.0">
+         <StackPane prefHeight="360.0" prefWidth="452.0">
             <children>
-               <VBox fx:id="overview_vb" fillWidth="false" prefHeight="200.0" prefWidth="100.0">
+               <VBox fx:id="overview_vb" fillWidth="false" prefHeight="344.0" prefWidth="452.0" styleClass="overview">
                   <children>
                      <AnchorPane prefHeight="30.0" prefWidth="472.0">
                         <children>
-                           <Button layoutX="385.0" layoutY="1.0" mnemonicParsing="false" text="Edit">
+                           <Button layoutX="376.0" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Edit">
                               <graphic>
                                  <FontAwesomeIconView glyphName="EDIT" />
                               </graphic>
@@ -108,25 +109,25 @@
                         <children>
                            <VBox prefHeight="200.0" prefWidth="100.0">
                               <children>
-                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Authors" />
-                                 <Label text="Nội dung" wrapText="true" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level1_content" text="Authors" />
+                                 <Label styleClass="level3_content" text="Nội dung" wrapText="true" />
                               </children>
                            </VBox>
                            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                               <children>
-                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Categories" />
-                                 <Label text="Nội dung, có thể nối bằng dấu phẩy trong code, bật tự động xuống dòng rồi" wrapText="true" />
+                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level1_content" text="Categories" />
+                                 <Label styleClass="level3_content" text="Nội dung, có thể nối bằng dấu phẩy trong code, bật tự động xuống dòng rồi" wrapText="true" />
                               </children>
                            </VBox>
                         </children>
                      </GridPane>
                      <VBox prefHeight="90.0" prefWidth="450.0">
                         <children>
-                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
-                           <Label text="Nội dung" wrapText="true" />
+                           <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level1_content" text="Description" />
+                           <Label styleClass="level3_content" text="Nội dung" wrapText="true" />
                         </children>
                      </VBox>
-                     <GridPane prefHeight="122.0" prefWidth="450.0">
+                     <GridPane prefHeight="135.0" prefWidth="450.0">
                        <columnConstraints>
                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -137,68 +138,68 @@
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                        </rowConstraints>
                         <children>
-                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="7.0">
                               <children>
-                                 <FontAwesomeIconView glyphName="CALENDAR" />
+                                 <FontAwesomeIconView glyphName="CALENDAR" size="20" />
                                  <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="239.0">
                                     <children>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publish Date" />
-                                       <Label text="Thời gian" />
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Publish Date" />
+                                       <Label styleClass="level3_content" text="Thời gian" />
                                     </children>
                                  </VBox>
                               </children>
                            </HBox>
-                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="7.0" GridPane.columnIndex="1">
                               <children>
-                                 <FontAwesomeIconView />
+                                 <FontAwesomeIconView glyphName="FILE_ALT" size="20" />
                                  <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="255.0">
                                     <children>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pages" />
-                                       <Label text="Số trang" />
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Pages" />
+                                       <Label styleClass="level3_content" text="Số trang" />
                                     </children>
                                  </VBox>
                               </children>
                            </HBox>
-                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="7.0" GridPane.rowIndex="1">
                               <children>
-                                 <FontAwesomeIconView />
+                                 <FontAwesomeIconView glyphName="STAR" size="20" />
                                  <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="221.0">
                                     <children>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Count Rating" />
-                                       <Label text="Số (sao)" />
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Count Rating" />
+                                       <Label styleClass="level3_content" text="Số (sao)" />
                                     </children>
                                  </VBox>
                               </children>
                            </HBox>
-                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="7.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                               <children>
-                                 <FontAwesomeIconView />
+                                 <FontAwesomeIconView glyphName="CART_ARROW_DOWN" size="20" />
                                  <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="260.0">
                                     <children>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Borrowed" />
-                                       <Label text="Tổng số đã mượn" />
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Total Borrowed" />
+                                       <Label styleClass="level3_content" text="Tổng số đã mượn" />
                                     </children>
                                  </VBox>
                               </children>
                            </HBox>
-                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="7.0" GridPane.rowIndex="2">
                               <children>
-                                 <FontAwesomeIconView />
+                                 <FontAwesomeIconView glyphName="ID_CARD" size="20" />
                                  <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="250.0">
                                     <children>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Google ID" />
-                                       <Label text="Số" />
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Google ID" />
+                                       <Label styleClass="level3_content" text="Số" />
                                     </children>
                                  </VBox>
                               </children>
                            </HBox>
-                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="7.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                               <children>
-                                 <FontAwesomeIconView />
+                                 <FontAwesomeIconView glyphName="LANGUAGE" size="20" />
                                  <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="254.0">
                                     <children>
-                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Language" />
-                                       <Label text="Nn" />
+                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Language" />
+                                       <Label styleClass="level3_content" text="Nn" />
                                     </children>
                                  </VBox>
                               </children>
@@ -206,17 +207,17 @@
                         </children>
                      </GridPane>
                   </children></VBox>
-               <VBox fx:id="comments_vb" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <VBox fx:id="comments_vb" prefHeight="200.0" prefWidth="100.0" styleClass="comments" visible="false">
                   <children>
-                     <ScrollPane prefHeight="323.0" prefWidth="450.0">
+                     <ScrollPane prefHeight="350.0" prefWidth="452.0">
                         <content>
-                           <VBox prefHeight="323.0" prefWidth="429.0" />
+                           <VBox prefHeight="350.0" prefWidth="427.0" visible="false" />
                         </content>
                      </ScrollPane>
                   </children></VBox>
-               <AnchorPane fx:id="borrow_history_vb" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <AnchorPane fx:id="borrow_history_vb" prefHeight="200.0" prefWidth="200.0" styleClass="borrow_history" visible="false">
                   <children>
-                     <TableView prefHeight="338.0" prefWidth="450.0">
+                     <TableView prefHeight="350.0" prefWidth="450.0">
                        <columns>
                          <TableColumn prefWidth="75.0" text="User" />
                          <TableColumn prefWidth="75.0" text="Borow Date" />

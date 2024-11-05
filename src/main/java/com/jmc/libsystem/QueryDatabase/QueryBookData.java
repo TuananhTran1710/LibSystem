@@ -41,7 +41,7 @@ public class QueryBookData {
     // truy van co van de ?
     public static ResultSet getBookStatistic() {
         ResultSet resultSet = null;
-        String query = "SELECT b.thumbnail_url, b.title, b.authors, " +
+        String query = "SELECT b.google_book_id, b.thumbnail_url, b.title, b.authors, " +
                 "    b.quantity AS total_books, " +
                 "    b.totalLoan AS total_borrowed_books, " +
                 "    CASE " +

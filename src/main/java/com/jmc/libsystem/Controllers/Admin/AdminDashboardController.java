@@ -52,7 +52,7 @@ public class AdminDashboardController implements Initializable {
     public Label category3;
     public Label categoryNumber3;
     public ProgressBar progress3;
-    private final int totalQuantity = 10;
+    private final int totalQuantity = 20;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

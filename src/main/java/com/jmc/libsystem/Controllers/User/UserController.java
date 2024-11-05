@@ -47,9 +47,7 @@ public class UserController implements Initializable {
                         }
                         default -> {
                             user_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
-                            DashboardController.getInstance().reset();
-                            DashboardController.getInstance().resetReading();
-                            DashboardController.getInstance().resetPopular();
+                            DashboardController.getInstance().resetAll();
                         }
 
                     }

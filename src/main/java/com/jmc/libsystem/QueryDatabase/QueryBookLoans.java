@@ -39,7 +39,7 @@ public class QueryBookLoans {
 
     public static ResultSet getTotalLoaned(String userId) {
         ResultSet resultSet = null;
-        String query = "SELECT COUNT(DISTINCT google_book_id) AS total_borrows " +
+        String query = "SELECT COUNT(*) AS total_borrows " +
                 "FROM bookloans " +
                 "WHERE user_id = ?";
         try {
@@ -54,7 +54,7 @@ public class QueryBookLoans {
 
     public static ResultSet getTotalReturned(String userId) {
         ResultSet resultSet = null;
-        String query = "SELECT COUNT(DISTINCT google_book_id) AS total_returns " +
+        String query = "SELECT COUNT(*) AS total_returns " +
                 "FROM bookloans " +
                 "WHERE user_id = ? AND return_date IS NOT NULL";
         try {
@@ -128,6 +128,21 @@ public class QueryBookLoans {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ResultSet getCountOverdue(){
+        ResultSet resultSet = null;
+        String query = "SELECT COUNT(*) AS count " +
+                "FROM bookloans " +
+                "WHERE return_date IS NULL  " +
+                "  AND DATEDIFF(CURDATE(), borrow_date) > 60;";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
     }
 
 }

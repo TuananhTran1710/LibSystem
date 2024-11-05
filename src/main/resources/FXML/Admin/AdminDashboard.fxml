@@ -1,195 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.*?>
-<AnchorPane prefHeight="750" prefWidth="850" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.jmc.libsystem.Controllers.Admin.AdminDashboardController">
-    <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS"
-                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                AnchorPane.topAnchor="0.0">
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1000.0" prefWidth="850.0"
-                    stylesheets="@../../Styles/AdminDashboard.css">
-            <AnchorPane layoutX="30.0" layoutY="539.0" minHeight="0.0" minWidth="0.0" prefHeight="634.0"
-                        prefWidth="763.0" styleClass="statistic" AnchorPane.bottomAnchor="71.39999999999998"
-                        AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.799999999999955"
-                        AnchorPane.topAnchor="539.0">
-                <Label styleClass="miniTitle" text="List of books" AnchorPane.leftAnchor="20.0"
-                       AnchorPane.topAnchor="10.0"/>
-                <HBox layoutY="55.199999999999996" prefHeight="333.0" prefWidth="774.0" styleClass="table-view"
-                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                      AnchorPane.topAnchor="50.0">
-                    <TableView fx:id="listBook" cache="true" focusTraversable="false" pickOnBounds="false"
-                               prefHeight="333.0" prefWidth="774.0" stylesheets="@../../Styles/AdminDashboard.css">
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="750" prefWidth="850" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.AdminDashboardController">
+    <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1000.0" prefWidth="850.0" stylesheets="@../../Styles/AdminDashboard.css">
+            <AnchorPane layoutX="30.0" layoutY="539.0" minHeight="0.0" minWidth="0.0" prefHeight="634.0" prefWidth="763.0" styleClass="statistic" AnchorPane.bottomAnchor="71.39999999999998" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.799999999999955" AnchorPane.topAnchor="539.0">
+                <Label styleClass="miniTitle" text="List of books" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0" />
+                <HBox layoutY="55.199999999999996" prefHeight="333.0" prefWidth="774.0" styleClass="table-view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                    <TableView fx:id="listBook" cache="true" focusTraversable="false" prefHeight="333.0" prefWidth="774.0" stylesheets="@../../Styles/AdminDashboard.css">
                         <columns>
-                            <TableColumn fx:id="imageColumn" editable="false" prefWidth="120.79998403787613"
-                                         sortable="false" text="Image"/>
-                            <TableColumn fx:id="titleColumn" editable="false" prefWidth="197.60009002685547"
-                                         sortable="false" text="Title"/>
-                            <TableColumn fx:id="authorsColumn" editable="false" prefWidth="137.5999755859375"
-                                         sortable="false" text="Author"/>
-                            <TableColumn fx:id="quantityColumn" editable="false" prefWidth="102.39996337890625"
-                                         sortable="false" text="Quantity"/>
-                            <TableColumn fx:id="loanedColumn" editable="false" prefWidth="101.5999755859375"
-                                         sortable="false" text="Borrowed"/>
-                            <TableColumn fx:id="statusColumn" editable="false" prefWidth="100.7999267578125"
-                                         sortable="false" text="Status"/>
+                            <TableColumn fx:id="imageColumn" editable="false" prefWidth="112.80001455545425" sortable="false" text="Image" />
+                            <TableColumn fx:id="titleColumn" editable="false" prefWidth="215.20000457763672" sortable="false" text="Title" />
+                            <TableColumn fx:id="authorsColumn" editable="false" prefWidth="152.80001831054688" sortable="false" text="Author" />
+                            <TableColumn fx:id="quantityColumn" editable="false" prefWidth="78.39990234375" sortable="false" text="Quantity" />
+                            <TableColumn fx:id="loanedColumn" editable="false" prefWidth="76.800048828125" sortable="false" text="Borrowed" />
+                            <TableColumn fx:id="statusColumn" editable="false" prefWidth="71.20001220703125" sortable="false" text="Status" />
+                     <TableColumn fx:id="editColumn" prefWidth="72.7999267578125" text="Edit" />
                         </columns>
                         <columnResizePolicy>
-                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                         </columnResizePolicy>
                         <HBox.margin>
-                            <Insets/>
+                            <Insets />
                         </HBox.margin>
                     </TableView>
                 </HBox>
             </AnchorPane>
-            <GridPane hgap="30.0" layoutX="30.4" layoutY="62.6" prefHeight="244.0" prefWidth="730.0"
-                      styleClass="subtitle" stylesheets="@../../Styles/AdminDashboard.css" vgap="30.0"
-                      AnchorPane.leftAnchor="30.4" AnchorPane.rightAnchor="30.399999999999977"
-                      AnchorPane.topAnchor="62.6">
+            <GridPane hgap="30.0" layoutX="30.4" layoutY="62.6" prefHeight="244.0" prefWidth="730.0" styleClass="subtitle" stylesheets="@../../Styles/AdminDashboard.css" vgap="30.0" AnchorPane.leftAnchor="30.4" AnchorPane.rightAnchor="30.399999999999977" AnchorPane.topAnchor="62.6">
                 <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 </rowConstraints>
                 <HBox prefHeight="100.0" prefWidth="200.0" styleClass="statistic">
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="statistictitle"
-                          text="Total number of users">
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="statistictitle" text="Total number of users">
                         <HBox.margin>
-                            <Insets left="30.0" top="15.0"/>
+                            <Insets left="30.0" top="15.0" />
                         </HBox.margin>
                     </Text>
                     <Label fx:id="numberUser" styleClass="number" text="0">
                         <HBox.margin>
-                            <Insets left="-145.0" top="45.0"/>
+                            <Insets left="-145.0" top="45.0" />
                         </HBox.margin>
                     </Label>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <HBox.margin>
-                            <Insets left="280.0" top="20.0"/>
+                            <Insets left="280.0" top="20.0" />
                         </HBox.margin>
-                        <Image url="@../../Images/group.png"/>
+                        <Image url="@../../Images/group.png" />
                     </ImageView>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0" styleClass="statistic" GridPane.columnIndex="1">
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="statistictitle"
-                          text="Total number of books">
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="statistictitle" text="Total number of books">
                         <HBox.margin>
-                            <Insets left="30.0" top="15.0"/>
+                            <Insets left="30.0" top="15.0" />
                         </HBox.margin>
                     </Text>
                     <Label fx:id="numberBook" styleClass="number" text="0">
                         <HBox.margin>
-                            <Insets left="-150.0" top="45.0"/>
+                            <Insets left="-150.0" top="45.0" />
                         </HBox.margin>
                     </Label>
                     <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <HBox.margin>
-                            <Insets left="280.0" top="20.0"/>
+                            <Insets left="280.0" top="20.0" />
                         </HBox.margin>
-                        <Image url="@../../Images/open-book.png"/>
+                        <Image url="@../../Images/open-book.png" />
                     </ImageView>
                 </HBox>
                 <HBox prefHeight="100.0" prefWidth="200.0" styleClass="statistic" GridPane.rowIndex="1">
                     <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="statistictitle" text="Books on loan">
                         <HBox.margin>
-                            <Insets left="30.0" top="15.0"/>
+                            <Insets left="30.0" top="15.0" />
                         </HBox.margin>
                     </Text>
                     <Label fx:id="numberBookLoan" styleClass="number" text="0">
                         <HBox.margin>
-                            <Insets left="-93.0" top="45.0"/>
+                            <Insets left="-93.0" top="45.0" />
                         </HBox.margin>
                     </Label>
                     <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <HBox.margin>
-                            <Insets left="280.0" top="20.0"/>
+                            <Insets left="280.0" top="20.0" />
                         </HBox.margin>
-                        <Image url="@../../Images/collections_book.png"/>
+                        <Image url="@../../Images/collections_book.png" />
                     </ImageView>
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="statistic" GridPane.columnIndex="1"
-                      GridPane.rowIndex="1">
+                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="statistic" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="statistictitle" text="Overdue books">
                         <HBox.margin>
-                            <Insets left="30.0" top="20.0"/>
+                            <Insets left="30.0" top="20.0" />
                         </HBox.margin>
                     </Text>
                     <Label fx:id="numberOverBook" styleClass="number-error" text="0">
                         <HBox.margin>
-                            <Insets left="-100.0" top="45.0"/>
+                            <Insets left="-100.0" top="45.0" />
                         </HBox.margin>
                     </Label>
                     <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <HBox.margin>
-                            <Insets left="280.0" top="20.0"/>
+                            <Insets left="280.0" top="20.0" />
                         </HBox.margin>
-                        <Image url="@../../Images/error.png"/>
+                        <Image url="@../../Images/error.png" />
                     </ImageView>
                 </HBox>
             </GridPane>
-            <HBox layoutX="30.4" layoutY="327.0" prefHeight="200.0" prefWidth="750.0" styleClass="statistic"
-                  AnchorPane.leftAnchor="30.4" AnchorPane.rightAnchor="30.399999999999977">
+            <HBox layoutX="30.4" layoutY="327.0" prefHeight="200.0" prefWidth="750.0" styleClass="statistic" AnchorPane.leftAnchor="30.4" AnchorPane.rightAnchor="30.399999999999977">
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="miniTitle" text="Statistics by category">
                     <HBox.margin>
-                        <Insets left="30.0" top="10.0"/>
+                        <Insets left="30.0" top="10.0" />
                     </HBox.margin>
                 </Text>
                 <GridPane prefHeight="138.0" prefWidth="734.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <HBox.margin>
-                        <Insets bottom="10.0" left="-230.0" right="10.0" top="50.0"/>
+                        <Insets bottom="10.0" left="-230.0" right="10.0" top="50.0" />
                     </HBox.margin>
                     <VBox prefHeight="200.0" prefWidth="100.0">
-                        <Label styleClass="statistictitle" text="category1"/>
-                        <Label styleClass="number" text="0">
+                        <Label fx:id="category1" styleClass="statistictitle" text="category1" />
+                        <Label fx:id="categoryNumber1" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="138.0" styleClass="number" text="0">
                             <VBox.margin>
-                                <Insets left="700.0" top="-25.0"/>
+                                <Insets left="600.0" top="-25.0" />
                             </VBox.margin>
                         </Label>
-                        <ProgressBar opacity="0.5" prefHeight="15.0" prefWidth="750.0" progress="0.0"/>
+                        <ProgressBar fx:id="progress1" opacity="0.5" prefHeight="15.0" prefWidth="750.0" progress="0.2" />
                     </VBox>
                     <VBox prefHeight="200.0" prefWidth="734.0" GridPane.rowIndex="1">
-                        <Label styleClass="statistictitle" text="category2"/>
-                        <Label prefHeight="15.0" prefWidth="12.0" styleClass="number" text="0">
+                        <Label fx:id="category2" styleClass="statistictitle" text="category2" />
+                        <Label fx:id="categoryNumber2" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="139.0" styleClass="number" text="0">
                             <VBox.margin>
-                                <Insets left="700.0" top="-25.0"/>
+                                <Insets left="600.0" top="-25.0" />
                             </VBox.margin>
                         </Label>
-                        <ProgressBar opacity="0.5" prefHeight="15.0" prefWidth="750.0" progress="0.0">
+                        <ProgressBar fx:id="progress2" opacity="0.5" prefHeight="15.0" prefWidth="750.0" progress="0.0">
                             <VBox.margin>
-                                <Insets/>
+                                <Insets />
                             </VBox.margin>
                         </ProgressBar>
                     </VBox>
                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
-                        <Label styleClass="statistictitle" text="category3"/>
-                        <Label styleClass="number" text="0">
+                        <Label fx:id="category3" styleClass="statistictitle" text="category3" />
+                        <Label fx:id="categoryNumber3" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="138.0" styleClass="number" text="0">
                             <VBox.margin>
-                                <Insets left="700.0" top="-25.0"/>
+                                <Insets left="600.0" top="-25.0" />
                             </VBox.margin>
                         </Label>
-                        <ProgressBar opacity="0.5" prefHeight="15.0" prefWidth="750.0" progress="0.0"/>
+                        <ProgressBar fx:id="progress3" opacity="0.5" prefHeight="15.0" prefWidth="750.0" progress="0.0" />
+
                     </VBox>
                 </GridPane>
             </HBox>
-            <Label id="Title" layoutX="30.4" layoutY="6.2" stylesheets="@../../Styles/AdminDashboard.css"
-                   text="Library Management" AnchorPane.leftAnchor="30.4" AnchorPane.topAnchor="6.2"/>
-            <Line endX="689.5999755859375" endY="-3.814697265625E-6" layoutX="131.0" layoutY="50.0" startX="-100.0"/>
+            <Label id="Title" layoutX="30.4" layoutY="6.2" stylesheets="@../../Styles/AdminDashboard.css" text="Library Management" AnchorPane.leftAnchor="30.4" AnchorPane.topAnchor="6.2" />
+            <Line endX="689.5999755859375" endY="-3.814697265625E-6" layoutX="131.0" layoutY="50.0" startX="-100.0" />
         </AnchorPane>
     </ScrollPane>
 </AnchorPane>

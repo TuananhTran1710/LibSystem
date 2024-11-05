@@ -2,14 +2,15 @@ package com.jmc.libsystem.Controllers.Admin;
 
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
+import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
@@ -22,7 +23,7 @@ import java.util.ResourceBundle;
 public class AdminDashboardController implements Initializable {
 
     private static AdminDashboardController instance;
-
+    /* bảng thống kê */
     public TableView<Map<String, Object>> listBook;
     public TableColumn<Map<String, Object>, ImageView> imageColumn;
     public TableColumn<Map<String, Object>, String> titleColumn;
@@ -30,11 +31,27 @@ public class AdminDashboardController implements Initializable {
     public TableColumn<Map<String, Object>, Integer> quantityColumn;
     public TableColumn<Map<String, Object>, Integer> loanedColumn;
     public TableColumn<Map<String, Object>, String> statusColumn;
+    public TableColumn<Map<String, Object>, Void> editColumn;
 
+    /* phần 4 ô thống kê ở trên cùng */
     public Label numberUser;
     public Label numberBook;
     public Label numberBookLoan;
     public Label numberOverBook;
+
+    /* thanh số lượng sách theo thể loại */
+    public Label category1;
+    public Label categoryNumber1;
+    public ProgressBar progress1;
+
+    public Label category2;
+    public Label categoryNumber2;
+    public ProgressBar progress2;
+
+    public Label category3;
+    public Label categoryNumber3;
+    public ProgressBar progress3;
+    private final int totalQuantity = 100000;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,30 +67,14 @@ public class AdminDashboardController implements Initializable {
     }
 
     private void refreshData() {
-        /* liên kết các cột */
-        //imageColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("image")));
-        titleColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("title")));
-        authorsColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("authors")));
-        quantityColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((Integer) data.getValue().get("quantity")));
-        loanedColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((Integer) data.getValue().get("loaned")));
-        statusColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("status")));
-
-//        imageColumn.setCellValueFactory(data -> {
-//            Image image = (Image) data.getValue().get("image"); // Lấy URL từ Map
-//            ImageView imageView = new ImageView(image);
-//            imageView.setFitHeight(50); // Đặt chiều cao hình ảnh
-//            imageView.setFitWidth(50);  // Đặt chiều rộng hình ảnh
-//            return new SimpleObjectProperty<>(imageView);
-//        });
-
-        ObservableList<Map<String, Object>> data = getBooks();
-        listBook.setItems(data);
-        addMouseClickedToTable();
+        getTableList();
+        //addMouseClickedToTable();
         try {
             getNumberData();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        showSortCategory();
         //add();
     }
 
@@ -81,7 +82,7 @@ public class AdminDashboardController implements Initializable {
         statusColumn.setCellFactory(tc -> {
             TableCell<Map<String, Object>, String> cell = new TableCell<>();
             cell.getStyleClass().add("status-cell");
-
+            System.out.println("can use css");
             cell.textProperty().addListener((obs, oldVal, newVal) -> {
                 if ("Available".equals(newVal)) {
                     cell.getStyleClass().add("in-stock");
@@ -112,34 +113,49 @@ public class AdminDashboardController implements Initializable {
 
     // lấy dữ liệu từ database
     public static ObservableList<Map<String, Object>> getBooks() {
-        ResultSet resultSet = QueryBookData.getBookStatistic();
+        // ObservableList để giữ dữ liệu cho UI
         ObservableList<Map<String, Object>> data = FXCollections.observableArrayList();
 
-        try {
-            while (resultSet.next()) {
-                Map<String, Object> row = new HashMap<>();
-                String title = resultSet.getString("title");
-                String imageUrl = resultSet.getString("thumbnail_url");
-                String authors = resultSet.getString("authors");
-                int quantity = resultSet.getInt("total_books");
-                int loaned = resultSet.getInt("total_borrowing");
 
-                //Image image = new Image(imageUrl);
+        // Tạo một Task để load ảnh trong background
+        Task<Void> loadDataTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                ResultSet resultSet = QueryBookData.getBookStatistic();
+                try {
+                    while (resultSet.next()) {
+                        Map<String, Object> row = new HashMap<>();
+                        String title = resultSet.getString("title");
+                        String imageUrl = resultSet.getString("thumbnail_url");
+                        String authors = resultSet.getString("authors");
+                        int quantity = resultSet.getInt("total_books");
+                        int loaned = resultSet.getInt("total_borrowed_books");
+                        String status = resultSet.getString("status");
+                        String id = resultSet.getString("google_book_id");
+                        // Tải ảnh trong background
+                        Image image = new Image(imageUrl, true);
 
-                row.put("title", title);
-                row.put("image", imageUrl);
-                row.put("authors", authors);
-                row.put("quantity", quantity);
-                row.put("loaned", loaned);
+                        row.put("title", title);
+                        row.put("image", image);
+                        row.put("authors", authors);
+                        row.put("quantity", quantity);
+                        row.put("loaned", loaned);
+                        row.put("status", status);
+                        row.put("id", id);
 
-                if (quantity > 0) row.put("status", "Available");
-                else row.put("status", "Over");
-
-                data.add(row);
+                        // Thêm dữ liệu vào ObservableList trên JavaFX Application Thread
+                        Platform.runLater(() -> data.add(row));
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return null;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        };
+
+        // Khởi chạy Task trong background
+        new Thread(loadDataTask).start();
+
         return data;
     }
 
@@ -152,6 +168,56 @@ public class AdminDashboardController implements Initializable {
         ResultSet Books = QueryBookData.getCountBook();
         int numberBooks = getNumber(Books);
         numberBook.setText(Integer.toString(numberBooks));
+
+        ResultSet BookLoan = QueryBookData.getCountBookLoan();
+        int numberBookLoans = getNumber(BookLoan);
+        numberBookLoan.setText(Integer.toString(numberBookLoans));
+
+        ResultSet Overdue = QueryBookLoans.getCountOverdue();
+        int numberOverdue = getNumber(Overdue);
+        numberOverBook.setText(Integer.toString(numberOverdue));
+    }
+
+    private void getTableList() {
+        /* liên kết các cột */
+        titleColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("title")));
+        authorsColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("authors")));
+        quantityColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((Integer) data.getValue().get("quantity")));
+        loanedColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((Integer) data.getValue().get("loaned")));
+        statusColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("status")));
+
+        imageColumn.setCellValueFactory(data -> {
+            Image image = (Image) data.getValue().get("image");
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(50); // Đặt chiều cao hình ảnh
+            imageView.setFitWidth(50);  // Đặt chiều rộng hình ảnh
+            return new SimpleObjectProperty<>(imageView);
+        });
+
+        editColumn.setCellFactory(param -> new TableCell<>() {
+            private final Hyperlink editLink = new Hyperlink("Edit");
+
+            {
+                editLink.setOnAction(event -> {
+                    Map<String, Object> rowData = getTableView().getItems().get(getIndex());
+                    // Thực hiện hành động chỉnh sửa với dữ liệu hàng tương ứng
+                    System.out.println("Edit: " + rowData.get("id"));
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(editLink);
+                }
+            }
+        });
+
+        ObservableList<Map<String, Object>> data = getBooks();
+        listBook.setItems(data);
     }
 
     private int getNumber(ResultSet data) throws SQLException {
@@ -161,6 +227,34 @@ public class AdminDashboardController implements Initializable {
         } else {
             System.out.println("You have nothing");
             return 0;
+        }
+    }
+
+    private void showSortCategory() {
+        ResultSet resultSet = QueryBookData.getCategorySort3();
+        try {
+            int id = 1;
+            while (resultSet.next()) {
+                String category = resultSet.getString("category");
+                int total = resultSet.getInt("total_books");
+                double average = (double) total / totalQuantity;
+                if (id == 1) {
+                    category1.setText(category);
+                    categoryNumber1.setText(Integer.toString(total));
+                    progress1.setProgress(average);
+                } else if (id == 2) {
+                    category2.setText(category);
+                    categoryNumber2.setText(Integer.toString(total));
+                    progress2.setProgress(average);
+                } else {
+                    category3.setText(category);
+                    categoryNumber3.setText(Integer.toString(total));
+                    progress3.setProgress(average);
+                }
+                id++;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -12,9 +12,10 @@ import com.jmc.libsystem.Views.UserMenuOptions;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,7 +29,6 @@ public class BookDetailController implements Initializable {
     public Label publishDate_lbl;
     public Label quantity_lbl;
     public Label pages_lbl;
-    public Label description_text;
     public ImageView image;
     public Label title;
     public Label sumRating_lbl;
@@ -38,6 +38,10 @@ public class BookDetailController implements Initializable {
     public Button unlike_btn;
     public Label totalLoan_lbl;
     public Button comment_btn;
+    public Label description_lbl;
+    public Label available_lbl;
+    public Label categories_lbl;
+    public ScrollPane scrollPane;
 
 
     private Book book;
@@ -60,58 +64,83 @@ public class BookDetailController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        borrow_btn.setFocusTraversable(false);
+        like_btn.setFocusTraversable(false);
+        return_btn.setFocusTraversable(false);
+        unlike_btn.setFocusTraversable(false);
+
         back_btn.setOnAction(event -> moveMenuCurrent());
-        return_btn.setOnAction(event -> toBorrowBook());
-        borrow_btn.setOnAction(event -> toReturnBook());
-        like_btn.setOnAction(event -> toUnlikeBook());
-        unlike_btn.setOnAction(event -> toLikeBook());
+        return_btn.setOnAction(event -> {
+            toBorrowButton();
+            QueryBookLoans.updateReturnBook(book.getId());
+            book.setNumBorrowing(book.getNumBorrowing() - 1);
+            available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
+            available_lbl.setTextFill(Color.BLACK);
+        });
+        borrow_btn.setOnAction(event -> {
+            toReturnButton();
+            QueryBookLoans.insertNewRecord(book.getId());
+            book.setNumBorrowing(book.getNumBorrowing() + 1);
+            book.setTotalLoan(book.getTotalLoan() + 1);
+
+            int availableNumber = book.getQuantity() - book.getNumBorrowing();
+            if (availableNumber == 0) {
+                available_lbl.setText("Out of stock");
+                available_lbl.setTextFill(Color.RED);
+            } else {
+                available_lbl.setText("Available: " + availableNumber + " copies");
+                available_lbl.setTextFill(Color.BLACK);
+            }
+
+            totalLoan_lbl.setText("Borrowed: " + String.valueOf(book.getTotalLoan()) + " times");
+        });
+        like_btn.setOnAction(event -> {
+            toUnlikeButton();
+            QueryFavoriteBook.insertNewRecord(book.getId());
+        });
+        unlike_btn.setOnAction(event -> {
+            toLikeButton();
+            QueryFavoriteBook.deleteRecord(book.getId());
+        });
     }
 
-    private void toReturnBook() {
+    private void toReturnButton() {
         return_btn.setVisible(true);
         borrow_btn.setVisible(false);
 
         return_btn.setDisable(false);
         borrow_btn.setDisable(true);
-        // truy van va them vao csdl bookLoan
-        // can chinh
-        if (!QueryBookLoans.isBorrowing(book.getId()))
-            QueryBookLoans.insertNewRecord(book.getId());
     }
 
-    private void toBorrowBook() {
+    private void toBorrowButton() {
         return_btn.setVisible(false);
         borrow_btn.setVisible(true);
 
         return_btn.setDisable(true);
         borrow_btn.setDisable(false);
 
-        // truy van va cap nhat csdl o column return_date
-        QueryBookLoans.updateReturnBook(book.getId());
     }
 
-    private void toLikeBook() {
+    private void toLikeButton() {
         like_btn.setVisible(true);
         unlike_btn.setVisible(false);
 
         like_btn.setDisable(false);
         unlike_btn.setDisable(true);
-
-        //truy van va xoa khoi bang favorite
-        QueryFavoriteBook.deleteRecord(book.getId());
     }
 
-    private void toUnlikeBook() {
+    private void toUnlikeButton() {
         like_btn.setVisible(false);
         unlike_btn.setVisible(true);
 
         like_btn.setDisable(true);
         unlike_btn.setDisable(false);
+    }
 
-        // truy van va them vao bang favorite
-        // can chinh
-        if (!QueryFavoriteBook.isFavorite(book.getId()))
-            QueryFavoriteBook.insertNewRecord(book.getId());
+    public void setDisableBorrowButton() {
+        if (book.getQuantity() == book.getNumBorrowing()) {
+            borrow_btn.setDisable(true);
+        }
     }
 
     private void moveMenuCurrent() {
@@ -125,6 +154,7 @@ public class BookDetailController implements Initializable {
             case MYBOOK -> {
                 UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getMyBookView());
                 MyBookController.getInstance().refreshData();
+
             }
             case SEARCH ->
                     UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getSearchView());
@@ -133,16 +163,31 @@ public class BookDetailController implements Initializable {
 
 
     public void setUpInfo(Book book) {
+        scrollPane.setVvalue(0.0);
+
         title.setText(book.getTitle());
         author_lbl.setText(book.getAuthors());
+        categories_lbl.setText(book.getCategory());
         publishDate_lbl.setText(book.getPublishDate().toString());
         quantity_lbl.setText(String.valueOf(book.getQuantity()));
         pages_lbl.setText(String.valueOf(book.getPageCount()));
-        description_text.setText(book.getDescription());
-        totalLoan_lbl.setText(String.valueOf(book.getTotalLoan()));
+        description_lbl.setText(book.getDescription());
+        totalLoan_lbl.setText("Borrowed: " + String.valueOf(book.getTotalLoan()) + " times");
+
+        int availableNumber = book.getQuantity() - book.getNumBorrowing();
+        if (availableNumber == 0) {
+            available_lbl.setText("Out of stock");
+            available_lbl.setTextFill(Color.RED);
+        } else {
+            available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
+            available_lbl.setTextFill(Color.BLACK);
+        }
+
 
         if (book.getCountRating() > 0) {
-            sumRating_lbl.setText(String.valueOf(book.getSumRatingStar()));
+            sumRating_lbl.setText("(" + String.valueOf(book.getSumRatingStar()) + " ratings)");
+        } else {
+            sumRating_lbl.setText("Nothing rating");
         }
 
         // Thiết lập hình ảnh bìa sách
@@ -159,10 +204,13 @@ public class BookDetailController implements Initializable {
 
 
     public void modifyButton() {
-        if (QueryBookLoans.isBorrowing(book.getId())) toReturnBook();
-        else toBorrowBook();
 
-        if (QueryFavoriteBook.isFavorite(book.getId())) toUnlikeBook();
-        else toLikeBook();
+        if (QueryBookLoans.isBorrowing(book.getId())) toReturnButton();
+        else toBorrowButton();
+
+        if (QueryFavoriteBook.isFavorite(book.getId())) toUnlikeButton();
+        else toLikeButton();
+
+        setDisableBorrowButton();
     }
 }

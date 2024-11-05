@@ -45,19 +45,20 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publish Date:" />
                         <Label fx:id="publishDate_lbl" text="Label" />
                     </HBox>
-                    <HBox layoutX="10.0" layoutY="60.0" prefHeight="50.0" prefWidth="706.0" spacing="5.0">
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity in stock:" wrappingWidth="163.84921264648438" />
+                    <HBox layoutX="10.0" layoutY="60.0" prefHeight="10.0" prefWidth="310.0" spacing="5.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity in stock:" wrappingWidth="103.04922485351562" />
                         <Label fx:id="quantity_lbl" text="Label" />
                     </HBox>
                     <HBox layoutX="10.0" layoutY="161.0" prefHeight="50.0" prefWidth="706.0" spacing="5.0">
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pages" />
                         <Label fx:id="pages_lbl" text="Label" />
                     </HBox>
-                    <HBox prefHeight="50.0" prefWidth="310.0">
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Summary:" />
-                        <Text fx:id="description_text" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                    </HBox>
-                    <AnchorPane prefHeight="146.0" prefWidth="298.0" />
+               <VBox fillWidth="false" prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Summary:" />
+                     <Label fx:id="description_text" text="Label" wrapText="true" />
+                  </children>
+               </VBox>
                 </VBox>
             </AnchorPane>
         </TitledPane>

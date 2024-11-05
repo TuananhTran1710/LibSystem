@@ -28,7 +28,7 @@ public class BookDetailController implements Initializable {
     public Label publishDate_lbl;
     public Label quantity_lbl;
     public Label pages_lbl;
-    public Text description_text;
+    public Label description_text;
     public ImageView image;
     public Label title;
     public Label sumRating_lbl;

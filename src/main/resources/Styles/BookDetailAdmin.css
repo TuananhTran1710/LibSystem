@@ -1,0 +1,227 @@
+.container {
+    -fx-background-color: #EEEEEE;
+}
+
+/* logo */
+.logo_container {
+    -fx-background-color: transparent;
+}
+
+.logo_container FontAwesomeIconView {
+    -fx-fill: #132A13;;
+}
+
+.logo_container Label {
+    -fx-text-fill: #132A13;;
+    -fx-font-family: "Calibri Light";
+    -fx-font-size: 2.5em;
+}
+
+.logo_container Button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+.logo_container Button:hover {
+    -fx-cursor: hand;
+}
+
+.logo_container Button:hover FontAwesomeIconView {
+    -fx-effect: dropshadow(gaussian, rgba(173, 216, 230, 0.7), 30, 0.5, 0, 0);
+}
+
+/* bên trái */
+.detail {
+    -fx-background-color: transparent;
+}
+
+.detail .in_stock {
+    -fx-background-color: rgba(220, 220, 220, 0.8);
+    -fx-background-radius: 10px;
+}
+
+.button_1 {
+    -fx-background-color: #132A13;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 1.2em;
+    -fx-alignment: CENTER;
+    -fx-graphic-text-gap: 10px;
+    -fx-padding: 5px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 11;
+}
+
+.button_1:hover{
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+.button_1 FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+.button_2 {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #132A13;
+    -fx-font-size: 1.2em;
+    -fx-alignment: CENTER;
+    -fx-graphic-text-gap: 10px;
+    -fx-padding: 5px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 11;
+}
+
+.button_2:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+
+.button_2 FontAwesomeIconView {
+    -fx-fill: #132A13;
+}
+
+.star FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+/* bên phải */
+.right_detail {
+    -fx-padding: 10px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D3D3D3;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-spacing: 15px;
+}
+
+.right_detail .title {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 1.9em;
+    -fx-font-weight: bold;
+}
+
+/* Thanh chọn bên phải */
+.right_detail .choose_action {
+    -fx-background-color: rgba(19, 42, 19, 0.1);
+    -fx-background-radius: 5px;
+}
+
+.right_detail .choose_action ToggleButton {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.3em;
+}
+
+.right_detail .choose_action FontAwesomeIconView {
+    -fx-fill: #132A13;
+}
+
+.right_detail .choose_action ToggleButton:selected {
+    -fx-background-color: #132A13;
+    -fx-text-fill: #FFFFFF;
+}
+
+.right_detail .choose_action ToggleButton:selected FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+/* over view */
+.overview .level1_content {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.5em;
+    -fx-font-weight: bold;
+}
+
+.overview .level2_content {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.1em;
+    -fx-font-weight: bold;
+}
+
+.overview .level3_content {
+    -fx-text-fill: #4A6B4A;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.0em;
+}
+
+.overview Button {
+    -fx-background-color: rgba(19, 42, 19, 0.1);
+    -fx-background-radius: 5px;
+    -fx-text-fill: #132A13;
+}
+
+.overview Button:hover {
+    -fx-cursor: hand;
+}
+
+.overview FontAwesomeIconView {
+    -fx-fill: #132A13;
+}
+
+/* Comments */
+.comments .scroll-pane {
+    -fx-border-color: #132A13;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #FFFFFF;
+}
+
+.comments .scroll-pane .viewport {
+    -fx-background-color: rgba(19, 42, 19, 0.1);
+}
+
+.comments .scroll-pane .scroll-bar:horizontal .thumb,
+.comments .scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #132A13;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;
+    -fx-opacity: 0.8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 7, 0.5, 0, 0);
+}
+
+.comments .scroll-pane .scroll-bar:horizontal .thumb:hover,
+.comments .scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #1A4314;
+    -fx-opacity: 1.0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+.comments .scroll-pane .scroll-bar:horizontal,
+.comments .scroll-pane .scroll-bar:vertical {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 2px;
+}
+
+.comments .scroll-pane .scroll-bar:horizontal .thumb:pressed,
+.comments .scroll-pane .scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: #0B4619;
+    -fx-opacity: 1.0;
+}
+
+/* borrow history */
+.borrow_history TableView {
+    -fx-background-color: rgba(19, 42, 19, 0.05);
+    -fx-border-color: transparent;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-table-cell-border-color: transparent;
+}
+
+.borrow_history TableView .column-header {
+    -fx-background-color: #132A13;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #d0d0d0;
+}
+
+.borrow_history TableView .column-header .label {
+    -fx-text-fill: #FFFFFF;
+}
+

@@ -62,7 +62,7 @@
                 </VBox>
             </AnchorPane>
         </TitledPane>
-        <VBox fillWidth="false" layoutX="51.0" layoutY="86.0" prefHeight="508.0" prefWidth="350.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="86.0">
+        <VBox fillWidth="false" layoutX="51.0" layoutY="86.0" prefHeight="508.0" prefWidth="350.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="120.0">
             <ImageView fx:id="image" fitHeight="282.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="title" styleClass="book_title" text="Book title" />
          <HBox alignment="CENTER" prefHeight="26.0" prefWidth="120.0" spacing="4.0" styleClass="available_x_copies">

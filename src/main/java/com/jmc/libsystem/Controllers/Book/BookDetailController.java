@@ -60,6 +60,11 @@ public class BookDetailController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        borrow_btn.setFocusTraversable(false);
+        like_btn.setFocusTraversable(false);
+        return_btn.setFocusTraversable(false);
+        unlike_btn.setFocusTraversable(false);
+        
         back_btn.setOnAction(event -> moveMenuCurrent());
         return_btn.setOnAction(event -> toBorrowBook());
         borrow_btn.setOnAction(event -> toReturnBook());

@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <ScrollPane fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" styleClass="book_preview_container" stylesheets="@../../Styles/BookPreview.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Book.BookDetailController">
@@ -22,11 +23,11 @@
                     <FontAwesomeIconView glyphName="ARROW_LEFT" size="25" />
                 </graphic>
             </Button>
-            <Label layoutX="343.0" layoutY="6.0" text="Book Preview" />
+            <Label layoutX="343.0" layoutY="6.0" text="Book Detail" />
             <FontAwesomeIconView glyphName="BOOK" layoutX="805.0" layoutY="35.0" size="30" AnchorPane.leftAnchor="766.0" />
             <Line endX="650.0" layoutX="363.0" layoutY="50.0" startX="-100.0" AnchorPane.leftAnchor="50.0" />
         </AnchorPane>
-        <TitledPane animated="false" layoutX="434.0" layoutY="122.0" prefHeight="170.0" prefWidth="300.0" styleClass="tit_container" text="Reader Policy" AnchorPane.rightAnchor="101.20000000000005" AnchorPane.topAnchor="122.0">
+        <TitledPane animated="false" layoutX="425.0" layoutY="86.0" prefHeight="170.0" prefWidth="300.0" styleClass="tit_container" text="Reader Policy" AnchorPane.rightAnchor="105.39999999999998" AnchorPane.topAnchor="86.0">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                 <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum books to borrow: 10,000" AnchorPane.topAnchor="10.0" />
                 <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum borrowing period: 1 day" AnchorPane.topAnchor="35.0" />
@@ -34,12 +35,12 @@
                 <Text layoutX="14.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Renewal period: 1 day" AnchorPane.topAnchor="85.0" />
             </AnchorPane>
         </TitledPane>
-        <TitledPane animated="false" layoutX="434.0" layoutY="321.0" prefHeight="300.0" prefWidth="350.0" styleClass="tit_container" text="Document Information" AnchorPane.rightAnchor="50.80000000000007" AnchorPane.topAnchor="321.0">
+        <TitledPane animated="false" layoutX="425.0" layoutY="278.0" prefHeight="300.0" prefWidth="350.0" styleClass="tit_container" text="Document Information" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="278.0">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                 <VBox layoutX="21.0" layoutY="8.0" prefHeight="240.0" prefWidth="310.0" spacing="10.0" AnchorPane.topAnchor="10.0">
                     <HBox prefHeight="50.0" prefWidth="706.0" spacing="5.0">
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Authors:" />
-                        <Label fx:id="author_lbl" text="Label" />
+                        <Label fx:id="author_lbl" text="Label" wrapText="true" />
                     </HBox>
                     <HBox layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="706.0" spacing="5.0">
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publish Date:" />
@@ -55,21 +56,22 @@
                     </HBox>
                     <HBox prefHeight="50.0" prefWidth="310.0">
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Summary:" />
-                        <Text fx:id="description_text" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Label fx:id="description_lbl" text="Label" wrapText="true" />
                     </HBox>
                     <AnchorPane prefHeight="146.0" prefWidth="298.0" />
                 </VBox>
             </AnchorPane>
         </TitledPane>
-        <VBox fillWidth="false" layoutX="51.0" layoutY="86.0" prefHeight="508.0" prefWidth="350.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="86.0">
-            <ImageView fx:id="image" fitHeight="282.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true" />
+        <VBox fillWidth="false" layoutX="51.0" layoutY="86.0" prefHeight="442.0" prefWidth="350.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="86.0">
+            <ImageView fx:id="image" fitHeight="218.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="title" styleClass="book_title" text="Book title" />
-         <HBox alignment="CENTER" prefHeight="26.0" prefWidth="120.0" spacing="4.0" styleClass="available_x_copies">
-            <children>
-               <Label text="Available: X Copies" />
-            </children>
-         </HBox>
-            <HBox prefHeight="34.0" prefWidth="350.0" spacing="10.0" styleClass="star">
+            <HBox alignment="CENTER" prefHeight="21.0" prefWidth="151.0" spacing="4.0" styleClass="available_x_copies">
+                <Label fx:id="available_lbl" text="Available: X Copies">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            </HBox>
+            <HBox prefHeight="42.0" prefWidth="350.0" spacing="10.0" styleClass="star">
                 <Label>
                     <graphic>
                         <FontAwesomeIconView glyphName="STAR" size="30" />
@@ -95,33 +97,39 @@
                         <FontAwesomeIconView glyphName="STAR" size="30" />
                     </graphic>
                 </Label>
-                <Label fx:id="sumRating_lbl" styleClass="other_label" text="(Số đánh giá)" />
+                <Label fx:id="sumRating_lbl" text="(Số đánh giá)">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
             </HBox>
-            <AnchorPane prefHeight="66.0" prefWidth="350.0">
-                <Button fx:id="borrow_btn" layoutY="17.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="button_1" text="Borrow">
+            <AnchorPane prefHeight="43.0" prefWidth="350.0">
+                <Button fx:id="borrow_btn" layoutY="-5.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="button_1" text="Borrow">
                     <graphic>
                         <FontAwesomeIconView glyphName="CART_ARROW_DOWN" size="20" />
                     </graphic>
                 </Button>
-                <Button fx:id="like_btn" layoutX="125.0" layoutY="17.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="100.0" styleClass="button_2" text="Like">
+                <Button fx:id="like_btn" layoutX="125.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="100.0" styleClass="button_2" text="Like">
                     <graphic>
                         <FontAwesomeIconView glyphName="HEART" size="20" />
                     </graphic>
                 </Button>
-                <Button fx:id="return_btn" layoutY="17.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="button_1" text="Return">
+                <Button fx:id="return_btn" layoutY="-5.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="button_1" text="Return">
                     <graphic>
                         <FontAwesomeIconView glyphName="REPEAT" size="20" />
                     </graphic>
                 </Button>
-                <Button fx:id="unlike_btn" layoutX="125.0" layoutY="17.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="100.0" styleClass="button_2" text="Unlike">
+                <Button fx:id="unlike_btn" layoutX="125.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="100.0" styleClass="button_2" text="Unlike">
                     <graphic>
                         <FontAwesomeIconView glyphName="HEART_ALT" size="20" />
                     </graphic>
                 </Button>
             </AnchorPane>
-            <Label fx:id="totalLoan_lbl" styleClass="other_label" text="Được mượn bao nhiêu lần" />
+            <Label fx:id="totalLoan_lbl" text="Được mượn bao nhiêu lần" textFill="#3e3a3a">
+            <font>
+               <Font name="System Bold" size="15.0" />
+            </font></Label>
         </VBox>
-        <AnchorPane layoutX="51.2" layoutY="163.2" prefHeight="579.0" prefWidth="742.0" styleClass="comment_container" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="650.0">
+        <AnchorPane layoutX="44.0" layoutY="584.8" prefHeight="573.0" prefWidth="742.0" styleClass="comment_container" AnchorPane.leftAnchor="44.0" AnchorPane.topAnchor="585.0">
             <Text layoutX="50.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Comment" />
             <FontAwesomeIconView glyphName="COMMENT" layoutX="20.0" layoutY="32.0" size="20" />
             <AnchorPane layoutX="11.2" layoutY="60.0" prefHeight="518.0" prefWidth="721.0" styleClass="surround" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">

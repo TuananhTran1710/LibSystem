@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,7 +27,6 @@ public class BookDetailController implements Initializable {
     public Label publishDate_lbl;
     public Label quantity_lbl;
     public Label pages_lbl;
-    public Text description_text;
     public ImageView image;
     public Label title;
     public Label sumRating_lbl;
@@ -38,6 +36,8 @@ public class BookDetailController implements Initializable {
     public Button unlike_btn;
     public Label totalLoan_lbl;
     public Button comment_btn;
+    public Label description_lbl;
+    public Label available_lbl;
 
 
     private Book book;
@@ -64,7 +64,7 @@ public class BookDetailController implements Initializable {
         like_btn.setFocusTraversable(false);
         return_btn.setFocusTraversable(false);
         unlike_btn.setFocusTraversable(false);
-        
+
         back_btn.setOnAction(event -> moveMenuCurrent());
         return_btn.setOnAction(event -> toBorrowBook());
         borrow_btn.setOnAction(event -> toReturnBook());
@@ -80,8 +80,13 @@ public class BookDetailController implements Initializable {
         borrow_btn.setDisable(true);
         // truy van va them vao csdl bookLoan
         // can chinh
-        if (!QueryBookLoans.isBorrowing(book.getId()))
+        if (!QueryBookLoans.isBorrowing(book.getId())) {
             QueryBookLoans.insertNewRecord(book.getId());
+            book.setNumBorrowing(book.getNumBorrowing() + 1);
+            book.setTotalLoan(book.getTotalLoan() + 1);
+            totalLoan_lbl.setText("Borrowed: " + String.valueOf(book.getTotalLoan()) + " times");
+            available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
+        }
     }
 
     private void toBorrowBook() {
@@ -93,6 +98,8 @@ public class BookDetailController implements Initializable {
 
         // truy van va cap nhat csdl o column return_date
         QueryBookLoans.updateReturnBook(book.getId());
+        book.setNumBorrowing(book.getNumBorrowing() - 1);
+        available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
     }
 
     private void toLikeBook() {
@@ -130,6 +137,7 @@ public class BookDetailController implements Initializable {
             case MYBOOK -> {
                 UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getMyBookView());
                 MyBookController.getInstance().refreshData();
+
             }
             case SEARCH ->
                     UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getSearchView());
@@ -143,11 +151,12 @@ public class BookDetailController implements Initializable {
         publishDate_lbl.setText(book.getPublishDate().toString());
         quantity_lbl.setText(String.valueOf(book.getQuantity()));
         pages_lbl.setText(String.valueOf(book.getPageCount()));
-        description_text.setText(book.getDescription());
-        totalLoan_lbl.setText(String.valueOf(book.getTotalLoan()));
+        description_lbl.setText(book.getDescription());
+        totalLoan_lbl.setText("Borrowed: " + String.valueOf(book.getTotalLoan()) + " times");
+        available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
 
         if (book.getCountRating() > 0) {
-            sumRating_lbl.setText(String.valueOf(book.getSumRatingStar()));
+            sumRating_lbl.setText("(" + String.valueOf(book.getSumRatingStar()) + " ratings)");
         }
 
         // Thiết lập hình ảnh bìa sách

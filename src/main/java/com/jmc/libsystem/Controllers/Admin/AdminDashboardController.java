@@ -32,6 +32,7 @@ public class AdminDashboardController implements Initializable {
     public TableColumn<Map<String, Object>, Integer> quantityColumn;
     public TableColumn<Map<String, Object>, Integer> loanedColumn;
     public TableColumn<Map<String, Object>, String> statusColumn;
+    public TableColumn<Map<String, Object>, Void> editColumn;
 
     /* phần 4 ô thống kê ở trên cùng */
     public Label numberUser;
@@ -68,7 +69,7 @@ public class AdminDashboardController implements Initializable {
 
     private void refreshData() {
         getTableList();
-        addMouseClickedToTable();
+        //addMouseClickedToTable();
         try {
             getNumberData();
         } catch (SQLException e) {
@@ -131,7 +132,7 @@ public class AdminDashboardController implements Initializable {
                         int quantity = resultSet.getInt("total_books");
                         int loaned = resultSet.getInt("total_borrowed_books");
                         String status = resultSet.getString("status");
-
+                        String id = resultSet.getString("google_book_id");
                         // Tải ảnh trong background
                         Image image = new Image(imageUrl, true);
 
@@ -141,6 +142,7 @@ public class AdminDashboardController implements Initializable {
                         row.put("quantity", quantity);
                         row.put("loaned", loaned);
                         row.put("status", status);
+                        row.put("id", id);
 
                         // Thêm dữ liệu vào ObservableList trên JavaFX Application Thread
                         Platform.runLater(() -> data.add(row));
@@ -191,6 +193,28 @@ public class AdminDashboardController implements Initializable {
             imageView.setFitHeight(50); // Đặt chiều cao hình ảnh
             imageView.setFitWidth(50);  // Đặt chiều rộng hình ảnh
             return new SimpleObjectProperty<>(imageView);
+        });
+
+        editColumn.setCellFactory(param -> new TableCell<>() {
+            private final Hyperlink editLink = new Hyperlink("Edit");
+
+            {
+                editLink.setOnAction(event -> {
+                    Map<String, Object> rowData = getTableView().getItems().get(getIndex());
+                    // Thực hiện hành động chỉnh sửa với dữ liệu hàng tương ứng
+                    System.out.println("Edit: " + rowData.get("id"));
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(editLink);
+                }
+            }
         });
 
         ObservableList<Map<String, Object>> data = getBooks();

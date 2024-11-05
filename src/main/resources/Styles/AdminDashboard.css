@@ -68,10 +68,10 @@
     -fx-alignment: CENTER;
 }
 
-.table-view .table-row-cell:selected {
+/*.table-view .table-row-cell:selected {
     -fx-background-color: #C6E7F3;
     -fx-font-weight: bold;
-}
+}*/
 
 .status-cell {
     -fx-alignment: CENTER;

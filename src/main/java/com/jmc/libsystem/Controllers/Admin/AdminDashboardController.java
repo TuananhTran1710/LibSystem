@@ -3,16 +3,15 @@ package com.jmc.libsystem.Controllers.Admin;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.concurrent.Task;
-import javafx.application.Platform;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -52,7 +51,7 @@ public class AdminDashboardController implements Initializable {
     public Label category3;
     public Label categoryNumber3;
     public ProgressBar progress3;
-    private final int totalQuantity = 20;
+    private final int totalQuantity = 100000;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -179,7 +178,7 @@ public class AdminDashboardController implements Initializable {
         numberOverBook.setText(Integer.toString(numberOverdue));
     }
 
-    private void getTableList(){
+    private void getTableList() {
         /* liên kết các cột */
         titleColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("title")));
         authorsColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("authors")));
@@ -235,11 +234,11 @@ public class AdminDashboardController implements Initializable {
         ResultSet resultSet = QueryBookData.getCategorySort3();
         try {
             int id = 1;
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 String category = resultSet.getString("category");
                 int total = resultSet.getInt("total_books");
-                double average = (double)total / totalQuantity;
-                if(id == 1){
+                double average = (double) total / totalQuantity;
+                if (id == 1) {
                     category1.setText(category);
                     categoryNumber1.setText(Integer.toString(total));
                     progress1.setProgress(average);
@@ -247,13 +246,12 @@ public class AdminDashboardController implements Initializable {
                     category2.setText(category);
                     categoryNumber2.setText(Integer.toString(total));
                     progress2.setProgress(average);
-                }
-                else {
+                } else {
                     category3.setText(category);
                     categoryNumber3.setText(Integer.toString(total));
                     progress3.setProgress(average);
                 }
-                id ++;
+                id++;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

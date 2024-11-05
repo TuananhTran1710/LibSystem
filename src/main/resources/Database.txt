@@ -23,6 +23,13 @@ CREATE TABLE Book (
     language VARCHAR(20)
 ) COLLATE utf8mb4_bin;
 
+alter table book
+add column state varchar(20);
+
+update book
+set state = 'publishing'
+where google_book_id >= '1' and google_book_id <= '30';
+
 -- Bảng User
 CREATE TABLE User (
     user_id VARCHAR(20) PRIMARY KEY,

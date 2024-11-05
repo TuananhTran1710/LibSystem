@@ -1,7 +1,9 @@
 package com.jmc.libsystem.Controllers;
 
+import com.jmc.libsystem.Controllers.User.DashboardController;
 import com.jmc.libsystem.HandleResultSet.EvaluateInfo;
 import com.jmc.libsystem.Models.Model;
+import com.jmc.libsystem.Views.UserMenuOptions;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -52,7 +54,11 @@ public class SignUpController implements Initializable {
                 && !user_id_fld.getText().trim().isEmpty() && !fullname_fld.getText().trim().isEmpty()) {
             EvaluateInfo.evaluateUserCredToSignup(email_fld.getText(), password_fld.getText(), user_id_fld.getText(), fullname_fld.getText());
             if (Model.getInstance().getLoginFlag()) {
+                Model.getInstance().getViewFactory().getUserSelectedMenuItem().setValue(UserMenuOptions.DASHBOARD);
                 Model.getInstance().getViewFactory().showUserWindow();
+
+                DashboardController.getInstance().resetAll();
+
                 Model.getInstance().getViewFactory().closeStage(stage);
             }
         } else {

@@ -73,7 +73,8 @@ public class LoginController implements Initializable {
 
         if (Model.getInstance().getLoginFlag()) {
             if (loginAccountType == AccountType.USER) {
-                // phai set gia tri truoc roi moi goi showUserWindow() khong thi oldVal = null
+                // phai set gia tri truoc roi moi goi showUserWindow() khong thi ban dau oldVal = null
+                // sau do lai set la dashboard thi lai cap nhat dashboard 1 lan nua => khong can thiet
                 Model.getInstance().getViewFactory().getUserSelectedMenuItem().setValue(UserMenuOptions.DASHBOARD);
 
                 Model.getInstance().getViewFactory().showUserWindow();
@@ -82,9 +83,7 @@ public class LoginController implements Initializable {
                 QueryBookLoans.noticeBookOverdue(Model.getInstance().getMyUser().getId());
 
                 //call functions to reset window
-                DashboardController.getInstance().reset();
-                DashboardController.getInstance().resetReading();
-                DashboardController.getInstance().resetPopular();
+                DashboardController.getInstance().resetAll();
 
             } else {
                 Model.getInstance().getViewFactory().getAdminSelectedMenuItem().setValue(AdminMenuOptions.DASHBOARD);

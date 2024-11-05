@@ -34,6 +34,50 @@ public class Book {
         this.thumbnailUrl = thumbnailUrl;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setPublishDate(LocalDate publishDate) {
+        this.publishDate = publishDate;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setCountRating(int countRating) {
+        this.countRating = countRating;
+    }
+
+    public void setSumRatingStar(int sumRatingStar) {
+        this.sumRatingStar = sumRatingStar;
+    }
+
+    public void setTotalLoan(int totalLoan) {
+        this.totalLoan = totalLoan;
+    }
+
+    public void setNumBorrowing(int numBorrowing) {
+        this.numBorrowing = numBorrowing;
+    }
+
     public Book(String id, String title, String authors, LocalDate publishDate, String description, String thumbnailUrl, int pageCount, String language, int quantity, String category, int countRating, int sumRatingStar, int totalLoan, int numBorrowing) {
         this.id = id;
         this.title = title;

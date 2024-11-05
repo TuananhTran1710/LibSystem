@@ -4,9 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -27,15 +25,7 @@
             <FontAwesomeIconView glyphName="BOOK" layoutX="805.0" layoutY="35.0" size="30" AnchorPane.leftAnchor="766.0" />
             <Line endX="650.0" layoutX="363.0" layoutY="50.0" startX="-100.0" AnchorPane.leftAnchor="50.0" />
         </AnchorPane>
-        <TitledPane animated="false" layoutX="425.0" layoutY="86.0" prefHeight="170.0" prefWidth="300.0" styleClass="tit_container" text="Reader Policy" AnchorPane.rightAnchor="105.39999999999998" AnchorPane.topAnchor="86.0">
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum books to borrow: 10,000" AnchorPane.topAnchor="10.0" />
-                <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum borrowing period: 1 day" AnchorPane.topAnchor="35.0" />
-                <Text layoutX="16.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum renewals: 10,000 times" AnchorPane.topAnchor="60.0" />
-                <Text layoutX="14.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Renewal period: 1 day" AnchorPane.topAnchor="85.0" />
-            </AnchorPane>
-        </TitledPane>
-        <TitledPane animated="false" layoutX="425.0" layoutY="278.0" prefHeight="300.0" prefWidth="350.0" styleClass="tit_container" text="Document Information" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="278.0">
+        <TitledPane animated="false" layoutX="425.0" layoutY="78.0" prefHeight="300.0" prefWidth="350.0" styleClass="tit_container" text="Document Information" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="78.0">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                 <VBox layoutX="21.0" layoutY="8.0" prefHeight="240.0" prefWidth="310.0" spacing="10.0" AnchorPane.topAnchor="10.0">
                     <HBox prefHeight="50.0" prefWidth="706.0" spacing="5.0">
@@ -79,30 +69,30 @@
             <HBox prefHeight="42.0" prefWidth="350.0" spacing="10.0" styleClass="star">
                 <Label>
                     <graphic>
-                        <FontAwesomeIconView glyphName="STAR" size="30" />
+                        <FontAwesomeIconView fx:id="star1" glyphName="STAR" size="30" />
                     </graphic>
                 </Label>
                 <Label layoutX="10.0" layoutY="10.0">
                     <graphic>
-                        <FontAwesomeIconView glyphName="STAR" size="30" />
+                        <FontAwesomeIconView fx:id="star2" glyphName="STAR" size="30" />
                     </graphic>
                 </Label>
                 <Label layoutX="21.0" layoutY="10.0">
                     <graphic>
-                        <FontAwesomeIconView glyphName="STAR" size="30" />
+                        <FontAwesomeIconView fx:id="star3" glyphName="STAR" size="30" />
                     </graphic>
                 </Label>
                 <Label layoutX="32.0" layoutY="10.0">
                     <graphic>
-                        <FontAwesomeIconView glyphName="STAR" size="30" />
+                        <FontAwesomeIconView fx:id="star4" glyphName="STAR" size="30" />
                     </graphic>
                 </Label>
                 <Label layoutX="44.0" layoutY="10.0">
                     <graphic>
-                        <FontAwesomeIconView glyphName="STAR" size="30" />
+                        <FontAwesomeIconView fx:id="star5" glyphName="STAR" size="30" />
                     </graphic>
                 </Label>
-                <Label fx:id="sumRating_lbl" text="(Số đánh giá)">
+                <Label fx:id="sumRating_lbl" prefHeight="30.0" prefWidth="159.0" text="(Số đánh giá)">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
@@ -116,7 +106,7 @@
                 </Button>
                 <Button fx:id="like_btn" layoutX="125.0" layoutY="-5.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="100.0" styleClass="button_2" text="Like">
                     <graphic>
-                        <FontAwesomeIconView glyphName="HEART" size="20" />
+                        <FontAwesomeIconView glyphName="HEART_ALT" size="20" />
                     </graphic>
                 </Button>
                 <Button fx:id="return_btn" layoutY="-5.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="button_1" text="Return">
@@ -136,49 +126,5 @@
                 </font>
             </Label>
         </VBox>
-        <AnchorPane layoutX="44.0" layoutY="584.8" prefHeight="573.0" prefWidth="742.0" styleClass="comment_container" AnchorPane.leftAnchor="44.0" AnchorPane.topAnchor="585.0">
-            <Text layoutX="50.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Comment" />
-            <FontAwesomeIconView glyphName="COMMENT" layoutX="20.0" layoutY="32.0" size="20" />
-            <AnchorPane layoutX="11.2" layoutY="60.0" prefHeight="518.0" prefWidth="721.0" styleClass="surround" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
-                <VBox layoutX="17.6" layoutY="5.0" prefHeight="490.0" prefWidth="687.0" spacing="10.0" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0">
-                    <ScrollPane fitToWidth="true" prefHeight="282.0" prefWidth="686.0">
-                        <VBox prefHeight="170.0" prefWidth="685.0">
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Danh sách cmt là vùng này nhé" />
-                        </VBox>
-                    </ScrollPane>
-                    <HBox prefHeight="50.0" prefWidth="200.0" styleClass="star">
-                        <ToggleButton mnemonicParsing="false">
-                            <graphic>
-                                <FontAwesomeIconView glyphName="STAR" size="20" />
-                            </graphic>
-                        </ToggleButton>
-                        <ToggleButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false">
-                            <graphic>
-                                <FontAwesomeIconView glyphName="STAR" size="20" />
-                            </graphic>
-                        </ToggleButton>
-                        <ToggleButton layoutX="37.0" layoutY="10.0" mnemonicParsing="false">
-                            <graphic>
-                                <FontAwesomeIconView glyphName="STAR" size="20" />
-                            </graphic>
-                        </ToggleButton>
-                        <ToggleButton layoutX="64.0" layoutY="10.0" mnemonicParsing="false">
-                            <graphic>
-                                <FontAwesomeIconView glyphName="STAR" size="20" />
-                            </graphic>
-                        </ToggleButton>
-                        <ToggleButton layoutX="92.0" layoutY="10.0" mnemonicParsing="false">
-                            <graphic>
-                                <FontAwesomeIconView glyphName="STAR" size="20" />
-                            </graphic>
-                        </ToggleButton>
-                    </HBox>
-                    <TextArea prefHeight="112.0" prefWidth="250.0" />
-                    <HBox alignment="CENTER" prefHeight="60.0" prefWidth="260.0">
-                        <Button fx:id="comment_btn" mnemonicParsing="false" prefHeight="32.0" prefWidth="198.0" text="Send comment" />
-                    </HBox>
-                </VBox>
-            </AnchorPane>
-        </AnchorPane>
     </AnchorPane>
 </ScrollPane>

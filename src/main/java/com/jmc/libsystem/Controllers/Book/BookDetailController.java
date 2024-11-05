@@ -1,5 +1,7 @@
 package com.jmc.libsystem.Controllers.Book;
 
+import com.jmc.libsystem.Controllers.User.DashboardController;
+import com.jmc.libsystem.Controllers.User.MyBookController;
 import com.jmc.libsystem.Controllers.User.UserController;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.Model;
@@ -20,19 +22,23 @@ import java.util.ResourceBundle;
 public class BookDetailController implements Initializable {
 
     private static BookDetailController instance;
-    public Text publish_date;
-    public Text pages;
-    public Text description;
-    public Label name_lbl;
-    public Label title;
-    public Text quantity;
-    public ImageView image_book;
-    public Button comment_btn;
-    public Button return_btn;
+
     public Button back_btn;
-    public Button like_btn;
+    public Label author_lbl;
+    public Label publishDate_lbl;
+    public Label quantity_lbl;
+    public Label pages_lbl;
+    public Text description_text;
+    public ImageView image;
+    public Label title;
+    public Label sumRating_lbl;
     public Button borrow_btn;
+    public Button like_btn;
+    public Button return_btn;
     public Button unlike_btn;
+    public Label totalLoan_lbl;
+    public Button comment_btn;
+
 
     private Book book;
 
@@ -68,7 +74,9 @@ public class BookDetailController implements Initializable {
         return_btn.setDisable(false);
         borrow_btn.setDisable(true);
         // truy van va them vao csdl bookLoan
-        QueryBookLoans.insertNewRecord(book.getId());
+        // can chinh
+        if (!QueryBookLoans.isBorrowing(book.getId()))
+            QueryBookLoans.insertNewRecord(book.getId());
     }
 
     private void toBorrowBook() {
@@ -101,16 +109,23 @@ public class BookDetailController implements Initializable {
         unlike_btn.setDisable(false);
 
         // truy van va them vao bang favorite
-        QueryFavoriteBook.insertNewRecord(book.getId());
+        // can chinh
+        if (!QueryFavoriteBook.isFavorite(book.getId()))
+            QueryFavoriteBook.insertNewRecord(book.getId());
     }
 
     private void moveMenuCurrent() {
         UserMenuOptions menuCurrent = Model.getInstance().getViewFactory().getUserSelectedMenuItem().getValue();
         switch (menuCurrent) {
-            case DASHBOARD ->
-                    UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
-            case MYBOOK ->
-                    UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getMyBookView());
+            case DASHBOARD -> {
+                UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
+                // de cho tiet kiem, chi reset phan reading
+                DashboardController.getInstance().resetReading();
+            }
+            case MYBOOK -> {
+                UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getMyBookView());
+                MyBookController.getInstance().refreshData();
+            }
             case SEARCH ->
                     UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getSearchView());
         }
@@ -119,20 +134,32 @@ public class BookDetailController implements Initializable {
 
     public void setUpInfo(Book book) {
         title.setText(book.getTitle());
+        author_lbl.setText(book.getAuthors());
+        publishDate_lbl.setText(book.getPublishDate().toString());
+        quantity_lbl.setText(String.valueOf(book.getQuantity()));
+        pages_lbl.setText(String.valueOf(book.getPageCount()));
+        description_text.setText(book.getDescription());
+        totalLoan_lbl.setText(String.valueOf(book.getTotalLoan()));
 
+        if (book.getCountRating() > 0) {
+            sumRating_lbl.setText(String.valueOf(book.getSumRatingStar()));
+        }
+
+        // Thiết lập hình ảnh bìa sách
         try {
             Image bookCoverImage = new Image(book.getThumbnailUrl(), true);
-            image_book.setImage(bookCoverImage);
+            image.setImage(bookCoverImage);
         } catch (Exception e) {
-            image_book.setImage(ShowListBookFound.DEFAULT_BOOK_COVER);
+            image.setImage(ShowListBookFound.DEFAULT_BOOK_COVER);
         }
-        image_book.setFitHeight(190);
-        image_book.setFitWidth(160);
-        image_book.setPreserveRatio(false);
+        image.setFitHeight(190);
+        image.setFitWidth(160);
+        image.setPreserveRatio(false);
     }
 
+
     public void modifyButton() {
-        if (QueryBookLoans.isBorrowed(book.getId())) toReturnBook();
+        if (QueryBookLoans.isBorrowing(book.getId())) toReturnBook();
         else toBorrowBook();
 
         if (QueryFavoriteBook.isFavorite(book.getId())) toUnlikeBook();

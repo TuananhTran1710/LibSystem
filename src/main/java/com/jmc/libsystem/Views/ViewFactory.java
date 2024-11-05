@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-// class nayf lam nhiem vu chuyen doi giua cac cua so
+// class nay lam nhiem vu chuyen doi giua cac cua so
 public class ViewFactory {
     //Users View
     private AnchorPane dashboardView;
@@ -28,7 +29,7 @@ public class ViewFactory {
     private VBox adminMenu;
     //book
     private AnchorPane bookPreview;
-    private AnchorPane bookLoanPreview;
+    private ScrollPane bookDetail;
     //
     private ObjectProperty<UserMenuOptions> userSelectedMenuItem;
     private ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
@@ -150,15 +151,15 @@ public class ViewFactory {
         return bookPreview;
     }
 
-    public AnchorPane getBookLoanPreview() {
-        if (bookLoanPreview == null) {
+    public ScrollPane getBookDetail() {
+        if (bookDetail == null) {
             try {
-                bookLoanPreview = new FXMLLoader(getClass().getResource("/FXML/Book/BookDetailAdmin.fxml")).load();
+                bookDetail = new FXMLLoader(getClass().getResource("/FXML/Book/BookDetail.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return bookLoanPreview;
+        return bookDetail;
     }
 
     //--------------------------------ANCHOR ADMIN----------------------

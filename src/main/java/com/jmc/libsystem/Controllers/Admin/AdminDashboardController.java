@@ -2,16 +2,15 @@ package com.jmc.libsystem.Controllers.Admin;
 
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
-import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -123,7 +122,7 @@ public class AdminDashboardController implements Initializable {
                 String imageUrl = resultSet.getString("thumbnail_url");
                 String authors = resultSet.getString("authors");
                 int quantity = resultSet.getInt("total_books");
-                int loaned = resultSet.getInt("total_borrowed_books");
+                int loaned = resultSet.getInt("total_borrowing");
 
                 //Image image = new Image(imageUrl);
 
@@ -133,7 +132,7 @@ public class AdminDashboardController implements Initializable {
                 row.put("quantity", quantity);
                 row.put("loaned", loaned);
 
-                if(quantity > 0) row.put("status", "Available");
+                if (quantity > 0) row.put("status", "Available");
                 else row.put("status", "Over");
 
                 data.add(row);

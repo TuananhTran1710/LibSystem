@@ -153,7 +153,7 @@ public class ViewFactory {
     public AnchorPane getBookLoanPreview() {
         if (bookLoanPreview == null) {
             try {
-                bookLoanPreview = new FXMLLoader(getClass().getResource("/FXML/Book/BookDetail.fxml")).load();
+                bookLoanPreview = new FXMLLoader(getClass().getResource("/FXML/Book/BookDetailAdmin.fxml")).load();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -67,7 +67,7 @@ public class QueryBookLoans {
         return resultSet;
     }
 
-    public static ResultSet getListBorrow(String userId) {
+    public static ResultSet getListBorrowing(String userId) {
         ResultSet resultSet = null;
         String query = "SELECT * " +
                 "FROM bookloans " +

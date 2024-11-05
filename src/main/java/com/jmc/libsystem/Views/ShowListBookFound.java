@@ -99,7 +99,7 @@ public class ShowListBookFound {
 
         // Xếp hạng trung bình
         double averageRating = (book.getCountRating() == 0) ? 0 : 1.0 * book.getSumRatingStar() / book.getCountRating();
-        Label ratingLabel = new Label("★" + String.format("%.1f", averageRating));
+        Label ratingLabel = new Label("★" + String.format("%.1f", 1.0 * (int) Math.floor(averageRating)));
         ratingLabel.setStyle("-fx-font-size: 10px; -fx-text-fill: #FFA500;");
 
         // Số lượng đã mượn

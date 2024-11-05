@@ -137,10 +137,6 @@
     -fx-fill: #132A13;
 }
 
-/* ngôi sao bên dưới sách */
-.star FontAwesomeIconView {
-    -fx-fill: #FFFFFF;
-}
 
 /* titled pane */
 .tit_container {

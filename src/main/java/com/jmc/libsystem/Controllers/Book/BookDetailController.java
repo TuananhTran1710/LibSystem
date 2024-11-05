@@ -9,6 +9,7 @@ import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.QueryDatabase.QueryFavoriteBook;
 import com.jmc.libsystem.Views.ShowListBookFound;
 import com.jmc.libsystem.Views.UserMenuOptions;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class BookDetailController implements Initializable {
@@ -42,7 +44,14 @@ public class BookDetailController implements Initializable {
     public Label available_lbl;
     public Label categories_lbl;
     public ScrollPane scrollPane;
+    public FontAwesomeIconView star1;
+    public FontAwesomeIconView star2;
+    public FontAwesomeIconView star3;
+    public FontAwesomeIconView star4;
+    public FontAwesomeIconView star5;
 
+    private List<FontAwesomeIconView> starsAverage;
+    private int currentRating = 0; // Rating ban đầu
 
     private Book book;
 
@@ -68,6 +77,16 @@ public class BookDetailController implements Initializable {
         like_btn.setFocusTraversable(false);
         return_btn.setFocusTraversable(false);
         unlike_btn.setFocusTraversable(false);
+
+        starsAverage = List.of(star1, star2, star3, star4, star5);
+
+//        for (int i = 0; i < starsAverage.size(); i++) {
+//            int index = i;
+//            starsAverage.get(i).setOnMouseEntered(event -> highlightStars(index + 1));
+//            starsAverage.get(i).setOnMouseExited(event -> resetStars());
+//            starsAverage.get(i).setOnMouseClicked(event -> setRating(index + 1));
+//        }
+
 
         back_btn.setOnAction(event -> moveMenuCurrent());
         return_btn.setOnAction(event -> {
@@ -102,6 +121,33 @@ public class BookDetailController implements Initializable {
             toLikeButton();
             QueryFavoriteBook.deleteRecord(book.getId());
         });
+    }
+
+    // Đặt lại các ngôi sao về trạng thái đánh giá hiện tại khi rời chuột
+    private void resetStars() {
+        setRating(currentRating);
+    }
+
+    // Làm sáng các ngôi sao đến vị trí chỉ định
+    private void highlightStars(int rating) {
+        for (int i = 0; i < starsAverage.size(); i++) {
+            if (i < rating) {
+                starsAverage.get(i).setFill((Color.web("#132A13")));
+            } else {
+                starsAverage.get(i).setFill((Color.web("#FFFFFF"))); // Default color
+            }
+        }
+    }
+    
+    public void setRating(int rating) {
+        currentRating = rating;
+        for (int i = 0; i < starsAverage.size(); i++) {
+            if (i < rating) {
+                starsAverage.get(i).setFill((Color.web("#132A13")));
+            } else {
+                starsAverage.get(i).setFill((Color.web("#FFFFFF"))); // Default color
+            }
+        }
     }
 
     private void toReturnButton() {
@@ -173,6 +219,7 @@ public class BookDetailController implements Initializable {
         pages_lbl.setText(String.valueOf(book.getPageCount()));
         description_lbl.setText(book.getDescription());
         totalLoan_lbl.setText("Borrowed: " + String.valueOf(book.getTotalLoan()) + " times");
+        setRating(book.getSumRatingStar() / book.getCountRating());
 
         int availableNumber = book.getQuantity() - book.getNumBorrowing();
         if (availableNumber == 0) {

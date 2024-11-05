@@ -179,7 +179,7 @@ public class DashboardController implements Initializable {
 
     public void resetReading() {
         scrollPane_reading.setHvalue(0.0);
-        ResultSet resultSet = QueryBookLoans.getListBorrow(Model.getInstance().getMyUser().getId());
+        ResultSet resultSet = QueryBookLoans.getListBorrowing(Model.getInstance().getMyUser().getId());
         bookReading = SearchBookDatabase.getBookFromResultSet(resultSet);
 
         if (num_show_reading.getValue() != 20)

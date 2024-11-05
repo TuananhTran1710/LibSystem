@@ -2,14 +2,14 @@ package com.jmc.libsystem.Controllers.Admin;
 
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
-import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.concurrent.Task;
@@ -134,6 +134,7 @@ public class AdminDashboardController implements Initializable {
     public static ObservableList<Map<String, Object>> getBooks() {
         // ObservableList để giữ dữ liệu cho UI
         ObservableList<Map<String, Object>> data = FXCollections.observableArrayList();
+
 
         // Tạo một Task để load ảnh trong background
         Task<Void> loadDataTask = new Task<Void>() {

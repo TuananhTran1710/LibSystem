@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.ProfileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0"
+            xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="76.0" layoutY="214.0" text="lịch sử hoạt động (lịch sử mượn trả)" />
-      <ListView layoutX="70.0" layoutY="244.0" prefHeight="130.0" prefWidth="200.0" />
-      <Label layoutX="70.0" layoutY="37.0" text="Thông tin tài khoản" />
-      <Label layoutX="341.0" layoutY="37.0" text="Edit" />
-      <Label layoutX="76.0" layoutY="139.0" text="Statistics" />
+      <AnchorPane prefHeight="70.0" prefWidth="790.0" AnchorPane.leftAnchor="30.0">
+         <children>
+            <Line endX="688.0" endY="1.4000015258789062" layoutX="101.0" layoutY="71.0" startX="-100.0" AnchorPane.leftAnchor="0.2928924560546875" AnchorPane.rightAnchor="0.6929229736327898" />
+            <Text layoutX="3.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Library Management" />
+         </children>
+      </AnchorPane>
+      <VBox layoutX="30.0" layoutY="117.0" prefHeight="260.0" prefWidth="400.0">
+         <children>
+            <HBox prefHeight="57.0" prefWidth="400.0">
+               <children>
+                  <FontAwesomeIconView />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="personal information" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

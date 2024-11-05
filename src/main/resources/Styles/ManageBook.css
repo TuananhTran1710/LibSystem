@@ -93,46 +93,22 @@
     -fx-cursor: hand;
 }
 
-/* BẢNG */
-.table-view {
-    -fx-background-color: #FFFFFF;
+TableView {
+    -fx-background-color: rgba(19, 42, 19, 0.05);
     -fx-border-color: transparent;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
     -fx-table-cell-border-color: transparent;
 }
 
-/* tiêu đề */
-.table-view .column-header-background {
+TableView .column-header {
     -fx-background-color: #132A13;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #d0d0d0;
 }
 
-.table-view .column-header-background .label {
+TableView .column-header .label {
     -fx-text-fill: #FFFFFF;
-    -fx-font-size: 1.2em;
-    -fx-font-weight: bold;
-    -fx-alignment: center;
-}
-
-/* bên trong bảng */
-.table-view .table-row-cell {
-    -fx-background-color: #FFFFFF;
-    -fx-text-fill: #132A13;
-}
-
-/* phân biệt dòng */
-.table-view .table-row-cell:odd {
-    -fx-background-color: #f9f9f9;
-}
-
-/* hover */
-.table-view .table-row-cell:hover {
-    -fx-background-color: rgba(19, 42, 19, 0.1);
-    -fx-text-fill: #000000;
-}
-
-/* viền tiêu đề */
-.table-view .column-header {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
 }
 
 

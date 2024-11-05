@@ -83,7 +83,7 @@
             <Insets left="20.0" right="20.0" />
          </padding>
       </VBox>
-      <VBox layoutX="63.0" layoutY="250.4" prefHeight="210.0" prefWidth="290.0" spacing="20.0" styleClass="total" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="250.0">
+      <VBox layoutX="63.0" layoutY="250.4" prefHeight="255.0" prefWidth="290.0" spacing="20.0" styleClass="total" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="250.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0" styleClass="title">
                <children>

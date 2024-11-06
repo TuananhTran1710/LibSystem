@@ -11,6 +11,7 @@ module com.jmc.libsystem {
     requires org.controlsfx.controls;
     requires java.desktop;
     requires jdk.compiler;
+    requires mysql.connector.j;
 
     exports com.jmc.libsystem;
     exports com.jmc.libsystem.Controllers;

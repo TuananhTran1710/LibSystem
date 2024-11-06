@@ -28,7 +28,7 @@ public class ViewFactory {
     private AnchorPane adminDashboardView;
     private AnchorPane manageBookView;
     private AnchorPane manageUserView;
-    private AnchorPane profileAdminView;
+    private ScrollPane profileAdminView;
     private AnchorPane responseView;
     private VBox adminMenu;
     //book
@@ -214,7 +214,7 @@ public class ViewFactory {
         return responseView;
     }
 
-    public AnchorPane getProfileAdminView() {
+    public ScrollPane getProfileAdminView() {
         if (profileAdminView == null) {
             try {
                 profileAdminView = new FXMLLoader(getClass().getResource("/Fxml/Admin/Profile.fxml")).load();
@@ -239,6 +239,11 @@ public class ViewFactory {
     // -----------------------------------Function Show Window------------------------------------
     public void showLoginWindow() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
+        createStage(loader);
+    }
+
+    public void showCmtWindow() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Book/test2.fxml"));
         createStage(loader);
     }
 

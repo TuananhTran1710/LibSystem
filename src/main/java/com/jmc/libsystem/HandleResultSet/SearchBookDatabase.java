@@ -10,8 +10,9 @@ import java.util.List;
 
 public class SearchBookDatabase {
     public static List<Book> getBookFromResultSet(String keyword) {
-        ResultSet resultSet = QueryBookData.getBookForSearch(keyword);
         List<Book> listBook = new ArrayList<>();
+
+        ResultSet resultSet = QueryBookData.getBookForSearch(keyword);
 
         try {
             if (!resultSet.isBeforeFirst()) {

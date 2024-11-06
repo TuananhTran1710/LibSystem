@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.Admin.Reponse">
-   <children>
-      <Label layoutX="42.0" layoutY="53.0" text="Danh sách các đề xuất" />
-      <Label layoutX="73.0" layoutY="103.0" text="dưới đây là một list các đề xuất của user" />
-      <Label layoutX="408.0" layoutY="103.0" text="nút xử lý (đồng ý hoặc từ chối)" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.jmc.libsystem.Controllers.Admin.ResponseController">
+    <Label layoutX="42.0" layoutY="53.0" text="Danh sách các đề xuất"/>
+    <Label layoutX="73.0" layoutY="103.0" text="dưới đây là một list các đề xuất của user"/>
+    <Label layoutX="408.0" layoutY="103.0" text="nút xử lý (đồng ý hoặc từ chối)"/>
 </AnchorPane>

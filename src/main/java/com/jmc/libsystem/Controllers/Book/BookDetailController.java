@@ -3,21 +3,27 @@ package com.jmc.libsystem.Controllers.Book;
 import com.jmc.libsystem.Controllers.User.DashboardController;
 import com.jmc.libsystem.Controllers.User.MyBookController;
 import com.jmc.libsystem.Controllers.User.UserController;
+import com.jmc.libsystem.HandleResultSet.HandleFeedback;
 import com.jmc.libsystem.Information.Book;
+import com.jmc.libsystem.Information.Comment;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.QueryDatabase.QueryFavoriteBook;
 import com.jmc.libsystem.Views.ShowListBookFound;
+import com.jmc.libsystem.Views.ShowListComment;
 import com.jmc.libsystem.Views.UserMenuOptions;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -31,7 +37,7 @@ public class BookDetailController implements Initializable {
     public Label publishDate_lbl;
     public Label quantity_lbl;
     public Label pages_lbl;
-    public ImageView image;
+    public ImageView imageView;
     public Label title;
     public Label sumRating_lbl;
     public Button borrow_btn;
@@ -39,7 +45,6 @@ public class BookDetailController implements Initializable {
     public Button return_btn;
     public Button unlike_btn;
     public Label totalLoan_lbl;
-    public Button comment_btn;
     public Label description_lbl;
     public Label available_lbl;
     public Label categories_lbl;
@@ -49,8 +54,23 @@ public class BookDetailController implements Initializable {
     public FontAwesomeIconView star3;
     public FontAwesomeIconView star4;
     public FontAwesomeIconView star5;
+    //phan cmt
+    public VBox comment_list;
+    public FontAwesomeIconView star_cmt1;
+    public FontAwesomeIconView star_cmt2;
+    public FontAwesomeIconView star_cmt3;
+    public FontAwesomeIconView star_cmt4;
+    public FontAwesomeIconView star_cmt5;
+    public TextArea text_cmt;
+    public Button edit_btn;
+    public Button comment_btn;
+    public Button deleted_btn;
+    public Button save_btn;
+
+    private List<Comment> feedbacks;
 
     private List<FontAwesomeIconView> starsAverage;
+    private List<FontAwesomeIconView> starsComment;
     private int currentRating = 0; // Rating ban đầu
 
     private Book book;
@@ -79,13 +99,13 @@ public class BookDetailController implements Initializable {
         unlike_btn.setFocusTraversable(false);
 
         starsAverage = List.of(star1, star2, star3, star4, star5);
-
-//        for (int i = 0; i < starsAverage.size(); i++) {
-//            int index = i;
-//            starsAverage.get(i).setOnMouseEntered(event -> highlightStars(index + 1));
-//            starsAverage.get(i).setOnMouseExited(event -> resetStars());
-//            starsAverage.get(i).setOnMouseClicked(event -> setRating(index + 1));
-//        }
+        starsComment = List.of(star_cmt1, star_cmt2, star_cmt3, star_cmt4, star_cmt5);
+        for (int i = 0; i < starsComment.size(); i++) {
+            int index = i;
+            starsComment.get(i).setOnMouseEntered(event -> highlightStars(index + 1));
+            starsComment.get(i).setOnMouseExited(event -> resetStars());
+            starsComment.get(i).setOnMouseClicked(event -> setRating(starsComment, index + 1));
+        }
 
 
         back_btn.setOnAction(event -> moveMenuCurrent());
@@ -125,27 +145,27 @@ public class BookDetailController implements Initializable {
 
     // Đặt lại các ngôi sao về trạng thái đánh giá hiện tại khi rời chuột
     private void resetStars() {
-        setRating(currentRating);
+        setRating(starsComment, currentRating);
     }
 
     // Làm sáng các ngôi sao đến vị trí chỉ định
     private void highlightStars(int rating) {
-        for (int i = 0; i < starsAverage.size(); i++) {
+        for (int i = 0; i < starsComment.size(); i++) {
             if (i < rating) {
-                starsAverage.get(i).setFill((Color.web("#132A13")));
+                starsComment.get(i).setFill((Color.web("#132A13")));
             } else {
-                starsAverage.get(i).setFill((Color.web("#FFFFFF"))); // Default color
+                starsComment.get(i).setFill((Color.web("#FFFFFF"))); // Default color
             }
         }
     }
-    
-    public void setRating(int rating) {
-        currentRating = rating;
-        for (int i = 0; i < starsAverage.size(); i++) {
+
+    public void setRating(List<FontAwesomeIconView> stars, int rating) {
+        if (stars == starsComment) currentRating = rating;
+        for (int i = 0; i < stars.size(); i++) {
             if (i < rating) {
-                starsAverage.get(i).setFill((Color.web("#132A13")));
+                stars.get(i).setFill((Color.web("#132A13")));
             } else {
-                starsAverage.get(i).setFill((Color.web("#FFFFFF"))); // Default color
+                stars.get(i).setFill((Color.web("#FFFFFF"))); // Default color
             }
         }
     }
@@ -219,7 +239,12 @@ public class BookDetailController implements Initializable {
         pages_lbl.setText(String.valueOf(book.getPageCount()));
         description_lbl.setText(book.getDescription());
         totalLoan_lbl.setText("Borrowed: " + String.valueOf(book.getTotalLoan()) + " times");
-        setRating(book.getSumRatingStar() / book.getCountRating());
+
+        setRating(starsAverage, book.getSumRatingStar() / book.getCountRating());
+
+        feedbacks = HandleFeedback.getListComment(book.getId());
+        ShowListComment.show(comment_list, feedbacks, 2);
+
 
         int availableNumber = book.getQuantity() - book.getNumBorrowing();
         if (availableNumber == 0) {
@@ -236,17 +261,24 @@ public class BookDetailController implements Initializable {
         } else {
             sumRating_lbl.setText("Nothing rating");
         }
-
-        // Thiết lập hình ảnh bìa sách
+        // set anh
         try {
-            Image bookCoverImage = new Image(book.getThumbnailUrl(), true);
-            image.setImage(bookCoverImage);
+            Image bookCoverImage;
+            if (book.getThumbnailImage() != null) {
+                // Create Image from byte array
+                bookCoverImage = new Image(new ByteArrayInputStream(book.getThumbnailImage()));
+            } else {
+                bookCoverImage = ShowListBookFound.DEFAULT_BOOK_COVER;
+            }
+            imageView.setImage(bookCoverImage);
         } catch (Exception e) {
-            image.setImage(ShowListBookFound.DEFAULT_BOOK_COVER);
+            imageView.setImage(ShowListBookFound.DEFAULT_BOOK_COVER);
         }
-        image.setFitHeight(190);
-        image.setFitWidth(160);
-        image.setPreserveRatio(false);
+
+
+        imageView.setFitHeight(190);
+        imageView.setFitWidth(160);
+        imageView.setPreserveRatio(false);
     }
 
 

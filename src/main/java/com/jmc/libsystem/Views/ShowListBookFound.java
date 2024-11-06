@@ -13,8 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
-
 
 public class ShowListBookFound {
 
@@ -60,7 +60,13 @@ public class ShowListBookFound {
         // Ảnh bìa
         ImageView bookCoverImageView = new ImageView();
         try {
-            Image bookCoverImage = new Image(book.getThumbnailUrl(), true);
+            Image bookCoverImage;
+            if (book.getThumbnailImage() != null) {
+                // Create Image from byte array
+                bookCoverImage = new Image(new ByteArrayInputStream(book.getThumbnailImage()));
+            } else {
+                bookCoverImage = DEFAULT_BOOK_COVER;
+            }
             bookCoverImageView.setImage(bookCoverImage);
         } catch (Exception e) {
             bookCoverImageView.setImage(DEFAULT_BOOK_COVER);
@@ -111,7 +117,7 @@ public class ShowListBookFound {
         } else {
             totalLoan = book.getTotalLoan() + "";
         }
-        Label borrowCountLabel = new Label("Picked:" + totalLoan);
+        Label borrowCountLabel = new Label("Picked: " + totalLoan);
         borrowCountLabel.setStyle("-fx-font-size: 10px; -fx-text-fill: #555;");
 
         // Sắp xếp các thông tin trong hai dòng chính
@@ -123,7 +129,3 @@ public class ShowListBookFound {
         return bookBox;
     }
 }
-
-
-
-

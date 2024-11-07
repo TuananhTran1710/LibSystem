@@ -17,7 +17,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/UserProfile.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="100.0" layoutY="66.0" prefHeight="210.0" prefWidth="650.0" styleClass="total" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="30.0">
+      <VBox layoutX="100.0" layoutY="66.0" prefHeight="210.0" prefWidth="730.0" styleClass="total" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="30.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="620.0" styleClass="title">
                <children>
@@ -83,7 +83,7 @@
             <Insets left="20.0" right="20.0" />
          </padding>
       </VBox>
-      <VBox layoutX="63.0" layoutY="250.4" prefHeight="255.0" prefWidth="290.0" spacing="20.0" styleClass="total" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="250.0">
+      <VBox layoutX="63.0" layoutY="250.4" prefHeight="255.0" prefWidth="340.0" spacing="20.0" styleClass="total" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="250.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0" styleClass="title">
                <children>
@@ -132,7 +132,7 @@
             <Insets bottom="20.0" left="20.0" />
          </padding>
       </VBox>
-      <VBox layoutX="350.0" layoutY="251.2" prefHeight="255.0" prefWidth="348.0" spacing="5.0" styleClass="total" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="250.0">
+      <VBox layoutX="350.0" layoutY="251.2" prefHeight="255.0" prefWidth="375.0" spacing="5.0" styleClass="total" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="250.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="306.0" styleClass="title">
                <children>
@@ -148,7 +148,7 @@
             <TextField />
             <AnchorPane prefHeight="40.0" prefWidth="289.0">
                <children>
-                  <Button layoutY="7.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="306.0" text="Change Password" AnchorPane.topAnchor="5.0">
+                  <Button layoutY="7.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="334.0" text="Change Password" AnchorPane.topAnchor="5.0">
                      <graphic>
                         <FontAwesomeIconView glyphName="PENCIL" />
                      </graphic>
@@ -160,7 +160,7 @@
             <Insets left="20.0" right="20.0" />
          </padding>
       </VBox>
-      <TableView layoutX="100.0" layoutY="486.0" prefHeight="200.0" prefWidth="650.0" AnchorPane.topAnchor="515.0">
+      <TableView layoutX="100.0" layoutY="486.0" prefHeight="200.0" prefWidth="730.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="515.0">
         <columns>
           <TableColumn prefWidth="75.0" text="Book Name" />
           <TableColumn prefWidth="75.0" text="Borrowed Date" />

@@ -13,8 +13,9 @@ CREATE TABLE Book (
     authors TEXT,
     category TEXT,
     description TEXT,
-    thumbnail_url VARCHAR(255),
+    thumbnail blob,
     page_count INT,
+    state varchar(20),
     quantity int,
     countRating int,
     sumRatingStar int,
@@ -24,7 +25,7 @@ CREATE TABLE Book (
 ) COLLATE utf8mb4_bin;
 
 alter table book
-add column state varchar(20);
+add column thumbnail blob;
 
 update book
 set state = 'publishing'
@@ -40,16 +41,22 @@ CREATE TABLE User (
     -- state : banned, active, deleted
 )COLLATE utf8mb4_bin;
 
+
 -- Tạo bảng feedback để chứa đánh giá của người dùng về sách
 CREATE TABLE Feedback (
-    feedback_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id VARCHAR(20),
     google_book_id VARCHAR(50),
+    primary key(user_id, google_book_id),
     rating INT CHECK (rating BETWEEN 1 AND 5),
     comment TEXT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
 )COLLATE utf8mb4_bin;
+
+drop table feedback;
+
+alter table feedback
+add primary key (user_id, google_book_id);
 
 -- Tạo bảng lịch sử mượn trả chung cho tất cả user (Chỉ admin có thể xem)
 CREATE TABLE BookLoans (
@@ -78,8 +85,8 @@ create table favorite(
     FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
 )COLLATE utf8mb4_bin;
 
+-- de xuat cho admin them sach vao
 create table BookRcm (
-
     google_book_id varchar(50),
     user_id varchar(20),
     primary key(google_book_id, user_id),
@@ -88,6 +95,7 @@ create table BookRcm (
     state varchar(20)
     -- state : in queue or accepted or ignored
 )COLLATE utf8mb4_bin;
+
 
 DELIMITER //
 

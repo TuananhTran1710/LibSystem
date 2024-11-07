@@ -179,7 +179,7 @@
 .comments .scroll-pane .scroll-bar:vertical .thumb {
     -fx-background-color: #132A13;
     -fx-background-radius: 10px;
-    -fx-padding: 5px;
+   // -fx-padding: 5px;
     -fx-opacity: 0.8;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 7, 0.5, 0, 0);
 }

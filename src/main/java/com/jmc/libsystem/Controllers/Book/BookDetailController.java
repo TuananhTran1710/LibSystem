@@ -198,7 +198,7 @@ public class BookDetailController implements Initializable {
     private void highlightStars(int rating) {
         for (int i = 0; i < starsComment.size(); i++) {
             if (i < rating) {
-                starsComment.get(i).setFill((Color.web("#132A13")));
+                starsComment.get(i).setFill((Color.web("gold")));
             } else {
                 starsComment.get(i).setFill((Color.web("#FFFFFF"))); // Default color
             }
@@ -209,7 +209,7 @@ public class BookDetailController implements Initializable {
         if (stars == starsComment) currentRating = rating;
         for (int i = 0; i < stars.size(); i++) {
             if (i < rating) {
-                stars.get(i).setFill((Color.web("#132A13")));
+                stars.get(i).setFill((Color.web("gold")));
             } else {
                 stars.get(i).setFill((Color.web("#FFFFFF"))); // Default color
             }

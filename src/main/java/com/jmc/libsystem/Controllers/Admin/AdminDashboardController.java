@@ -3,6 +3,7 @@ package com.jmc.libsystem.Controllers.Admin;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
+import com.jmc.libsystem.Views.ShowListBookFound;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -13,7 +14,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -126,17 +129,24 @@ public class AdminDashboardController implements Initializable {
                     while (resultSet.next()) {
                         Map<String, Object> row = new HashMap<>();
                         String title = resultSet.getString("title");
-                        String imageUrl = resultSet.getString("thumbnail_url");
+                        Blob thumbnailBlob = resultSet.getBlob("thumbnail"); // Get image as Blob
+                        byte[] thumbnailImage = thumbnailBlob != null ? thumbnailBlob.getBytes(1, (int) thumbnailBlob.length()) : null;
+                        Image bookCoverImage;
+                        if (thumbnailImage != null) {
+                            // Create Image from byte array
+                            bookCoverImage = new Image(new ByteArrayInputStream(thumbnailImage));
+                        } else {
+                            bookCoverImage = ShowListBookFound.DEFAULT_BOOK_COVER;
+                        }
+
                         String authors = resultSet.getString("authors");
                         int quantity = resultSet.getInt("total_books");
                         int loaned = resultSet.getInt("total_borrowed_books");
                         String status = resultSet.getString("status");
                         String id = resultSet.getString("google_book_id");
-                        // Tải ảnh trong background
-                        Image image = new Image(imageUrl, true);
 
                         row.put("title", title);
-                        row.put("image", image);
+                        row.put("image", bookCoverImage);
                         row.put("authors", authors);
                         row.put("quantity", quantity);
                         row.put("loaned", loaned);

@@ -27,38 +27,38 @@ public class ShowListComment {
 
     private static VBox createEachVbox(Comment comment) {
         VBox commentBox = new VBox();
-        commentBox.setSpacing(5); // Khoảng cách giữa các phần tử trong VBox
+        commentBox.setSpacing(2); // Khoảng cách giữa các phần tử trong VBox
 
         // Tạo Label cho user_id
         Label userIdLabel = new Label(comment.getUser_id());
         userIdLabel.setFont(new Font("Arial", 14));
         userIdLabel.setStyle("-fx-font-weight: bold;"); // Chữ đậm cho tên người dùng
+        userIdLabel.setMaxWidth(Double.MAX_VALUE); // Đảm bảo Label dãn theo VBox
+        userIdLabel.setMaxHeight(Double.MAX_VALUE);
 
         // Tạo HBox chứa các ngôi sao
         HBox ratingBox = new HBox();
+
+        ratingBox.getChildren().add(userIdLabel);
         ratingBox.setSpacing(2); // Khoảng cách giữa các ngôi sao
 
-//        int rating = comment.getRating();
-//        for (int i = 1; i <= 5; i++) {
-//            FontIcon starIcon = new FontIcon("fas-star");
-//            starIcon.setIconSize(16);
-//            if (i <= rating) {
-//                starIcon.setIconColor(Color.BLACK); // Ngôi sao đã đánh giá
-//            } else {
-//                starIcon.setIconColor(Color.GREY); // Ngôi sao chưa đánh giá
-//            }
-//            ratingBox.getChildren().add(starIcon);
-//        }
+        // Thêm các ngôi sao vào HBox (có thể thay thế bằng hình ảnh ngôi sao)
+        for (int i = 0; i < comment.getRating(); i++) {
+            Label star = new Label("★"); // Sử dụng ký tự ngôi sao
+            star.setStyle("-fx-font-size: 12; -fx-text-fill: gold;"); // Định dạng ngôi sao
+            ratingBox.getChildren().add(star);
+        }
 
         // Tạo Label cho nội dung bình luận
         Text textLabel = new Text(comment.getText());
         textLabel.setFont(new Font("Arial", 12));
         textLabel.setWrappingWidth(300); // Điều chỉnh độ rộng của dòng comment
+        textLabel.setStyle("-fx-wrap-text: true;"); // Tự động xuống dòng khi vượt quá kích thước
 
         // Thêm các thành phần vào VBox
-        commentBox.getChildren().addAll(userIdLabel, ratingBox, textLabel);
-
+        commentBox.getChildren().addAll(ratingBox, textLabel);
         return commentBox;
     }
+
 
 }

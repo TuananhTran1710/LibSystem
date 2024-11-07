@@ -57,7 +57,7 @@
                             <Insets left="30.0" top="15.0" />
                         </HBox.margin>
                     </Text>
-                    <Label fx:id="numberUser" styleClass="number" text="0">
+                    <Label fx:id="numberUser" maxWidth="500.0" styleClass="number" text="0">
                         <HBox.margin>
                             <Insets left="-145.0" top="45.0" />
                         </HBox.margin>
@@ -75,7 +75,7 @@
                             <Insets left="30.0" top="15.0" />
                         </HBox.margin>
                     </Text>
-                    <Label fx:id="numberBook" styleClass="number" text="0">
+                    <Label fx:id="numberBook" maxWidth="500.0" styleClass="number" text="0">
                         <HBox.margin>
                             <Insets left="-150.0" top="45.0" />
                         </HBox.margin>
@@ -93,7 +93,7 @@
                             <Insets left="30.0" top="15.0" />
                         </HBox.margin>
                     </Text>
-                    <Label fx:id="numberBookLoan" styleClass="number" text="0">
+                    <Label fx:id="numberBookLoan" maxWidth="500.0" prefWidth="500.0" styleClass="number" text="0">
                         <HBox.margin>
                             <Insets left="-93.0" top="45.0" />
                         </HBox.margin>
@@ -111,7 +111,7 @@
                             <Insets left="30.0" top="20.0" />
                         </HBox.margin>
                     </Text>
-                    <Label fx:id="numberOverBook" styleClass="number-error" text="0">
+                    <Label fx:id="numberOverBook" maxWidth="500.0" styleClass="number-error" text="0">
                         <HBox.margin>
                             <Insets left="-100.0" top="45.0" />
                         </HBox.margin>
@@ -144,7 +144,7 @@
                     </HBox.margin>
                     <VBox prefHeight="200.0" prefWidth="100.0">
                         <Label fx:id="category1" styleClass="statistictitle" text="category1" />
-                        <Label fx:id="categoryNumber1" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="138.0" styleClass="number" text="0">
+                        <Label fx:id="categoryNumber1" alignment="CENTER_RIGHT" maxWidth="500.0" prefHeight="30.0" prefWidth="138.0" styleClass="number" text="0">
                             <VBox.margin>
                                 <Insets left="600.0" top="-25.0" />
                             </VBox.margin>
@@ -153,7 +153,7 @@
                     </VBox>
                     <VBox prefHeight="200.0" prefWidth="734.0" GridPane.rowIndex="1">
                         <Label fx:id="category2" styleClass="statistictitle" text="category2" />
-                        <Label fx:id="categoryNumber2" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="139.0" styleClass="number" text="0">
+                        <Label fx:id="categoryNumber2" alignment="CENTER_RIGHT" maxWidth="500.0" prefHeight="30.0" prefWidth="139.0" styleClass="number" text="0">
                             <VBox.margin>
                                 <Insets left="600.0" top="-25.0" />
                             </VBox.margin>
@@ -166,7 +166,7 @@
                     </VBox>
                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                         <Label fx:id="category3" styleClass="statistictitle" text="category3" />
-                        <Label fx:id="categoryNumber3" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="138.0" styleClass="number" text="0">
+                        <Label fx:id="categoryNumber3" alignment="CENTER_RIGHT" maxWidth="500.0" prefHeight="30.0" prefWidth="138.0" styleClass="number" text="0">
                             <VBox.margin>
                                 <Insets left="600.0" top="-25.0" />
                             </VBox.margin>

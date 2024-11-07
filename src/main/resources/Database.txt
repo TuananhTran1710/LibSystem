@@ -164,6 +164,33 @@ SET GLOBAL event_scheduler = ON;
 
 
 
+DELIMITER //
+CREATE TRIGGER after_feedback_delete
+AFTER DELETE ON Feedback
+FOR EACH ROW
+BEGIN
+    UPDATE Book
+    SET countRating = countRating - 1,
+        sumRatingStar = sumRatingStar - OLD.rating
+    WHERE google_book_id = OLD.google_book_id;
+END;
+
+DELIMITER;
+
+
+DELIMITER //
+
+CREATE TRIGGER after_feedback_update
+AFTER UPDATE ON Feedback
+FOR EACH ROW
+BEGIN
+    UPDATE Book
+    SET sumRatingStar = sumRatingStar - OLD.rating + NEW.rating
+    WHERE google_book_id = NEW.google_book_id;
+END;
+
+DELIMITER;
+
 
 
 

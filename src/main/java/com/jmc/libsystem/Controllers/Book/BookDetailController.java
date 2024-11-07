@@ -162,14 +162,32 @@ public class BookDetailController implements Initializable {
         });
 
         comment_btn.setOnAction(event -> {
-            moveToEditComment();
+            if (currentRating > 0 && !text_cmt.getText().trim().isEmpty()) {
+                moveToEditComment();
+                QueryFeedback.insertNewComment(book.getId(), text_cmt.getText(), currentRating);
+                showFeedback();
+            } else {
+
+            }
         });
 
-        save_btn.setOnAction(event -> moveToEditComment());
+        save_btn.setOnAction(event ->
+        {
+            if (!text_cmt.getText().trim().isEmpty()) {
+                moveToEditComment();
+                QueryFeedback.modifyComment(book.getId(), text_cmt.getText(), currentRating);
+                showFeedback();
+            } else {
+
+            }
+        });
         deleted_btn.setOnAction(event -> {
             moveToSendComment();
+            QueryFeedback.deleteComment(book.getId());
+            showFeedback();
         });
     }
+
 
     // Đặt lại các ngôi sao về trạng thái đánh giá hiện tại khi rời chuột
     private void resetStars() {
@@ -341,6 +359,10 @@ public class BookDetailController implements Initializable {
         }
     }
 
+    private void showFeedback() {
+        feedbacks = HandleFeedback.getListComment(book.getId());
+        ShowListComment.show(comment_list, feedbacks);
+    }
 
     public void setUpInfo(Book book) {
 
@@ -357,8 +379,7 @@ public class BookDetailController implements Initializable {
 
         setRating(starsAverage, book.getSumRatingStar() / book.getCountRating());
 
-        feedbacks = HandleFeedback.getListComment(book.getId());
-        ShowListComment.show(comment_list, feedbacks);
+        showFeedback();
 
 
         int availableNumber = book.getQuantity() - book.getNumBorrowing();

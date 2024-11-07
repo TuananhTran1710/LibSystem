@@ -75,7 +75,7 @@
             <ToggleButton fx:id="commentToggle_btn" mnemonicParsing="false" prefHeight="30.0" prefWidth="227.0" selected="true" text="Comments" />
         </HBox>
         <StackPane prefHeight="539.0" prefWidth="452.0">
-            <VBox fx:id="overview_vbox" disable="true" fillWidth="false" prefHeight="344.0" prefWidth="452.0" styleClass="overview">
+            <VBox fx:id="overview_vbox" fillWidth="false" prefHeight="344.0" prefWidth="452.0" styleClass="overview" visible="false">
                 <AnchorPane prefHeight="30.0" prefWidth="472.0" />
                 <GridPane prefHeight="70.0" prefWidth="450.0">
                     <columnConstraints>
@@ -152,27 +152,40 @@
                     </HBox>
                 </GridPane>
             </VBox>
-            <VBox fx:id="comment_vbox" prefHeight="409.0" prefWidth="354.0" spacing="10" styleClass="comments" visible="false">
-                <ScrollPane hbarPolicy="NEVER" prefHeight="592.0" prefWidth="452.0" vbarPolicy="ALWAYS">
-                    <VBox fx:id="comment_list" prefHeight="102.0" prefWidth="100.0" />
+            <VBox fx:id="comment_vbox" prefHeight="409.0" prefWidth="354.0" spacing="10" styleClass="comments">
+                <ScrollPane hbarPolicy="NEVER" prefHeight="342.0" prefWidth="478.0" vbarPolicy="ALWAYS">
+                    <VBox fx:id="comment_list" prefHeight="306.0" prefWidth="458.0">
+                  <children>
+                     <VBox prefHeight="44.0" prefWidth="458.0" styleClass="cmt">
+                        <children>
+                           <HBox prefHeight="47.0" prefWidth="458.0">
+                              <children>
+                                 <Label prefHeight="18.0" prefWidth="112.0" text="User_id" />
+                                 <FontAwesomeIconView glyphName="STAR" size="15" />
+                                 <FontAwesomeIconView glyphName="STAR" size="15" />
+                                 <FontAwesomeIconView glyphName="STAR" size="15" />
+                                 <FontAwesomeIconView glyphName="STAR" size="15" />
+                                 <FontAwesomeIconView glyphName="STAR" size="15" />
+                              </children>
+                           </HBox>
+                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        </children>
+                     </VBox>
+                  </children></VBox>
                 </ScrollPane>
-                <AnchorPane prefHeight="93.0" prefWidth="354.0">
+                <AnchorPane prefHeight="178.0" prefWidth="478.0" styleClass="container">
                     <Label alignment="TOP_CENTER" layoutX="7.0" layoutY="18.0" prefHeight="11.0" prefWidth="91.0" styleClass="title2" text="Your Rating:" />
-                    <FontAwesomeIconView fx:id="star_cmt1" glyphName="STAR" layoutX="103.0" layoutY="38.0" size="20" />
-                    <FontAwesomeIconView fx:id="star_cmt2" glyphName="STAR" layoutX="125.0" layoutY="38.0" size="20" />
-                    <FontAwesomeIconView fx:id="star_cmt3" glyphName="STAR" layoutX="147.0" layoutY="37.0" size="20" />
-                    <FontAwesomeIconView fx:id="star_cmt4" glyphName="STAR" layoutX="170.0" layoutY="37.0" size="20" />
-                    <FontAwesomeIconView fx:id="star_cmt5" glyphName="STAR" layoutX="195.0" layoutY="37.0" size="20" />
+                    <FontAwesomeIconView fx:id="star_cmt1" glyphName="STAR" layoutX="90.0" layoutY="34.0" size="20" />
+                    <FontAwesomeIconView fx:id="star_cmt2" glyphName="STAR" layoutX="115.0" layoutY="34.0" size="20" />
+                    <FontAwesomeIconView fx:id="star_cmt3" glyphName="STAR" layoutX="140.0" layoutY="34.0" size="20" />
+                    <FontAwesomeIconView fx:id="star_cmt4" glyphName="STAR" layoutX="165.0" layoutY="34.0" size="20" />
+                    <FontAwesomeIconView fx:id="star_cmt5" glyphName="STAR" layoutX="190.0" layoutY="34.0" size="20" />
                     <Button fx:id="edit_btn" layoutX="263.0" layoutY="7.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="86.0" styleClass="button_1" text="Edit" />
+                    <TextArea fx:id="text_cmt" layoutX="5.0" layoutY="43.0" prefHeight="83.0" prefWidth="472.0" />
+                     <Button fx:id="save_btn" layoutX="316.0" layoutY="132.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" styleClass="button_1" text="Save" />
+                     <Button fx:id="comment_btn" layoutX="166.0" layoutY="132.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" styleClass="button_1" text="Send comment" />
+                     <Button fx:id="deleted_btn" layoutX="95.0" layoutY="132.0" mnemonicParsing="false" styleClass="button_1" text="Deleted" />
                 </AnchorPane>
-                <VBox prefHeight="200.0" prefWidth="100.0">
-                    <TextArea fx:id="text_cmt" prefHeight="161.0" prefWidth="452.0" />
-                    <AnchorPane prefHeight="23.0" prefWidth="452.0">
-                        <Button fx:id="comment_btn" layoutX="104.0" layoutY="13.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" styleClass="button_1" text="Send comment" />
-                        <Button fx:id="deleted_btn" layoutX="65.0" layoutY="10.0" mnemonicParsing="false" styleClass="button_1" text="Deleted" />
-                        <Button fx:id="save_btn" layoutX="232.0" layoutY="9.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" styleClass="button_1" text="Save" />
-                    </AnchorPane>
-                </VBox>
             </VBox>
         </StackPane>
     </VBox>

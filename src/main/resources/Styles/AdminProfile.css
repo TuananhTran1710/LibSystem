@@ -9,6 +9,10 @@
     -fx-background-radius: 10px;
 }
 
+.total FontAwesomeIconView {
+    -fx-fill: #4A6B4A;
+}
+
 .total TextField {
     -fx-background-color: rgba(19, 42, 19, 0.05);
     -fx-background-radius: 6px;
@@ -48,33 +52,15 @@
     -fx-fill: #132A13;
 }
 
-.blur_text {
-    -fx-text-fill: #4A6B4A;
-    -fx-font-family: "Segoe UI";
-    -fx-font-size:1.0em;
-}
-
-.bold_text {
+.normal_text {
     -fx-text-fill: #132A13;
     -fx-font-family: "Segoe UI";
     -fx-font-size:1.1em;
+}
+
+.bold_text {
+    -fx-text-fill: #4A6B4A;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.1em;
     -fx-font-weight: bold;
-}
-
-TableView {
-    -fx-background-color: #FFFFFF;
-    -fx-border-color: #D3D3D3;
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
-    -fx-table-cell-border-color: transparent;
-}
-
-TableView .column-header {
-    -fx-background-color: #132A13;
-    -fx-border-width: 0 0 1 0;
-    -fx-border-color: #d0d0d0;
-}
-
-TableView .column-header .label {
-    -fx-text-fill: #FFFFFF;
 }

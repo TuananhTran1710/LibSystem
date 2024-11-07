@@ -24,12 +24,6 @@ CREATE TABLE Book (
     language VARCHAR(20)
 ) COLLATE utf8mb4_bin;
 
-alter table book
-add column thumbnail blob;
-
-update book
-set state = 'publishing'
-where google_book_id >= '1' and google_book_id <= '30';
 
 -- Bảng User
 CREATE TABLE User (
@@ -53,10 +47,6 @@ CREATE TABLE Feedback (
     FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id)
 )COLLATE utf8mb4_bin;
 
-drop table feedback;
-
-alter table feedback
-add primary key (user_id, google_book_id);
 
 -- Tạo bảng lịch sử mượn trả chung cho tất cả user (Chỉ admin có thể xem)
 CREATE TABLE BookLoans (

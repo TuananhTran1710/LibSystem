@@ -150,21 +150,12 @@
     -fx-font-size: 1.2em;
 }
 
-.tit_container .title {
-    -fx-background-color: #132A13;
-    -fx-text-fill: #FFFFFF;
-}
-
 .tit_container .arrow {
     -fx-background-color: #FFFFFF;
 }
 
 .tit_container .content {
     -fx-background-color: #FFFFFF;
-    -fx-text-fill: #132A13;
-    -fx-font-family: "Calibri Light";
-    -fx-font-size: 1.2em;
-    -fx-spacing: 10;
 }
 
 .tit_container .content Label {
@@ -177,7 +168,6 @@
 /* comment */
 .comment_container {
     -fx-background-color: transparent;
-    -fx-background-radius: 10;
     -fx-text-fill: #132A13;
     -fx-font-size: 1.2em;
 }
@@ -193,7 +183,7 @@
 .comment_container Button {
     -fx-background-color: #132A13;
     -fx-text-fill: #FFFFFF;
-    -fx-background-radius: 30;
+    -fx-background-radius: 5px;
 }
 
 .comment_container Button:hover {
@@ -213,7 +203,7 @@
 .comment_container .surround {
     -fx-border-color: #132A13;
     -fx-border-width: 1px;
-    -fx-border-radius: 10;
+    -fx-border-radius: 5px;
 }
 
 .comment_container .scroll-pane {
@@ -253,19 +243,47 @@
     -fx-background-color: transparent;
     -fx-border-color: #132A13;
     -fx-border-width: 1px;
-    -fx-border-radius: 10;
+    -fx-border-radius: 5px;
     -fx-text-fill: #132A13
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.0em;
 }
 
 .comment_container TextArea .content {
-    -fx-background-radius: 10;
+    -fx-background-radius: 5px;
 }
 
 .comment_container TextArea .viewport {
-    -fx-background-radius: 10;
+    -fx-background-radius: 5px;
 }
 
 .comment_container .title {
     -fx-font-size: 1.6em;
+    -fx-font-weight: bold;
+}
+
+.level1_content {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:2.5em;
+    -fx-font-weight: bold;
+}
+
+.level2_content {
+    -fx-text-fill: #4A6B4A;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.2em;
+}
+
+.level3_content {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.0em;
+}
+
+.level4_content {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.5em;
     -fx-font-weight: bold;
 }

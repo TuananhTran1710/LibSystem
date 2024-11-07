@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -75,19 +76,19 @@
          </Button>
       </children>
    </VBox>
-   <VBox layoutX="389.0" layoutY="110.0" prefHeight="490.0" prefWidth="474.0" styleClass="right_detail" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="160.0">
+   <VBox layoutX="345.0" layoutY="75.2" prefHeight="641.0" prefWidth="474.0" styleClass="right_detail" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="75.0">
       <children>
          <Label styleClass="title" text="Book name" />
          <HBox alignment="CENTER" prefHeight="40.0" prefWidth="451.0" spacing="6.0" styleClass="choose_action">
             <children>
-               <ToggleButton mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" selected="true" text="Overview" />
-               <ToggleButton mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" text="Comments" />
+               <ToggleButton mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" text="Overview" />
+               <ToggleButton mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" selected="true" text="Comments" />
                <ToggleButton mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" text="Borrow History" />
             </children>
          </HBox>
-         <StackPane prefHeight="360.0" prefWidth="452.0">
+         <StackPane prefHeight="539.0" prefWidth="452.0">
             <children>
-               <VBox fx:id="overview_vb" fillWidth="false" prefHeight="344.0" prefWidth="452.0" styleClass="overview">
+               <VBox fx:id="overview_vb" disable="true" fillWidth="false" prefHeight="344.0" prefWidth="452.0" styleClass="overview" visible="false">
                   <children>
                      <AnchorPane prefHeight="30.0" prefWidth="472.0">
                         <children>
@@ -207,17 +208,9 @@
                         </children>
                      </GridPane>
                   </children></VBox>
-               <VBox fx:id="comments_vb" prefHeight="200.0" prefWidth="100.0" styleClass="comments" visible="false">
+               <AnchorPane fx:id="borrow_history_vb" prefHeight="200.0" prefWidth="200.0" styleClass="borrow_history">
                   <children>
-                     <ScrollPane prefHeight="350.0" prefWidth="452.0">
-                        <content>
-                           <VBox prefHeight="350.0" prefWidth="427.0" visible="false" />
-                        </content>
-                     </ScrollPane>
-                  </children></VBox>
-               <AnchorPane fx:id="borrow_history_vb" prefHeight="200.0" prefWidth="200.0" styleClass="borrow_history" visible="false">
-                  <children>
-                     <TableView prefHeight="350.0" prefWidth="450.0">
+                     <TableView prefHeight="530.0" prefWidth="450.0">
                        <columns>
                          <TableColumn prefWidth="75.0" text="User" />
                          <TableColumn prefWidth="75.0" text="Borow Date" />
@@ -229,6 +222,38 @@
                         </columnResizePolicy>
                      </TableView>
                   </children></AnchorPane>
+               <VBox prefHeight="409.0" prefWidth="354.0" spacing="10" styleClass="comments" visible="false">
+                  <children>
+                     <ScrollPane hbarPolicy="NEVER" prefHeight="592.0" prefWidth="452.0" vbarPolicy="ALWAYS">
+                        <content>
+                           <VBox fx:id="comment_list" prefHeight="102.0" prefWidth="100.0" />
+                        </content>
+                     </ScrollPane>
+                     <AnchorPane prefHeight="93.0" prefWidth="354.0">
+                        <children>
+                           <Label alignment="TOP_CENTER" layoutX="7.0" layoutY="18.0" prefHeight="11.0" prefWidth="91.0" styleClass="title2" text="Your Rating:" />
+                           <FontAwesomeIconView fx:id="star_cmt1" glyphName="STAR" layoutX="103.0" layoutY="38.0" size="20" />
+                           <FontAwesomeIconView fx:id="star_cmt2" glyphName="STAR" layoutX="125.0" layoutY="38.0" size="20" />
+                           <FontAwesomeIconView fx:id="star_cmt3" glyphName="STAR" layoutX="147.0" layoutY="37.0" size="20" />
+                           <FontAwesomeIconView fx:id="star_cmt4" glyphName="STAR" layoutX="170.0" layoutY="37.0" size="20" />
+                           <FontAwesomeIconView fx:id="star_cmt5" glyphName="STAR" layoutX="195.0" layoutY="37.0" size="20" />
+                           <Button fx:id="edit_btn" layoutX="263.0" layoutY="7.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="86.0" styleClass="button_1" text="Edit" />
+                        </children>
+                     </AnchorPane>
+                     <VBox prefHeight="200.0" prefWidth="100.0">
+                        <children>
+                           <TextArea fx:id="text_cmt" prefHeight="161.0" prefWidth="452.0" />
+                           <AnchorPane prefHeight="23.0" prefWidth="452.0">
+                              <children>
+                                 <Button fx:id="comment_btn" layoutX="104.0" layoutY="13.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" styleClass="button_1" text="Send comment" />
+                                 <Button fx:id="deleted_btn" layoutX="65.0" layoutY="10.0" mnemonicParsing="false" styleClass="button_1" text="Deleted" />
+                                 <Button fx:id="save_btn" layoutX="232.0" layoutY="9.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" styleClass="button_1" text="Save" />
+                              </children>
+                           </AnchorPane>
+                        </children>
+                     </VBox>
+                  </children>
+               </VBox>
             </children>
          </StackPane>
       </children>

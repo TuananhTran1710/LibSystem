@@ -167,12 +167,12 @@
 .comments .scroll-pane {
     -fx-border-color: #132A13;
     -fx-border-width: 2px;
-    -fx-border-radius: 5px;
+   // -fx-border-radius: 5px;
     -fx-background-color: #FFFFFF;
 }
 
 .comments .scroll-pane .viewport {
-    -fx-background-color: rgba(19, 42, 19, 0.1);
+    -fx-background-color: transparent;
 }
 
 .comments .scroll-pane .scroll-bar:horizontal .thumb,

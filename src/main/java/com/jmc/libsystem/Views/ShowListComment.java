@@ -31,7 +31,7 @@ public class ShowListComment {
 
         // Tạo Label cho user_id
         Label userIdLabel = new Label(comment.getUser_id());
-
+        userIdLabel.setPrefWidth(315);
         userIdLabel.setStyle("-fx-font-weight: bold;" +
                 "-fx-font-size: 1.3em"); // Chữ đậm cho tên người dùng
 
@@ -41,7 +41,7 @@ public class ShowListComment {
         // Tạo HBox chứa các ngôi sao
         HBox rating_id = new HBox();
         rating_id.getChildren().add(userIdLabel);
-        rating_id.setSpacing(6);
+        rating_id.setSpacing(0.0);
 
         HBox ratingBox = new HBox();
         ratingBox.setSpacing(2); // Khoảng cách giữa các ngôi sao
@@ -62,12 +62,20 @@ public class ShowListComment {
 
         // Tạo Label cho nội dung bình luận
         Text textLabel = new Text(comment.getText());
-        textLabel.setWrappingWidth(300); // Điều chỉnh độ rộng của dòng comment
+        textLabel.setWrappingWidth(415); // Điều chỉnh độ rộng của dòng comment
         textLabel.setStyle("-fx-wrap-text: true;" +
                 "-fx-font-size: 1.25em"); // Tự động xuống dòng khi vượt quá kích thước
 
         // Thêm các thành phần vào VBox
         commentBox.getChildren().addAll(rating_id, textLabel);
+        commentBox.setStyle("-fx-background-color: #EEEEEE;" +
+                "-fx-border-radius: 5px;" +
+                "-fx-padding: 3px 10px 10px 10px;" +
+                "-fx-border-color: #132A13;" +
+                "-fx-border-weight: 2px;");
+        commentBox.setPrefWidth(430);
+        commentBox.setPrefHeight(55);
+
         return commentBox;
     }
 

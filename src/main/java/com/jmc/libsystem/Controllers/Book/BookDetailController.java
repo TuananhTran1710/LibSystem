@@ -158,6 +158,7 @@ public class BookDetailController implements Initializable {
         });
 
         edit_btn.setOnAction(event -> {
+
             onEditComment();
         });
 
@@ -332,6 +333,7 @@ public class BookDetailController implements Initializable {
         }
 
         text_cmt.setEditable(true);
+        text_cmt.positionCaret(text_cmt.getText().length());
     }
 
 
@@ -406,8 +408,8 @@ public class BookDetailController implements Initializable {
         }
 
 
-        imageView.setFitHeight(190);
-        imageView.setFitWidth(160);
+        imageView.setFitHeight(280);
+        imageView.setFitWidth(225);
         imageView.setPreserveRatio(false);
     }
 

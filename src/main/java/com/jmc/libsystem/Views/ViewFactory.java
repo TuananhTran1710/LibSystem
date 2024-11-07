@@ -32,8 +32,7 @@ public class ViewFactory {
     private AnchorPane responseView;
     private VBox adminMenu;
     //book
-    private AnchorPane bookPreview;
-    private ScrollPane bookDetail;
+    private AnchorPane bookDetail;
     //
     private ObjectProperty<UserMenuOptions> userSelectedMenuItem;
     private ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
@@ -144,18 +143,8 @@ public class ViewFactory {
         return reportView;
     }
 
-    public AnchorPane getBookPreview() {
-        if (bookPreview == null) {
-            try {
-                bookPreview = new FXMLLoader(getClass().getResource("/Fxml/Book/BookPreview.fxml")).load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return bookPreview;
-    }
 
-    public ScrollPane getBookDetail() {
+    public AnchorPane getBookDetail() {
         if (bookDetail == null) {
             try {
                 bookDetail = new FXMLLoader(getClass().getResource("/FXML/Book/BookDetail.fxml")).load();

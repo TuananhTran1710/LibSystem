@@ -10,14 +10,14 @@ import javafx.scene.text.Text;
 import java.util.List;
 
 public class ShowListComment {
-    public static void show(VBox container, List<Comment> listComment, int limit) {
+    public static void show(VBox container, List<Comment> listComment) {
         container.getChildren().clear();
         if (listComment.isEmpty()) {
             //do something
             return;
         }
 
-        for (int i = 0; i < Math.min(listComment.size(), limit); i++) {
+        for (int i = 0; i < listComment.size(); i++) {
             Comment comment = listComment.get(i);
             VBox commentBox = createEachVbox(comment);
             container.getChildren().add(commentBox);

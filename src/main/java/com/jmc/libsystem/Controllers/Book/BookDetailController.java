@@ -9,6 +9,7 @@ import com.jmc.libsystem.Information.Comment;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.QueryDatabase.QueryFavoriteBook;
+import com.jmc.libsystem.QueryDatabase.QueryFeedback;
 import com.jmc.libsystem.Views.ShowListBookFound;
 import com.jmc.libsystem.Views.ShowListComment;
 import com.jmc.libsystem.Views.UserMenuOptions;
@@ -16,8 +17,8 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -25,6 +26,8 @@ import javafx.scene.paint.Color;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -39,7 +42,6 @@ public class BookDetailController implements Initializable {
     public Label pages_lbl;
     public ImageView imageView;
     public Label title;
-    public Label sumRating_lbl;
     public Button borrow_btn;
     public Button like_btn;
     public Button return_btn;
@@ -48,7 +50,6 @@ public class BookDetailController implements Initializable {
     public Label description_lbl;
     public Label available_lbl;
     public Label categories_lbl;
-    public ScrollPane scrollPane;
     public FontAwesomeIconView star1;
     public FontAwesomeIconView star2;
     public FontAwesomeIconView star3;
@@ -66,6 +67,12 @@ public class BookDetailController implements Initializable {
     public Button comment_btn;
     public Button deleted_btn;
     public Button save_btn;
+    public ToggleButton overview_btn;
+    public ToggleButton commentToggle_btn;
+    public Label id_lbl;
+    public Label lan_lbl;
+    public VBox overview_vbox;
+    public VBox comment_vbox;
 
     private List<Comment> feedbacks;
 
@@ -141,6 +148,27 @@ public class BookDetailController implements Initializable {
             toLikeButton();
             QueryFavoriteBook.deleteRecord(book.getId());
         });
+
+        overview_btn.setOnAction(event -> {
+            moveToOverviewVBox();
+        });
+
+        commentToggle_btn.setOnAction(event -> {
+            moveToCommentVbox();
+        });
+
+        edit_btn.setOnAction(event -> {
+            onEditComment();
+        });
+
+        comment_btn.setOnAction(event -> {
+            moveToEditComment();
+        });
+
+        save_btn.setOnAction(event -> moveToEditComment());
+        deleted_btn.setOnAction(event -> {
+            moveToSendComment();
+        });
     }
 
     // Đặt lại các ngôi sao về trạng thái đánh giá hiện tại khi rời chuột
@@ -203,6 +231,92 @@ public class BookDetailController implements Initializable {
         unlike_btn.setDisable(false);
     }
 
+    private void moveToCommentVbox() {
+        commentToggle_btn.setSelected(true);
+        overview_btn.setSelected(false);
+
+        overview_vbox.setDisable(true);
+        overview_vbox.setVisible(false);
+
+        comment_vbox.setDisable(false);
+        comment_vbox.setVisible(true);
+    }
+
+    private void moveToOverviewVBox() {
+        commentToggle_btn.setSelected(false);
+        overview_btn.setSelected(true);
+
+        overview_vbox.setDisable(false);
+        overview_vbox.setVisible(true);
+
+        comment_vbox.setDisable(true);
+        comment_vbox.setVisible(false);
+    }
+
+    private void moveToEditComment() {
+        deleted_btn.setVisible(false);
+        deleted_btn.setDisable(true);
+
+        save_btn.setVisible(false);
+        save_btn.setDisable(true);
+
+        edit_btn.setVisible(true);
+        edit_btn.setDisable(false);
+
+        comment_btn.setVisible(false);
+        comment_btn.setDisable(true);
+
+        for (int i = 0; i < 5; i++) {
+            starsComment.get(i).setDisable(true);
+        }
+
+        text_cmt.setEditable(false);
+    }
+
+    private void moveToSendComment() {
+        deleted_btn.setVisible(false);
+        deleted_btn.setDisable(true);
+
+        save_btn.setVisible(false);
+        save_btn.setDisable(true);
+
+        edit_btn.setVisible(false);
+        edit_btn.setDisable(true);
+
+        comment_btn.setDisable(false);
+        comment_btn.setVisible(true);
+
+        for (int i = 0; i < 5; i++) {
+            starsComment.get(i).setDisable(false);
+        }
+
+        setRating(starsComment, 0);
+
+        text_cmt.setEditable(true);
+        text_cmt.clear();
+    }
+
+    private void onEditComment() {
+        deleted_btn.setVisible(true);
+        deleted_btn.setDisable(false);
+
+        save_btn.setVisible(true);
+        save_btn.setDisable(false);
+
+        edit_btn.setVisible(false);
+        edit_btn.setDisable(true);
+
+        comment_btn.setDisable(true);
+        comment_btn.setVisible(false);
+
+        for (int i = 0; i < 5; i++) {
+            starsComment.get(i).setDisable(false);
+        }
+
+        text_cmt.setEditable(true);
+    }
+
+
     public void setDisableBorrowButton() {
         if (book.getQuantity() == book.getNumBorrowing()) {
             borrow_btn.setDisable(true);
@@ -229,7 +343,6 @@ public class BookDetailController implements Initializable {
 
 
     public void setUpInfo(Book book) {
-        scrollPane.setVvalue(0.0);
 
         title.setText(book.getTitle());
         author_lbl.setText(book.getAuthors());
@@ -239,11 +352,13 @@ public class BookDetailController implements Initializable {
         pages_lbl.setText(String.valueOf(book.getPageCount()));
         description_lbl.setText(book.getDescription());
         totalLoan_lbl.setText("Borrowed: " + String.valueOf(book.getTotalLoan()) + " times");
+        id_lbl.setText(book.getId());
+        lan_lbl.setText(book.getLanguage());
 
         setRating(starsAverage, book.getSumRatingStar() / book.getCountRating());
 
         feedbacks = HandleFeedback.getListComment(book.getId());
-        ShowListComment.show(comment_list, feedbacks, 2);
+        ShowListComment.show(comment_list, feedbacks);
 
 
         int availableNumber = book.getQuantity() - book.getNumBorrowing();
@@ -255,12 +370,6 @@ public class BookDetailController implements Initializable {
             available_lbl.setTextFill(Color.BLACK);
         }
 
-
-        if (book.getCountRating() > 0) {
-            sumRating_lbl.setText("(" + String.valueOf(book.getSumRatingStar()) + " ratings)");
-        } else {
-            sumRating_lbl.setText("Nothing rating");
-        }
         // set anh
         try {
             Image bookCoverImage;
@@ -283,6 +392,8 @@ public class BookDetailController implements Initializable {
 
 
     public void modifyButton() {
+        moveToOverviewVBox();
+        showMyComment();
 
         if (QueryBookLoans.isBorrowing(book.getId())) toReturnButton();
         else toBorrowButton();
@@ -292,4 +403,25 @@ public class BookDetailController implements Initializable {
 
         setDisableBorrowButton();
     }
+
+    public void showMyComment() {
+        ResultSet resultSet = QueryFeedback.isCommented(book.getId());
+        try {
+            if (resultSet.isBeforeFirst()) {
+                resultSet.next();
+                String text = resultSet.getString("comment");
+                String user_id = Model.getInstance().getMyUser().getId();
+                int rating = resultSet.getInt("rating");
+                setRating(starsComment, rating);
+                text_cmt.setText(text);
+
+                moveToEditComment();
+            } else {
+                moveToSendComment();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

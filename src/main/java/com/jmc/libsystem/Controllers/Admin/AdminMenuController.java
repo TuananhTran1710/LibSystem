@@ -25,6 +25,26 @@ public class AdminMenuController implements Initializable {
     private void addListensButton() {
         dashboard_btn.setOnAction(event -> onDashBoard());
         logout_btn.setOnAction(event -> convertToLogin());
+        response_btn.setOnAction(event -> onResponse());
+        profile_btn.setOnAction(event -> onProfile());
+        book_btn.setOnAction(event -> onManageBook());
+        user_btn.setOnAction(event -> onManageUser());
+    }
+
+    private void onManageUser() {
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.USER);
+    }
+
+    private void onManageBook() {
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.BOOK);
+    }
+
+    private void onProfile() {
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.PROFILE);
+    }
+
+    private void onResponse() {
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.RESPONSE);
     }
 
     private void convertToLogin() {

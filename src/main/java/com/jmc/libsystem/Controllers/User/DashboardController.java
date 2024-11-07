@@ -26,7 +26,6 @@ public class DashboardController implements Initializable {
     public ScrollPane scrollPane_search;
     public ScrollPane scrollPane_reading;
 
-
     public DashboardController() {
         instance = this;
     }
@@ -34,7 +33,6 @@ public class DashboardController implements Initializable {
     public static DashboardController getInstance() {
         return instance;
     }
-
 
     public TextField search_tf;
     public Button search_btn;
@@ -179,7 +177,7 @@ public class DashboardController implements Initializable {
 
     public void resetReading() {
         scrollPane_reading.setHvalue(0.0);
-        ResultSet resultSet = QueryBookLoans.getListBorrow(Model.getInstance().getMyUser().getId());
+        ResultSet resultSet = QueryBookLoans.getListBorrowing(Model.getInstance().getMyUser().getId());
         bookReading = SearchBookDatabase.getBookFromResultSet(resultSet);
 
         if (num_show_reading.getValue() != 20)

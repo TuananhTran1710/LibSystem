@@ -1,5 +1,6 @@
 package com.jmc.libsystem.Information;
 
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -10,7 +11,7 @@ public class Book {
     private final String authors;
     private LocalDate publishDate;
     private String description;
-    private final String thumbnailUrl;
+    private final byte[] thumbnailImage; // Store image data as byte array
     private int pageCount;
     private String language;
     private int quantity;
@@ -20,18 +21,18 @@ public class Book {
     private int totalLoan;
     private int numBorrowing;
 
-
-    public Book(String id, String title, String authors, String thumbnailUrl) {
+    // Constructor with thumbnail image as byte array
+    public Book(String id, String title, String authors, byte[] thumbnailImage) {
         this.id = id;
         this.title = title;
         this.authors = authors;
-        this.thumbnailUrl = thumbnailUrl;
+        this.thumbnailImage = thumbnailImage;
     }
 
-    public Book(String title, String authors, String thumbnailUrl) {
+    public Book(String title, String authors, byte[] thumbnailImage) {
         this.title = title;
         this.authors = authors;
-        this.thumbnailUrl = thumbnailUrl;
+        this.thumbnailImage = thumbnailImage;
     }
 
     public void setId(String id) {
@@ -78,13 +79,13 @@ public class Book {
         this.numBorrowing = numBorrowing;
     }
 
-    public Book(String id, String title, String authors, LocalDate publishDate, String description, String thumbnailUrl, int pageCount, String language, int quantity, String category, int countRating, int sumRatingStar, int totalLoan, int numBorrowing) {
+    public Book(String id, String title, String authors, LocalDate publishDate, String description, byte[] thumbnailImage, int pageCount, String language, int quantity, String category, int countRating, int sumRatingStar, int totalLoan, int numBorrowing) {
         this.id = id;
         this.title = title;
         this.authors = authors;
         this.publishDate = publishDate;
         this.description = description;
-        this.thumbnailUrl = thumbnailUrl;
+        this.thumbnailImage = thumbnailImage;
         this.pageCount = pageCount;
         this.language = language;
         this.quantity = quantity;
@@ -115,8 +116,8 @@ public class Book {
         return description;
     }
 
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
+    public byte[] getThumbnailImage() {
+        return thumbnailImage;
     }
 
     public int getPageCount() {
@@ -156,9 +157,10 @@ public class Book {
             String id = rs.getString("google_book_id");
             String title = rs.getString("title");
             String authors = rs.getString("authors");
-            LocalDate publishedDate = rs.getDate("publishDate").toLocalDate();
+            LocalDate publishedDate = rs.getDate("publishDate") != null ? rs.getDate("publishDate").toLocalDate() : null;
             String description = rs.getString("description");
-            String thumbnailUrl = rs.getString("thumbnail_url");
+            Blob thumbnailBlob = rs.getBlob("thumbnail"); // Get image as Blob
+            byte[] thumbnailImage = thumbnailBlob != null ? thumbnailBlob.getBytes(1, (int) thumbnailBlob.length()) : null;
             int pageCount = rs.getInt("page_count");
             String language = rs.getString("language");
             int quantity = rs.getInt("quantity");
@@ -168,7 +170,7 @@ public class Book {
             int totalLoan = rs.getInt("totalLoan");
             int numBorrowing = rs.getInt("numBorrowing");
 
-            return new Book(id, title, authors, publishedDate, description, thumbnailUrl,
+            return new Book(id, title, authors, publishedDate, description, thumbnailImage,
                     pageCount, language, quantity, category, countRating,
                     sumRatingStar, totalLoan, numBorrowing);
         } catch (SQLException e) {

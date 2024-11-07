@@ -3,21 +3,32 @@ package com.jmc.libsystem.Controllers.Book;
 import com.jmc.libsystem.Controllers.User.DashboardController;
 import com.jmc.libsystem.Controllers.User.MyBookController;
 import com.jmc.libsystem.Controllers.User.UserController;
+import com.jmc.libsystem.HandleResultSet.HandleFeedback;
 import com.jmc.libsystem.Information.Book;
+import com.jmc.libsystem.Information.Comment;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.QueryDatabase.QueryFavoriteBook;
+import com.jmc.libsystem.QueryDatabase.QueryFeedback;
 import com.jmc.libsystem.Views.ShowListBookFound;
+import com.jmc.libsystem.Views.ShowListComment;
 import com.jmc.libsystem.Views.UserMenuOptions;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class BookDetailController implements Initializable {
@@ -29,20 +40,45 @@ public class BookDetailController implements Initializable {
     public Label publishDate_lbl;
     public Label quantity_lbl;
     public Label pages_lbl;
-    public ImageView image;
+    public ImageView imageView;
     public Label title;
-    public Label sumRating_lbl;
     public Button borrow_btn;
     public Button like_btn;
     public Button return_btn;
     public Button unlike_btn;
     public Label totalLoan_lbl;
-    public Button comment_btn;
     public Label description_lbl;
     public Label available_lbl;
     public Label categories_lbl;
-    public ScrollPane scrollPane;
+    public FontAwesomeIconView star1;
+    public FontAwesomeIconView star2;
+    public FontAwesomeIconView star3;
+    public FontAwesomeIconView star4;
+    public FontAwesomeIconView star5;
+    //phan cmt
+    public VBox comment_list;
+    public FontAwesomeIconView star_cmt1;
+    public FontAwesomeIconView star_cmt2;
+    public FontAwesomeIconView star_cmt3;
+    public FontAwesomeIconView star_cmt4;
+    public FontAwesomeIconView star_cmt5;
+    public TextArea text_cmt;
+    public Button edit_btn;
+    public Button comment_btn;
+    public Button deleted_btn;
+    public Button save_btn;
+    public ToggleButton overview_btn;
+    public ToggleButton commentToggle_btn;
+    public Label id_lbl;
+    public Label lan_lbl;
+    public VBox overview_vbox;
+    public VBox comment_vbox;
 
+    private List<Comment> feedbacks;
+
+    private List<FontAwesomeIconView> starsAverage;
+    private List<FontAwesomeIconView> starsComment;
+    private int currentRating = 0; // Rating ban đầu
 
     private Book book;
 
@@ -68,6 +104,16 @@ public class BookDetailController implements Initializable {
         like_btn.setFocusTraversable(false);
         return_btn.setFocusTraversable(false);
         unlike_btn.setFocusTraversable(false);
+
+        starsAverage = List.of(star1, star2, star3, star4, star5);
+        starsComment = List.of(star_cmt1, star_cmt2, star_cmt3, star_cmt4, star_cmt5);
+        for (int i = 0; i < starsComment.size(); i++) {
+            int index = i;
+            starsComment.get(i).setOnMouseEntered(event -> highlightStars(index + 1));
+            starsComment.get(i).setOnMouseExited(event -> resetStars());
+            starsComment.get(i).setOnMouseClicked(event -> setRating(starsComment, index + 1));
+        }
+
 
         back_btn.setOnAction(event -> moveMenuCurrent());
         return_btn.setOnAction(event -> {
@@ -102,6 +148,72 @@ public class BookDetailController implements Initializable {
             toLikeButton();
             QueryFavoriteBook.deleteRecord(book.getId());
         });
+
+        overview_btn.setOnAction(event -> {
+            moveToOverviewVBox();
+        });
+
+        commentToggle_btn.setOnAction(event -> {
+            moveToCommentVbox();
+        });
+
+        edit_btn.setOnAction(event -> {
+            onEditComment();
+        });
+
+        comment_btn.setOnAction(event -> {
+            if (currentRating > 0 && !text_cmt.getText().trim().isEmpty()) {
+                moveToEditComment();
+                QueryFeedback.insertNewComment(book.getId(), text_cmt.getText(), currentRating);
+                showFeedback();
+            } else {
+
+            }
+        });
+
+        save_btn.setOnAction(event ->
+        {
+            if (!text_cmt.getText().trim().isEmpty()) {
+                moveToEditComment();
+                QueryFeedback.modifyComment(book.getId(), text_cmt.getText(), currentRating);
+                showFeedback();
+            } else {
+
+            }
+        });
+        deleted_btn.setOnAction(event -> {
+            moveToSendComment();
+            QueryFeedback.deleteComment(book.getId());
+            showFeedback();
+        });
+    }
+
+
+    // Đặt lại các ngôi sao về trạng thái đánh giá hiện tại khi rời chuột
+    private void resetStars() {
+        setRating(starsComment, currentRating);
+    }
+
+    // Làm sáng các ngôi sao đến vị trí chỉ định
+    private void highlightStars(int rating) {
+        for (int i = 0; i < starsComment.size(); i++) {
+            if (i < rating) {
+                starsComment.get(i).setFill((Color.web("#132A13")));
+            } else {
+                starsComment.get(i).setFill((Color.web("#FFFFFF"))); // Default color
+            }
+        }
+    }
+
+    public void setRating(List<FontAwesomeIconView> stars, int rating) {
+        if (stars == starsComment) currentRating = rating;
+        for (int i = 0; i < stars.size(); i++) {
+            if (i < rating) {
+                stars.get(i).setFill((Color.web("#132A13")));
+            } else {
+                stars.get(i).setFill((Color.web("#FFFFFF"))); // Default color
+            }
+        }
     }
 
     private void toReturnButton() {
@@ -137,6 +249,92 @@ public class BookDetailController implements Initializable {
         unlike_btn.setDisable(false);
     }
 
+    private void moveToCommentVbox() {
+        commentToggle_btn.setSelected(true);
+        overview_btn.setSelected(false);
+
+        overview_vbox.setDisable(true);
+        overview_vbox.setVisible(false);
+
+        comment_vbox.setDisable(false);
+        comment_vbox.setVisible(true);
+    }
+
+    private void moveToOverviewVBox() {
+        commentToggle_btn.setSelected(false);
+        overview_btn.setSelected(true);
+
+        overview_vbox.setDisable(false);
+        overview_vbox.setVisible(true);
+
+        comment_vbox.setDisable(true);
+        comment_vbox.setVisible(false);
+    }
+
+    private void moveToEditComment() {
+        deleted_btn.setVisible(false);
+        deleted_btn.setDisable(true);
+
+        save_btn.setVisible(false);
+        save_btn.setDisable(true);
+
+        edit_btn.setVisible(true);
+        edit_btn.setDisable(false);
+
+        comment_btn.setVisible(false);
+        comment_btn.setDisable(true);
+
+        for (int i = 0; i < 5; i++) {
+            starsComment.get(i).setDisable(true);
+        }
+
+        text_cmt.setEditable(false);
+    }
+
+    private void moveToSendComment() {
+        deleted_btn.setVisible(false);
+        deleted_btn.setDisable(true);
+
+        save_btn.setVisible(false);
+        save_btn.setDisable(true);
+
+        edit_btn.setVisible(false);
+        edit_btn.setDisable(true);
+
+        comment_btn.setDisable(false);
+        comment_btn.setVisible(true);
+
+        for (int i = 0; i < 5; i++) {
+            starsComment.get(i).setDisable(false);
+        }
+
+        setRating(starsComment, 0);
+
+        text_cmt.setEditable(true);
+        text_cmt.clear();
+    }
+
+    private void onEditComment() {
+        deleted_btn.setVisible(true);
+        deleted_btn.setDisable(false);
+
+        save_btn.setVisible(true);
+        save_btn.setDisable(false);
+
+        edit_btn.setVisible(false);
+        edit_btn.setDisable(true);
+
+        comment_btn.setDisable(true);
+        comment_btn.setVisible(false);
+
+        for (int i = 0; i < 5; i++) {
+            starsComment.get(i).setDisable(false);
+        }
+
+        text_cmt.setEditable(true);
+    }
+
+
     public void setDisableBorrowButton() {
         if (book.getQuantity() == book.getNumBorrowing()) {
             borrow_btn.setDisable(true);
@@ -161,9 +359,12 @@ public class BookDetailController implements Initializable {
         }
     }
 
+    private void showFeedback() {
+        feedbacks = HandleFeedback.getListComment(book.getId());
+        ShowListComment.show(comment_list, feedbacks);
+    }
 
     public void setUpInfo(Book book) {
-        scrollPane.setVvalue(0.0);
 
         title.setText(book.getTitle());
         author_lbl.setText(book.getAuthors());
@@ -173,6 +374,13 @@ public class BookDetailController implements Initializable {
         pages_lbl.setText(String.valueOf(book.getPageCount()));
         description_lbl.setText(book.getDescription());
         totalLoan_lbl.setText("Borrowed: " + String.valueOf(book.getTotalLoan()) + " times");
+        id_lbl.setText(book.getId());
+        lan_lbl.setText(book.getLanguage());
+
+        setRating(starsAverage, book.getSumRatingStar() / book.getCountRating());
+
+        showFeedback();
+
 
         int availableNumber = book.getQuantity() - book.getNumBorrowing();
         if (availableNumber == 0) {
@@ -183,27 +391,30 @@ public class BookDetailController implements Initializable {
             available_lbl.setTextFill(Color.BLACK);
         }
 
-
-        if (book.getCountRating() > 0) {
-            sumRating_lbl.setText("(" + String.valueOf(book.getSumRatingStar()) + " ratings)");
-        } else {
-            sumRating_lbl.setText("Nothing rating");
-        }
-
-        // Thiết lập hình ảnh bìa sách
+        // set anh
         try {
-            Image bookCoverImage = new Image(book.getThumbnailUrl(), true);
-            image.setImage(bookCoverImage);
+            Image bookCoverImage;
+            if (book.getThumbnailImage() != null) {
+                // Create Image from byte array
+                bookCoverImage = new Image(new ByteArrayInputStream(book.getThumbnailImage()));
+            } else {
+                bookCoverImage = ShowListBookFound.DEFAULT_BOOK_COVER;
+            }
+            imageView.setImage(bookCoverImage);
         } catch (Exception e) {
-            image.setImage(ShowListBookFound.DEFAULT_BOOK_COVER);
+            imageView.setImage(ShowListBookFound.DEFAULT_BOOK_COVER);
         }
-        image.setFitHeight(190);
-        image.setFitWidth(160);
-        image.setPreserveRatio(false);
+
+
+        imageView.setFitHeight(190);
+        imageView.setFitWidth(160);
+        imageView.setPreserveRatio(false);
     }
 
 
     public void modifyButton() {
+        moveToOverviewVBox();
+        showMyComment();
 
         if (QueryBookLoans.isBorrowing(book.getId())) toReturnButton();
         else toBorrowButton();
@@ -213,4 +424,25 @@ public class BookDetailController implements Initializable {
 
         setDisableBorrowButton();
     }
+
+    public void showMyComment() {
+        ResultSet resultSet = QueryFeedback.isCommented(book.getId());
+        try {
+            if (resultSet.isBeforeFirst()) {
+                resultSet.next();
+                String text = resultSet.getString("comment");
+                String user_id = Model.getInstance().getMyUser().getId();
+                int rating = resultSet.getInt("rating");
+                setRating(starsComment, rating);
+                text_cmt.setText(text);
+
+                moveToEditComment();
+            } else {
+                moveToSendComment();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

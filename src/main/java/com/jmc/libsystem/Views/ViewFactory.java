@@ -26,10 +26,13 @@ public class ViewFactory {
     private VBox userMenu;
     //Admin View
     private AnchorPane adminDashboardView;
+    private AnchorPane manageBookView;
+    private AnchorPane manageUserView;
+    private ScrollPane profileAdminView;
+    private AnchorPane responseView;
     private VBox adminMenu;
     //book
-    private AnchorPane bookPreview;
-    private ScrollPane bookDetail;
+    private AnchorPane bookDetail;
     //
     private ObjectProperty<UserMenuOptions> userSelectedMenuItem;
     private ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
@@ -140,18 +143,8 @@ public class ViewFactory {
         return reportView;
     }
 
-    public AnchorPane getBookPreview() {
-        if (bookPreview == null) {
-            try {
-                bookPreview = new FXMLLoader(getClass().getResource("/Fxml/Book/BookPreview.fxml")).load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return bookPreview;
-    }
 
-    public ScrollPane getBookDetail() {
+    public AnchorPane getBookDetail() {
         if (bookDetail == null) {
             try {
                 bookDetail = new FXMLLoader(getClass().getResource("/FXML/Book/BookDetail.fxml")).load();
@@ -177,6 +170,50 @@ public class ViewFactory {
         return adminDashboardView;
     }
 
+    public AnchorPane getManageUserView() {
+        if (manageUserView == null) {
+            try {
+                manageUserView = new FXMLLoader(getClass().getResource("/Fxml/Admin/ManageUser.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return manageUserView;
+    }
+
+    public AnchorPane getManageBookView() {
+        if (manageBookView == null) {
+            try {
+                manageBookView = new FXMLLoader(getClass().getResource("/Fxml/Admin/ManageBook.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return manageBookView;
+    }
+
+    public AnchorPane getResponseView() {
+        if (responseView == null) {
+            try {
+                responseView = new FXMLLoader(getClass().getResource("/Fxml/Admin/Response.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return responseView;
+    }
+
+    public ScrollPane getProfileAdminView() {
+        if (profileAdminView == null) {
+            try {
+                profileAdminView = new FXMLLoader(getClass().getResource("/Fxml/Admin/Profile.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return profileAdminView;
+    }
+
     public VBox getAdminMenu() {
         if (adminMenu == null) {
             try {
@@ -191,6 +228,11 @@ public class ViewFactory {
     // -----------------------------------Function Show Window------------------------------------
     public void showLoginWindow() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
+        createStage(loader);
+    }
+
+    public void showCmtWindow() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Book/test2.fxml"));
         createStage(loader);
     }
 
@@ -259,5 +301,6 @@ public class ViewFactory {
     public void closeStage(Stage stage) {
         stage.close();
     }
+
 
 }

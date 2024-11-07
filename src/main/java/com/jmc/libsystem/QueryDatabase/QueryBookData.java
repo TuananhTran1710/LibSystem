@@ -41,7 +41,7 @@ public class QueryBookData {
     // truy van co van de ?
     public static ResultSet getBookStatistic() {
         ResultSet resultSet = null;
-        String query = "SELECT b.google_book_id, b.thumbnail_url, b.title, b.authors, " +
+        String query = "SELECT b.google_book_id, b.thumbnail, b.title, b.authors, " +
                 "    b.quantity AS total_books, " +
                 "    b.totalLoan AS total_borrowed_books, " +
                 "    CASE " +
@@ -50,19 +50,6 @@ public class QueryBookData {
                 "    END AS status " +
                 "FROM " +
                 "    Book b";
-        /*String query = "SELECT" +
-                "  b.google_book_id, b.thumbnail_url,b.title,b.authors, b.quantity AS total_books" +
-                "    ,COUNT(bl.history_id) AS total_borrowing," +
-                "    CASE " +
-                "        WHEN b.quantity > COUNT(bl.history_id) THEN 'Còn sách'\n" +
-                "        ELSE 'Hết sách'\n" +
-                "    END AS status\n" +
-                "FROM \n" +
-                "    Book b\n" +
-                "LEFT JOIN \n" +
-                "    BookLoans bl ON b.google_book_id = bl.google_book_id AND bl.return_date IS NULL\n" +
-                "GROUP BY \n" +
-                "    b.google_book_id, b.title, b.authors, b.thumbnail_url, b.quantity;\n";*/
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
@@ -72,7 +59,7 @@ public class QueryBookData {
         return resultSet;
     }
 
-    public static ResultSet getCountBook(){
+    public static ResultSet getCountBook() {
         ResultSet resultSet = null;
         try {
             String query = "SELECT COUNT(*) as count FROM book;";
@@ -86,7 +73,7 @@ public class QueryBookData {
         return resultSet;
     }
 
-    public static ResultSet getCountBookLoan(){
+    public static ResultSet getCountBookLoan() {
         ResultSet resultSet = null;
         try {
             String query = "SELECT sum(totalLoan) as count FROM book;";
@@ -100,7 +87,7 @@ public class QueryBookData {
         return resultSet;
     }
 
-    public static ResultSet getCategorySort3(){
+    public static ResultSet getCategorySort3() {
         ResultSet resultSet = null;
         try {
             String query = "SELECT category, sum(quantity) AS total_books " +

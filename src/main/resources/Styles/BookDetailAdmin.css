@@ -83,9 +83,6 @@
     -fx-fill: #132A13;
 }
 
-.star FontAwesomeIconView {
-    -fx-fill: #FFFFFF;
-}
 
 /* bên phải */
 .right_detail {
@@ -225,3 +222,6 @@
     -fx-text-fill: #FFFFFF;
 }
 
+.cmt{
+-fx-background-color: #FFFFFF
+}

@@ -3,12 +3,15 @@ package com.jmc.libsystem.QueryDatabase;
 import com.jmc.libsystem.Models.DatabaseDriver;
 import com.jmc.libsystem.Models.Model;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class QueryBookLoans {
 
@@ -130,7 +133,7 @@ public class QueryBookLoans {
         }
     }
 
-    public static ResultSet getCountOverdue(){
+    public static ResultSet getCountOverdue() {
         ResultSet resultSet = null;
         String query = "SELECT COUNT(*) AS count " +
                 "FROM bookloans " +
@@ -144,5 +147,45 @@ public class QueryBookLoans {
         }
         return resultSet;
     }
+
+    public static void setRemainingTime(Label time_lbl, String book_id, String user_id) {
+        ResultSet resultSet = null;
+        String query = "SELECT * " +
+                "FROM bookloans " +
+                "WHERE user_id = ? and google_book_id = ? and return_date is null";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, user_id);
+            preparedStatement.setString(2, book_id);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            if (resultSet.next()) {
+                LocalDate dueDate = resultSet.getDate("due_date").toLocalDate();
+
+                // Tính thời gian còn lại
+                LocalDateTime now = LocalDateTime.now();
+                LocalDateTime dueDateTime = dueDate.atStartOfDay();
+                Duration duration = Duration.between(now, dueDateTime);
+
+                // Lấy ngày và giờ còn lại
+                long daysRemaining = duration.toDays();
+                long hoursRemaining = duration.toHoursPart();
+
+                // Cập nhật Label
+                // Kiểm tra nếu đã quá hạn
+                if (duration.isNegative())
+                    time_lbl.setText("Overdue");
+                else
+                    time_lbl.setText("Remaining: " + daysRemaining + " days " + hoursRemaining + " times");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }

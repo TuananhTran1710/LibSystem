@@ -21,6 +21,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -36,7 +37,7 @@ public class BookDetailController implements Initializable {
     private static BookDetailController instance;
 
     public Button back_btn;
-    public Label author_lbl;
+
     public Label publishDate_lbl;
     public Label quantity_lbl;
     public Label pages_lbl;
@@ -49,7 +50,7 @@ public class BookDetailController implements Initializable {
     public Label totalLoan_lbl;
     public Label description_lbl;
     public Label available_lbl;
-    public Label categories_lbl;
+
     public FontAwesomeIconView star1;
     public FontAwesomeIconView star2;
     public FontAwesomeIconView star3;
@@ -73,6 +74,9 @@ public class BookDetailController implements Initializable {
     public Label lan_lbl;
     public VBox overview_vbox;
     public VBox comment_vbox;
+    public VBox authorsContainer;
+    public VBox categoriesContainer;
+
 
     private List<Comment> feedbacks;
 
@@ -158,6 +162,7 @@ public class BookDetailController implements Initializable {
         });
 
         edit_btn.setOnAction(event -> {
+
             onEditComment();
         });
 
@@ -332,6 +337,7 @@ public class BookDetailController implements Initializable {
         }
 
         text_cmt.setEditable(true);
+        text_cmt.positionCaret(text_cmt.getText().length());
     }
 
 
@@ -367,8 +373,6 @@ public class BookDetailController implements Initializable {
     public void setUpInfo(Book book) {
 
         title.setText(book.getTitle());
-        author_lbl.setText(book.getAuthors());
-        categories_lbl.setText(book.getCategory());
         publishDate_lbl.setText(book.getPublishDate().toString());
         quantity_lbl.setText(String.valueOf(book.getQuantity()));
         pages_lbl.setText(String.valueOf(book.getPageCount()));
@@ -406,9 +410,35 @@ public class BookDetailController implements Initializable {
         }
 
 
-        imageView.setFitHeight(190);
-        imageView.setFitWidth(160);
+        imageView.setFitHeight(280);
+        imageView.setFitWidth(225);
         imageView.setPreserveRatio(false);
+
+        // Hiển thị danh sách tác giả dưới dạng các ô, mỗi dòng chứa 2 ô
+        authorsContainer.getChildren().clear();
+        List<String> authors = List.of(book.getAuthors().split(", "));
+        for (int i = 0; i < authors.size(); i += 2) {
+            HBox row = new HBox(5);
+            for (int j = i; j < i + 2 && j < authors.size(); j++) {
+                Label authorLabel = new Label(authors.get(j));
+                authorLabel.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 5 10; -fx-border-radius: 15; -fx-background-radius: 15;");
+                row.getChildren().add(authorLabel);
+            }
+            authorsContainer.getChildren().add(row);
+        }
+
+        // Hiển thị danh mục sách dưới dạng các ô, mỗi dòng chứa 2 ô
+        categoriesContainer.getChildren().clear();
+        List<String> categories = List.of(book.getCategory().split(","));
+        for (int i = 0; i < categories.size(); i += 3) {
+            HBox row = new HBox(5);
+            for (int j = i; j < i + 3 && j < categories.size(); j++) {
+                Label categoryLabel = new Label(categories.get(j).trim());
+                categoryLabel.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 5 10; -fx-border-radius: 15; -fx-background-radius: 15;");
+                row.getChildren().add(categoryLabel);
+            }
+            categoriesContainer.getChildren().add(row);
+        }
     }
 
 

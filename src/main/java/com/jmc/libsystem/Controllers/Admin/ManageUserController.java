@@ -1,11 +1,7 @@
 package com.jmc.libsystem.Controllers.Admin;
 
 import com.jmc.libsystem.HandleResultSet.EvaluateInfo;
-import com.jmc.libsystem.Models.Model;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class ManageUserController {
 
@@ -14,6 +10,10 @@ public class ManageUserController {
     public TextField emailField;
     public PasswordField passwordField;
     public Button addUserButton;
+    public TextField search_tf;
+    public Button search_btn;
+    public ChoiceBox num_show_search;
+    public ChoiceBox criteriaBox;
 
     public void initialize() {
         addUserButton.setOnAction(event -> {

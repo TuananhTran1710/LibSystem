@@ -166,6 +166,7 @@
 .overview {
 -fx-spacing: 10
 }
+
 /* Comments */
 .comments .scroll-pane {
     -fx-border-color: #132A13;

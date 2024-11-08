@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ProfileController implements Initializable {
+    private static ProfileController instance;
+
     public TextField user_id_fld;
     public TextField fullname_fld;
     public TextField email_fld;

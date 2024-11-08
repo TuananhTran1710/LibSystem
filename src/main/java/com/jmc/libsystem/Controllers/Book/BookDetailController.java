@@ -360,8 +360,6 @@ public class BookDetailController implements Initializable {
                 MyBookController.getInstance().refreshData();
 
             }
-            case SEARCH ->
-                    UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getSearchView());
         }
     }
 

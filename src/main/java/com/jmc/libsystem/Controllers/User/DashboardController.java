@@ -44,9 +44,9 @@ public class DashboardController implements Initializable {
     public Button notice_btn;
     public HBox reading_hbox;
     public HBox popular_hbox;
-    public ChoiceBox<Integer> num_show_reading;
-    public ChoiceBox<Integer> num_show_popular;
-    public ChoiceBox<Integer> num_show_search;
+    public ChoiceBox num_show_reading;
+    public ChoiceBox num_show_popular;
+    public ChoiceBox num_show_search;
 
     public static SearchCriteria typeSearch;
     public static int limitBookSearch;
@@ -64,13 +64,13 @@ public class DashboardController implements Initializable {
         criteriaBox.setItems(FXCollections.observableArrayList(SearchCriteria.TITLE, SearchCriteria.CATEGORY, SearchCriteria.AUTHORS));
         criteriaBox.setValue(SearchCriteria.TITLE);
         //
-        num_show_search.setItems(FXCollections.observableArrayList(20, 50, 100));
+        num_show_search.setItems(FXCollections.observableArrayList(20, 50, 100, "All"));
         num_show_search.setValue(20);
 
-        num_show_popular.setItems(FXCollections.observableArrayList(20, 50, 100));
+        num_show_popular.setItems(FXCollections.observableArrayList(20, 50, 100, "All"));
         num_show_popular.setValue(20);
 
-        num_show_reading.setItems(FXCollections.observableArrayList(20, 50, 100));
+        num_show_reading.setItems(FXCollections.observableArrayList(20, 50, 100, "All"));
         num_show_reading.setValue(20);
         //
         typeSearch = SearchCriteria.TITLE;
@@ -127,17 +127,23 @@ public class DashboardController implements Initializable {
     }
 
     public void modifyShowBookSearch() {
-        limitBookSearch = num_show_search.getValue();
+        if (!(num_show_search.getValue()).equals("All"))
+            limitBookSearch = (int) num_show_search.getValue();
+        else limitBookSearch = Integer.MAX_VALUE;
         searchBooks(limitBookSearch);
     }
 
     public void modifyShowBookReading() {
-        limitBookReading = num_show_reading.getValue();
+        if (!(num_show_reading.getValue()).equals("All"))
+            limitBookReading = (int) num_show_reading.getValue();
+        else limitBookReading = Integer.MAX_VALUE;
         ShowListBookFound.show(bookReading, reading_hbox, limitBookReading);
     }
 
     public void modifyShowBookPopular() {
-        limitBookPopular = num_show_popular.getValue();
+        if (!(num_show_popular.getValue()).equals("All"))
+            limitBookPopular = (int) num_show_popular.getValue();
+        else limitBookPopular = Integer.MAX_VALUE;
         ShowListBookFound.show(bookPopular, popular_hbox, limitBookPopular);
     }
 
@@ -175,7 +181,7 @@ public class DashboardController implements Initializable {
         ResultSet resultSet = QueryBookLoans.getListBorrowing(Model.getInstance().getMyUser().getId());
         bookReading = SearchBookDatabase.getBookFromResultSet(resultSet);
 
-        if (num_show_reading.getValue() != 20)
+        if (num_show_reading.getValue().equals("All") || (int) num_show_reading.getValue() != 20)
             num_show_reading.setValue(20); // sau khi set thi lap tuc nhay vao ham modifyReading o Dashboard
         else ShowListBookFound.show(bookReading, reading_hbox, 20);
     }
@@ -183,7 +189,7 @@ public class DashboardController implements Initializable {
     public void resetPopular() {
         scrollPane_popular.setHvalue(0.0);
         bookPopular = RecommendationSystem.getListRecommend();
-        if (num_show_popular.getValue() != 20)
+        if (num_show_popular.getValue().equals("All") || (int) num_show_popular.getValue() != 20)
             num_show_popular.setValue(20);
         else ShowListBookFound.show(bookPopular, popular_hbox, 20);
     }

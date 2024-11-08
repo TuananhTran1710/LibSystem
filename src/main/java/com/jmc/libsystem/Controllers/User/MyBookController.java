@@ -30,8 +30,8 @@ public class MyBookController implements Initializable {
     public HBox Favorite_HB;
     public ScrollPane scrollPane_fav;
     public ScrollPane scrollPane_borrow;
-    public ChoiceBox<Integer> num_show_fav;
-    public ChoiceBox<Integer> num_show_borrow;
+    public ChoiceBox num_show_fav;
+    public ChoiceBox num_show_borrow;
 
     public static int limitBookBorrowing;
     public static int limitBookFavorite;
@@ -49,10 +49,10 @@ public class MyBookController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        num_show_borrow.setItems(FXCollections.observableArrayList(20, 50, 100));
+        num_show_borrow.setItems(FXCollections.observableArrayList(20, 50, 100, "All"));
         num_show_borrow.setValue(20);
 
-        num_show_fav.setItems(FXCollections.observableArrayList(20, 50, 100));
+        num_show_fav.setItems(FXCollections.observableArrayList(20, 50, 100, "All"));
         num_show_fav.setValue(20);
 
         limitBookBorrowing = 20;
@@ -67,12 +67,16 @@ public class MyBookController implements Initializable {
     }
 
     private void modifyShowBookFavorite() {
-        limitBookFavorite = num_show_fav.getValue();
+        if (!(num_show_fav.getValue()).equals("All"))
+            limitBookFavorite = (int) num_show_fav.getValue();
+        else limitBookFavorite = Integer.MAX_VALUE;
         ShowListBookFound.show(favList, Favorite_HB, limitBookFavorite);
     }
 
     private void modifyShowBookBorrow() {
-        limitBookBorrowing = num_show_borrow.getValue();
+        if (!(num_show_borrow.getValue()).equals("All"))
+            limitBookBorrowing = (int) num_show_borrow.getValue();
+        else limitBookBorrowing = Integer.MAX_VALUE;
         ShowListBookFound.show(borrowingList, Borrow_HB, limitBookBorrowing);
     }
 
@@ -95,6 +99,13 @@ public class MyBookController implements Initializable {
         NumberBorrow.setText(Integer.toString(borrow));
         NumberReturn.setText(Integer.toString(returns));
         NumberFavorite.setText(Integer.toString(favorite));
+
+        limitBookBorrowing = 20;
+        limitBookFavorite = 20;
+
+        num_show_borrow.setValue(20);
+        num_show_fav.setValue(20);
+
         showBorrowBook(user_id, Borrow_HB);
         showFavoriteBook(user_id, Favorite_HB);
 

@@ -32,6 +32,13 @@
         <Line endX="400.0" layoutX="425.0" layoutY="50.0" startX="-350.0" AnchorPane.leftAnchor="50.0" />
     </AnchorPane>
     <VBox alignment="CENTER" fillWidth="false" layoutX="51.2" layoutY="110.0" prefHeight="490.0" prefWidth="250.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="160.0">
+        <HBox fx:id="time_vBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0" styleClass="time">
+         <FontAwesomeIconView glyphName="CLOCK_ALT" />
+            <Label fx:id="time_lbl" text="Label" textFill="#e11010">
+            <font>
+               <Font name="System Bold" size="13.0" />
+            </font></Label>
+        </HBox>
         <ImageView fx:id="imageView" fitHeight="280.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true" />
         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="350.0" spacing="10.0">
             <Label>
@@ -78,7 +85,7 @@
             <ToggleButton fx:id="commentToggle_btn" mnemonicParsing="false" prefHeight="30.0" prefWidth="243.0" selected="true" text="Comments" />
         </HBox>
         <StackPane prefHeight="539.0" prefWidth="452.0">
-            <VBox fx:id="overview_vbox" fillWidth="false" prefHeight="344.0" prefWidth="452.0" styleClass="overview">
+            <VBox fx:id="overview_vbox" fillWidth="false" prefHeight="344.0" prefWidth="452.0" styleClass="overview" visible="false">
                 <AnchorPane prefHeight="30.0" prefWidth="472.0" />
                 <GridPane prefHeight="70.0" prefWidth="450.0">
                     <columnConstraints>
@@ -160,7 +167,7 @@
                     </HBox>
                 </GridPane>
             </VBox>
-            <VBox fx:id="comment_vbox" prefHeight="409.0" prefWidth="354.0" spacing="10" styleClass="comments" visible="false">
+            <VBox fx:id="comment_vbox" prefHeight="409.0" prefWidth="354.0" spacing="10" styleClass="comments">
                 <ScrollPane hbarPolicy="NEVER" prefHeight="342.0" prefWidth="478.0" vbarPolicy="ALWAYS">
                     <VBox fx:id="comment_list" alignment="TOP_CENTER" fillWidth="false" prefHeight="306.0" prefWidth="458.0">
                         <VBox prefHeight="55.0" prefWidth="430.0" styleClass="cmt">

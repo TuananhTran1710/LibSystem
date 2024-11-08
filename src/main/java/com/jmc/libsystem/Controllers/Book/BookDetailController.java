@@ -76,6 +76,8 @@ public class BookDetailController implements Initializable {
     public VBox comment_vbox;
     public VBox authorsContainer;
     public VBox categoriesContainer;
+    public Label time_lbl;
+    public HBox time_vBox;
 
 
     private List<Comment> feedbacks;
@@ -121,6 +123,7 @@ public class BookDetailController implements Initializable {
 
         back_btn.setOnAction(event -> moveMenuCurrent());
         return_btn.setOnAction(event -> {
+            time_vBox.setVisible(false);
             toBorrowButton();
             QueryBookLoans.updateReturnBook(book.getId());
             book.setNumBorrowing(book.getNumBorrowing() - 1);
@@ -128,10 +131,12 @@ public class BookDetailController implements Initializable {
             available_lbl.setTextFill(Color.BLACK);
         });
         borrow_btn.setOnAction(event -> {
+            time_vBox.setVisible(true);
             toReturnButton();
             QueryBookLoans.insertNewRecord(book.getId());
             book.setNumBorrowing(book.getNumBorrowing() + 1);
             book.setTotalLoan(book.getTotalLoan() + 1);
+            QueryBookLoans.setRemainingTime(time_lbl, book.getId(), Model.getInstance().getMyUser().getId());
 
             int availableNumber = book.getQuantity() - book.getNumBorrowing();
             if (availableNumber == 0) {
@@ -222,6 +227,7 @@ public class BookDetailController implements Initializable {
     }
 
     private void toReturnButton() {
+
         return_btn.setVisible(true);
         borrow_btn.setVisible(false);
 
@@ -360,8 +366,6 @@ public class BookDetailController implements Initializable {
                 MyBookController.getInstance().refreshData();
 
             }
-            case SEARCH ->
-                    UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getSearchView());
         }
     }
 
@@ -445,15 +449,23 @@ public class BookDetailController implements Initializable {
     public void modifyButton() {
         moveToOverviewVBox();
         showMyComment();
-
-        if (QueryBookLoans.isBorrowing(book.getId())) toReturnButton();
-        else toBorrowButton();
-
-        if (QueryFavoriteBook.isFavorite(book.getId())) toUnlikeButton();
-        else toLikeButton();
+        if (QueryBookLoans.isBorrowing(book.getId())) {
+            time_vBox.setVisible(true);
+            QueryBookLoans.setRemainingTime(time_lbl, book.getId(), Model.getInstance().getMyUser().getId());
+            toReturnButton();
+        } else {
+            time_vBox.setVisible(false);
+            toBorrowButton(); // Chức năng khi sách chưa mượn
+        }
+        if (QueryFavoriteBook.isFavorite(book.getId())) {
+            toUnlikeButton();
+        } else {
+            toLikeButton();
+        }
 
         setDisableBorrowButton();
     }
+
 
     public void showMyComment() {
         ResultSet resultSet = QueryFeedback.isCommented(book.getId());

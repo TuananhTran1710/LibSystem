@@ -19,7 +19,6 @@ public class ViewFactory {
     //Users View
     private AnchorPane dashboardView;
     private AnchorPane myBookView;
-    private AnchorPane searchView;
     private AnchorPane reportView;
     private AnchorPane proposeView;
     private AnchorPane profileView;
@@ -96,17 +95,6 @@ public class ViewFactory {
             }
         }
         return myBookView;
-    }
-
-    public AnchorPane getSearchView() {
-        if (searchView == null) {
-            try {
-                searchView = new FXMLLoader(getClass().getResource("/Fxml/User/Search.fxml")).load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return searchView;
     }
 
     public AnchorPane getProposeView() {

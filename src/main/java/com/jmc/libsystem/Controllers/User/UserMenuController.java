@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 
 public class UserMenuController implements Initializable {
     public Button dashboard_btn;
-    public Button search_btn;
     public Button profile_btn;
     public Button logout_btn;
     public Button report_btn;
@@ -27,7 +26,6 @@ public class UserMenuController implements Initializable {
         dashboard_btn.setOnAction(event -> onDashBoard());
         logout_btn.setOnAction(event -> convertToLogin());
         mybook_btn.setOnAction(event -> onMyBook());
-        search_btn.setOnAction(event -> onSearch());
         propose_btn.setOnAction(event -> onPropose());
         profile_btn.setOnAction(event -> onProfile());
     }
@@ -40,9 +38,6 @@ public class UserMenuController implements Initializable {
         Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.PROPOSE);
     }
 
-    private void onSearch() {
-        Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.SEARCH);
-    }
 
     private void convertToLogin() {
         Model.getInstance().getViewFactory().getUserSelectedMenuItem().set(UserMenuOptions.LOGOUT);

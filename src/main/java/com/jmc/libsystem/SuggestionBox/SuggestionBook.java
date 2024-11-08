@@ -39,7 +39,7 @@ public class SuggestionBook {
         if (autoCompletionBinding != null) {
             autoCompletionBinding.dispose();
         }
-        Set<String> typeSuggest = new HashSet<>();
+        Set<String> typeSuggest;
         if (DashboardController.typeSearch == SearchCriteria.TITLE) {
             typeSuggest = titleSuggest;
         } else if (DashboardController.typeSearch == SearchCriteria.CATEGORY) {

@@ -1,6 +1,5 @@
 package com.jmc.libsystem.Controllers.User;
 
-import com.jmc.libsystem.Information.User;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

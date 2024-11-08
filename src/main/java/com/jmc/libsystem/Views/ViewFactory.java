@@ -28,7 +28,7 @@ public class ViewFactory {
     private AnchorPane adminDashboardView;
     private AnchorPane manageBookView;
     private AnchorPane manageUserView;
-    private ScrollPane profileAdminView;
+    private AnchorPane profileAdminView;
     private AnchorPane responseView;
     private VBox adminMenu;
     //book
@@ -203,7 +203,7 @@ public class ViewFactory {
         return responseView;
     }
 
-    public ScrollPane getProfileAdminView() {
+    public AnchorPane getProfileAdminView() {
         if (profileAdminView == null) {
             try {
                 profileAdminView = new FXMLLoader(getClass().getResource("/Fxml/Admin/Profile.fxml")).load();

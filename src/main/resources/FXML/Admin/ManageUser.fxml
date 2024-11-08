@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="total_container" stylesheets="@../../Styles/ManageUser.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.ManageUserController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="total_container" stylesheets="@../../Styles/ManageUser.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.ManageUserController">
    <children>
 
       <AnchorPane layoutX="31.2" prefHeight="60.0" prefWidth="790.0" styleClass="title" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="0.0">

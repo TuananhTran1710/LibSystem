@@ -93,6 +93,11 @@
             <version>11.1.0</version> <!-- Chọn phiên bản tương thích với Java của bạn -->
         </dependency>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId> <!-- Cần thêm để sử dụng WebView -->
+            <version>22.0.1</version>
+        </dependency>
 
     </dependencies>
 

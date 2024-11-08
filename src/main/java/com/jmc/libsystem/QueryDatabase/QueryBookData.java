@@ -24,11 +24,9 @@ public class QueryBookData {
         return resultSet;
     }
 
-    public static ResultSet getAllBook(String keyWord) {
+    public static ResultSet getDataForSuggest() {
         ResultSet resultSet = null;
-        String type = DashboardController.typeSearch.toString();
-        // no limit num of book displayed
-        String query = "SELECT * FROM book";
+        String query = "SELECT distinct title, authors, category FROM book";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
@@ -104,5 +102,6 @@ public class QueryBookData {
         }
         return resultSet;
     }
+
 }
 

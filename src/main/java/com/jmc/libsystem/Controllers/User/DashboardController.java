@@ -5,6 +5,7 @@ import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.QueryDatabase.RecommendationSystem;
+import com.jmc.libsystem.SuggestionBox.SuggestionBook;
 import com.jmc.libsystem.Views.SearchCriteria;
 import com.jmc.libsystem.Views.ShowListBookFound;
 import javafx.collections.FXCollections;
@@ -13,12 +14,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
 import java.sql.ResultSet;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
     private static DashboardController instance;
@@ -56,17 +58,9 @@ public class DashboardController implements Initializable {
     public static List<Book> bookReading;
 
 
-    public AutoCompletionBinding<String> autoCompletionBinding;
-    public Set<String> titleSuggest = new HashSet<>();
-    public Set<String> categorySuggest = new HashSet<>();
-    public Set<String> authorSuggest = new HashSet<>();
-
-    public static boolean onBookPreview = false;
-    public static boolean onBookLoanPreview = false;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //
+
         criteriaBox.setItems(FXCollections.observableArrayList(SearchCriteria.TITLE, SearchCriteria.CATEGORY, SearchCriteria.AUTHORS));
         criteriaBox.setValue(SearchCriteria.TITLE);
         //
@@ -80,7 +74,21 @@ public class DashboardController implements Initializable {
         num_show_reading.setValue(20);
         //
         typeSearch = SearchCriteria.TITLE;
-        criteriaBox.valueProperty().addListener(observable -> typeSearch = criteriaBox.getValue());
+        criteriaBox.valueProperty().addListener(observable ->
+        {
+            typeSearch = criteriaBox.getValue();
+            if (SuggestionBook.autoCompletionBinding != null) {
+                SuggestionBook.autoCompletionBinding.dispose();
+            }
+            if (typeSearch == SearchCriteria.TITLE) {
+                SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.titleSuggest);
+            } else if (typeSearch == SearchCriteria.AUTHORS) {
+                SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.authorSuggest);
+            } else {
+                SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.categorySuggest);
+            }
+            SuggestionBook.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
+        });
         //
         limitBookSearch = 20;
         limitBookPopular = 20;
@@ -93,8 +101,9 @@ public class DashboardController implements Initializable {
         num_show_search.valueProperty().addListener(observable -> modifyShowBookSearch());
         num_show_reading.valueProperty().addListener(observable -> modifyShowBookReading());
         num_show_popular.valueProperty().addListener(observable -> modifyShowBookPopular());
-        autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, titleSuggest);
-
+        //
+        SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.titleSuggest);
+        SuggestionBook.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
         //auto completion
         search_tf.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -102,8 +111,10 @@ public class DashboardController implements Initializable {
                 switch (keyEvent.getCode()) {
                     case ENTER -> {
                         if (search_tf.isFocused() && !search_tf.getText().trim().isEmpty()) {
-                            searhBooks(limitBookSearch);
-                            autoCompletionLearnWord(search_tf.getText().trim());
+                            searchBooks(limitBookSearch);
+
+                            SuggestionBook.autoCompletionLearnWord(search_tf, search_tf.getText().trim());
+
                             resultList_hb.requestFocus();
                         }
                     }
@@ -112,24 +123,12 @@ public class DashboardController implements Initializable {
         });
         //
         name_lbl.setText("Hi " + Model.getInstance().getMyUser().getFullName() + "!");
-        search_btn.setOnAction(event -> searhBooks(limitBookSearch));
-    }
-
-
-    public void autoCompletionLearnWord(String newWord) {
-        if (!titleSuggest.contains(newWord)) {
-            titleSuggest.add(newWord);
-            if (autoCompletionBinding != null) {
-                autoCompletionBinding.dispose();
-            }
-            autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, titleSuggest);
-            autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
-        }
+        search_btn.setOnAction(event -> searchBooks(limitBookSearch));
     }
 
     public void modifyShowBookSearch() {
         limitBookSearch = num_show_search.getValue();
-        searhBooks(limitBookSearch);
+        searchBooks(limitBookSearch);
     }
 
     public void modifyShowBookReading() {
@@ -143,12 +142,10 @@ public class DashboardController implements Initializable {
     }
 
 
-    public void searhBooks(int limit) {
+    public void searchBooks(int limit) {
         String keyWord = search_tf.getText();
         keyWord = keyWord.trim();
         if (!keyWord.isEmpty()) {
-
-            autoCompletionLearnWord(keyWord);
 
             //gọi truy van de lay ket qua tu database
             bookSearch = SearchBookDatabase.getBookFromResultSet(keyWord);
@@ -158,16 +155,14 @@ public class DashboardController implements Initializable {
         }
     }
 
-
-    //chua lam cai nay
-    public void addTitleSetSuggestion() {
-        // khi admin add sach vao thi cho truc tiep ten sach, ten tg, muc luc vao goi y luon
-
-    }
-
     //this function is called when login successfully
     public void reset() {
         scrollPane_search.setHvalue(0.0);
+        if (SuggestionBook.autoCompletionBinding != null) {
+            SuggestionBook.autoCompletionBinding.dispose();
+        }
+        SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.titleSuggest);
+        SuggestionBook.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
         search_tf.clear();
         criteriaBox.setValue(SearchCriteria.TITLE);
         name_lbl.setText("Hi " + Model.getInstance().getMyUser().getFullName() + "!");
@@ -198,5 +193,4 @@ public class DashboardController implements Initializable {
         resetReading();
         resetPopular();
     }
-
 }

@@ -13,9 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="total_container" stylesheets="@../../Styles/ManageUser.css"
-            xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.jmc.libsystem.Controllers.Admin.ManageUserController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="total_container" stylesheets="@../../Styles/ManageUser.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.ManageUserController">
    <children>
 
       <AnchorPane layoutX="31.2" prefHeight="60.0" prefWidth="790.0" styleClass="title" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="0.0">
@@ -39,30 +37,30 @@
                         <VBox prefHeight="200.0" prefWidth="190.0" spacing="5.0">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User ID" />
-                              <TextField />
+                              <TextField fx:id="userIdField" />
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="190.0" spacing="5.0">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Full name" />
-                              <TextField />
+                              <TextField fx:id="fullNameField" />
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="190.0" spacing="5.0">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-                              <TextField />
+                              <TextField fx:id="emailField" />
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="190.0" spacing="5.0">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-                              <PasswordField />
+                              <PasswordField fx:id="passwordField" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" text="Add User">
+                  <Button fx:id="addUserButton" mnemonicParsing="false" text="Add User">
                      <graphic>
                         <FontAwesomeIconView glyphName="USER_PLUS" />
                      </graphic>
@@ -82,8 +80,8 @@
                <children>
                   <AnchorPane prefHeight="45.0" prefWidth="790.0" AnchorPane.topAnchor="16.0">
                      <children>
-                  
-                                    <TextField fx:id="search_tf" layoutX="-181.0" layoutY="2.0" prefHeight="40.0" prefWidth="750.0" promptText="Search or type a command..." styleClass="search_field" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="2.0" />
+
+                        <TextField fx:id="search_tf" layoutX="-181.0" layoutY="2.0" prefHeight="40.0" prefWidth="750.0" promptText="Search or type a command..." styleClass="search_field" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="2.0" />
                         <Button fx:id="search_btn" layoutY="2.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" styleClass="search_button" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="2.0">
                            <graphic>
                               <FontAwesomeIconView glyphName="SEARCH" rotate="-11.3" size="15" />
@@ -99,13 +97,13 @@
                   <AnchorPane layoutX="-15.0" layoutY="46.0" prefHeight="230.0" prefWidth="790.0" AnchorPane.leftAnchor="-0.0" AnchorPane.topAnchor="76.0">
                      <children>
                         <TableView layoutX="20.0" prefHeight="230.0" prefWidth="750.0" AnchorPane.leftAnchor="20.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="User ID" />
-                            <TableColumn prefWidth="75.0" text="Full name" />
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="User ID" />
+                              <TableColumn prefWidth="75.0" text="Full name" />
                               <TableColumn prefWidth="75.0" text="Email" />
                               <TableColumn prefWidth="75.0" text="Password" />
                               <TableColumn prefWidth="75.0" text="Action" />
-                          </columns>
+                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>

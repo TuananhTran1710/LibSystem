@@ -38,7 +38,10 @@ public class UserController implements Initializable {
                             Stage stage = (Stage) user_parent.getScene().getWindow();
                             Model.getInstance().getViewFactory().closeStage(stage);
                         }
-                        case PROFILE -> user_parent.setCenter(Model.getInstance().getViewFactory().getProfileView());
+                        case PROFILE -> {
+                            user_parent.setCenter(Model.getInstance().getViewFactory().getProfileView());
+                            ProfileController.getInstance().showProfile(); //làm mới nội dung profile
+                        }
                         case PROPOSE -> user_parent.setCenter(Model.getInstance().getViewFactory().getProposeView());
                         case MYBOOK -> {
                             user_parent.setCenter(Model.getInstance().getViewFactory().getMyBookView());

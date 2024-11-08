@@ -15,7 +15,6 @@ public class DatabaseDriver {
         try {
             //ket noi project voi database
             this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/lib_system", "root", "abc123456");
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

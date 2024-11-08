@@ -11,7 +11,10 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/AdminProfile.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/AdminProfile.css"
+            xmlns="http://javafx.com/javafx/22"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.jmc.libsystem.Controllers.Admin.ProfileController">
    <children>
       <VBox layoutX="100.0" layoutY="68.0" prefHeight="350.0" prefWidth="652.0" spacing="5.0" styleClass="total" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="70.0">
          <children>

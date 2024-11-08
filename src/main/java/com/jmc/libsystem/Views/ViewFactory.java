@@ -19,7 +19,6 @@ public class ViewFactory {
     //Users View
     private AnchorPane dashboardView;
     private AnchorPane myBookView;
-    private AnchorPane searchView;
     private AnchorPane reportView;
     private AnchorPane proposeView;
     private AnchorPane profileView;
@@ -28,7 +27,7 @@ public class ViewFactory {
     private AnchorPane adminDashboardView;
     private AnchorPane manageBookView;
     private AnchorPane manageUserView;
-    private ScrollPane profileAdminView;
+    private AnchorPane profileAdminView;
     private AnchorPane responseView;
     private VBox adminMenu;
     //book
@@ -96,17 +95,6 @@ public class ViewFactory {
             }
         }
         return myBookView;
-    }
-
-    public AnchorPane getSearchView() {
-        if (searchView == null) {
-            try {
-                searchView = new FXMLLoader(getClass().getResource("/Fxml/User/Search.fxml")).load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return searchView;
     }
 
     public AnchorPane getProposeView() {
@@ -203,7 +191,7 @@ public class ViewFactory {
         return responseView;
     }
 
-    public ScrollPane getProfileAdminView() {
+    public AnchorPane getProfileAdminView() {
         if (profileAdminView == null) {
             try {
                 profileAdminView = new FXMLLoader(getClass().getResource("/Fxml/Admin/Profile.fxml")).load();

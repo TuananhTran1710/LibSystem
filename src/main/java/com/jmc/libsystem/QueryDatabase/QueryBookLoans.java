@@ -1,14 +1,20 @@
 package com.jmc.libsystem.QueryDatabase;
 
+import com.jmc.libsystem.Information.BookLoan;
 import com.jmc.libsystem.Models.DatabaseDriver;
 import com.jmc.libsystem.Models.Model;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QueryBookLoans {
 
@@ -130,7 +136,7 @@ public class QueryBookLoans {
         }
     }
 
-    public static ResultSet getCountOverdue(){
+    public static ResultSet getCountOverdue() {
         ResultSet resultSet = null;
         String query = "SELECT COUNT(*) AS count " +
                 "FROM bookloans " +
@@ -144,5 +150,140 @@ public class QueryBookLoans {
         }
         return resultSet;
     }
+
+    public static void setRemainingTime(Label time_lbl, String book_id, String user_id) {
+        ResultSet resultSet = null;
+        String query = "SELECT * " +
+                "FROM bookloans " +
+                "WHERE user_id = ? and google_book_id = ? and return_date is null";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, user_id);
+            preparedStatement.setString(2, book_id);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            if (resultSet.next()) {
+                LocalDate dueDate = resultSet.getDate("due_date").toLocalDate();
+
+                // Tính thời gian còn lại
+                LocalDateTime now = LocalDateTime.now();
+                LocalDateTime dueDateTime = dueDate.plusDays(1).atStartOfDay();
+
+                Duration duration = Duration.between(now, dueDateTime);
+
+                // Lấy ngày và giờ còn lại
+                long daysRemaining = duration.toDays();
+                long hoursRemaining = duration.toHoursPart();
+
+                // Cập nhật Label
+                // Kiểm tra nếu đã quá hạn
+                if (duration.isNegative())
+                    time_lbl.setText("Overdue");
+                else
+                    time_lbl.setText("Remaining: " + daysRemaining + " days " + hoursRemaining + " hours");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //lấy tổng số sách đã mượn, dùng trong user profile
+    public static int getTotalBookBorrowed(String userId) {
+        String query = "SELECT COUNT(*) FROM BookLoans WHERE user_id = ?";
+        try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
+            stmt.setString(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    //lấy số sách đang mượn, dùng trong user profile
+    public static int getCurrentBorrowing(String userId) {
+        String query = "SELECT COUNT(*) FROM BookLoans WHERE user_id = ? AND return_date IS NULL";
+        try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
+            stmt.setString(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    //lấy số sách quá hạn chưa trả, dùng trong user profile
+    public static int getOverdueBooks(String userId) {
+        String query = "SELECT COUNT(*) FROM BookLoans WHERE user_id = ? AND return_date IS NULL AND due_date < CURDATE()";
+        try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
+            stmt.setString(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    //lấy thể loại yêu thích, dùng trong user profile
+    public static String getFavoriteGenre(String userId) {
+        String query = "SELECT category FROM Book WHERE google_book_id IN " +
+                "(SELECT google_book_id FROM BookLoans WHERE user_id = ?) " +
+                "GROUP BY category ORDER BY COUNT(*) DESC LIMIT 1";
+        try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
+            stmt.setString(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("category");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "N/A";
+    }
+
+    // lấy dữ liệu từ bảng bookloans trả về list, dùng trong user profile
+    public static List<BookLoan> getBookLoansByUserId(String userId) {
+        List<BookLoan> bookLoans = new ArrayList<>();
+        String query = "SELECT b.title, bl.borrow_date, bl.return_date, " +
+                "CASE " +
+                "  WHEN bl.return_date IS NULL AND bl.due_date < CURDATE() THEN 'Overdue' " +
+                "  WHEN bl.return_date IS NULL THEN 'Borrowing' " +
+                "  ELSE 'Returned' " +
+                "END AS status " +
+                "FROM BookLoans bl " +
+                "JOIN Book b ON bl.google_book_id = b.google_book_id " +
+                "WHERE bl.user_id = ? " +
+                "ORDER BY (bl.return_date IS NULL) DESC, bl.borrow_date DESC";
+
+        try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
+            stmt.setString(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String bookName = rs.getString("title");
+                String borrowedDate = rs.getString("borrow_date");
+                String returnDate = rs.getString("return_date") != null ? rs.getString("return_date") : "N/A";
+                String status = rs.getString("status");
+
+                bookLoans.add(new BookLoan(bookName, borrowedDate, returnDate, status));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookLoans;
+    }
+
 
 }

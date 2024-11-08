@@ -166,6 +166,7 @@
 .overview {
 -fx-spacing: 10
 }
+
 /* Comments */
 .comments .scroll-pane {
     -fx-border-color: #132A13;
@@ -227,4 +228,12 @@
 
 .cmt{
 -fx-background-color: #FFFFFF
+}
+
+.time{
+    -fx-background-color: #EEEEEE;
+    -fx-border-radius: 5px;
+    -fx-padding: 2;
+    -fx-border-color: #132A13;
+    -fx-border-weight: 2px;
 }

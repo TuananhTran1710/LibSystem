@@ -168,7 +168,8 @@ public class QueryBookLoans {
 
                 // Tính thời gian còn lại
                 LocalDateTime now = LocalDateTime.now();
-                LocalDateTime dueDateTime = dueDate.atStartOfDay();
+                LocalDateTime dueDateTime = dueDate.plusDays(1).atStartOfDay();
+
                 Duration duration = Duration.between(now, dueDateTime);
 
                 // Lấy ngày và giờ còn lại
@@ -180,7 +181,7 @@ public class QueryBookLoans {
                 if (duration.isNegative())
                     time_lbl.setText("Overdue");
                 else
-                    time_lbl.setText("Remaining: " + daysRemaining + " days " + hoursRemaining + " times");
+                    time_lbl.setText("Remaining: " + daysRemaining + " days " + hoursRemaining + " hours");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -103,7 +103,7 @@ public class SearchBookAPI {
                 int numBorrowing = 0;
                 int quantity = 0;
 
-                // Add book to list
+                // Add book to list with state = null (that isn't added to database)
                 bookList.add(new Book(id, title, authors, publishDate, description, thumbnailImage, pageCount, language, quantity, cats, countRating, sumRatingStar, totalLoan, numBorrowing));
             }
         }

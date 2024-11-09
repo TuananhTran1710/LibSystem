@@ -119,7 +119,6 @@ public class AdminDashboardController implements Initializable {
         // ObservableList để giữ dữ liệu cho UI
         ObservableList<Map<String, Object>> data = FXCollections.observableArrayList();
 
-
         // Tạo một Task để load ảnh trong background
         Task<Void> loadDataTask = new Task<Void>() {
             @Override

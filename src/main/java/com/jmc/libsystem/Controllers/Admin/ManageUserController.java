@@ -45,10 +45,6 @@ public class ManageUserController implements Initializable {
     public TextField emailField;
     public PasswordField passwordField;
     public Button addUserButton;
-    public TextField search_tf;
-    public Button search_btn;
-    public ChoiceBox num_show_search;
-    public ChoiceBox criteriaBox;
 
 
     private ObservableList<Map<String, Object>> data;

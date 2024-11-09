@@ -1,10 +1,13 @@
 package com.jmc.libsystem.QueryDatabase;
 
+import com.jmc.libsystem.Controllers.User.DashboardController;
 import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.DatabaseDriver;
+import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.Views.AccountType;
 import javafx.scene.control.Alert;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +29,6 @@ public class QueryAccountData {
         }
         return resultSet;
     }
-
     //lam the nay tuc la tren csdl, cac email phai khac nhau (PK) --> Can chinh lai table trong csdl
     public static ResultSet getUserDataForSignUp(String email, String id) {
         ResultSet resultSet = null;
@@ -153,61 +155,6 @@ public class QueryAccountData {
                 }
             }
         }
-    }
-
-    //cập nhật thông tin user, dùng cho user profile
-    public static void updateUserInfo(User user) {
-        String query = "UPDATE user SET fullName = ?, email = ? WHERE user_id = ?";
-        try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
-            stmt.setString(1, user.getFullName());
-            stmt.setString(2, user.getEmail());
-            stmt.setString(3, user.getId());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //cập nhật mật khẩu user, dùng cho user profile
-    public static void updatePassword(User user) {
-        String query = "UPDATE user SET password = ?";
-        try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
-            stmt.setString(1, user.getPassword());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //kiểm tra xem id đã tồn tại chưa, dùng cho user profile
-    public static boolean isUserIdExists(String userId) {
-        String query = "SELECT COUNT(*) FROM user WHERE user_id = ?";
-        try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
-            stmt.setString(1, userId);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next() && rs.getInt(1) > 0) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    //kiểm tra xem email đã tồn tại chưa, dùng cho user profile
-    public static boolean isEmailExists(String email) {
-        String query = "SELECT COUNT(*) FROM user WHERE email = ?";
-        try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
-            stmt.setString(1, email);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next() && rs.getInt(1) > 0) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-
     }
 
 }

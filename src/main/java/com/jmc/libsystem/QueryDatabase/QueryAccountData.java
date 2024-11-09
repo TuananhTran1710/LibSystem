@@ -1,10 +1,10 @@
 package com.jmc.libsystem.QueryDatabase;
 
+import com.jmc.libsystem.Information.Admin;
 import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.DatabaseDriver;
 import com.jmc.libsystem.Views.AccountType;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -89,7 +89,7 @@ public class QueryAccountData {
     }
 
     //cập nhật mật khẩu user, dùng cho user profile
-    public static void updatePassword(User user) {
+    public static void updateUserPassword(User user) {
         String query = "UPDATE user SET password = ?";
         try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
             stmt.setString(1, user.getPassword());
@@ -99,23 +99,8 @@ public class QueryAccountData {
         }
     }
 
-    //kiểm tra xem id đã tồn tại chưa, dùng cho user profile
-    public static boolean isUserIdExists(String userId) {
-        String query = "SELECT COUNT(*) FROM user WHERE user_id = ?";
-        try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
-            stmt.setString(1, userId);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next() && rs.getInt(1) > 0) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
     //kiểm tra xem email đã tồn tại chưa, dùng cho user profile
-    public static boolean isEmailExists(String email) {
+    public static boolean isUserEmailExists(String email) {
         String query = "SELECT COUNT(*) FROM user WHERE email = ?";
         try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
             stmt.setString(1, email);
@@ -129,4 +114,42 @@ public class QueryAccountData {
         return false;
     }
 
+    //cập nhật thông tin admin, dùng cho admin profile
+    public static void updateAdminInfo(Admin admin) {
+        String query = "UPDATE admin SET fullName = ?, email = ? WHERE admin_id = ?";
+        try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
+            stmt.setString(1, admin.getFullName());
+            stmt.setString(2, admin.getEmail());
+            stmt.setString(3, admin.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //cập nhật mật khẩu admin, dùng cho admin profile
+    public static void updateAdminPassword(Admin admin) {
+        String query = "UPDATE admin SET password = ?";
+        try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
+            stmt.setString(1, admin.getPassword());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //kiểm tra xem email đã tồn tại chưa, dùng cho admin profile
+    public static boolean isAdminEmailExists(String email) {
+        String query = "SELECT COUNT(*) FROM admin WHERE email = ?";
+        try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

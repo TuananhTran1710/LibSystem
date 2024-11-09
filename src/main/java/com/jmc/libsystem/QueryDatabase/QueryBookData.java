@@ -12,7 +12,7 @@ public class QueryBookData {
         ResultSet resultSet = null;
         String type = DashboardController.typeSearch.toString();
         // no limit num of book displayed
-        String query = "SELECT * FROM book WHERE " + type + " COLLATE utf8mb4_general_ci LIKE ?";
+        String query = "SELECT * FROM book WHERE " + type + " COLLATE utf8mb4_general_ci LIKE ? and state = 'publishing' ";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             // Thêm % vào từ khóa tìm kiếm cho LIKE
@@ -26,7 +26,7 @@ public class QueryBookData {
 
     public static ResultSet getDataForSuggest() {
         ResultSet resultSet = null;
-        String query = "SELECT distinct title, authors, category FROM book";
+        String query = "SELECT distinct title, authors, category FROM book where state = 'publishing'";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
@@ -43,8 +43,8 @@ public class QueryBookData {
                 "    b.quantity AS total_books, " +
                 "    b.totalLoan AS total_borrowed_books, " +
                 "    CASE " +
-                "        WHEN b.quantity > b.totalLoan THEN 'Available' " +
-                "        ELSE 'Over' " +
+                "        WHEN b.quantity > b.numBorrowing THEN 'Available' " +
+                "        ELSE 'Out of stock' " +
                 "    END AS status " +
                 "FROM " +
                 "    Book b";
@@ -60,7 +60,7 @@ public class QueryBookData {
     public static ResultSet getCountBook() {
         ResultSet resultSet = null;
         try {
-            String query = "SELECT COUNT(*) as count FROM book;";
+            String query = "SELECT COUNT(*) as count FROM book where state = 'publishing'";
 
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
 
@@ -90,6 +90,7 @@ public class QueryBookData {
         try {
             String query = "SELECT category, sum(quantity) AS total_books " +
                     "FROM book " +
+                    "where state = 'publishing' " +
                     "GROUP BY category " +
                     "ORDER BY total_books DESC " +
                     "LIMIT 3;";

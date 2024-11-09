@@ -157,7 +157,7 @@ public class RecommendationSystem {
 
         Set<String> bookIds = bookRcm.keySet();
         String placeholders = bookIds.stream().map(id -> "?").collect(Collectors.joining(", "));
-        String query = "SELECT * FROM Book WHERE google_book_id IN (" + placeholders + ")";
+        String query = "SELECT * FROM Book WHERE google_book_id IN (" + placeholders + ") and state = 'publishing' ";
 
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);

@@ -21,6 +21,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -77,7 +78,10 @@ public class BookDetailController implements Initializable {
     public VBox authorsContainer;
     public VBox categoriesContainer;
     public Label time_lbl;
-    public HBox time_vBox;
+    public HBox state_hbox;
+    public Label state_lbl;
+    public AnchorPane available_hbox;
+    public HBox time_hBox;
 
 
     private List<Comment> feedbacks;
@@ -123,15 +127,21 @@ public class BookDetailController implements Initializable {
 
         back_btn.setOnAction(event -> moveMenuCurrent());
         return_btn.setOnAction(event -> {
-            time_vBox.setVisible(false);
-            toBorrowButton();
             QueryBookLoans.updateReturnBook(book.getId());
             book.setNumBorrowing(book.getNumBorrowing() - 1);
+            time_hBox.setVisible(false);
+            toBorrowButton();
             available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
             available_lbl.setTextFill(Color.BLACK);
+            if (book.getState().equals("deleted")) {
+                borrow_btn.setDisable(true);
+                available_hbox.setVisible(false);
+
+                state_lbl.setText("Deleted");
+            }
         });
         borrow_btn.setOnAction(event -> {
-            time_vBox.setVisible(true);
+            time_hBox.setVisible(true);
             toReturnButton();
             QueryBookLoans.insertNewRecord(book.getId());
             book.setNumBorrowing(book.getNumBorrowing() + 1);
@@ -443,6 +453,7 @@ public class BookDetailController implements Initializable {
             }
             categoriesContainer.getChildren().add(row);
         }
+//        setState();
     }
 
 
@@ -450,11 +461,11 @@ public class BookDetailController implements Initializable {
         moveToOverviewVBox();
         showMyComment();
         if (QueryBookLoans.isBorrowing(book.getId())) {
-            time_vBox.setVisible(true);
+            time_hBox.setVisible(true);
             QueryBookLoans.setRemainingTime(time_lbl, book.getId(), Model.getInstance().getMyUser().getId());
             toReturnButton();
         } else {
-            time_vBox.setVisible(false);
+            time_hBox.setVisible(false);
             toBorrowButton(); // Chức năng khi sách chưa mượn
         }
         if (QueryFavoriteBook.isFavorite(book.getId())) {
@@ -464,8 +475,23 @@ public class BookDetailController implements Initializable {
         }
 
         setDisableBorrowButton();
+        setState();
     }
 
+    public void setState() {
+        if (book.getState().equals("deleted")) {
+            available_hbox.setVisible(false);
+            borrow_btn.setDisable(true);
+            state_lbl.setText("Deleted");
+            state_lbl.setTextFill(Color.RED);
+            if (QueryBookLoans.isBorrowing(book.getId())) time_hBox.setVisible(true);
+            else time_hBox.setVisible(false);
+        } else {
+            available_hbox.setVisible(true);
+            state_lbl.setText("Publishing");
+            state_lbl.setTextFill(Color.web("#32CD32"));
+        }
+    }
 
     public void showMyComment() {
         ResultSet resultSet = QueryFeedback.isCommented(book.getId());
@@ -473,7 +499,6 @@ public class BookDetailController implements Initializable {
             if (resultSet.isBeforeFirst()) {
                 resultSet.next();
                 String text = resultSet.getString("comment");
-                String user_id = Model.getInstance().getMyUser().getId();
                 int rating = resultSet.getInt("rating");
                 setRating(starsComment, rating);
                 text_cmt.setText(text);

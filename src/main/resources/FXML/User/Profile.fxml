@@ -64,12 +64,12 @@
       </GridPane>
       <AnchorPane prefHeight="50.0" prefWidth="689.0">
          <children>
-            <Button fx:id="edit_profile_btn" mnemonicParsing="false" onAction="#onEditButtonClicked" prefHeight="26.0" prefWidth="70.0" text="Edit">
+            <Button fx:id="edit_profile_btn" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Edit">
                <graphic>
                   <FontAwesomeIconView glyphName="EDIT" />
                </graphic>
             </Button>
-            <Button fx:id="save_profile_btn" mnemonicParsing="false" onAction="#onSaveButtonClicked" prefHeight="26.0" prefWidth="70.0" text="Save">
+            <Button fx:id="save_profile_btn" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Save">
                <graphic>
                   <FontAwesomeIconView glyphName="SAVE" />
                </graphic>
@@ -125,7 +125,7 @@
       <Label layoutX="10.0" layoutY="92.0" styleClass="blur_text" text="Confirm New Password" />
       <TextField fx:id="confirm_new_password_fld" />
       <AnchorPane prefHeight="40.0" prefWidth="289.0">
-         <Button fx:id="change_password_btn" layoutY="7.0" mnemonicParsing="false" onAction="#onChangePasswordButtonClicked" prefHeight="27.0" prefWidth="334.0" text="Change Password" AnchorPane.topAnchor="5.0">
+         <Button fx:id="change_password_btn" layoutY="7.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="334.0" text="Change Password" AnchorPane.topAnchor="5.0">
             <graphic>
                <FontAwesomeIconView glyphName="PENCIL" />
             </graphic>

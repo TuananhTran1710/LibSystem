@@ -63,10 +63,10 @@ public class QueryAccountData {
         return resultSet;
     }
 
-    public static ResultSet getCountUser(){
+    public static ResultSet getCountUser() {
         ResultSet resultSet = null;
         try {
-            String query = "SELECT COUNT(*) as count FROM user;";
+            String query = "SELECT COUNT(*) as count FROM user where state = 'active' ";
 
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
 

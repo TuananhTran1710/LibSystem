@@ -5,6 +5,9 @@
 5. solve conflict
 6. push len A
 
+
+
+
 -- Tạo bảng lưu trữ thông tin sách
 CREATE TABLE Book (
     google_book_id VARCHAR(50) PRIMARY KEY,  -- ID từ Google Books API làm khóa chính

@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -32,6 +31,7 @@ public class ViewFactory {
     private VBox adminMenu;
     //book
     private AnchorPane bookDetail;
+    private AnchorPane bookDetailAPI;
     //
     private ObjectProperty<UserMenuOptions> userSelectedMenuItem;
     private ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
@@ -211,6 +211,17 @@ public class ViewFactory {
             }
         }
         return adminMenu;
+    }
+
+    public AnchorPane getBookDetailAPI() {
+        if (bookDetailAPI == null) {
+            try {
+                bookDetailAPI = new FXMLLoader(getClass().getResource("/FXML/Book/BookDetailAPI.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return bookDetailAPI;
     }
 
     // -----------------------------------Function Show Window------------------------------------

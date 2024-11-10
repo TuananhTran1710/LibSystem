@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.APIDriver;
+import com.jmc.libsystem.QueryDatabase.QueryBookData;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -19,9 +20,9 @@ import java.util.List;
 public class SearchBookAPI {
 
     // Method to parse JSON string and retrieve a list of Book objects
-    public static List<Book> getListBookFromJson(String keyword) throws URISyntaxException, IOException {
+    public static List<Book> getListBookFromJson(String keyword, String type) throws URISyntaxException, IOException {
         // Fetch JSON data from Google API
-        String jsonResponse = APIDriver.getJsonString(keyword);
+        String jsonResponse = APIDriver.getJsonString(keyword, type);
         List<Book> bookList = new ArrayList<>();
 
         ObjectMapper mapper = new ObjectMapper();
@@ -40,6 +41,7 @@ public class SearchBookAPI {
 
                 // Retrieve necessary information from JSON response
                 String id = item.get("id").asText();
+                if (QueryBookData.isExist(id)) continue;
                 String title = volumeInfo.has("title") ? volumeInfo.get("title").asText() : "N/A";
 
                 // Authors

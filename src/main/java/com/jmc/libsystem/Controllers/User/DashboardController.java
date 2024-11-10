@@ -74,6 +74,7 @@ public class DashboardController implements Initializable {
         num_show_reading.setValue(20);
         //
         typeSearch = SearchCriteria.TITLE;
+
         criteriaBox.valueProperty().addListener(observable ->
         {
             typeSearch = criteriaBox.getValue();
@@ -113,7 +114,7 @@ public class DashboardController implements Initializable {
                         if (search_tf.isFocused() && !search_tf.getText().trim().isEmpty()) {
                             searchBooks(limitBookSearch);
 
-                            SuggestionBook.autoCompletionLearnWord(search_tf, search_tf.getText().trim());
+                            SuggestionBook.autoCompletionLearnWord(search_tf, search_tf.getText().trim(), typeSearch);
 
                             resultList_hb.requestFocus();
                         }
@@ -154,7 +155,7 @@ public class DashboardController implements Initializable {
         if (!keyWord.isEmpty()) {
 
             //gọi truy van de lay ket qua tu database
-            bookSearch = SearchBookDatabase.getBookFromResultSet(keyWord);
+            bookSearch = SearchBookDatabase.getBookFromResultSet(keyWord, typeSearch.toString());
 
             //đẩy lên giao diện
             ShowListBookFound.show(bookSearch, resultList_hb, limitBookSearch);

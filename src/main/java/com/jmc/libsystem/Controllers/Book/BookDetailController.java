@@ -443,7 +443,7 @@ public class BookDetailController implements Initializable {
 
         // Hiển thị danh mục sách dưới dạng các ô, mỗi dòng chứa 2 ô
         categoriesContainer.getChildren().clear();
-        List<String> categories = List.of(book.getCategory().split(","));
+        List<String> categories = List.of(book.getCategory().split(", "));
         for (int i = 0; i < categories.size(); i += 3) {
             HBox row = new HBox(5);
             for (int j = i; j < i + 3 && j < categories.size(); j++) {
@@ -453,7 +453,6 @@ public class BookDetailController implements Initializable {
             }
             categoriesContainer.getChildren().add(row);
         }
-//        setState();
     }
 
 

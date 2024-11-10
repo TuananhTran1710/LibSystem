@@ -15,12 +15,29 @@ import java.net.URISyntaxException;
 public class APIDriver {
     private static final String API_URL = "https://www.googleapis.com/books/v1/volumes";
 
-    // Phương thức gửi yêu cầu tới API Google Books và trả về chuối JSon
-    public static String getJsonString(String query) throws URISyntaxException, IOException {
+    // Phương thức gửi yêu cầu tới API Google Books và trả về chuỗi JSON
+    public static String getJsonString(String query, String type) throws URISyntaxException, IOException {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            // Điều chỉnh cú pháp của query theo type
+            String formattedQuery;
+            switch (type.toLowerCase()) {
+                case "authors":
+                    formattedQuery = "inauthor:" + query;
+                    break;
+                case "title":
+                    formattedQuery = "intitle:" + query;
+                    break;
+                case "category":
+                    formattedQuery = "subject:" + query;
+                    break;
+                default:
+                    formattedQuery = query; // Mặc định không có từ khóa đặc biệt nếu type không hợp lệ
+                    break;
+            }
+
             URI uri = new URIBuilder(API_URL)
-                    .addParameter("q", query)
-                    .addParameter("maxResults", String.valueOf(30)) // set gioi han ket qua tra ve la 30
+                    .addParameter("q", formattedQuery)
+                    .addParameter("maxResults", "20") // set giới hạn kết quả trả về là 30
                     .build();
 
             HttpGet request = new HttpGet(uri);
@@ -31,4 +48,5 @@ public class APIDriver {
             }
         }
     }
+
 }

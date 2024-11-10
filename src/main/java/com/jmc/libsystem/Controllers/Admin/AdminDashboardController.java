@@ -69,7 +69,7 @@ public class AdminDashboardController implements Initializable {
         return instance;
     }
 
-    private void refreshData() {
+    public void refreshData() {
         getTableList();
         //addMouseClickedToTable();
         try {

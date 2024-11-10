@@ -1,6 +1,5 @@
 package com.jmc.libsystem.QueryDatabase;
 
-import com.jmc.libsystem.Controllers.User.DashboardController;
 import com.jmc.libsystem.Models.DatabaseDriver;
 
 import java.sql.PreparedStatement;
@@ -8,11 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class QueryBookData {
-    public static ResultSet getBookForSearch(String keyWord) {
+    public static ResultSet getBookForSearch(String keyWord, String typeSearch) {
         ResultSet resultSet = null;
-        String type = DashboardController.typeSearch.toString();
         // no limit num of book displayed
-        String query = "SELECT * FROM book WHERE " + type + " COLLATE utf8mb4_general_ci LIKE ? and state = 'publishing' ";
+        String query = "SELECT * FROM book WHERE " + typeSearch + " COLLATE utf8mb4_general_ci LIKE ? and state = 'publishing' ";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             // Thêm % vào từ khóa tìm kiếm cho LIKE
@@ -105,5 +103,18 @@ public class QueryBookData {
         return resultSet;
     }
 
+
+    public static boolean isExist(String book_id) {
+        String query = "SELECT EXISTS (SELECT 1 FROM book WHERE google_book_id = ?)";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, book_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) return resultSet.getBoolean(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 }
 

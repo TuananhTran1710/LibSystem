@@ -6,6 +6,7 @@ import com.jmc.libsystem.Models.DatabaseDriver;
 import com.jmc.libsystem.Views.AccountType;
 import javafx.scene.control.Alert;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -65,7 +66,7 @@ public class QueryAccountData {
     public static ResultSet getCountUser() {
         ResultSet resultSet = null;
         try {
-            String query = "SELECT COUNT(*) as count FROM user where state = 'active' ";
+            String query = "SELECT COUNT(*) as count FROM user where state = 'Active' ";
 
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
 

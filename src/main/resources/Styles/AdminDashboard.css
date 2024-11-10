@@ -68,6 +68,11 @@
     -fx-alignment: CENTER;
 }
 
+.table-view .cell {
+    -fx-wrap-text: true; /* Cho phép tự động xuống dòng */
+    -fx-alignment: CENTER; /* Căn giữa văn bản trong cell */
+}
+
 /*.table-view .table-row-cell:selected {
     -fx-background-color: #C6E7F3;
     -fx-font-weight: bold;

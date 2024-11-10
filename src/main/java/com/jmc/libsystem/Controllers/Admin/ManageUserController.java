@@ -98,11 +98,11 @@ public class ManageUserController implements Initializable {
             refreshData();
         });
 
-
-        String selectedValue = criteriaBox.getSelectionModel().getSelectedItem();
-        String type = (selectedValue == "ID" ? "user_id" : (selectedValue == "Name" ? "fullName" : "email"));
-
         search_btn.setOnAction(event -> {
+            String selectedValue = criteriaBox.getSelectionModel().getSelectedItem();
+            String type = (selectedValue == "ID" ? "user_id" : (selectedValue == "Name" ? "fullName" : "email"));
+            //System.out.println(type);
+
             String text = search_tf.getText();
             ResultSet resultSet = QueryAccountData.getAccountForSearch(text, type);
             //System.out.println("Can access");

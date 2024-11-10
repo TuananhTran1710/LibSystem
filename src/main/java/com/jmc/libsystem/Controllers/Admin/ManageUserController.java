@@ -77,7 +77,8 @@ public class ManageUserController implements Initializable {
             String fullName = fullNameField.getText();
             String email = emailField.getText();
             String password = passwordField.getText();
-            System.out.println(userId + " " + fullName + " " + email + " " + password);
+            if(password.trim().isEmpty()) password = userId;
+            //System.out.println(userId + " " + fullName + " " + email + " " + password);
             if (!email.trim().isEmpty() && !password.trim().isEmpty()
                     && !userId.trim().isEmpty() && !fullName.trim().isEmpty()) {
                 QueryAccountData.insertAccount(email, password, userId, fullName);

@@ -88,11 +88,27 @@ public class QueryBookData {
     public static ResultSet getCategorySort3() {
         ResultSet resultSet = null;
         try {
-            String query = "SELECT category, sum(quantity) AS total_books " +
-                    "FROM book " +
-                    "GROUP BY category " +
-                    "ORDER BY total_books DESC " +
-                    "LIMIT 3;";
+            String query = "WITH category_split AS (\n" +
+                    "    SELECT \n" +
+                    "        TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(category, ',', numbers.n), ',', -1)) AS genre,\n" +
+                    "        quantity\n" +
+                    "    FROM \n" +
+                    "        book\n" +
+                    "    JOIN \n" +
+                    "        (SELECT 1 n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 \n" +
+                    "         UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10) numbers\n" +
+                    "        ON CHAR_LENGTH(category) - CHAR_LENGTH(REPLACE(category, ',', '')) >= numbers.n - 1\n" +
+                    ")\n" +
+                    "SELECT \n" +
+                    "    genre as category,\n" +
+                    "    SUM(quantity) AS total_books\n" +
+                    "FROM \n" +
+                    "    category_split\n" +
+                    "GROUP BY \n" +
+                    "    genre\n" +
+                    "ORDER BY \n" +
+                    "    total_books DESC\n" +
+                    "limit 3;\n";
 
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
 

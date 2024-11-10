@@ -1,10 +1,8 @@
 package com.jmc.libsystem.QueryDatabase;
 
 import com.jmc.libsystem.Information.Admin;
-import com.jmc.libsystem.Controllers.User.DashboardController;
 import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.DatabaseDriver;
-import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.Views.AccountType;
 import javafx.scene.control.Alert;
 
@@ -29,6 +27,7 @@ public class QueryAccountData {
         }
         return resultSet;
     }
+
     //lam the nay tuc la tren csdl, cac email phai khac nhau (PK) --> Can chinh lai table trong csdl
     public static ResultSet getUserDataForSignUp(String email, String id) {
         ResultSet resultSet = null;
@@ -156,6 +155,7 @@ public class QueryAccountData {
             }
         }
     }
+
     //cập nhật thông tin user, dùng cho user profile
     public static void updateUserInfo(User user) {
         String query = "UPDATE user SET fullName = ?, email = ? WHERE user_id = ?";

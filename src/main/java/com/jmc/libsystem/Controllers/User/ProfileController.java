@@ -5,7 +5,6 @@ import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -47,24 +46,21 @@ public class ProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         refreshProfile();
-
-        //cho các cột lấy giá trị tương ứng của class bookloan
-        bookname_clm.setCellValueFactory(new PropertyValueFactory<>("bookName"));
-        borroweddate_clm.setCellValueFactory(new PropertyValueFactory<>("borrowedDate"));
-        returndate_clm.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
-        status_clm.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        //căn thẳng nội dung với cột
-        bookname_clm.setStyle("-fx-alignment: CENTER-LEFT;");
-        borroweddate_clm.setStyle("-fx-alignment: CENTER;");
-        returndate_clm.setStyle("-fx-alignment: CENTER;");
-        status_clm.setStyle("-fx-alignment: CENTER;");
+        InitBorrowHistoryTable();
+        addListensButton();
     }
 
     private void refreshProfile() {
         loadUserProfile();
         loadBorrowingStatistics();
         loadUserBookLoans();
+    }
+
+    //lấy sự kiện
+    private void addListensButton() {
+        edit_profile_btn.setOnAction(event -> onEditButtonClicked());
+        save_profile_btn.setOnAction(event -> onSaveButtonClicked());
+        change_password_btn.setOnAction(event -> onChangePasswordButtonClicked());
     }
 
     //cái này là để làm mới dữ liệu, sử dụng ở user controller khi mà case của sự kiện bằng profile
@@ -96,7 +92,7 @@ public class ProfileController implements Initializable {
 
     //cho chỉnh sửa khi bấm edit
     private void setFieldsEditable(boolean editable) {
-        user_id_fld.setEditable(editable);
+        user_id_fld.setEditable(false);
         fullname_fld.setEditable(editable);
         email_fld.setEditable(editable);
         password_fld.setEditable(false);
@@ -112,42 +108,32 @@ public class ProfileController implements Initializable {
     }
 
     //bấm nút edit profile
-    @FXML
     public void onEditButtonClicked() {
         setFieldsEditable(true);
 
         edit_profile_btn.setVisible(false);
         save_profile_btn.setVisible(true);
+
+        System.out.println("edit");
     }
 
     //bấm nút save profile
-    @FXML
     public void onSaveButtonClicked() {
         //lấy thaydodoiri từ field
-        String updatedID = user_id_fld.getText();
         String updatedFullName = fullname_fld.getText();
         String updatedEmail = email_fld.getText();
+        User current_user = Model.getInstance().getMyUser();
 
-        //kiểm tra id và email đã tồn tại chưa
-        if (!updatedID.equals(Model.getInstance().getMyUser().getId()) && QueryAccountData.isUserIdExists(updatedID)) {
-            //id tồn tại thì không thay đổi
-            User current_user = Model.getInstance().getMyUser();
-            user_id_fld.setText(current_user.getId());
-            showAlert("Error", "Oops...", "User ID already exists. Please choose a different one.");
-            return;
-        }
-
-        if (!updatedEmail.equals(Model.getInstance().getMyUser().getEmail()) && QueryAccountData.isEmailExists(updatedEmail)) {
+        //kiểm tra email tồn tại chưa
+        if (!updatedEmail.equals(Model.getInstance().getMyUser().getEmail()) && QueryAccountData.isUserEmailExists(updatedEmail)) {
             //email tồn tại thì không thay đổi
-            User current_user = Model.getInstance().getMyUser();
             email_fld.setText(current_user.getEmail());
+            QueryAccountData.updateUserInfo(current_user);
             showAlert("Error", "Oops...", "Email already exists. Please use a different email.");
             return;
         }
 
         //nhập nhật của user
-        User current_user = Model.getInstance().getMyUser();
-        current_user.setId(updatedID);
         current_user.setFullName(updatedFullName);
         current_user.setEmail(updatedEmail);
 
@@ -160,10 +146,11 @@ public class ProfileController implements Initializable {
         //nút
         edit_profile_btn.setVisible(true);
         save_profile_btn.setVisible(false);
+
+        System.out.println("save");
     }
 
     //bấm nút đổi mật khẩu
-    @FXML
     public void onChangePasswordButtonClicked() {
         String newPassword = new_password_fld.getText();
         String confirmNewPassword = confirm_new_password_fld.getText();
@@ -171,7 +158,7 @@ public class ProfileController implements Initializable {
 
         if (newPassword.equals(confirmNewPassword) && !newPassword.equals(current_user.getPassword())) {
             current_user.setPassword(newPassword);
-            QueryAccountData.updatePassword(current_user);
+            QueryAccountData.updateUserPassword(current_user);
 
             password_fld.setText(newPassword);
         } else if (!newPassword.equals(confirmNewPassword)) {
@@ -200,6 +187,20 @@ public class ProfileController implements Initializable {
         favorite_genre_lbl.setText(favoriteGenre);
     }
 
+    //gắn và căn chỉnh các trường trong bảng
+    private void InitBorrowHistoryTable() {
+        //cho các cột lấy giá trị tương ứng của class bookloan
+        bookname_clm.setCellValueFactory(new PropertyValueFactory<>("bookName"));
+        borroweddate_clm.setCellValueFactory(new PropertyValueFactory<>("borrowedDate"));
+        returndate_clm.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
+        status_clm.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        //căn thẳng nội dung với cột
+        bookname_clm.setStyle("-fx-alignment: CENTER-LEFT;");
+        borroweddate_clm.setStyle("-fx-alignment: CENTER;");
+        returndate_clm.setStyle("-fx-alignment: CENTER;");
+        status_clm.setStyle("-fx-alignment: CENTER;");
+    }
 
     private void loadUserBookLoans() {
         List<BookLoan> bookLoans = QueryBookLoans.getBookLoansByUserId(Model.getInstance().getMyUser().getId());

@@ -140,8 +140,8 @@ public class QueryBookLoans {
         ResultSet resultSet = null;
         String query = "SELECT COUNT(*) AS count " +
                 "FROM bookloans " +
-                "WHERE return_date IS NULL  " +
-                "  AND DATEDIFF(CURDATE(), borrow_date) > 60;";
+                "WHERE return_date IS NULL" +
+                " AND DATEDIFF(CURDATE(), borrow_date) > 60;";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
@@ -171,7 +171,8 @@ public class QueryBookLoans {
 
                 // Tính thời gian còn lại
                 LocalDateTime now = LocalDateTime.now();
-                LocalDateTime dueDateTime = dueDate.plusDays(1).atStartOfDay();
+
+                LocalDateTime dueDateTime = dueDate.atTime(23, 59);
 
                 Duration duration = Duration.between(now, dueDateTime);
 
@@ -284,6 +285,4 @@ public class QueryBookLoans {
         }
         return bookLoans;
     }
-
-
 }

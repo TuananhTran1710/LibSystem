@@ -36,9 +36,6 @@ public class SuggestionBook {
 
 
     public static void autoCompletionLearnWord(TextField search_tf, String newWord) {
-        if (autoCompletionBinding != null) {
-            autoCompletionBinding.dispose();
-        }
         Set<String> typeSuggest;
         if (DashboardController.typeSearch == SearchCriteria.TITLE) {
             typeSuggest = titleSuggest;
@@ -48,6 +45,9 @@ public class SuggestionBook {
             typeSuggest = authorSuggest;
         }
         if (!typeSuggest.contains(newWord)) {
+            if (autoCompletionBinding != null) {
+                autoCompletionBinding.dispose();
+            }
             typeSuggest.add(newWord);
             autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, typeSuggest);
             SuggestionBook.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);

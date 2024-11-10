@@ -20,6 +20,8 @@ public class Book {
     private int sumRatingStar;
     private int totalLoan;
     private int numBorrowing;
+    private String state;
+
 
     // Constructor with thumbnail image as byte array
     public Book(String id, String title, String authors, byte[] thumbnailImage) {
@@ -77,6 +79,32 @@ public class Book {
 
     public void setNumBorrowing(int numBorrowing) {
         this.numBorrowing = numBorrowing;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public Book(String id, String title, String authors, LocalDate publishDate, String description, byte[] thumbnailImage, int pageCount, String language, int quantity, String category, int countRating, int sumRatingStar, int totalLoan, int numBorrowing, String state) {
+        this.id = id;
+        this.title = title;
+        this.authors = authors;
+        this.publishDate = publishDate;
+        this.description = description;
+        this.thumbnailImage = thumbnailImage;
+        this.pageCount = pageCount;
+        this.language = language;
+        this.quantity = quantity;
+        this.category = category;
+        this.countRating = countRating;
+        this.sumRatingStar = sumRatingStar;
+        this.totalLoan = totalLoan;
+        this.numBorrowing = numBorrowing;
+        this.state = state;
     }
 
     public Book(String id, String title, String authors, LocalDate publishDate, String description, byte[] thumbnailImage, int pageCount, String language, int quantity, String category, int countRating, int sumRatingStar, int totalLoan, int numBorrowing) {
@@ -169,10 +197,11 @@ public class Book {
             int sumRatingStar = rs.getInt("sumRatingStar");
             int totalLoan = rs.getInt("totalLoan");
             int numBorrowing = rs.getInt("numBorrowing");
+            String state = rs.getString("state");
 
             return new Book(id, title, authors, publishedDate, description, thumbnailImage,
                     pageCount, language, quantity, category, countRating,
-                    sumRatingStar, totalLoan, numBorrowing);
+                    sumRatingStar, totalLoan, numBorrowing, state);
         } catch (SQLException e) {
             throw new RuntimeException("Error creating Book from ResultSet", e);
         }

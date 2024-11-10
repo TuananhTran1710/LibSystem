@@ -5,7 +5,6 @@ import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -109,7 +108,6 @@ public class ProfileController implements Initializable {
     }
 
     //bấm nút edit profile
-    @FXML
     public void onEditButtonClicked() {
         setFieldsEditable(true);
 
@@ -120,7 +118,6 @@ public class ProfileController implements Initializable {
     }
 
     //bấm nút save profile
-    @FXML
     public void onSaveButtonClicked() {
         //lấy thaydodoiri từ field
         String updatedFullName = fullname_fld.getText();
@@ -128,7 +125,7 @@ public class ProfileController implements Initializable {
         User current_user = Model.getInstance().getMyUser();
 
         //kiểm tra email tồn tại chưa
-        if (!updatedEmail.equals(Model.getInstance().getMyUser().getEmail()) && QueryAccountData.isEmailExists(updatedEmail)) {
+        if (!updatedEmail.equals(Model.getInstance().getMyUser().getEmail()) && QueryAccountData.isUserEmailExists(updatedEmail)) {
             //email tồn tại thì không thay đổi
             email_fld.setText(current_user.getEmail());
             QueryAccountData.updateUserInfo(current_user);
@@ -154,7 +151,6 @@ public class ProfileController implements Initializable {
     }
 
     //bấm nút đổi mật khẩu
-    @FXML
     public void onChangePasswordButtonClicked() {
         String newPassword = new_password_fld.getText();
         String confirmNewPassword = confirm_new_password_fld.getText();
@@ -162,7 +158,7 @@ public class ProfileController implements Initializable {
 
         if (newPassword.equals(confirmNewPassword) && !newPassword.equals(current_user.getPassword())) {
             current_user.setPassword(newPassword);
-            QueryAccountData.updatePassword(current_user);
+            QueryAccountData.updateUserPassword(current_user);
 
             password_fld.setText(newPassword);
         } else if (!newPassword.equals(confirmNewPassword)) {

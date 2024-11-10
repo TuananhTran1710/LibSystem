@@ -10,72 +10,70 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0"
-            prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/AdminProfile.css"
-            xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.jmc.libsystem.Controllers.Admin.ProfileController">
-   <VBox layoutX="100.0" layoutY="68.0" prefHeight="350.0" prefWidth="652.0" spacing="5.0" styleClass="total"
-         AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="70.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/AdminProfile.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.ProfileController">
+   <VBox layoutX="100.0" layoutY="68.0" prefHeight="350.0" prefWidth="652.0" spacing="5.0" styleClass="total" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="70.0">
       <padding>
-         <Insets left="20.0" right="20.0"/>
+         <Insets left="20.0" right="20.0" />
       </padding>
       <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="306.0" styleClass="title">
-         <FontAwesomeIconView glyphName="USER" size="25"/>
-         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Details"/>
+         <FontAwesomeIconView glyphName="USER" size="25" />
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Details" />
       </HBox>
       <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="335.0" spacing="7.0">
-         <FontAwesomeIconView glyphName="ID_BADGE" size="17"/>
-         <Label styleClass="bold_text" text="Admin ID:"/>
-         <Label fx:id="admin_id_lbl" styleClass="normal_text" text="Label"/>
+         <FontAwesomeIconView glyphName="ID_BADGE" size="17" />
+         <Label styleClass="bold_text" text="Admin ID:" />
+         <Label fx:id="admin_id_lbl" styleClass="normal_text" text="Label" />
       </HBox>
       <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="610.0" spacing="7.0">
-         <FontAwesomeIconView glyphName="USER" size="17"/>
-         <Label styleClass="bold_text" text="Full Name"/>
+         <FontAwesomeIconView glyphName="USER" size="17" />
+         <Label styleClass="bold_text" text="Full Name" />
       </HBox>
-      <TextField fx:id="fullname_fld"/>
+      <TextField fx:id="fullname_fld" />
       <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="610.0" spacing="7.0">
-         <FontAwesomeIconView glyphName="ENVELOPE" size="17"/>
-         <Label styleClass="bold_text" text="Email"/>
+         <FontAwesomeIconView glyphName="ENVELOPE" size="17" />
+         <Label styleClass="bold_text" text="Email" />
       </HBox>
-      <TextField fx:id="email_fld"/>
+      <TextField fx:id="email_fld" />
       <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="610.0" spacing="7.0">
-         <FontAwesomeIconView glyphName="KEY" size="17"/>
-         <Label styleClass="bold_text" text="Password"/>
+         <FontAwesomeIconView glyphName="KEY" size="17" />
+         <Label styleClass="bold_text" text="Password" />
       </HBox>
-      <TextField fx:id="password_fld"/>
+      <TextField fx:id="password_fld" />
       <AnchorPane prefHeight="40.0" prefWidth="289.0">
-         <Button fx:id="edit_btn" layoutY="7.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="610.0"
-                 text="Edit " AnchorPane.topAnchor="5.0">
+         <Button fx:id="edit_btn" layoutY="7.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="610.0" text="Edit " AnchorPane.topAnchor="5.0">
             <graphic>
-               <FontAwesomeIconView glyphName="EDIT"/>
+               <FontAwesomeIconView glyphName="EDIT" />
+            </graphic>
+         </Button>
+         <Button fx:id="save_btn" layoutY="4.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="610.0" text="Save">
+            <graphic>
+               <FontAwesomeIconView glyphName="SAVE" />
             </graphic>
          </Button>
       </AnchorPane>
    </VBox>
-   <VBox layoutX="100.0" layoutY="429.0" prefHeight="240.0" prefWidth="650.0" spacing="5.0" styleClass="total"
-         AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="440.0">
+   <VBox layoutX="100.0" layoutY="429.0" prefHeight="240.0" prefWidth="650.0" spacing="5.0" styleClass="total" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="440.0">
       <padding>
-         <Insets left="20.0" right="20.0"/>
+         <Insets left="20.0" right="20.0" />
       </padding>
       <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="306.0" styleClass="title">
-         <FontAwesomeIconView glyphName="KEY" size="20"/>
-         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Change Password"/>
+         <FontAwesomeIconView glyphName="KEY" size="20" />
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Change Password" />
       </HBox>
       <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="610.0" spacing="7.0">
-         <FontAwesomeIconView glyphName="KEY" size="17"/>
-         <Label styleClass="bold_text" text="New Password"/>
+         <FontAwesomeIconView glyphName="KEY" size="17" />
+         <Label styleClass="bold_text" text="New Password" />
       </HBox>
-      <TextField fx:id="new_password_fld"/>
+      <TextField fx:id="new_password_fld" />
       <HBox alignment="BOTTOM_LEFT" layoutX="30.0" layoutY="72.0" prefHeight="35.0" prefWidth="610.0" spacing="7.0">
-         <FontAwesomeIconView glyphName="KEY" size="17"/>
-         <Label styleClass="bold_text" text="Confirm New Password"/>
+         <FontAwesomeIconView glyphName="KEY" size="17" />
+         <Label styleClass="bold_text" text="Confirm New Password" />
       </HBox>
-      <TextField fx:id="confirm_new_password_fld"/>
+      <TextField fx:id="confirm_new_password_fld" />
       <AnchorPane prefHeight="40.0" prefWidth="289.0">
-         <Button fx:id="change_password_btn" layoutY="7.0" mnemonicParsing="false" prefHeight="27.0"
-                 prefWidth="610.0" text="Change Password" AnchorPane.topAnchor="5.0">
+         <Button fx:id="change_password_btn" layoutY="7.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="610.0" text="Change Password" AnchorPane.topAnchor="5.0">
             <graphic>
-               <FontAwesomeIconView glyphName="PENCIL"/>
+               <FontAwesomeIconView glyphName="PENCIL" />
             </graphic>
          </Button>
       </AnchorPane>

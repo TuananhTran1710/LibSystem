@@ -47,7 +47,8 @@ public class QueryBookData {
                 "        ELSE 'Out of stock' " +
                 "    END AS status " +
                 "FROM " +
-                "    Book b";
+                "    Book b " +
+                "where b.state = 'publishing'";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             resultSet = preparedStatement.executeQuery();

@@ -105,10 +105,19 @@ public class QueryAccountData {
 
     public static void insertAccount(String email, String password, String user_id, String fullName) {
 
-        //String password duoc truyen vao nham muc dich co du lieu de Insert vao database khi thong tin sign-up hop le
-        ResultSet resultSet = QueryAccountData.getUserDataForSignUp(email, user_id);
+        ResultSet resultSet = null;
         try {
-            if (!resultSet.isBeforeFirst()) { // check xem email ton tai chua?
+            String query = "SELECT * FROM user WHERE user_id = ?";
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, user_id);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            if (!resultSet.isBeforeFirst()) { // check xem id ton tai chua?
                 String queryInsert = "Insert into user (email, password, user_id, fullName, state) values (?, ?, ?, ?, ?)";
 
                 try (PreparedStatement preparedStatementInsert = DatabaseDriver.getConn().prepareStatement(queryInsert)) {

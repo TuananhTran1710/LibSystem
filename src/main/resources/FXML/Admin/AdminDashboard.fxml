@@ -26,13 +26,13 @@
                 <HBox layoutY="55.199999999999996" prefHeight="333.0" prefWidth="774.0" styleClass="table-view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                     <TableView fx:id="listBook" cache="true" focusTraversable="false" prefHeight="333.0" prefWidth="774.0" stylesheets="@../../Styles/AdminDashboard.css">
                         <columns>
-                            <TableColumn fx:id="imageColumn" editable="false" prefWidth="112.80001455545425" sortable="false" text="Image" />
-                            <TableColumn fx:id="titleColumn" editable="false" prefWidth="215.20000457763672" sortable="false" text="Title" />
-                            <TableColumn fx:id="authorsColumn" editable="false" prefWidth="152.80001831054688" sortable="false" text="Author" />
-                            <TableColumn fx:id="quantityColumn" editable="false" prefWidth="78.39990234375" sortable="false" text="Quantity" />
-                            <TableColumn fx:id="loanedColumn" editable="false" prefWidth="76.800048828125" sortable="false" text="Borrowed" />
-                            <TableColumn fx:id="statusColumn" editable="false" prefWidth="71.20001220703125" sortable="false" text="Status" />
-                            <TableColumn fx:id="editColumn" prefWidth="72.7999267578125" text="Edit" />
+                            <TableColumn fx:id="imageColumn" editable="false" prefWidth="112.80001455545425" resizable="false" reorderable="false" sortable="false" text="Image" />
+                            <TableColumn fx:id="titleColumn" editable="false" prefWidth="215.20000457763672" resizable="false" reorderable="false" sortable="false" text="Title" />
+                            <TableColumn fx:id="authorsColumn" editable="false" prefWidth="152.80001831054688" resizable="false" reorderable="false" sortable="false" text="Author" />
+                            <TableColumn fx:id="quantityColumn" editable="false" prefWidth="78.39990234375" resizable="false" reorderable="false" sortable="false" text="Quantity" />
+                            <TableColumn fx:id="loanedColumn" editable="false" prefWidth="76.800048828125" resizable="false" reorderable="false" sortable="false" text="Borrowed" />
+                            <TableColumn fx:id="statusColumn" editable="false" prefWidth="71.20001220703125" resizable="false" reorderable="false" sortable="false" text="Status" />
+                            <TableColumn fx:id="editColumn" prefWidth="72.7999267578125" resizable="false" reorderable="false" text="Edit" />
                         </columns>
                         <columnResizePolicy>
                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

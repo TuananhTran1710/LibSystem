@@ -47,6 +47,14 @@ public class ManageBookController implements Initializable {
     public Button searchInLib_btn;
     public ScrollPane scrollPane;
 
+    public TextField getSearchAddBook_tf() {
+        return searchAddBook_tf;
+    }
+
+    public TextField getSearchInLib_tf() {
+        return searchInLib_tf;
+    }
+
     public static SearchCriteria typeSearchAddBook;
     public static SearchCriteria typeSearchInLib;
 
@@ -182,5 +190,6 @@ public class ManageBookController implements Initializable {
         SuggestionBook.autoCompletionBinding.setPrefWidth(searchInLib_tf.getWidth() - 160);
         searchInLib_tf.clear();
         criteriaSearchLib.setValue(SearchCriteria.TITLE);
+
     }
 }

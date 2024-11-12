@@ -41,6 +41,7 @@ public class SearchBookAPI {
 
                 // Retrieve necessary information from JSON response
                 String id = item.get("id").asText();
+
                 if (QueryBookData.isExist(id)) continue;
                 String title = volumeInfo.has("title") ? volumeInfo.get("title").asText() : "N/A";
 
@@ -62,12 +63,23 @@ public class SearchBookAPI {
                 if (volumeInfo.has("publishedDate")) {
                     String dateStr = volumeInfo.get("publishedDate").asText();
                     try {
+                        // Try parsing with "yyyy-MM-dd" format first
                         publishDate = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     } catch (Exception e) {
-                        // Default to January 1st of the year if date format is only "yyyy"
-                        publishDate = LocalDate.parse(dateStr + "-01-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        try {
+                            // If it fails, try parsing with "yyyy" format and default to January 1st
+                            publishDate = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("yyyy"))
+                                    .withMonth(1).withDayOfMonth(1);
+                        } catch (Exception ex) {
+                            // Handle any other unexpected date formats, if needed
+                            System.err.println("Unrecognized date format: " + dateStr);
+                            continue;   // bo qua sach do
+                        }
                     }
+                } else {
+                    continue;     // bo qua sach do
                 }
+
 
                 // Description
                 String description = volumeInfo.has("description") ? volumeInfo.get("description").asText() : "N/A";

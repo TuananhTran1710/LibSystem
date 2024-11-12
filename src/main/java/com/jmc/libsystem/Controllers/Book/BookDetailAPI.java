@@ -5,6 +5,8 @@ import com.jmc.libsystem.Controllers.Admin.ManageBookController;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
+import com.jmc.libsystem.SuggestionBox.SuggestionBook;
+import com.jmc.libsystem.Views.SearchCriteria;
 import com.jmc.libsystem.Views.ShowListBookFound;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -22,6 +24,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class BookDetailAPI implements Initializable {
 
@@ -86,6 +89,7 @@ public class BookDetailAPI implements Initializable {
 
 
         addBook_btn.setOnAction(event -> {
+
             int num = Integer.parseInt(quantity_tf.getText());
             QueryBookData.addBook(book, num);
             book.setQuantity(num);
@@ -93,8 +97,19 @@ public class BookDetailAPI implements Initializable {
 
             notice_lbl.setText("Add book successfully");
             notice_lbl.setTextFill(Color.web("#32CD32"));
-
             createTimeLine();
+
+            // add data into suggestion box
+            Set<String> typeSuggest;
+            if (ManageBookController.typeSearchAddBook == SearchCriteria.TITLE) {
+                typeSuggest = SuggestionBook.titleSuggest;
+            } else if (ManageBookController.typeSearchAddBook == SearchCriteria.CATEGORY) {
+                typeSuggest = SuggestionBook.categorySuggest;
+            } else {
+                typeSuggest = SuggestionBook.authorSuggest;
+            }
+            String newWord = ManageBookController.getInstance().getSearchAddBook_tf().getText();
+            typeSuggest.add(newWord);
         });
 
         update_btn.setOnAction(event -> {
@@ -121,6 +136,7 @@ public class BookDetailAPI implements Initializable {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 // Nếu người dùng chọn OK, tiến hành xóa sách
                 QueryBookData.deleteBook(book.getId());
+                quantity_tf.setText("1");
                 toAddButton();
 
                 notice_lbl.setText("Delete book successfully");
@@ -260,6 +276,5 @@ public class BookDetailAPI implements Initializable {
             toAddButton();
         }
     }
-
 
 }

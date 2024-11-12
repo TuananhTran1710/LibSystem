@@ -149,6 +149,11 @@ TableView .column-header .label {
     -fx-text-fill: #FFFFFF;
 }
 
+.table-view .cell {
+    -fx-wrap-text: true; /* Cho phép tự động xuống dòng */
+    -fx-alignment: CENTER; /* Căn giữa văn bản trong cell */
+}
+
 .user_list {
     -fx-background-color: #FFFFFF;
     -fx-border-color: #D3D3D3;

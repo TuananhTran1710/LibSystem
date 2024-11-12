@@ -197,6 +197,7 @@ public class ShowListBookFound {
             if (event.getClickCount() == 1) {
                 AdminController.getInstance().admin_parent.setCenter(Model.getInstance().getViewFactory().getBookDetailAPI());
                 BookDetailAPI.getInstance().setBook(book);
+                BookDetailAPI.getInstance().modifyButton();
                 BookDetailAPI.getInstance().setUpInfo(book);
             }
         });

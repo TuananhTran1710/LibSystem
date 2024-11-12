@@ -6,6 +6,8 @@
 6. push len A
 
 
+alter table book
+modify countRating int default 0;
 
 
 -- Tạo bảng lưu trữ thông tin sách

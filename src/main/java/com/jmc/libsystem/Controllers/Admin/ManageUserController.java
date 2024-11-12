@@ -14,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
@@ -98,17 +100,27 @@ public class ManageUserController implements Initializable {
             refreshData();
         });
 
-        search_btn.setOnAction(event -> {
-            String selectedValue = criteriaBox.getSelectionModel().getSelectedItem();
-            String type = (selectedValue == "ID" ? "user_id" : (selectedValue == "Name" ? "fullName" : "email"));
-            //System.out.println(type);
+        search_btn.setOnAction(event -> searchAction());
 
-            String text = search_tf.getText();
-            ResultSet resultSet = QueryAccountData.getAccountForSearch(text, type);
-            //System.out.println("Can access");
-            data.clear();
-            getData(resultSet);
+        search_tf.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                searchAction();
+            }
         });
+
+        search_tf.setOnKeyReleased(event -> searchAction());
+    }
+
+    private void searchAction(){
+        String selectedValue = criteriaBox.getSelectionModel().getSelectedItem();
+        String type = (selectedValue == "ID" ? "user_id" : (selectedValue == "Name" ? "fullName" : "email"));
+        //System.out.println(type);
+
+        String text = search_tf.getText();
+        ResultSet resultSet = QueryAccountData.getAccountForSearch(text, type);
+        //System.out.println("Can access");
+        data.clear();
+        getData(resultSet);
     }
 
     private void UserTable(){

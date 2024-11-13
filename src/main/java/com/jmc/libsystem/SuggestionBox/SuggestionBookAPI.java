@@ -29,7 +29,7 @@ public class SuggestionBookAPI {
             }
             typeSuggest.add(newWord);
             autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, typeSuggest);
-            SuggestionBook.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
+            SuggestionBookAPI.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
         }
     }
 }

@@ -6,7 +6,9 @@ import com.jmc.libsystem.SuggestionBox.SuggestionBook;
 import com.jmc.libsystem.SuggestionBox.SuggestionBookAPI;
 import com.jmc.libsystem.Views.SearchCriteria;
 import com.jmc.libsystem.Views.ShowListBookFound;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,8 +20,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.textfield.TextFields;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -154,18 +154,26 @@ public class ManageBookController implements Initializable {
         String keyWord = searchAddBook_tf.getText();
         keyWord = keyWord.trim();
         if (!keyWord.isEmpty()) {
+            String word = keyWord;
+            Task<List<Book>> task = new Task<List<Book>>() {
 
-            //gọi truy van de lay ket qua tu API
-            try {
-                bookSearch = SearchBookAPI.getListBookFromJson(keyWord, typeSearchAddBook.toString());
-            } catch (URISyntaxException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+                @Override
+                protected List<Book> call() throws Exception {
+                    Long start = System.currentTimeMillis();
+                    bookSearch = SearchBookAPI.getListBookFromJson(word, typeSearchAddBook.toString());
+                    Thread.sleep(100);
+                    Long end = System.currentTimeMillis();
+                    System.out.println(end - start);
+                    return bookSearch;
+                }
+            };
 
-            //đẩy lên giao diện
-            ShowListBookFound.show(bookSearch, BookAPI_hb);
+            // tu day la chay tren luong chinh
+            task.setOnSucceeded(e -> {
+                List<Book> list = task.getValue();
+                Platform.runLater(() -> ShowListBookFound.show(list, BookAPI_hb));
+            });
+            new Thread(task).start();
         }
     }
 
@@ -183,6 +191,7 @@ public class ManageBookController implements Initializable {
     }
 
     public void resetBookLibrary() {
+//        criteriaSearchLib.setValue(SearchCriteria.CATEGORY);
         if (SuggestionBook.autoCompletionBinding != null) {
             SuggestionBook.autoCompletionBinding.dispose();
         }

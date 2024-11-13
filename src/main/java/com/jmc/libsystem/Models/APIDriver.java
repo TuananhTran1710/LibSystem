@@ -37,7 +37,7 @@ public class APIDriver {
 
             URI uri = new URIBuilder(API_URL)
                     .addParameter("q", formattedQuery)
-                    .addParameter("maxResults", "20") // set giới hạn kết quả trả về là 30
+                    .addParameter("maxResults", "20")
                     .build();
 
             HttpGet request = new HttpGet(uri);

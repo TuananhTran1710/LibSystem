@@ -102,11 +102,11 @@ public class ManageUserController implements Initializable {
 
         search_btn.setOnAction(event -> searchAction());
 
-        search_tf.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                searchAction();
-            }
-        });
+//        search_tf.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+//            if (event.getCode() == KeyCode.ENTER) {
+//                searchAction();
+//            }
+//        });
 
         search_tf.setOnKeyReleased(event -> searchAction());
     }
@@ -157,7 +157,7 @@ public class ManageUserController implements Initializable {
 
     // lấy dữ liệu từ database
     private void getData(ResultSet resultSet) {
-
+        data.clear();
         // Tạo một Task để load
         Task<Void> loadDataTask = new Task<Void>() {
             @Override

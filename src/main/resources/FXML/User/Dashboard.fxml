@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -8,58 +9,112 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../../Styles/Dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.DashboardController">
-    <TextField fx:id="search_tf" layoutX="24.0" layoutY="60.0" prefHeight="40.0" prefWidth="800.0" promptText="Search or type a command..." styleClass="search_field" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="60.0" />
-    <ChoiceBox fx:id="criteriaBox" layoutX="719.0" layoutY="62.0" prefHeight="36.0" prefWidth="90.0" styleClass="type_Search_box" AnchorPane.topAnchor="62.0" />
-    <Button fx:id="search_btn" layoutX="24.0" layoutY="59.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" styleClass="search_button" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="60.0">
-        <graphic>
-            <FontAwesomeIconView glyphName="SEARCH" rotate="-11.3" size="15" />
-        </graphic>
-    </Button>
-    <FontAwesomeIconView glyphName="SLIDERS" layoutX="800.0" layoutY="86.0" size="20" />
-    <Text layoutX="675.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sort_by" text="Sort by:" />
-    <Line endX="15.39996337890625" endY="9.400001525878906" layoutX="649.0" layoutY="81.0" startX="15.39996337890625" startY="-12.200004577636719" styleClass="line" />
-    <ChoiceBox fx:id="num_show_search" layoutX="607.0" layoutY="67.0" prefHeight="26.0" prefWidth="50.0" styleClass="show_box" />
-    <AnchorPane prefHeight="48.0" prefWidth="850.0" styleClass="title_container" AnchorPane.bottomAnchor="701.6" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <Label fx:id="name_lbl" layoutX="40.0" layoutY="7.0" styleClass="section_title" text="Label" />
-        <Button fx:id="notice_btn" layoutX="784.0" layoutY="5.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" AnchorPane.rightAnchor="30.0">
-            <graphic>
-                <FontAwesomeIconView glyphName="BELL" size="20" />
-            </graphic>
-        </Button>
-    </AnchorPane>
-    <ScrollPane fx:id="scrollPane_search" hbarPolicy="ALWAYS" layoutX="24.0" layoutY="107.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="24.0">
-        <HBox fx:id="resultList_hb" prefHeight="100.0" prefWidth="200.0">
-        </HBox>
-    </ScrollPane>
-    <AnchorPane layoutX="20.0" layoutY="491.0" prefHeight="251.0" prefWidth="807.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="491.0">
-        <Label layoutX="38.0" layoutY="26.0" text="Reading">
-         <font>
-            <Font size="20.0" />
-         </font>
-        </Label>
-        <FontAwesomeIconView glyphName="UNIVERSITY" layoutX="14.0" layoutY="47.0" size="14" />
-        <Line endX="695.0" layoutX="108.0" layoutY="55.0" startX="-105.0" />
-        <ScrollPane fx:id="scrollPane_reading" hbarPolicy="ALWAYS" layoutX="4.0" layoutY="61.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="4.0">
-            <HBox fx:id="reading_hbox" prefHeight="100.0" prefWidth="200.0" />
-        </ScrollPane>
-        <ChoiceBox fx:id="num_show_reading" layoutX="755.0" layoutY="25.0" prefWidth="50.0" styleClass="show_box" />
-    </AnchorPane>
-    <AnchorPane layoutX="21.0" layoutY="287.0" prefHeight="195.0" prefWidth="807.0">
-        <Label layoutX="37.0" layoutY="6.0" text="Popular">
-         <font>
-            <Font size="20.0" />
-         </font>
-        </Label>
-        <FontAwesomeIconView glyphName="UNIVERSITY" layoutX="14.0" layoutY="27.0" size="14" text="" wrappingWidth="16.0" />
-        <Line endX="695.0" layoutX="109.0" layoutY="36.0" startX="-105.0" />
-        <ScrollPane fx:id="scrollPane_popular" hbarPolicy="ALWAYS" layoutX="4.0" layoutY="42.0" prefHeight="180.0" prefWidth="800.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="4.0">
-            <HBox fx:id="popular_hbox" prefHeight="100.0" prefWidth="200.0" />
-        </ScrollPane>
-        <ChoiceBox fx:id="num_show_popular" layoutX="755.0" layoutY="5.0" prefWidth="50.0" styleClass="show_box" />
-    </AnchorPane>
-</AnchorPane>
+<ScrollPane fitToWidth="true" prefHeight="750.0" prefWidth="850.0" stylesheets="@../../Styles/Dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.DashboardController">
+   <content>
+      <AnchorPane prefHeight="940.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../../Styles/Dashboard.css">
+         <children>
+            <AnchorPane prefHeight="48.0" prefWidth="850.0" styleClass="title_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <Label fx:id="name_lbl" layoutX="40.0" layoutY="7.0" styleClass="section_title" text="Label" />
+                  <Button fx:id="notice_btn" layoutX="784.0" layoutY="5.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" AnchorPane.rightAnchor="30.0">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="BELL" size="20" />
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <VBox layoutX="24.0" layoutY="127.0" prefHeight="240.0" prefWidth="782.0" spacing="10.0" styleClass="part_1" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="390.0">
+               <padding>
+                  <Insets top="7.0" />
+               </padding>
+               <children>
+                  <HBox prefHeight="11.0" prefWidth="778.0" spacing="7.0">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <children>
+                        <Label styleClass="title" text="Popular" />
+                        <FontAwesomeIconView glyphName="ANGLE_RIGHT" size="25" wrappingWidth="630.0" />
+                        <ChoiceBox fx:id="num_show_popular" prefWidth="50.0" styleClass="show_box" />
+                     </children>
+                  </HBox>
+                  <ScrollPane fx:id="scrollPane_popular" hbarPolicy="ALWAYS" prefHeight="190.0" prefWidth="781.0" vbarPolicy="NEVER">
+                     <content>
+                        <HBox fx:id="popular_hbox" prefHeight="100.0" prefWidth="200.0" />
+                     </content>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </ScrollPane>
+               </children>
+            </VBox>
+            <VBox layoutX="24.0" layoutY="409.0" prefHeight="240.0" prefWidth="782.0" spacing="10.0" styleClass="part_1" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="660.0">
+               <padding>
+                  <Insets top="7.0" />
+               </padding>
+               <children>
+                  <HBox prefHeight="11.0" prefWidth="778.0" spacing="7.0">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <children>
+                        <Label styleClass="title" text="Reading" />
+                        <FontAwesomeIconView glyphName="ANGLE_RIGHT" size="25" wrappingWidth="630.0" />
+                        <ChoiceBox fx:id="num_show_reading" prefWidth="50.0" styleClass="show_box" />
+                     </children>
+                  </HBox>
+                  <ScrollPane fx:id="scrollPane_reading" hbarPolicy="ALWAYS" prefHeight="190.0" prefWidth="781.0" vbarPolicy="NEVER">
+                     <content>
+                        <HBox fx:id="reading_hbox" prefHeight="100.0" prefWidth="200.0" />
+                     </content>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </ScrollPane>
+               </children>
+            </VBox>
+            <VBox layoutX="23.0" layoutY="49.0" prefHeight="292.0" prefWidth="782.0" spacing="10.0" styleClass="search_surround" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="70.0">
+               <children>
+                  <AnchorPane prefHeight="50.0" prefWidth="780.0">
+                     <children>
+                        <TextField fx:id="search_tf" layoutX="-0.8" layoutY="2.0" prefHeight="45.0" prefWidth="778.0" promptText="Search or type a command..." styleClass="search_field" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="search_btn" layoutY="3.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" styleClass="search_button" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="SEARCH" rotate="-11.3" size="15" />
+                           </graphic>
+                        </Button>
+                        <ChoiceBox fx:id="criteriaBox" layoutX="668.0" layoutY="5.0" prefHeight="36.0" prefWidth="90.0" styleClass="type_Search_box" AnchorPane.leftAnchor="632.0" AnchorPane.topAnchor="7.0" />
+                        <Text layoutX="613.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sort_by" text="Search by:" AnchorPane.leftAnchor="577.0" />
+                        <Line endX="15.39996337890625" endY="13.0" layoutX="586.0" layoutY="24.0" startX="15.39996337890625" startY="-12.200004577636719" styleClass="line" AnchorPane.leftAnchor="564.0" AnchorPane.topAnchor="12.0" />
+                        <FontAwesomeIconView glyphName="SLIDERS" layoutX="749.0" layoutY="32.0" size="20" AnchorPane.leftAnchor="713.0" />
+                        <ChoiceBox fx:id="num_show_search" layoutX="505.0" layoutY="12.0" prefWidth="50.0" styleClass="show_box" />
+                     </children>
+                  </AnchorPane>
+                  <VBox prefHeight="190.0" prefWidth="780.0" spacing="10.0" styleClass="part_2">
+                     <padding>
+                        <Insets top="7.0" />
+                     </padding>
+                     <children>
+                        <ScrollPane fx:id="scrollPane_search" hbarPolicy="ALWAYS" prefHeight="273.0" prefWidth="778.0" vbarPolicy="NEVER">
+                           <content>
+                              <HBox fx:id="resultList_hb" prefHeight="100.0" prefWidth="200.0" />
+                           </content>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

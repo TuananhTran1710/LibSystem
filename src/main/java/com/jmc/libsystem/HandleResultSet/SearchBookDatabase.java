@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchBookDatabase {
-    public static List<Book> getBookFromResultSet(String keyword) {
+    public static List<Book> getBookFromResultSet(String keyword, String typeSearch) {
         List<Book> listBook = new ArrayList<>();
 
-        ResultSet resultSet = QueryBookData.getBookForSearch(keyword);
+        ResultSet resultSet = QueryBookData.getBookForSearch(keyword, typeSearch);
 
         try {
             if (!resultSet.isBeforeFirst()) {

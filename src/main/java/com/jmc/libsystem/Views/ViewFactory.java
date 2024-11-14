@@ -17,7 +17,7 @@ import java.io.IOException;
 // class nay lam nhiem vu chuyen doi giua cac cua so
 public class ViewFactory {
     //Users View
-    private AnchorPane dashboardView;
+    private ScrollPane dashboardView;
     private AnchorPane myBookView;
     private AnchorPane reportView;
     private AnchorPane proposeView;
@@ -32,6 +32,7 @@ public class ViewFactory {
     private VBox adminMenu;
     //book
     private AnchorPane bookDetail;
+    private AnchorPane bookDetailAPI;
     //
     private ObjectProperty<UserMenuOptions> userSelectedMenuItem;
     private ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
@@ -62,7 +63,7 @@ public class ViewFactory {
 //tat ca cac ham get Anchor, VBox nay muc dich de tranh load file fxml nhieu lan,
 // vi khi load nhieu lan se goi lai initialize nhieu lan va dang ky nhieu su kien chong nhau
 
-    public AnchorPane getDashboardView() {
+    public ScrollPane getDashboardView() {
         // anchorPane giong nhu la mot loai Parent
         // tuong duong voi moi khi ta se khai bao Parent root
         if (dashboardView == null) {
@@ -211,6 +212,17 @@ public class ViewFactory {
             }
         }
         return adminMenu;
+    }
+
+    public AnchorPane getBookDetailAPI() {
+        if (bookDetailAPI == null) {
+            try {
+                bookDetailAPI = new FXMLLoader(getClass().getResource("/FXML/Book/BookDetailAPI.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return bookDetailAPI;
     }
 
     // -----------------------------------Function Show Window------------------------------------

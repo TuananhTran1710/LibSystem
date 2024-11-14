@@ -10,31 +10,6 @@
     -fx-padding: 10px;
 }
 
-/* Chọn thêm xóa */
-.choose_action {
-    -fx-background-color: rgba(19, 42, 19, 0.1);
-}
-
-.choose_action ToggleButton {
-    -fx-background-color: transparent;
-    -fx-text-fill: #132A13;
-    -fx-font-family: "Segoe UI";
-    -fx-font-size:1.4em;
-}
-
-.choose_action FontAwesomeIconView {
-    -fx-fill: #132A13;
-}
-
-.choose_action ToggleButton:selected {
-    -fx-background-color: #132A13;
-    -fx-text-fill: #FFFFFF;
-}
-
-.choose_action ToggleButton:selected FontAwesomeIconView {
-    -fx-fill: #FFFFFF;
-}
-
 /* Thanh tìm kiếm */
 .search_field {
     -fx-background-color: rgba(19, 42, 19, 0.05);
@@ -111,4 +86,69 @@ TableView .column-header .label {
     -fx-text-fill: #FFFFFF;
 }
 
+.part_2 {
+    -fx-background-color: rgba(19, 42, 19, 0.05);
+    -fx-background-radius: 10px;
+    -fx-border-color: #132A13;
+    -fx-border-radius: 10px;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
+}
 
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb,
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #132A13;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;
+    -fx-opacity: 0.8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 7, 0.5, 0, 0);
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb:hover,
+.scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #1A4314;
+    -fx-opacity: 1.0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+.scroll-pane .scroll-bar:horizontal,
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-padding: 2px;
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb:pressed,
+.scroll-pane .scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: #0B4619;
+    -fx-opacity: 1.0;
+}
+
+.surround {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10px;
+    -fx-border-color: #D3D3D3;
+    -fx-border-radius: 10px;
+}
+
+.part_title {
+    -fx-background-color: #132A13;
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+    -fx-border-radius: 10px 10px 0 0;
+    -fx-background-radius: 10px 10px 0 0;
+}
+
+.part_title FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+.part_title Label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF;
+}

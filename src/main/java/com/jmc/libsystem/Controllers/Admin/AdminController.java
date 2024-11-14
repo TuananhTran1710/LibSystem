@@ -11,6 +11,16 @@ import java.util.ResourceBundle;
 public class AdminController implements Initializable {
     public BorderPane admin_parent;
 
+    private static AdminController instance;
+
+    public AdminController() {
+        instance = this;
+    }
+
+    public static AdminController getInstance() {
+        return instance;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         admin_parent.setCenter(Model.getInstance().getViewFactory().getAdminDashboardView());
@@ -28,13 +38,20 @@ public class AdminController implements Initializable {
                             Model.getInstance().getViewFactory().closeStage(stage);
                         }
                         case USER -> admin_parent.setCenter(Model.getInstance().getViewFactory().getManageUserView());
-                        case BOOK -> admin_parent.setCenter(Model.getInstance().getViewFactory().getManageBookView());
+                        case BOOK -> {
+                            admin_parent.setCenter(Model.getInstance().getViewFactory().getManageBookView());
+                            ManageBookController.getInstance().reset();
+                            ManageBookController.getInstance().resetBookLibrary();
+                        }
                         case PROFILE -> {
                             admin_parent.setCenter(Model.getInstance().getViewFactory().getProfileAdminView());
                             ProfileController.getInstance().showProfile();
                         }
                         case RESPONSE -> admin_parent.setCenter(Model.getInstance().getViewFactory().getResponseView());
-                        default -> admin_parent.setCenter(Model.getInstance().getViewFactory().getAdminDashboardView());
+                        default -> {
+                            admin_parent.setCenter(Model.getInstance().getViewFactory().getAdminDashboardView());
+                            AdminDashboardController.getInstance().refreshData();
+                        }
 
                     }
                 });

@@ -2,6 +2,27 @@
     -fx-background-color: #EEEEEE;
 }
 
+.title1 {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:2.5em;
+    -fx-font-weight: bold;
+}
+
+.title2 {
+    -fx-text-fill: rgba(19, 42, 19, 0.3);
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.2em;
+    -fx-font-weight: bold;
+}
+
+.search_surround {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D3D3D3;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
 /* textfiled để search */
 .search_field {
     -fx-background-color: rgba(19, 42, 19, 0.05);
@@ -75,21 +96,28 @@
     -fx-cursor: hand;
 }
 
-.part {
-    -fx-background-color: rgba(19, 42, 19, 0.05);
+.part_1 {
+    -fx-background-color: #FFFFFF;
     -fx-background-radius: 10px;
-    -fx-border-color: #d0d0d0;
+    -fx-border-color: #D3D3D3;
     -fx-border-radius: 10px;
 }
 
-.part .title {
+.part_2 {
+    -fx-background-color: rgba(19, 42, 19, 0.05);
+    -fx-background-radius: 10px;
+    -fx-border-color: #132A13;
+    -fx-border-radius: 10px;
+}
+
+.part_1 .title {
     -fx-text-fill: #132A13;
     -fx-font-family: "Segoe UI";
     -fx-font-size:1.5em;
     -fx-font-weight: bold;
 }
 
-.part FontAwesomeIconView {
+.part_1 FontAwesomeIconView {
     -fx-fill: #132A13;
 }
 

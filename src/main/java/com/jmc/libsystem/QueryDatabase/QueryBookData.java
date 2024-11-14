@@ -1,6 +1,6 @@
 package com.jmc.libsystem.QueryDatabase;
 
-import com.jmc.libsystem.Controllers.User.DashboardController;
+import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.DatabaseDriver;
 
 import java.sql.PreparedStatement;
@@ -8,11 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class QueryBookData {
-    public static ResultSet getBookForSearch(String keyWord) {
+    public static ResultSet getBookForSearch(String keyWord, String typeSearch) {
         ResultSet resultSet = null;
-        String type = DashboardController.typeSearch.toString();
         // no limit num of book displayed
-        String query = "SELECT * FROM book WHERE " + type + " COLLATE utf8mb4_general_ci LIKE ? and state = 'publishing' ";
+        String query = "SELECT * FROM book WHERE " + typeSearch + " COLLATE utf8mb4_general_ci LIKE ? and state = 'publishing' ";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             // Thêm % vào từ khóa tìm kiếm cho LIKE
@@ -120,5 +119,64 @@ public class QueryBookData {
         return resultSet;
     }
 
+
+    public static boolean isExist(String book_id) {
+        String query = "SELECT EXISTS (SELECT 1 FROM book WHERE google_book_id = ?)";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, book_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) return resultSet.getBoolean(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    public static void addBook(Book book, int num) {
+        String query = "INSERT INTO book (google_book_id, title, authors, category, publishDate, page_count, description, language, thumbnail, quantity, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, book.getId());
+            preparedStatement.setString(2, book.getTitle());
+            preparedStatement.setString(3, book.getAuthors());
+            preparedStatement.setString(4, book.getCategory());
+
+            preparedStatement.setDate(5, java.sql.Date.valueOf(book.getPublishDate()));
+
+            preparedStatement.setInt(6, book.getPageCount());
+            preparedStatement.setString(7, book.getDescription());
+            preparedStatement.setString(8, book.getLanguage());
+            preparedStatement.setBytes(9, book.getThumbnailImage());
+            preparedStatement.setInt(10, num);
+            preparedStatement.setString(11, "publishing");
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateBook(String book_id, int num) {
+        String query = "UPDATE book SET quantity = ? WHERE google_book_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setInt(1, num);
+            preparedStatement.setString(2, book_id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteBook(String book_id) {
+        String query = "DELETE FROM book WHERE google_book_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, book_id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

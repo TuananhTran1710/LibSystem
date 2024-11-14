@@ -1,9 +1,13 @@
 package com.jmc.libsystem.Views;
 
+import com.jmc.libsystem.Controllers.Admin.AdminController;
+import com.jmc.libsystem.Controllers.Book.BookDetailAPI;
 import com.jmc.libsystem.Controllers.Book.BookDetailController;
 import com.jmc.libsystem.Controllers.User.UserController;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.Model;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -49,6 +53,82 @@ public class ShowListBookFound {
             resultList_hb.getChildren().add(bookBox);
         }
     }
+
+//    public static void show(List<Book> bookList, HBox resultList_hb) {
+//        resultList_hb.getChildren().clear();
+//
+//        if (bookList.isEmpty()) {
+//            VBox emptyBox = new VBox();
+//            emptyBox.setAlignment(Pos.CENTER);
+//            emptyBox.setSpacing(3);
+//
+//            ImageView image = new ImageView();
+//            Image notFoundImage = new Image(ShowListBookFound.class.getResource("/Images/empty.png").toString());
+//            image.setImage(notFoundImage);
+//            image.setFitHeight(90);
+//            image.setFitWidth(90);
+//            image.setPreserveRatio(false);
+//
+//            Label messageLabel = new Label("No books found");
+//            messageLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #A0A0A0;");
+//
+//            emptyBox.getChildren().addAll(image, messageLabel);
+//            resultList_hb.getChildren().add(emptyBox);
+//        }
+//
+//        for (int i = 0; i < bookList.size(); i++) {
+//            Book book = bookList.get(i);
+//            VBox bookBox = createBookBoxAPI(book);
+//            resultList_hb.getChildren().add(bookBox);
+//        }
+//    }
+
+
+    public static void show(List<Book> bookList, HBox resultList_hb) {
+        resultList_hb.getChildren().clear();
+
+        // Nếu danh sách sách trống
+        if (bookList.isEmpty()) {
+            VBox emptyBox = new VBox();
+            emptyBox.setAlignment(Pos.CENTER);
+            emptyBox.setSpacing(3);
+
+            ImageView image = new ImageView();
+            Image notFoundImage = new Image(ShowListBookFound.class.getResource("/Images/empty.png").toString());
+            image.setImage(notFoundImage);
+            image.setFitHeight(90);
+            image.setFitWidth(90);
+            image.setPreserveRatio(false);
+
+            Label messageLabel = new Label("No books found");
+            messageLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #A0A0A0;");
+
+            emptyBox.getChildren().addAll(image, messageLabel);
+            resultList_hb.getChildren().add(emptyBox);
+            return;
+        }
+
+        // Khởi chạy một luồng cho mỗi sách trong bookList
+        for (Book book : bookList) {
+            Task<Void> task = new Task<>() {
+                @Override
+                protected Void call() {
+                    // Tạo VBox cho mỗi sách
+                    VBox bookBox = createBookBoxAPI(book);
+
+                    // Cập nhật giao diện trong luồng chính
+                    Platform.runLater(() -> resultList_hb.getChildren().add(bookBox));
+                    return null;
+                }
+            };
+
+            // Khởi chạy Task trong một luồng mới
+            Thread thread = new Thread(task);
+            thread.setDaemon(true); // Đảm bảo luồng sẽ tự động tắt khi ứng dụng JavaFX kết thúc
+            thread.start();
+        }
+    }
+
 
     private static VBox createBookBox(Book book) {
         VBox bookBox = new VBox();
@@ -126,6 +206,64 @@ public class ShowListBookFound {
 
         // Thêm các thành phần vào VBox
         bookBox.getChildren().addAll(bookCoverImageView, titleLabel, authorLabel, ratingAndBorrowBox);
+        return bookBox;
+    }
+
+    private static VBox createBookBoxAPI(Book book) {
+        VBox bookBox = new VBox();
+        bookBox.setSpacing(3);
+        bookBox.setPadding(new Insets(5));
+        bookBox.setAlignment(Pos.TOP_CENTER);
+        bookBox.setPrefHeight(165);
+
+        // Ảnh bìa
+        ImageView bookCoverImageView = new ImageView();
+        try {
+            Image bookCoverImage;
+            if (book.getThumbnailImage() != null) {
+                // Create Image from byte array
+                bookCoverImage = new Image(new ByteArrayInputStream(book.getThumbnailImage()));
+            } else {
+                bookCoverImage = DEFAULT_BOOK_COVER;
+            }
+            bookCoverImageView.setImage(bookCoverImage);
+        } catch (Exception e) {
+            bookCoverImageView.setImage(DEFAULT_BOOK_COVER);
+        }
+        bookCoverImageView.setFitHeight(90);
+        bookCoverImageView.setFitWidth(90);
+        bookCoverImageView.setPreserveRatio(false);
+
+        // Thêm CSS trực tiếp vào ImageView
+        bookCoverImageView.setStyle(
+                "-fx-cursor: hand; " +
+                        "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);"
+        );
+
+        // Sự kiện click vào ảnh bìa để xem trước sách
+        bookCoverImageView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                AdminController.getInstance().admin_parent.setCenter(Model.getInstance().getViewFactory().getBookDetailAPI());
+                BookDetailAPI.getInstance().setBook(book);
+                BookDetailAPI.getInstance().modifyButton();
+                BookDetailAPI.getInstance().setUpInfo(book);
+            }
+        });
+
+        // Hiển thị tiêu đề sách (giới hạn ký tự)
+        String shortTitle = book.getTitle().length() > 15 ? book.getTitle().substring(0, 15) + "..." : book.getTitle();
+        Label titleLabel = new Label(shortTitle);
+        titleLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12px;");
+        titleLabel.setTooltip(new Tooltip(book.getTitle()));
+
+        // Hiển thị tên tác giả (giới hạn ký tự)
+        String shortAuthor = book.getAuthors().length() > 15 ? book.getAuthors().substring(0, 15) + "..." : book.getAuthors();
+        Label authorLabel = new Label(shortAuthor);
+        authorLabel.setStyle("-fx-font-family: 'Calibri Light'; -fx-font-size: 12px;");
+        authorLabel.setTooltip(new Tooltip(book.getAuthors()));
+
+        // Thêm các thành phần vào VBox
+        bookBox.getChildren().addAll(bookCoverImageView, titleLabel, authorLabel);
         return bookBox;
     }
 }

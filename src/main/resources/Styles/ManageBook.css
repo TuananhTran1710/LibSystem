@@ -86,19 +86,20 @@ TableView .column-header .label {
     -fx-text-fill: #FFFFFF;
 }
 
-/* SCROLL PANE */
-.scroll-pane {
+.part_2 {
+    -fx-background-color: rgba(19, 42, 19, 0.05);
+    -fx-background-radius: 10px;
     -fx-border-color: #132A13;
-    -fx-border-width: 2px;
-    -fx-border-radius: 5px;
-    -fx-background-color: #FFFFFF;
+    -fx-border-radius: 10px;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
 }
 
 .scroll-pane .viewport {
-    -fx-background-color: rgba(19, 42, 19, 0.1);
+    -fx-background-color: transparent;
 }
 
-/* con lăn */
 .scroll-pane .scroll-bar:horizontal .thumb,
 .scroll-pane .scroll-bar:vertical .thumb {
     -fx-background-color: #132A13;
@@ -108,7 +109,6 @@ TableView .column-header .label {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 7, 0.5, 0, 0);
 }
 
-/* hover con lăn */
 .scroll-pane .scroll-bar:horizontal .thumb:hover,
 .scroll-pane .scroll-bar:vertical .thumb:hover {
     -fx-background-color: #1A4314;
@@ -116,14 +116,12 @@ TableView .column-header .label {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
 }
 
-/* thanh cuộn */
 .scroll-pane .scroll-bar:horizontal,
 .scroll-pane .scroll-bar:vertical {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: transparent;
     -fx-padding: 2px;
 }
 
-/* nhấn vào thanh cuộn */
 .scroll-pane .scroll-bar:horizontal .thumb:pressed,
 .scroll-pane .scroll-bar:vertical .thumb:pressed {
     -fx-background-color: #0B4619;

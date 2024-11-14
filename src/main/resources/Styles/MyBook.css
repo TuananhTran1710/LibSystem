@@ -1,31 +1,73 @@
-.dashboard {
+.mybook_container {
     -fx-background-color: #EEEEEE;
 }
 
-/* 2 vùng bên dưới */
-.feature {
-    -fx-background-color: #EEEEEE;
+.stat_view {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px 0 5px 0;
+    -fx-alignment: center;
+    -fx-border-width: 0 1px 0 0;
+    -fx-border-color: #DDDDDD;
+    -fx-spacing: 10;
 }
 
-.feature FontAwesomeIconView {
-    -fx-fill: #132A13;
-    -fx-size: 15;
+.stat {
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 10, 0, 0, 10);
 }
 
-
-/* SCROLL PANE */
-.scroll-pane {
-    -fx-border-color: #132A13;
-    -fx-border-width: 2px;
-    -fx-border-radius: 5px;
+.stat VBox {
     -fx-background-color: #FFFFFF;
 }
 
-.scroll-pane .viewport {
-    -fx-background-color: rgba(19, 42, 19, 0.1);
+.stat FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
 }
 
-/* con lăn */
+.stat_gradient {
+    -fx-background-color: linear-gradient(to right, #132A13, #253F25);
+}
+
+.stat_title {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Calibri";
+    -fx-font-size: 2.0em;
+    -fx-font-weight: bold;
+}
+
+.stat_number {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Calibri";
+    -fx-font-size: 1.5em;
+}
+
+.part_1 {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10px;
+    -fx-border-color: #D3D3D3;
+    -fx-border-radius: 10px;
+}
+
+.part_1 .title {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.5em;
+    -fx-font-weight: bold;
+}
+
+.part_1 FontAwesomeIconView {
+    -fx-fill: #132A13;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
 .scroll-pane .scroll-bar:horizontal .thumb,
 .scroll-pane .scroll-bar:vertical .thumb {
     -fx-background-color: #132A13;
@@ -35,7 +77,6 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 7, 0.5, 0, 0);
 }
 
-/* hover con lăn */
 .scroll-pane .scroll-bar:horizontal .thumb:hover,
 .scroll-pane .scroll-bar:vertical .thumb:hover {
     -fx-background-color: #1A4314;
@@ -43,58 +84,17 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
 }
 
-/* thanh cuộn */
 .scroll-pane .scroll-bar:horizontal,
 .scroll-pane .scroll-bar:vertical {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: transparent;
     -fx-padding: 2px;
 }
 
-/* nhấn vào thanh cuộn */
 .scroll-pane .scroll-bar:horizontal .thumb:pressed,
 .scroll-pane .scroll-bar:vertical .thumb:pressed {
     -fx-background-color: #0B4619;
     -fx-opacity: 1.0;
 }
-
-/* vbox là các ô thống kê*/
-.book VBox {
-    -fx-border-color: #132A13;
-    -fx-border-width: 2px;
-    -fx-border-radius: 5px;
-    -fx-background-color: #FFFFFF;
-}
-
-/* hbox là nơi lưu phần mục và số lượng*/
-
-.book HBox {
-    -fx-alignment: center;
-}
-
-/* số sách mượn */
-#NumberBorrow {
-    -fx-font-family: "Pacifico";
-    -fx-font-size: 4.5em;
-}
-
-/* số sách trả */
-#NumberReturn {
-    -fx-font-family: "Pacifico";
-    -fx-font-size: 4.5em;
-}
-
-/* số sách yêu thích */
-#NumberFavorite {
-    -fx-font-family: "Pacifico";
-    -fx-font-size: 4.5em;
-}
-
-/* dòng tiêu đề */
-#List {
-    -fx-font-family: "Britannic Bold";
-    -fx-font-size: 2em;
-}
-
 
 /* show số lượng và dùng cho các choice box còn lại */
 .show_box {

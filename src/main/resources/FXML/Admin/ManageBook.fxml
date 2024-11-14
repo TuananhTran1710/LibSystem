@@ -42,12 +42,12 @@
     </VBox>
      <TableView layoutX="17.0" layoutY="421.0" prefHeight="314.0" prefWidth="814.0">
          <columns>
-             <TableColumn prefWidth="75.20001029968262" text="Image" />
-             <TableColumn prefWidth="205.60000610351562" text="Title" />
-             <TableColumn prefWidth="191.99996948242188" text="Authors" />
-             <TableColumn prefWidth="136.00006103515625" text="Categories" />
-         <TableColumn prefWidth="86.4000244140625" text="State" />
-         <TableColumn prefWidth="136.00006103515625" text="Action" />
+             <TableColumn prefWidth="75.20001029968262" text="Image" resizable="false" reorderable="false" />
+             <TableColumn prefWidth="205.60000610351562" text="Title" resizable="false" reorderable="false" />
+             <TableColumn prefWidth="191.99996948242188" text="Authors" resizable="false" reorderable="false" />
+             <TableColumn prefWidth="136.00006103515625" text="Categories" resizable="false" reorderable="false" />
+         <TableColumn prefWidth="86.4000244140625" text="State" resizable="false" reorderable="false" />
+         <TableColumn prefWidth="136.00006103515625" text="Action" resizable="false" reorderable="false" />
          </columns>
          <columnResizePolicy>
              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -16,7 +17,7 @@ import java.io.IOException;
 // class nay lam nhiem vu chuyen doi giua cac cua so
 public class ViewFactory {
     //Users View
-    private AnchorPane dashboardView;
+    private ScrollPane dashboardView;
     private AnchorPane myBookView;
     private AnchorPane reportView;
     private AnchorPane proposeView;
@@ -62,7 +63,7 @@ public class ViewFactory {
 //tat ca cac ham get Anchor, VBox nay muc dich de tranh load file fxml nhieu lan,
 // vi khi load nhieu lan se goi lai initialize nhieu lan va dang ky nhieu su kien chong nhau
 
-    public AnchorPane getDashboardView() {
+    public ScrollPane getDashboardView() {
         // anchorPane giong nhu la mot loai Parent
         // tuong duong voi moi khi ta se khai bao Parent root
         if (dashboardView == null) {

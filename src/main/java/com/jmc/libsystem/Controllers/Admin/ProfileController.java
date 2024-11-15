@@ -3,6 +3,7 @@ package com.jmc.libsystem.Controllers.Admin;
 import com.jmc.libsystem.Information.Admin;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -24,6 +25,8 @@ public class ProfileController implements Initializable {
     public TextField confirm_new_password_fld;
     public Button change_password_btn;
     public Button save_btn;
+    public FontAwesomeIconView fullname_fontaws;
+    public Label fullname_lbl;
 
     public ProfileController() {
         instance = this;
@@ -71,7 +74,7 @@ public class ProfileController implements Initializable {
 
     private void setFieldsEditable(boolean editable) {
         fullname_fld.setEditable(editable);
-        email_fld.setEditable(editable);
+        email_fld.setEditable(false);
         password_fld.setEditable(false);
     }
 
@@ -84,6 +87,12 @@ public class ProfileController implements Initializable {
     }
 
     public void onEditButtonClicked() {
+        fullname_lbl.getStyleClass().remove("bold_text");
+        fullname_lbl.getStyleClass().add("edit_text");
+
+        fullname_fontaws.getStyleClass().remove("fontaws");
+        fullname_fontaws.getStyleClass().add("edit_fontaws");
+
         setFieldsEditable(true);
 
         edit_btn.setVisible(false);
@@ -93,17 +102,15 @@ public class ProfileController implements Initializable {
     }
 
     public void onSaveButtonClicked() {
+        fullname_lbl.getStyleClass().remove("edit_text");
+        fullname_lbl.getStyleClass().add("bold_text");
+
+        fullname_fontaws.getStyleClass().remove("edit_fontaws");
+        fullname_fontaws.getStyleClass().add("fontaws");
+
         String updatedFullName = fullname_fld.getText();
         String updatedEmail = email_fld.getText();
         Admin current_admin = Model.getInstance().getMyAdmin();
-
-        if (!updatedEmail.equals(Model.getInstance().getMyAdmin().getEmail()) && QueryAccountData.isAdminEmailExists(updatedEmail)) {
-            email_fld.setText(current_admin.getEmail());
-            //QueryAccountData.updateUserInfo(current_user);
-            QueryAccountData.updateAdminInfo(current_admin);
-            showAlert("Error", "Oops...", "Email already exists. Please use a different email.");
-            return;
-        }
 
         //nhập nhật của user
         current_admin.setFullName(updatedFullName);

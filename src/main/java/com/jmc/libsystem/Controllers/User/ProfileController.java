@@ -34,6 +34,7 @@ public class ProfileController implements Initializable {
     public TableColumn borroweddate_clm;
     public TableColumn returndate_clm;
     public TableColumn status_clm;
+    public Label fullname_lbl;
 
     public ProfileController() {
         instance = this;
@@ -94,7 +95,7 @@ public class ProfileController implements Initializable {
     private void setFieldsEditable(boolean editable) {
         user_id_fld.setEditable(false);
         fullname_fld.setEditable(editable);
-        email_fld.setEditable(editable);
+        email_fld.setEditable(false);
         password_fld.setEditable(false);
     }
 
@@ -109,6 +110,8 @@ public class ProfileController implements Initializable {
 
     //bấm nút edit profile
     public void onEditButtonClicked() {
+        fullname_lbl.getStyleClass().remove("blur_text");
+        fullname_lbl.getStyleClass().add("yellow_text");
         setFieldsEditable(true);
 
         edit_profile_btn.setVisible(false);
@@ -119,19 +122,13 @@ public class ProfileController implements Initializable {
 
     //bấm nút save profile
     public void onSaveButtonClicked() {
+        fullname_lbl.getStyleClass().remove("yellow_text");
+        fullname_lbl.getStyleClass().add("blur_text");
+
         //lấy thaydodoiri từ field
         String updatedFullName = fullname_fld.getText();
         String updatedEmail = email_fld.getText();
         User current_user = Model.getInstance().getMyUser();
-
-        //kiểm tra email tồn tại chưa
-        if (!updatedEmail.equals(Model.getInstance().getMyUser().getEmail()) && QueryAccountData.isUserEmailExists(updatedEmail)) {
-            //email tồn tại thì không thay đổi
-            email_fld.setText(current_user.getEmail());
-            QueryAccountData.updateUserInfo(current_user);
-            showAlert("Error", "Oops...", "Email already exists. Please use a different email.");
-            return;
-        }
 
         //nhập nhật của user
         current_user.setFullName(updatedFullName);

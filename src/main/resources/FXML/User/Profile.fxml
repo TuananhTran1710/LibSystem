@@ -44,7 +44,7 @@
             <GridPane.margin>
                <Insets right="10.0" />
             </GridPane.margin>
-            <Label styleClass="blur_text" text="Full Name" />
+            <Label fx:id="fullname_lbl" styleClass="blur_text" text="Full Name" />
             <TextField fx:id="fullname_fld" />
          </VBox>
          <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">

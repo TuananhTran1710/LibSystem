@@ -32,7 +32,7 @@
         <Line endX="400.0" layoutX="425.0" layoutY="50.0" startX="-350.0" AnchorPane.leftAnchor="50.0" />
     </AnchorPane>
     <VBox alignment="CENTER" fillWidth="false" layoutX="51.2" layoutY="110.0" prefHeight="490.0" prefWidth="250.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="160.0">
-        <HBox fx:id="time_hBox" alignment="CENTER" prefHeight="26.0" prefWidth="205.0" spacing="5.0" styleClass="time">
+        <HBox fx:id="time_hBox" alignment="CENTER" prefHeight="26.0" prefWidth="205.0" spacing="5.0" styleClass="in_stock">
             <FontAwesomeIconView glyphName="CLOCK_ALT" />
             <Label fx:id="time_lbl" text="Label" textFill="#e11010">
                 <font>

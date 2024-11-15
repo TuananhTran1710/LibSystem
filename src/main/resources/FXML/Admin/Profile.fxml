@@ -20,22 +20,22 @@
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Details" />
       </HBox>
       <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="335.0" spacing="7.0">
-         <FontAwesomeIconView glyphName="ID_BADGE" size="17" />
+         <FontAwesomeIconView glyphName="ID_BADGE" size="17" styleClass="fontaws" />
          <Label styleClass="bold_text" text="Admin ID:" />
          <Label fx:id="admin_id_lbl" styleClass="normal_text" text="Label" />
       </HBox>
       <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="610.0" spacing="7.0">
-         <FontAwesomeIconView glyphName="USER" size="17" />
-         <Label styleClass="bold_text" text="Full Name" />
+         <FontAwesomeIconView fx:id="fullname_fontaws" glyphName="USER" size="17" styleClass="fontaws" />
+         <Label fx:id="fullname_lbl" styleClass="bold_text" text="Full Name" />
       </HBox>
       <TextField fx:id="fullname_fld" />
       <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="610.0" spacing="7.0">
-         <FontAwesomeIconView glyphName="ENVELOPE" size="17" />
+         <FontAwesomeIconView glyphName="ENVELOPE" size="17" styleClass="fontaws" />
          <Label styleClass="bold_text" text="Email" />
       </HBox>
       <TextField fx:id="email_fld" />
       <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="610.0" spacing="7.0">
-         <FontAwesomeIconView glyphName="KEY" size="17" />
+         <FontAwesomeIconView glyphName="KEY" size="17" styleClass="fontaws" />
          <Label styleClass="bold_text" text="Password" />
       </HBox>
       <TextField fx:id="password_fld" />
@@ -61,12 +61,12 @@
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Change Password" />
       </HBox>
       <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="610.0" spacing="7.0">
-         <FontAwesomeIconView glyphName="KEY" size="17" />
+         <FontAwesomeIconView glyphName="KEY" size="17" styleClass="fontaws" />
          <Label styleClass="bold_text" text="New Password" />
       </HBox>
       <TextField fx:id="new_password_fld" />
       <HBox alignment="BOTTOM_LEFT" layoutX="30.0" layoutY="72.0" prefHeight="35.0" prefWidth="610.0" spacing="7.0">
-         <FontAwesomeIconView glyphName="KEY" size="17" />
+         <FontAwesomeIconView glyphName="KEY" size="17" styleClass="fontaws" />
          <Label styleClass="bold_text" text="Confirm New Password" />
       </HBox>
       <TextField fx:id="confirm_new_password_fld" />

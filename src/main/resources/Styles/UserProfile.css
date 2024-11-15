@@ -54,6 +54,12 @@
     -fx-font-size:1.0em;
 }
 
+.yellow_text {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.0em;
+}
+
 .bold_text {
     -fx-text-fill: #132A13;
     -fx-font-family: "Segoe UI";

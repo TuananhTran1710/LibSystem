@@ -1,5 +1,8 @@
 package com.jmc.libsystem.Controllers.Admin;
 
+import com.jmc.libsystem.Controllers.Book.BookEditAdmin;
+import com.jmc.libsystem.Information.Book;
+import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
@@ -55,6 +58,9 @@ public class AdminDashboardController implements Initializable {
     public Label categoryNumber3;
     public ProgressBar progress3;
     private final int totalQuantity = 100000;
+
+    public HashMap<String, Book> bookList = new HashMap<>();
+    // luu book_id va ResultSet cua book tu database
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -210,6 +216,23 @@ public class AdminDashboardController implements Initializable {
                 editLink.setOnAction(event -> {
                     Map<String, Object> rowData = getTableView().getItems().get(getIndex());
                     // Thực hiện hành động chỉnh sửa với dữ liệu hàng tương ứng
+                    String book_id = (String) rowData.get("id");
+                    if (!bookList.containsKey(book_id)) {
+                        ResultSet resultSet = QueryBookData.getBook(book_id);
+                        try {
+                            resultSet.next();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Book book = Book.createBookFromResultSet(resultSet);
+                        bookList.put(book_id, book);
+                    }
+                    Book book = bookList.get(book_id);
+                    AdminController.getInstance().admin_parent.setCenter(Model.getInstance().getViewFactory().getBookEditAdmin());
+                    BookEditAdmin.getInstance().setBook(book);
+                    BookEditAdmin.getInstance().modifyButton();
+                    BookEditAdmin.getInstance().setUpInfo(book);
+
                     System.out.println("Edit: " + rowData.get("id"));
                 });
             }

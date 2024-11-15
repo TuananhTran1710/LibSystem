@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -31,7 +32,7 @@
         <FontAwesomeIconView glyphName="BOOK" layoutX="766.0" layoutY="34.0" size="30" AnchorPane.leftAnchor="766.0" />
         <Line endX="400.0" layoutX="425.0" layoutY="50.0" startX="-350.0" AnchorPane.leftAnchor="50.0" />
     </AnchorPane>
-    <VBox alignment="CENTER" fillWidth="false" layoutX="51.2" layoutY="110.0" prefHeight="490.0" prefWidth="250.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="160.0">
+    <VBox alignment="CENTER" fillWidth="false" layoutX="51.0" layoutY="109.0" prefHeight="575.0" prefWidth="250.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="109.0">
         <ImageView fx:id="imageView" fitHeight="280.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true" />
         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="350.0" spacing="10.0" styleClass="star">
             <Label>
@@ -60,21 +61,35 @@
                 </graphic>
             </Label>
         </HBox>
-        <AnchorPane fx:id="available_hbox" prefHeight="22.0" prefWidth="132.0" styleClass="in_stock">
+        <AnchorPane fx:id="available_hbox" prefHeight="21.0" prefWidth="157.0" styleClass="in_stock">
             <FontAwesomeIconView glyphName="ARCHIVE" layoutX="17.0" layoutY="16.0" />
             <Label fx:id="available_lbl" layoutX="36.0" layoutY="3.0" text="X in stock" />
         </AnchorPane>
-        <AnchorPane prefHeight="67.0" prefWidth="250.0">
+        <AnchorPane prefHeight="30.0" prefWidth="250.0">
             <Button fx:id="editBook_btn" layoutX="76.0" layoutY="15.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="78.0" styleClass="button_1" text="Edit" />
-            <Button fx:id="cancel_btn" layoutY="15.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="66.0" styleClass="button_1" text="Cancel" />
-            <Button fx:id="saveEdit_btn" layoutX="164.0" layoutY="15.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="78.0" styleClass="button_1" text="Save" />
+            <Button fx:id="cancel_btn" layoutX="21.0" layoutY="15.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="66.0" styleClass="button_1" text="Cancel" />
+            <Button fx:id="saveEdit_btn" layoutX="154.0" layoutY="15.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="78.0" styleClass="button_1" text="Save" />
         </AnchorPane>
-        <AnchorPane layoutX="10.0" layoutY="414.0" prefHeight="67.0" prefWidth="250.0">
-            <Button fx:id="deleteBook_btn" layoutX="22.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" styleClass="button_1" text="Delete" />
-            <Button fx:id="changeQuantity_btn" layoutX="128.0" layoutY="15.0" mnemonicParsing="false" styleClass="button_1" text="Change quantity" />
+        <AnchorPane layoutX="10.0" layoutY="414.0" prefHeight="9.0" prefWidth="250.0">
+            <Button fx:id="deleteBook_btn" layoutX="142.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" styleClass="button_1" text="Delete" />
+            <Button fx:id="restore_btn" layoutX="40.0" layoutY="10.0" mnemonicParsing="false" styleClass="button_1" text="Restore" />
         </AnchorPane>
+        <AnchorPane fx:id="quantity_hbox" layoutX="10.0" layoutY="445.0" prefHeight="71.0" prefWidth="250.0">
+            <TextField fx:id="quantity_tf" alignment="CENTER" layoutX="97.0" layoutY="15.0" prefHeight="26.0" prefWidth="78.0">
+            <font>
+               <Font name="System Bold" size="13.0" />
+            </font></TextField>
+            <Button fx:id="plus_btn" layoutX="163.0" layoutY="15.0" mnemonicParsing="false" text="+" />
+            <Button fx:id="subtract_btn" layoutX="87.0" layoutY="15.0" mnemonicParsing="false" text="-" />
+            <Text layoutX="25.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" />
+        </AnchorPane>
+      <Label fx:id="notice_lbl" alignment="CENTER" prefHeight="58.0" prefWidth="250.0" textFill="#ea0000">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
     </VBox>
-    <VBox layoutX="345.0" layoutY="75.2" prefHeight="641.0" prefWidth="474.0" styleClass="right_detail" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="75.0">
+    <VBox layoutX="345.0" layoutY="75.2" prefHeight="643.0" prefWidth="494.0" styleClass="right_detail" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="75.0">
         <Label fx:id="title" styleClass="title" text="Book name" />
         <HBox alignment="CENTER" prefHeight="40.0" prefWidth="451.0" spacing="6.0" styleClass="choose_action">
             <ToggleButton fx:id="overview_btn" mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" text="Overview" />
@@ -82,7 +97,7 @@
             <ToggleButton fx:id="borrowHistory_btn" mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" text="Borrow History" />
         </HBox>
         <StackPane prefHeight="539.0" prefWidth="452.0">
-            <VBox fx:id="overview_vbox" fillWidth="false" prefHeight="551.0" prefWidth="452.0" styleClass="overview">
+            <VBox fx:id="overview_vbox" fillWidth="false" prefHeight="551.0" prefWidth="452.0" styleClass="overview" visible="false">
                 <AnchorPane prefHeight="28.0" prefWidth="472.0">
                     <HBox fx:id="state_hbox" alignment="CENTER" layoutX="8.0" prefHeight="28.0" prefWidth="114.0" styleClass="time" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <Label fx:id="state_lbl" text="Label">
@@ -151,7 +166,7 @@
                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="7.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <FontAwesomeIconView glyphName="CART_ARROW_DOWN" size="20" />
                         <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="260.0">
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Total Borrowed" />
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Total Loans" />
                             <Label fx:id="totalLoan_lbl" styleClass="level3_content" text="Tổng số đã mượn" />
                         </VBox>
                     </HBox>
@@ -170,6 +185,13 @@
                         </VBox>
                     </HBox>
                 </GridPane>
+                <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="200.0" spacing="7.0">
+                    <FontAwesomeIconView glyphName="ID_CARD" size="20" />
+                    <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="250.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Borrowing" />
+                        <Label fx:id="borrowing_lbl" styleClass="level3_content" text="Số" />
+                    </VBox>
+                </HBox>
             </VBox>
             <AnchorPane fx:id="borrowHistory_vbox" prefHeight="200.0" prefWidth="200.0" styleClass="borrow_history" visible="false">
                 <TableView prefHeight="530.0" prefWidth="450.0">
@@ -184,9 +206,12 @@
                     </columnResizePolicy>
                 </TableView>
             </AnchorPane>
-            <VBox fx:id="comment_vbox" prefHeight="409.0" prefWidth="354.0" spacing="10" styleClass="comments" visible="false">
-                <ScrollPane hbarPolicy="NEVER" prefHeight="592.0" prefWidth="452.0" vbarPolicy="ALWAYS">
-                    <VBox fx:id="comment_list" prefHeight="102.0" prefWidth="100.0" />
+            <VBox fx:id="comment_vbox" prefHeight="409.0" prefWidth="354.0" spacing="10" styleClass="comments">
+                <ScrollPane fx:id="scrollPane_cmt" hbarPolicy="NEVER" prefHeight="592.0" prefWidth="478.0" vbarPolicy="ALWAYS">
+                    <VBox fx:id="comment_list" alignment="TOP_CENTER" prefHeight="102.0" prefWidth="434.0">
+                  <padding>
+                     <Insets top="10.0" />
+                  </padding></VBox>
                 </ScrollPane>
             </VBox>
         </StackPane>

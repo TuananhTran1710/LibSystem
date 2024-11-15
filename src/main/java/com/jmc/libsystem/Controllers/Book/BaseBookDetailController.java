@@ -3,6 +3,8 @@ package com.jmc.libsystem.Controllers.Book;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Views.ShowListBookFound;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
@@ -33,6 +36,9 @@ public class BaseBookDetailController implements Initializable {
     public FontAwesomeIconView star4;
     public FontAwesomeIconView star5;
 
+    public Label notice_lbl;
+    protected Timeline noticeTimeline;
+
     public VBox authorsContainer;
     public VBox categoriesContainer;
 
@@ -47,6 +53,21 @@ public class BaseBookDetailController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         starsAverage = List.of(star1, star2, star3, star4, star5);
         back_btn.setOnAction(event -> moveMenuCurrent());
+    }
+
+    public void createTimeLine() {
+        // Chỉ tạo Timeline nếu nó chưa được khởi tạo
+        if (noticeTimeline == null) {
+            noticeTimeline = new Timeline(new KeyFrame(
+                    Duration.seconds(1.5),
+                    evt -> notice_lbl.setText("")
+            ));
+            noticeTimeline.setCycleCount(1);
+        }
+
+        // Dừng và chạy lại Timeline để đảm bảo nhãn sẽ biến mất sau 3 giây
+        noticeTimeline.stop();
+        noticeTimeline.playFromStart();
     }
 
     // khong dinh nghia o day vi deu duoc overide o lop con

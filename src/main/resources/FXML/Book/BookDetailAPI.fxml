@@ -54,11 +54,11 @@
           AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="84.0">
         <Label fx:id="title" styleClass="title" text="Book name"/>
         <HBox alignment="CENTER" prefHeight="40.0" prefWidth="452.0" spacing="6.0" styleClass="choose_action">
-            <ToggleButton fx:id="overview_btn" mnemonicParsing="false" prefHeight="30.0" prefWidth="470.0"
+            <ToggleButton mnemonicParsing="false" prefHeight="30.0" prefWidth="470.0"
                           selected="true" text="Overview"/>
         </HBox>
         <StackPane prefHeight="539.0" prefWidth="452.0">
-            <VBox fx:id="overview_vbox" fillWidth="false" prefHeight="344.0" prefWidth="452.0" styleClass="overview">
+            <VBox fillWidth="false" prefHeight="344.0" prefWidth="452.0" styleClass="overview">
                 <AnchorPane prefHeight="28.0" prefWidth="472.0"/>
                 <GridPane prefHeight="70.0" prefWidth="450.0">
                     <columnConstraints>

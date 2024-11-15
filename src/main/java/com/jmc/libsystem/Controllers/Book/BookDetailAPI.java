@@ -7,20 +7,19 @@ import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.SuggestionBox.SuggestionBook;
 import com.jmc.libsystem.Views.SearchCriteria;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class BookDetailAPI extends BaseBookDetailController implements Initializable {
+public class BookDetailAPI extends BaseBookDetailController {
 
     public Button addBook_btn;
     public VBox authorsContainer;
@@ -31,10 +30,8 @@ public class BookDetailAPI extends BaseBookDetailController implements Initializ
     public Button subtract_btn;
     public Button plus_btn;
     public Button update_btn;
-    public Label notice_lbl;
     public Button delete_btn;
 
-    private Timeline noticeTimeline;
 
     public static BookDetailAPI getInstance() {
         return instance;
@@ -146,20 +143,6 @@ public class BookDetailAPI extends BaseBookDetailController implements Initializ
         ManageBookController.getInstance().resetBookLibrary();
     }
 
-    public void createTimeLine() {
-        // Chỉ tạo Timeline nếu nó chưa được khởi tạo
-        if (noticeTimeline == null) {
-            noticeTimeline = new Timeline(new KeyFrame(
-                    Duration.seconds(1.5),
-                    evt -> notice_lbl.setText("")
-            ));
-            noticeTimeline.setCycleCount(1);
-        }
-
-        // Dừng và chạy lại Timeline để đảm bảo nhãn sẽ biến mất sau 3 giây
-        noticeTimeline.stop();
-        noticeTimeline.playFromStart();
-    }
 
     public void setUpInfo(Book book) {
         notice_lbl.setText("");

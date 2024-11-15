@@ -191,7 +191,6 @@ public class ManageBookController implements Initializable {
     }
 
     public void resetBookLibrary() {
-//        criteriaSearchLib.setValue(SearchCriteria.CATEGORY);
         if (SuggestionBook.autoCompletionBinding != null) {
             SuggestionBook.autoCompletionBinding.dispose();
         }
@@ -199,6 +198,6 @@ public class ManageBookController implements Initializable {
         SuggestionBook.autoCompletionBinding.setPrefWidth(searchInLib_tf.getWidth() - 160);
         searchInLib_tf.clear();
         criteriaSearchLib.setValue(SearchCriteria.TITLE);
-
+        
     }
 }

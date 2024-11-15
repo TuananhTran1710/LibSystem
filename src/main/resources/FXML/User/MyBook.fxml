@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="mybook_container" stylesheets="@../../Styles/MyBook.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.MyBookController">
    <HBox fillHeight="false" layoutX="34.0" layoutY="28.0" prefHeight="156.0" prefWidth="782.0" styleClass="stat_view">
@@ -16,7 +17,10 @@
           <AnchorPane prefHeight="120.0" prefWidth="245.0" stylesheets="@../../Styles/MyBook.css">
                <Label id="List" alignment="CENTER" layoutX="13.0" layoutY="24.0" styleClass="stat_title" text="Borrow Book" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0" />
             <FontAwesomeIconView glyphName="BOOKMARK" layoutX="178.0" layoutY="41.0" size="20" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="20.0" />
-               <Label id="NumberBorrow" fx:id="NumberBorrow" alignment="CENTER" layoutX="49.0" layoutY="80.0" prefHeight="30.0" prefWidth="100.0" styleClass="stat_number" text="0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" />
+               <Label id="NumberBorrow" fx:id="NumberBorrow" alignment="CENTER" layoutX="49.0" layoutY="80.0" prefHeight="30.0" prefWidth="100.0" styleClass="stat_number" text="0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
             <VBox layoutX="168.0" layoutY="45.0" prefHeight="70.0" prefWidth="39.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="23.0" />
             <styleClass>
                <String fx:value="stat" />
@@ -26,7 +30,10 @@
           <AnchorPane prefHeight="120.0" prefWidth="245.0" stylesheets="@../../Styles/MyBook.css">
                <Label id="List" layoutX="8.0" layoutY="25.0" styleClass="stat_title" text="Return Book" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0" />
             <FontAwesomeIconView glyphName="UNDO" layoutX="189.0" layoutY="18.0" size="20" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="20.0" />
-               <Label id="NumberReturn" fx:id="NumberReturn" alignment="CENTER" layoutX="25.0" layoutY="71.0" prefHeight="30.0" prefWidth="100.0" styleClass="stat_number" text="0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" />
+               <Label id="NumberReturn" fx:id="NumberReturn" alignment="CENTER" layoutX="25.0" layoutY="71.0" prefHeight="30.0" prefWidth="100.0" styleClass="stat_number" text="0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
             <VBox layoutX="149.0" layoutY="10.0" prefHeight="70.0" prefWidth="39.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="23.0" />
             <styleClass>
                <String fx:value="stat" />
@@ -36,7 +43,10 @@
           <AnchorPane prefHeight="120.0" prefWidth="245.0" stylesheets="@../../Styles/MyBook.css">
                <Label id="List" layoutX="7.0" layoutY="15.0" styleClass="stat_title" text="Favorite Book" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0" />
             <FontAwesomeIconView glyphName="HEART" layoutX="176.0" layoutY="19.0" size="20" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="20.0" />
-               <Label id="NumberFavorite" fx:id="NumberFavorite" alignment="CENTER" layoutX="14.0" layoutY="73.0" prefHeight="30.0" prefWidth="100.0" styleClass="stat_number" text="0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" />
+               <Label id="NumberFavorite" fx:id="NumberFavorite" alignment="CENTER" layoutX="14.0" layoutY="73.0" prefHeight="30.0" prefWidth="100.0" styleClass="stat_number" text="0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
             <VBox layoutX="176.0" layoutY="21.0" prefHeight="70.0" prefWidth="39.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="23.0" />
             <styleClass>
                <String fx:value="stat" />

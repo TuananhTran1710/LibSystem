@@ -109,4 +109,33 @@
             <Insets bottom="20.0" />
         </padding>
     </VBox>
+     <TableView layoutX="17.0" layoutY="421.0" prefHeight="314.0" prefWidth="814.0">
+         <columns>
+             <TableColumn prefWidth="75.20001029968262" text="Image" resizable="false" reorderable="false" />
+             <TableColumn prefWidth="205.60000610351562" text="Title" resizable="false" reorderable="false" />
+             <TableColumn prefWidth="191.99996948242188" text="Authors" resizable="false" reorderable="false" />
+             <TableColumn prefWidth="136.00006103515625" text="Categories" resizable="false" reorderable="false" />
+         <TableColumn prefWidth="86.4000244140625" text="State" resizable="false" reorderable="false" />
+         <TableColumn prefWidth="136.00006103515625" text="Action" resizable="false" reorderable="false" />
+         </columns>
+         <columnResizePolicy>
+             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+     </TableView>
+   <Label layoutX="27.0" layoutY="348.0" prefHeight="18.0" prefWidth="124.0" />
+   <AnchorPane layoutX="18.0" layoutY="375.0" prefHeight="38.0" prefWidth="813.0">
+      <children>
+         <TextField prefHeight="40.0" prefWidth="767.0" promptText="Search or type a command..." styleClass="search_field" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         <ChoiceBox layoutX="703.0" layoutY="2.0" prefHeight="36.0" prefWidth="90.0" styleClass="type_Search_box" AnchorPane.topAnchor="2.0" />
+         <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" styleClass="search_button" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <graphic>
+               <FontAwesomeIconView glyphName="SEARCH" rotate="-11.3" size="15" />
+            </graphic>
+         </Button>
+         <FontAwesomeIconView glyphName="SLIDERS" layoutX="784.0" layoutY="28.0" size="20" text="" />
+         <Text layoutX="656.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sort_by" text="Sort by:" />
+         <Line endX="15.39996337890625" endY="9.400001525878906" layoutX="633.0" layoutY="22.0" startX="15.39996337890625" startY="-12.200004577636719" styleClass="line" />
+      </children>
+   </AnchorPane>
+   <Label layoutX="27.0" layoutY="349.0" text="Books in Library" />
 </AnchorPane>

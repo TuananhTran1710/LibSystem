@@ -10,53 +10,33 @@ import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.QueryDatabase.QueryFavoriteBook;
 import com.jmc.libsystem.QueryDatabase.QueryFeedback;
-import com.jmc.libsystem.Views.ShowListBookFound;
 import com.jmc.libsystem.Views.ShowListComment;
 import com.jmc.libsystem.Views.UserMenuOptions;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class BookDetailController implements Initializable {
+public class BookDetailController extends BaseBookDetailController {
 
     private static BookDetailController instance;
 
-    public Button back_btn;
-
-    public Label publishDate_lbl;
-    public Label quantity_lbl;
-    public Label pages_lbl;
-    public ImageView imageView;
-    public Label title;
     public Button borrow_btn;
     public Button like_btn;
     public Button return_btn;
     public Button unlike_btn;
     public Label totalLoan_lbl;
-    public Label description_lbl;
     public Label available_lbl;
+    public Label quantity_lbl;
 
-    public FontAwesomeIconView star1;
-    public FontAwesomeIconView star2;
-    public FontAwesomeIconView star3;
-    public FontAwesomeIconView star4;
-    public FontAwesomeIconView star5;
     //phan cmt
     public VBox comment_list;
     public FontAwesomeIconView star_cmt1;
@@ -65,18 +45,17 @@ public class BookDetailController implements Initializable {
     public FontAwesomeIconView star_cmt4;
     public FontAwesomeIconView star_cmt5;
     public TextArea text_cmt;
-    public Button edit_btn;
-    public Button comment_btn;
-    public Button deleted_btn;
-    public Button save_btn;
+    public Button edit_btn;      //edit my comment
+    public Button comment_btn;   // send comment
+    public Button deleted_btn;  // delete my comment
+    public Button save_btn;   // save my comment
+
     public ToggleButton overview_btn;
     public ToggleButton commentToggle_btn;
-    public Label id_lbl;
-    public Label lan_lbl;
+
     public VBox overview_vbox;
     public VBox comment_vbox;
-    public VBox authorsContainer;
-    public VBox categoriesContainer;
+
     public Label time_lbl;
     public HBox state_hbox;
     public Label state_lbl;
@@ -86,19 +65,9 @@ public class BookDetailController implements Initializable {
 
     private List<Comment> feedbacks;
 
-    private List<FontAwesomeIconView> starsAverage;
     private List<FontAwesomeIconView> starsComment;
     private int currentRating = 0; // Rating ban đầu
 
-    private Book book;
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
 
     public static BookDetailController getInstance() {
         return instance;
@@ -110,12 +79,13 @@ public class BookDetailController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        super.initialize(url, resourceBundle);
         borrow_btn.setFocusTraversable(false);
         like_btn.setFocusTraversable(false);
         return_btn.setFocusTraversable(false);
         unlike_btn.setFocusTraversable(false);
 
-        starsAverage = List.of(star1, star2, star3, star4, star5);
+
         starsComment = List.of(star_cmt1, star_cmt2, star_cmt3, star_cmt4, star_cmt5);
         for (int i = 0; i < starsComment.size(); i++) {
             int index = i;
@@ -124,8 +94,6 @@ public class BookDetailController implements Initializable {
             starsComment.get(i).setOnMouseClicked(event -> setRating(starsComment, index + 1));
         }
 
-
-        back_btn.setOnAction(event -> moveMenuCurrent());
         return_btn.setOnAction(event -> {
             QueryBookLoans.updateReturnBook(book.getId());
             book.setNumBorrowing(book.getNumBorrowing() - 1);
@@ -140,6 +108,7 @@ public class BookDetailController implements Initializable {
                 state_lbl.setText("Deleted");
             }
         });
+
         borrow_btn.setOnAction(event -> {
             time_hBox.setVisible(true);
             toReturnButton();
@@ -157,7 +126,7 @@ public class BookDetailController implements Initializable {
                 available_lbl.setTextFill(Color.BLACK);
             }
 
-            totalLoan_lbl.setText("Borrowed: " + String.valueOf(book.getTotalLoan()) + " times");
+            totalLoan_lbl.setText(String.valueOf(book.getTotalLoan()) + " times");
         });
         like_btn.setOnAction(event -> {
             toUnlikeButton();
@@ -177,7 +146,6 @@ public class BookDetailController implements Initializable {
         });
 
         edit_btn.setOnAction(event -> {
-
             onEditComment();
         });
 
@@ -187,7 +155,10 @@ public class BookDetailController implements Initializable {
                 QueryFeedback.insertNewComment(book.getId(), text_cmt.getText(), currentRating);
                 showFeedback();
             } else {
-
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Please rate and write your comment");
+                alert.showAndWait();
             }
         });
 
@@ -225,15 +196,10 @@ public class BookDetailController implements Initializable {
         }
     }
 
+    @Override
     public void setRating(List<FontAwesomeIconView> stars, int rating) {
         if (stars == starsComment) currentRating = rating;
-        for (int i = 0; i < stars.size(); i++) {
-            if (i < rating) {
-                stars.get(i).setFill((Color.web("gold")));
-            } else {
-                stars.get(i).setFill((Color.web("#FFFFFF"))); // Default color
-            }
-        }
+        super.setRating(stars, rating);
     }
 
     private void toReturnButton() {
@@ -363,7 +329,8 @@ public class BookDetailController implements Initializable {
         }
     }
 
-    private void moveMenuCurrent() {
+    @Override
+    public void moveMenuCurrent() {
         UserMenuOptions menuCurrent = Model.getInstance().getViewFactory().getUserSelectedMenuItem().getValue();
         switch (menuCurrent) {
             case DASHBOARD -> {
@@ -384,21 +351,14 @@ public class BookDetailController implements Initializable {
         ShowListComment.show(comment_list, feedbacks);
     }
 
+    @Override
     public void setUpInfo(Book book) {
+        super.setUpInfo(book);
 
-        title.setText(book.getTitle());
-        publishDate_lbl.setText(book.getPublishDate().toString());
         quantity_lbl.setText(String.valueOf(book.getQuantity()));
-        pages_lbl.setText(String.valueOf(book.getPageCount()));
-        description_lbl.setText(book.getDescription());
-        totalLoan_lbl.setText("Borrowed: " + String.valueOf(book.getTotalLoan()) + " times");
-        id_lbl.setText(book.getId());
-        lan_lbl.setText(book.getLanguage());
-
-        setRating(starsAverage, book.getSumRatingStar() / book.getCountRating());
+        totalLoan_lbl.setText(String.valueOf(book.getTotalLoan()) + " times");
 
         showFeedback();
-
 
         int availableNumber = book.getQuantity() - book.getNumBorrowing();
         if (availableNumber == 0) {
@@ -408,54 +368,9 @@ public class BookDetailController implements Initializable {
             available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
             available_lbl.setTextFill(Color.BLACK);
         }
-
-        // set anh
-        try {
-            Image bookCoverImage;
-            if (book.getThumbnailImage() != null) {
-                // Create Image from byte array
-                bookCoverImage = new Image(new ByteArrayInputStream(book.getThumbnailImage()));
-            } else {
-                bookCoverImage = ShowListBookFound.DEFAULT_BOOK_COVER;
-            }
-            imageView.setImage(bookCoverImage);
-        } catch (Exception e) {
-            imageView.setImage(ShowListBookFound.DEFAULT_BOOK_COVER);
-        }
-
-
-        imageView.setFitHeight(280);
-        imageView.setFitWidth(225);
-        imageView.setPreserveRatio(false);
-
-        // Hiển thị danh sách tác giả dưới dạng các ô, mỗi dòng chứa 2 ô
-        authorsContainer.getChildren().clear();
-        List<String> authors = List.of(book.getAuthors().split(", "));
-        for (int i = 0; i < authors.size(); i += 2) {
-            HBox row = new HBox(5);
-            for (int j = i; j < i + 2 && j < authors.size(); j++) {
-                Label authorLabel = new Label(authors.get(j));
-                authorLabel.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 5 10; -fx-border-radius: 15; -fx-background-radius: 15;");
-                row.getChildren().add(authorLabel);
-            }
-            authorsContainer.getChildren().add(row);
-        }
-
-        // Hiển thị danh mục sách dưới dạng các ô, mỗi dòng chứa 2 ô
-        categoriesContainer.getChildren().clear();
-        List<String> categories = List.of(book.getCategory().split(", "));
-        for (int i = 0; i < categories.size(); i += 3) {
-            HBox row = new HBox(5);
-            for (int j = i; j < i + 3 && j < categories.size(); j++) {
-                Label categoryLabel = new Label(categories.get(j).trim());
-                categoryLabel.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 5 10; -fx-border-radius: 15; -fx-background-radius: 15;");
-                row.getChildren().add(categoryLabel);
-            }
-            categoriesContainer.getChildren().add(row);
-        }
     }
 
-
+    @Override
     public void modifyButton() {
         moveToOverviewVBox();
         showMyComment();

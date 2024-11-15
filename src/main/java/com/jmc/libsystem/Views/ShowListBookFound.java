@@ -54,36 +54,6 @@ public class ShowListBookFound {
         }
     }
 
-//    public static void show(List<Book> bookList, HBox resultList_hb) {
-//        resultList_hb.getChildren().clear();
-//
-//        if (bookList.isEmpty()) {
-//            VBox emptyBox = new VBox();
-//            emptyBox.setAlignment(Pos.CENTER);
-//            emptyBox.setSpacing(3);
-//
-//            ImageView image = new ImageView();
-//            Image notFoundImage = new Image(ShowListBookFound.class.getResource("/Images/empty.png").toString());
-//            image.setImage(notFoundImage);
-//            image.setFitHeight(90);
-//            image.setFitWidth(90);
-//            image.setPreserveRatio(false);
-//
-//            Label messageLabel = new Label("No books found");
-//            messageLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #A0A0A0;");
-//
-//            emptyBox.getChildren().addAll(image, messageLabel);
-//            resultList_hb.getChildren().add(emptyBox);
-//        }
-//
-//        for (int i = 0; i < bookList.size(); i++) {
-//            Book book = bookList.get(i);
-//            VBox bookBox = createBookBoxAPI(book);
-//            resultList_hb.getChildren().add(bookBox);
-//        }
-//    }
-
-
     public static void show(List<Book> bookList, HBox resultList_hb) {
         resultList_hb.getChildren().clear();
 

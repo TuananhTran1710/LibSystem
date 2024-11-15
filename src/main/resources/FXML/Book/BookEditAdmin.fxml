@@ -208,7 +208,7 @@
             </AnchorPane>
             <VBox fx:id="comment_vbox" prefHeight="409.0" prefWidth="354.0" spacing="10" styleClass="comments">
                 <ScrollPane fx:id="scrollPane_cmt" hbarPolicy="NEVER" prefHeight="592.0" prefWidth="478.0" vbarPolicy="ALWAYS">
-                    <VBox fx:id="comment_list" alignment="TOP_CENTER" prefHeight="102.0" prefWidth="434.0">
+                    <VBox fx:id="comment_list" alignment="TOP_CENTER" fillWidth="false" prefHeight="102.0" prefWidth="451.0">
                   <padding>
                      <Insets top="10.0" />
                   </padding></VBox>

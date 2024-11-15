@@ -77,47 +77,12 @@ public class AdminDashboardController implements Initializable {
 
     public void refreshData() {
         getTableList();
-        //addMouseClickedToTable();
         try {
             getNumberData();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         showSortCategory();
-        //add();
-    }
-
-    private void add() {
-        statusColumn.setCellFactory(tc -> {
-            TableCell<Map<String, Object>, String> cell = new TableCell<>();
-            cell.getStyleClass().add("status-cell");
-            System.out.println("can use css");
-            cell.textProperty().addListener((obs, oldVal, newVal) -> {
-                if ("Available".equals(newVal)) {
-                    cell.getStyleClass().add("in-stock");
-                    cell.getStyleClass().remove("out-of-stock");
-                } else if ("Over".equals(newVal)) {
-                    cell.getStyleClass().add("out-of-stock");
-                    cell.getStyleClass().remove("in-stock");
-                }
-            });
-
-            return cell;
-        });
-    }
-
-    private void addMouseClickedToTable() {
-        listBook.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) { // Click đúp
-                Map<String, Object> selected = listBook.getSelectionModel().getSelectedItem();
-                if (selected != null) {
-
-                    // Xử lý khi một hàng được chọn
-                    System.out.println("Bạn đã chọn: " + selected.get("title"));
-                    // Mở cửa sổ mới, cập nhật dữ liệu, ...
-                }
-            }
-        });
     }
 
     // lấy dữ liệu từ database

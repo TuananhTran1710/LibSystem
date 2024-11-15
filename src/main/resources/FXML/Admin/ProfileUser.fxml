@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/UserProfile.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.ProfileUserontroller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/UserProfile.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.ProfileUserontroller">
    <VBox layoutX="100.0" layoutY="66.0" prefHeight="210.0" prefWidth="730.0" styleClass="total" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="30.0">
       <padding>
          <Insets left="20.0" right="20.0" />

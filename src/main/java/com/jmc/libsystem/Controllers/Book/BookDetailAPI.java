@@ -170,7 +170,7 @@ public class BookDetailAPI implements Initializable {
 
     private void moveMenuCurrent() {
         AdminController.getInstance().admin_parent.setCenter(Model.getInstance().getViewFactory().getManageBookView());
-        ManageBookController.getInstance().resetBookLibrary();
+        //ManageBookController.getInstance().resetBookLibrary();
     }
 
     public void createTimeLine() {

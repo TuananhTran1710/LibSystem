@@ -119,6 +119,17 @@ public class QueryBookData {
         return resultSet;
     }
 
+    public static ResultSet getAllBook() {
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM book";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
 
     public static boolean isExist(String book_id) {
         String query = "SELECT EXISTS (SELECT 1 FROM book WHERE google_book_id = ?)";

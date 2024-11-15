@@ -50,8 +50,9 @@ public class RecommendationSystem {
                 String bookId = resultSet.getString("google_book_id");
                 int sumStar = resultSet.getInt("sumRatingStar");
                 int countRating = resultSet.getInt("countRating");
-
-                bookRcm.put(bookId, bookRcm.getOrDefault(bookId, 0.0) + WEIGHT_FEEDBACK * sumStar / countRating);
+                if (countRating == 0) {
+                    bookRcm.put(bookId, bookRcm.getOrDefault(bookId, 0.0));
+                } else bookRcm.put(bookId, bookRcm.getOrDefault(bookId, 0.0) + WEIGHT_FEEDBACK * sumStar / countRating);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

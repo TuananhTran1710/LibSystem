@@ -285,4 +285,20 @@ public class QueryBookLoans {
         }
         return bookLoans;
     }
+
+    public static ResultSet getListBorrow(String book_id) {
+        ResultSet resultSet = null;
+        String query = "SELECT * " +
+                "FROM bookloans " +
+                "WHERE google_book_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, book_id);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
 }

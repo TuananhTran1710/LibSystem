@@ -31,7 +31,7 @@
         <FontAwesomeIconView glyphName="BOOK" layoutX="766.0" layoutY="34.0" size="30" AnchorPane.leftAnchor="766.0" />
         <Line endX="400.0" layoutX="425.0" layoutY="50.0" startX="-350.0" AnchorPane.leftAnchor="50.0" />
     </AnchorPane>
-    <VBox alignment="CENTER" fillWidth="false" layoutX="51.2" layoutY="110.0" prefHeight="490.0" prefWidth="250.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="160.0">
+    <VBox alignment="CENTER" fillWidth="false" layoutX="51.2" layoutY="134.4" prefHeight="550.0" prefWidth="250.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="134.0">
         <HBox fx:id="time_hBox" alignment="CENTER" prefHeight="26.0" prefWidth="205.0" spacing="5.0" styleClass="time">
             <FontAwesomeIconView glyphName="CLOCK_ALT" />
             <Label fx:id="time_lbl" text="Label" textFill="#e11010">
@@ -68,7 +68,7 @@
                 </graphic>
             </Label>
         </HBox>
-        <AnchorPane fx:id="available_hbox" prefHeight="20.0" prefWidth="124.0" styleClass="in_stock">
+        <AnchorPane fx:id="available_hbox" prefHeight="20.0" prefWidth="153.0" styleClass="in_stock">
             <FontAwesomeIconView glyphName="ARCHIVE" layoutX="12.0" layoutY="16.0" />
             <Label fx:id="available_lbl" layoutX="29.0" layoutY="2.0" text="Available" />
         </AnchorPane>
@@ -78,6 +78,11 @@
             <Button fx:id="return_btn" alignment="CENTER" layoutX="36.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="134.0" styleClass="button_1" text="Return" textAlignment="CENTER" />
             <Button fx:id="unlike_btn" alignment="CENTER" layoutX="36.0" layoutY="64.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="134.0" styleClass="button_2" text="Unlike" />
         </AnchorPane>
+      <Label fx:id="notice_lbl" alignment="CENTER" prefHeight="129.0" prefWidth="250.0" textFill="#ea0000">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
     </VBox>
     <VBox layoutX="345.0" layoutY="75.2" prefHeight="641.0" prefWidth="474.0" styleClass="right_detail" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="75.0">
         <Label fx:id="title" styleClass="title" text="Book name" />
@@ -86,13 +91,14 @@
             <ToggleButton fx:id="commentToggle_btn" mnemonicParsing="false" prefHeight="30.0" prefWidth="243.0" selected="true" text="Comments" />
         </HBox>
         <StackPane prefHeight="539.0" prefWidth="452.0">
-            <VBox fx:id="overview_vbox" fillWidth="false" prefHeight="344.0" prefWidth="452.0" styleClass="overview">
+            <VBox fx:id="overview_vbox" fillWidth="false" prefHeight="344.0" prefWidth="452.0" styleClass="overview" visible="false">
                 <AnchorPane prefHeight="28.0" prefWidth="472.0">
                     <HBox fx:id="state_hbox" alignment="CENTER" layoutX="8.0" prefHeight="28.0" prefWidth="114.0" styleClass="time" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <Label fx:id="state_lbl" text="Label">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font></Label>
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
                     </HBox>
                 </AnchorPane>
                 <GridPane prefHeight="70.0" prefWidth="450.0">
@@ -150,13 +156,13 @@
                         <FontAwesomeIconView glyphName="BOOK" size="20" />
                         <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="221.0">
                             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Total in stock" />
-                            <Label fx:id="quantity_lbl" styleClass="level3_content" text="Số (sao)" />
+                            <Label fx:id="quantity_lbl" styleClass="level3_content" text="Số lượng" />
                         </VBox>
                     </HBox>
                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="7.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <FontAwesomeIconView glyphName="CART_ARROW_DOWN" size="20" />
                         <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="260.0">
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Total Borrowed" />
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Total Loans" />
                             <Label fx:id="totalLoan_lbl" styleClass="level3_content" text="Tổng số đã mượn" />
                         </VBox>
                     </HBox>
@@ -175,9 +181,16 @@
                         </VBox>
                     </HBox>
                 </GridPane>
+                <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="200.0" spacing="7.0">
+                    <FontAwesomeIconView glyphName="ID_CARD" size="20" />
+                    <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="250.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Borrowing" />
+                        <Label fx:id="borrowing_lbl" styleClass="level3_content" text="Số" />
+                    </VBox>
+                </HBox>
             </VBox>
-            <VBox fx:id="comment_vbox" prefHeight="409.0" prefWidth="354.0" spacing="10" styleClass="comments" visible="false">
-                <ScrollPane hbarPolicy="NEVER" prefHeight="342.0" prefWidth="478.0" vbarPolicy="ALWAYS">
+            <VBox fx:id="comment_vbox" prefHeight="409.0" prefWidth="354.0" spacing="10" styleClass="comments">
+                <ScrollPane fx:id="scrollPane_cmt" hbarPolicy="NEVER" prefHeight="342.0" prefWidth="478.0" vbarPolicy="ALWAYS">
                     <VBox fx:id="comment_list" alignment="TOP_CENTER" fillWidth="false" prefHeight="306.0" prefWidth="458.0">
                         <VBox prefHeight="55.0" prefWidth="430.0" styleClass="cmt">
                             <HBox prefHeight="47.0" prefWidth="458.0">

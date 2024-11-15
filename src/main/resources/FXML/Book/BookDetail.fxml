@@ -150,7 +150,7 @@
                         <FontAwesomeIconView glyphName="BOOK" size="20" />
                         <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="221.0">
                             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Total in stock" />
-                            <Label fx:id="quantity_lbl" styleClass="level3_content" text="Số (sao)" />
+                            <Label fx:id="quantity_lbl" styleClass="level3_content" text="Số lượng" />
                         </VBox>
                     </HBox>
                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="7.0" GridPane.columnIndex="1" GridPane.rowIndex="1">

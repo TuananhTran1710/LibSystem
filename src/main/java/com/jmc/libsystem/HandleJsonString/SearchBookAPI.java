@@ -152,8 +152,8 @@ public class SearchBookAPI {
             URL url = new URL(imageUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setConnectTimeout(1000);
-            connection.setReadTimeout(1000);
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
 
             try (InputStream inputStream = connection.getInputStream();
                  // luu du lieu anh duoi dang byte

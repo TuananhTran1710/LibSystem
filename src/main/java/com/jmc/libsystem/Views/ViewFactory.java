@@ -33,6 +33,7 @@ public class ViewFactory {
     //book
     private AnchorPane bookDetail;
     private AnchorPane bookDetailAPI;
+    private AnchorPane bookEditAdmin;
     //
     private ObjectProperty<UserMenuOptions> userSelectedMenuItem;
     private ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
@@ -223,6 +224,17 @@ public class ViewFactory {
             }
         }
         return bookDetailAPI;
+    }
+
+    public AnchorPane getBookEditAdmin() {
+        if (bookEditAdmin == null) {
+            try {
+                bookEditAdmin = new FXMLLoader(getClass().getResource("/FXML/Book/BookEditAdmin.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return bookEditAdmin;
     }
 
     // -----------------------------------Function Show Window------------------------------------

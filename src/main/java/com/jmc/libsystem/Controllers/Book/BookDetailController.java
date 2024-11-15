@@ -61,6 +61,8 @@ public class BookDetailController extends BaseBookDetailController {
     public Label state_lbl;
     public AnchorPane available_hbox;
     public HBox time_hBox;
+    public ScrollPane scrollPane_cmt;
+    public Label borrowing_lbl;
 
 
     private List<Comment> feedbacks;
@@ -107,6 +109,10 @@ public class BookDetailController extends BaseBookDetailController {
 
                 state_lbl.setText("Deleted");
             }
+
+            notice_lbl.setText("Return successfully");
+            notice_lbl.setTextFill(Color.web("#32CD32"));
+            createTimeLine();
         });
 
         borrow_btn.setOnAction(event -> {
@@ -116,6 +122,10 @@ public class BookDetailController extends BaseBookDetailController {
             book.setNumBorrowing(book.getNumBorrowing() + 1);
             book.setTotalLoan(book.getTotalLoan() + 1);
             QueryBookLoans.setRemainingTime(time_lbl, book.getId(), Model.getInstance().getMyUser().getId());
+
+            notice_lbl.setText("Borrow successfully");
+            notice_lbl.setTextFill(Color.web("#32CD32"));
+            createTimeLine();
 
             int availableNumber = book.getQuantity() - book.getNumBorrowing();
             if (availableNumber == 0) {
@@ -131,10 +141,18 @@ public class BookDetailController extends BaseBookDetailController {
         like_btn.setOnAction(event -> {
             toUnlikeButton();
             QueryFavoriteBook.insertNewRecord(book.getId());
+
+            notice_lbl.setText("Added to your favorite list");
+            notice_lbl.setTextFill(Color.web("#32CD32"));
+            createTimeLine();
         });
         unlike_btn.setOnAction(event -> {
             toLikeButton();
             QueryFavoriteBook.deleteRecord(book.getId());
+
+            notice_lbl.setText("Removed from your favorite list");
+            notice_lbl.setTextFill(Color.web("#32CD32"));
+            createTimeLine();
         });
 
         overview_btn.setOnAction(event -> {
@@ -237,6 +255,8 @@ public class BookDetailController extends BaseBookDetailController {
     }
 
     private void moveToCommentVbox() {
+        scrollPane_cmt.setVvalue(0.0);
+
         commentToggle_btn.setSelected(true);
         overview_btn.setSelected(false);
 
@@ -355,6 +375,7 @@ public class BookDetailController extends BaseBookDetailController {
     public void setUpInfo(Book book) {
         super.setUpInfo(book);
 
+        borrowing_lbl.setText(book.getNumBorrowing() + "");
         quantity_lbl.setText(String.valueOf(book.getQuantity()));
         totalLoan_lbl.setText(String.valueOf(book.getTotalLoan()) + " times");
 

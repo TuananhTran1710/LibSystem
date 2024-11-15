@@ -7,10 +7,7 @@ import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.SuggestionBox.SuggestionBook;
 import com.jmc.libsystem.Views.SearchCriteria;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -31,7 +28,7 @@ public class BookDetailAPI extends BaseBookDetailController {
     public Button plus_btn;
     public Button update_btn;
     public Button delete_btn;
-
+    public ToggleButton overview_btn;
 
     public static BookDetailAPI getInstance() {
         return instance;
@@ -58,6 +55,10 @@ public class BookDetailAPI extends BaseBookDetailController {
                 // Nếu không phải là số, đặt lại giá trị về giá trị cũ
                 quantity_tf.setText(oldValue);
             }
+        });
+
+        overview_btn.setOnAction(event -> {
+            overview_btn.setSelected(true);
         });
 
         addBook_btn.setOnAction(event -> {
@@ -145,8 +146,8 @@ public class BookDetailAPI extends BaseBookDetailController {
 
 
     public void setUpInfo(Book book) {
-        notice_lbl.setText("");
         super.setUpInfo(book);
+        notice_lbl.setText("");
     }
 
     public void toUpdateButton() {

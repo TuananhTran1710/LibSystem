@@ -8,8 +8,14 @@ import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Information.Comment;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
+import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.Views.AdminMenuOptions;
 import com.jmc.libsystem.Views.ShowListComment;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -17,9 +23,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.*;
 
 public class BookEditAdmin extends BaseBookDetailController {
     public AnchorPane available_hbox;
@@ -53,6 +60,11 @@ public class BookEditAdmin extends BaseBookDetailController {
     public Button plus_btn;
     public Button subtract_btn;
 
+    public TableView<Map<String, Object>> borrowHistory_table;
+    public TableColumn<Map<String, Object>, String> userID_column;
+    public TableColumn<Map<String, Object>, LocalDate> borrowDate_column;
+    public TableColumn<Map<String, Object>, Object> returnDate_column;
+    public TableColumn<Map<String, Object>, String> status_column;
 
     private List<Comment> feedbacks;
     private Book book;
@@ -87,6 +99,8 @@ public class BookEditAdmin extends BaseBookDetailController {
         });
         borrowHistory_btn.setOnAction(event -> {
             moveToBorrowHistoryVBox();
+
+
         });
 
         editBook_btn.setOnAction(event -> {
@@ -271,6 +285,9 @@ public class BookEditAdmin extends BaseBookDetailController {
     }
 
     private void moveToBorrowHistoryVBox() {
+        // show borrow history
+        getTableList();
+        //------------------
         commentToggle_btn.setSelected(false);
         overview_btn.setSelected(false);
         borrowHistory_btn.setSelected(true);
@@ -402,5 +419,70 @@ public class BookEditAdmin extends BaseBookDetailController {
         }
     }
 
+
+    // lấy dữ liệu từ database cho phan borrow history
+    public ObservableList<Map<String, Object>> getListBorrowHistory() {
+        ObservableList<Map<String, Object>> data = FXCollections.observableArrayList();
+
+        Task<Void> loadDataTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                ResultSet resultSet = QueryBookLoans.getListBorrow(book.getId());
+                try {
+                    while (resultSet.next()) {
+                        Map<String, Object> row = new HashMap<>();
+
+                        String user_id = resultSet.getString("user_id");
+                        LocalDate borrowDate = resultSet.getDate("borrow_date").toLocalDate();
+                        LocalDate returnDate = resultSet.getDate("return_date") != null
+                                ? resultSet.getDate("return_date").toLocalDate()
+                                : null;
+
+                        LocalDate dueDate = resultSet.getDate("due_date").toLocalDate();
+                        String status = "on time"; // Mặc định là đúng hạn
+
+                        if (returnDate == null && dueDate.isBefore(LocalDate.now())) {
+                            status = "overdue";
+                        } else if (returnDate != null && returnDate.isBefore(dueDate)) {
+                            status = "on time";
+                        } else if (returnDate != null && returnDate.isAfter(dueDate)) {
+                            status = "overdue";
+                        }
+
+                        row.put("user_id", user_id);    // key phai khop voi ten o ham getTableList
+                        row.put("borrow_date", borrowDate);
+                        if (returnDate != null) {
+                            row.put("return_date", returnDate);
+                        } else {
+                            row.put("return_date", "Not returned");
+                        }
+                        row.put("status", status);
+
+                        // Thêm dữ liệu vào ObservableList trên JavaFX Application Thread
+                        Platform.runLater(() -> data.add(row));
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+
+        // Khởi chạy Task trong background
+        new Thread(loadDataTask).start();
+
+        return data;
+    }
+
+    private void getTableList() {
+        /* liên kết các cột */
+        userID_column.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("user_id")));
+        borrowDate_column.setCellValueFactory(data -> new SimpleObjectProperty<>((LocalDate) data.getValue().get("borrow_date")));
+        returnDate_column.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().get("return_date")));
+        status_column.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("status")));
+
+        ObservableList<Map<String, Object>> data = getListBorrowHistory();
+        borrowHistory_table.setItems(data);
+    }
 
 }

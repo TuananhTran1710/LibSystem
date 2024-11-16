@@ -1,8 +1,9 @@
 package com.jmc.libsystem.Controllers.Admin;
 
+import com.jmc.libsystem.Controllers.Book.BookEditAdmin;
 import com.jmc.libsystem.HandleJsonString.SearchBookAPI;
 import com.jmc.libsystem.Information.Book;
-import com.jmc.libsystem.QueryDatabase.QueryAccountData;
+import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.SuggestionBox.SuggestionBook;
 import com.jmc.libsystem.SuggestionBox.SuggestionBookAPI;
@@ -20,7 +21,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.ByteArrayInputStream;
@@ -42,7 +42,6 @@ public class ManageBookController implements Initializable {
         return instance;
     }
 
-    public VBox addBooksView;
     public TextField searchAddBook_tf;
     public ChoiceBox<SearchCriteria> criteriaBoxAddBook;
     public Button searchAddBook_btn;
@@ -59,6 +58,8 @@ public class ManageBookController implements Initializable {
     public TableColumn<Map<String, Object>, String> stateCol;
     public TableColumn<Map<String, Object>, Void> actionCol;
     public TableView<Map<String, Object>> tableView;
+
+    public HashMap<String, Book> bookList = new HashMap<>();
 
     public TextField getSearchAddBook_tf() {
         return searchAddBook_tf;
@@ -102,26 +103,7 @@ public class ManageBookController implements Initializable {
             SuggestionBookAPI.autoCompletionBinding.setPrefWidth(searchAddBook_tf.getWidth() - 160);
         });
 
-//        criteriaSearchLib.valueProperty().addListener(observable ->
-//        {
-//            typeSearchInLib = criteriaSearchLib.getValue();
-//            if (SuggestionBook.autoCompletionBinding != null) {
-//                SuggestionBook.autoCompletionBinding.dispose();
-//            }
-//            if (typeSearchInLib == SearchCriteria.TITLE) {
-//                SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(searchInLib_tf, SuggestionBook.titleSuggest);
-//            } else if (typeSearchInLib == SearchCriteria.AUTHORS) {
-//                SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(searchInLib_tf, SuggestionBook.authorSuggest);
-//            } else {
-//                SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(searchInLib_tf, SuggestionBook.categorySuggest);
-//            }
-//            SuggestionBook.autoCompletionBinding.setPrefWidth(searchInLib_tf.getWidth() - 160);
-//        });
-
         bookSearch = new ArrayList<>();
-
-//        SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(searchInLib_tf, SuggestionBook.titleSuggest);
-//        SuggestionBook.autoCompletionBinding.setPrefWidth(searchInLib_tf.getWidth() - 160);
 
         SuggestionBookAPI.autoCompletionBinding = TextFields.bindAutoCompletion(searchAddBook_tf, SuggestionBookAPI.titleSuggest);
         SuggestionBookAPI.autoCompletionBinding.setPrefWidth(searchAddBook_tf.getWidth() - 160);
@@ -143,29 +125,9 @@ public class ManageBookController implements Initializable {
             }
         });
 
-//        searchInLib_tf.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent keyEvent) {
-//                switch (keyEvent.getCode()) {
-//                    case ENTER -> {
-//                        if (searchInLib_tf.isFocused() && !searchInLib_tf.getText().trim().isEmpty()) {
-//                            searchBookInLib();
-//                            // do something to suitable with table column
-//                        }
-//                    }
-//                }
-//            }
-//        });
-
         searchAddBook_btn.setOnAction(event -> searchAddBooks());
-        //searchInLib_btn.setOnAction(event -> searchBookInLib());
-
         data = FXCollections.observableArrayList();
         refreshDataInLib();
-    }
-
-    private void searchBookInLib() {
-
     }
 
     private void searchAddBooks() {
@@ -208,38 +170,28 @@ public class ManageBookController implements Initializable {
         BookAPI_hb.getChildren().clear();
     }
 
-    void refreshDataInLib(){
+    void refreshDataInLib() {
         data.clear();
         getData(QueryBookData.getAllBook());
         addButton();
         BookTable();
     }
 
-    private void addButton(){
+    private void addButton() {
         searchInLib_btn.setOnAction(event -> searchAction());
-
-//        search_tf.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
-//            if (event.getCode() == KeyCode.ENTER) {
-//                searchAction();
-//            }
-//        });
-
         searchInLib_tf.setOnKeyReleased(event -> searchAction());
     }
 
-    private void searchAction(){
+    private void searchAction() {
         SearchCriteria selectedValue = criteriaSearchLib.getValue();
-        String type = (selectedValue == SearchCriteria.TITLE ? "title" : (selectedValue == SearchCriteria.AUTHORS ? "authors" : "category"));
-        //System.out.println(type);
-
+        String type = selectedValue.toString();
         String text = searchInLib_tf.getText();
-        ResultSet resultSet = QueryBookData.getBookForSearch(text, type);
-        //System.out.println("Can access");
+        ResultSet resultSet = QueryBookData.getBookForSearchV2(text, type);
         data.clear();
         getData(resultSet);
     }
 
-    private void BookTable(){
+    private void BookTable() {
         data = FXCollections.observableArrayList();
         titleCol.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("title")));
         authorCol.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("authors")));
@@ -254,6 +206,54 @@ public class ManageBookController implements Initializable {
             return new SimpleObjectProperty<>(imageView);
         });
 
+        titleCol.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    // Rút gọn nội dung
+                    setText(item.length() > 25 ? item.substring(0, 25) + "..." : item);
+                    Tooltip tooltip = new Tooltip(item);
+                    setTooltip(tooltip); // Hiển thị nội dung đầy đủ khi di chuột
+                }
+            }
+        });
+
+        authorCol.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    // Rút gọn nội dung
+                    setText(item.length() > 25 ? item.substring(0, 25) + "..." : item);
+                    Tooltip tooltip = new Tooltip(item);
+                    setTooltip(tooltip); // Hiển thị nội dung đầy đủ khi di chuột
+                }
+            }
+        });
+
+        categoriesCol.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    // Rút gọn nội dung
+                    setText(item.length() > 25 ? item.substring(0, 25) + "..." : item);
+                    Tooltip tooltip = new Tooltip(item);
+                    setTooltip(tooltip); // Hiển thị nội dung đầy đủ khi di chuột
+                }
+            }
+        });
+
         actionCol.setCellFactory(param -> new TableCell<>() {
             private final Hyperlink editLink = new Hyperlink("Edit");
 
@@ -261,6 +261,23 @@ public class ManageBookController implements Initializable {
                 editLink.setOnAction(event -> {
                     Map<String, Object> rowData = getTableView().getItems().get(getIndex());
                     // Thực hiện hành động chỉnh sửa với dữ liệu hàng tương ứng
+                    String book_id = (String) rowData.get("id");
+                    if (!bookList.containsKey(book_id)) {
+                        ResultSet resultSet = QueryBookData.getBook(book_id);
+                        try {
+                            resultSet.next();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Book book = Book.createBookFromResultSet(resultSet);
+                        bookList.put(book_id, book);
+                    }
+                    Book book = bookList.get(book_id);
+                    AdminController.getInstance().admin_parent.setCenter(Model.getInstance().getViewFactory().getBookEditAdmin());
+                    BookEditAdmin.getInstance().setBook(book);
+                    BookEditAdmin.getInstance().modifyButton();
+                    BookEditAdmin.getInstance().setUpInfo(book);
+
                     System.out.println("Edit: " + rowData.get("id"));
                 });
             }
@@ -287,7 +304,7 @@ public class ManageBookController implements Initializable {
         SuggestionBook.autoCompletionBinding.setPrefWidth(searchInLib_tf.getWidth() - 160);
         searchInLib_tf.clear();
         criteriaSearchLib.setValue(SearchCriteria.TITLE);
-        
+
     }
 
     private void getData(ResultSet resultSet) {
@@ -303,6 +320,10 @@ public class ManageBookController implements Initializable {
                         String authors = resultSet.getString("authors");
                         String category = resultSet.getString("category");
                         String state = resultSet.getString("state");
+                        if (state.equals("deleted")) {
+                            state = "Deleted";
+                        } else state = "Publishing";
+
                         String id = resultSet.getString("google_book_id");
 
                         Blob thumbnailBlob = resultSet.getBlob("thumbnail"); // Get image as Blob

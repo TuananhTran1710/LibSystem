@@ -174,6 +174,40 @@ public class AdminDashboardController implements Initializable {
             return new SimpleObjectProperty<>(imageView);
         });
 
+
+        titleColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    // Rút gọn nội dung
+                    setText(item.length() > 25 ? item.substring(0, 25) + "..." : item);
+                    Tooltip tooltip = new Tooltip(item);
+                    setTooltip(tooltip); // Hiển thị nội dung đầy đủ khi di chuột
+                }
+            }
+        });
+
+        authorsColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    // Rút gọn nội dung
+                    setText(item.length() > 25 ? item.substring(0, 25) + "..." : item);
+                    Tooltip tooltip = new Tooltip(item);
+                    setTooltip(tooltip); // Hiển thị nội dung đầy đủ khi di chuột
+                }
+            }
+        });
+
+
         editColumn.setCellFactory(param -> new TableCell<>() {
             private final Hyperlink editLink = new Hyperlink("Edit");
 

@@ -80,6 +80,7 @@ TableView .column-header {
     -fx-background-color: #132A13;
     -fx-border-width: 0 0 1 0;
     -fx-border-color: #d0d0d0;
+    -fx-font-size: 14px;
 }
 
 TableView .column-header .label {
@@ -87,9 +88,20 @@ TableView .column-header .label {
 }
 
 .table-view .cell {
-    -fx-wrap-text: true; /* Cho phép tự động xuống dòng */
-    -fx-alignment: CENTER; /* Căn giữa văn bản trong cell */
+    -fx-alignment: CENTER; /* Căn giữa nội dung */
+        -fx-padding: 0;        /* Xóa padding thừa */
 }
+
+.table-view .table-cell {
+    -fx-alignment: CENTER;        /* Căn giữa nội dung */
+    -fx-text-overrun: ellipsis;   /* Hiển thị dấu chấm khi vượt quá chiều rộng */
+    -fx-padding: 5;               /* Khoảng cách nội dung trong cell */
+    -fx-wrap-text: false;         /* Không cho phép xuống dòng */
+    -fx-font-family: "Arial";     /* Font chữ */
+    -fx-font-size: 13px;          /* Kích thước chữ */
+}
+
+//-----------------------
 
 .part_2 {
     -fx-background-color: rgba(19, 42, 19, 0.05);

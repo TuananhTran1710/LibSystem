@@ -141,7 +141,6 @@ public class BookDetailAPI extends BaseBookDetailController {
     @Override
     public void moveMenuCurrent() {
         AdminController.getInstance().admin_parent.setCenter(Model.getInstance().getViewFactory().getManageBookView());
-        //ManageBookController.getInstance().resetBookLibrary();
     }
 
 

@@ -27,10 +27,10 @@
                     <TableView fx:id="listBook" cache="true" focusTraversable="false" prefHeight="333.0" prefWidth="774.0" stylesheets="@../../Styles/AdminDashboard.css">
                         <columns>
                             <TableColumn fx:id="imageColumn" editable="false" prefWidth="64.80001455545425" reorderable="false" resizable="false" sortable="false" text="Image" />
-                            <TableColumn fx:id="titleColumn" editable="false" prefWidth="186.4000244140625" reorderable="false" resizable="false" sortable="false" text="Title" />
-                            <TableColumn fx:id="authorsColumn" editable="false" prefWidth="165.60000610351562" reorderable="false" resizable="false" sortable="false" text="Author" />
-                            <TableColumn fx:id="quantityColumn" editable="false" prefWidth="107.99993896484375" reorderable="false" resizable="false" sortable="false" text="Quantity" />
-                            <TableColumn fx:id="loanedColumn" editable="false" prefWidth="88.7999267578125" reorderable="false" resizable="false" sortable="false" text="Borrowed" />
+                            <TableColumn fx:id="titleColumn" editable="false" prefWidth="191.2000274658203" reorderable="false" resizable="false" sortable="false" text="Title" />
+                            <TableColumn fx:id="authorsColumn" editable="false" prefWidth="193.6000518798828" reorderable="false" resizable="false" sortable="false" text="Author" />
+                            <TableColumn fx:id="quantityColumn" editable="false" prefWidth="90.39990234375" reorderable="false" resizable="false" sortable="false" text="Quantity" />
+                            <TableColumn fx:id="loanedColumn" editable="false" prefWidth="76.79998779296875" reorderable="false" resizable="false" sortable="false" text="Borrowed" />
                             <TableColumn fx:id="statusColumn" editable="false" prefWidth="80.800048828125" reorderable="false" resizable="false" sortable="false" text="Status" />
                             <TableColumn fx:id="editColumn" prefWidth="73.5999755859375" reorderable="false" resizable="false" text="Edit" />
                         </columns>

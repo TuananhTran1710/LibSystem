@@ -23,6 +23,35 @@ public class QueryBookData {
         return resultSet;
     }
 
+    public static ResultSet getBookForSearchV2(String keyWord, String typeSearch) {
+        ResultSet resultSet = null;
+        // no limit num of book displayed
+        String query = "SELECT * FROM book WHERE " + typeSearch + " COLLATE utf8mb4_general_ci LIKE ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            // Thêm % vào từ khóa tìm kiếm cho LIKE
+            preparedStatement.setString(1, "%" + keyWord + "%");
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
+
+    public static ResultSet getBook(String book_id) {
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM book WHERE google_book_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, book_id);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
     public static ResultSet getDataForSuggest() {
         ResultSet resultSet = null;
         String query = "SELECT distinct title, authors, category FROM book where state = 'publishing'";
@@ -119,6 +148,17 @@ public class QueryBookData {
         return resultSet;
     }
 
+    public static ResultSet getAllBook() {
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM book";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
 
     public static boolean isExist(String book_id) {
         String query = "SELECT EXISTS (SELECT 1 FROM book WHERE google_book_id = ?)";
@@ -173,6 +213,30 @@ public class QueryBookData {
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, book_id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateState(String book_id, String state) {
+        String query = "UPDATE book SET state = ? WHERE google_book_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, state);
+            preparedStatement.setString(2, book_id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateQuantity(String id, int quantity) {
+        String query = "UPDATE book SET quantity = ? WHERE google_book_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setInt(1, quantity);
+            preparedStatement.setString(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

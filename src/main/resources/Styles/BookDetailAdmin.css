@@ -239,6 +239,16 @@
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
     -fx-table-cell-border-color: transparent;
+
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER;
+}
+
+.table-view .cell {
+    -fx-wrap-text: true; /* Cho phép tự động xuống dòng */
+    -fx-alignment: CENTER; /* Căn giữa văn bản trong cell */
 }
 
 .borrow_history TableView .column-header {
@@ -262,3 +272,5 @@
     -fx-border-color: #132A13;
     -fx-border-weight: 2px;
 }
+
+

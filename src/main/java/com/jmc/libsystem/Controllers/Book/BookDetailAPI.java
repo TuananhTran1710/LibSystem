@@ -7,20 +7,16 @@ import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.SuggestionBox.SuggestionBook;
 import com.jmc.libsystem.Views.SearchCriteria;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class BookDetailAPI extends BaseBookDetailController implements Initializable {
+public class BookDetailAPI extends BaseBookDetailController {
 
     public Button addBook_btn;
     public VBox authorsContainer;
@@ -31,10 +27,8 @@ public class BookDetailAPI extends BaseBookDetailController implements Initializ
     public Button subtract_btn;
     public Button plus_btn;
     public Button update_btn;
-    public Label notice_lbl;
     public Button delete_btn;
-
-    private Timeline noticeTimeline;
+    public ToggleButton overview_btn;
 
     public static BookDetailAPI getInstance() {
         return instance;
@@ -61,6 +55,10 @@ public class BookDetailAPI extends BaseBookDetailController implements Initializ
                 // Nếu không phải là số, đặt lại giá trị về giá trị cũ
                 quantity_tf.setText(oldValue);
             }
+        });
+
+        overview_btn.setOnAction(event -> {
+            overview_btn.setSelected(true);
         });
 
         addBook_btn.setOnAction(event -> {
@@ -143,27 +141,12 @@ public class BookDetailAPI extends BaseBookDetailController implements Initializ
     @Override
     public void moveMenuCurrent() {
         AdminController.getInstance().admin_parent.setCenter(Model.getInstance().getViewFactory().getManageBookView());
-        ManageBookController.getInstance().resetBookLibrary();
     }
 
-    public void createTimeLine() {
-        // Chỉ tạo Timeline nếu nó chưa được khởi tạo
-        if (noticeTimeline == null) {
-            noticeTimeline = new Timeline(new KeyFrame(
-                    Duration.seconds(1.5),
-                    evt -> notice_lbl.setText("")
-            ));
-            noticeTimeline.setCycleCount(1);
-        }
-
-        // Dừng và chạy lại Timeline để đảm bảo nhãn sẽ biến mất sau 3 giây
-        noticeTimeline.stop();
-        noticeTimeline.playFromStart();
-    }
 
     public void setUpInfo(Book book) {
-        notice_lbl.setText("");
         super.setUpInfo(book);
+        notice_lbl.setText("");
     }
 
     public void toUpdateButton() {

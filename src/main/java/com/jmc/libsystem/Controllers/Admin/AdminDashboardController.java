@@ -1,5 +1,8 @@
 package com.jmc.libsystem.Controllers.Admin;
 
+import com.jmc.libsystem.Controllers.Book.BookEditAdmin;
+import com.jmc.libsystem.Information.Book;
+import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
@@ -56,6 +59,9 @@ public class AdminDashboardController implements Initializable {
     public ProgressBar progress3;
     private final int totalQuantity = 100000;
 
+    public HashMap<String, Book> bookList = new HashMap<>();
+    // luu book_id va ResultSet cua book tu database
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         refreshData();
@@ -71,47 +77,12 @@ public class AdminDashboardController implements Initializable {
 
     public void refreshData() {
         getTableList();
-        //addMouseClickedToTable();
         try {
             getNumberData();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         showSortCategory();
-        //add();
-    }
-
-    private void add() {
-        statusColumn.setCellFactory(tc -> {
-            TableCell<Map<String, Object>, String> cell = new TableCell<>();
-            cell.getStyleClass().add("status-cell");
-            System.out.println("can use css");
-            cell.textProperty().addListener((obs, oldVal, newVal) -> {
-                if ("Available".equals(newVal)) {
-                    cell.getStyleClass().add("in-stock");
-                    cell.getStyleClass().remove("out-of-stock");
-                } else if ("Over".equals(newVal)) {
-                    cell.getStyleClass().add("out-of-stock");
-                    cell.getStyleClass().remove("in-stock");
-                }
-            });
-
-            return cell;
-        });
-    }
-
-    private void addMouseClickedToTable() {
-        listBook.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) { // Click đúp
-                Map<String, Object> selected = listBook.getSelectionModel().getSelectedItem();
-                if (selected != null) {
-
-                    // Xử lý khi một hàng được chọn
-                    System.out.println("Bạn đã chọn: " + selected.get("title"));
-                    // Mở cửa sổ mới, cập nhật dữ liệu, ...
-                }
-            }
-        });
     }
 
     // lấy dữ liệu từ database
@@ -203,6 +174,40 @@ public class AdminDashboardController implements Initializable {
             return new SimpleObjectProperty<>(imageView);
         });
 
+
+        titleColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    // Rút gọn nội dung
+                    setText(item.length() > 25 ? item.substring(0, 25) + "..." : item);
+                    Tooltip tooltip = new Tooltip(item);
+                    setTooltip(tooltip); // Hiển thị nội dung đầy đủ khi di chuột
+                }
+            }
+        });
+
+        authorsColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    // Rút gọn nội dung
+                    setText(item.length() > 25 ? item.substring(0, 25) + "..." : item);
+                    Tooltip tooltip = new Tooltip(item);
+                    setTooltip(tooltip); // Hiển thị nội dung đầy đủ khi di chuột
+                }
+            }
+        });
+
+
         editColumn.setCellFactory(param -> new TableCell<>() {
             private final Hyperlink editLink = new Hyperlink("Edit");
 
@@ -210,6 +215,23 @@ public class AdminDashboardController implements Initializable {
                 editLink.setOnAction(event -> {
                     Map<String, Object> rowData = getTableView().getItems().get(getIndex());
                     // Thực hiện hành động chỉnh sửa với dữ liệu hàng tương ứng
+                    String book_id = (String) rowData.get("id");
+                    if (!bookList.containsKey(book_id)) {
+                        ResultSet resultSet = QueryBookData.getBook(book_id);
+                        try {
+                            resultSet.next();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Book book = Book.createBookFromResultSet(resultSet);
+                        bookList.put(book_id, book);
+                    }
+                    Book book = bookList.get(book_id);
+                    AdminController.getInstance().admin_parent.setCenter(Model.getInstance().getViewFactory().getBookEditAdmin());
+                    BookEditAdmin.getInstance().setBook(book);
+                    BookEditAdmin.getInstance().modifyButton();
+                    BookEditAdmin.getInstance().setUpInfo(book);
+
                     System.out.println("Edit: " + rowData.get("id"));
                 });
             }

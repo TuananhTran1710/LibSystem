@@ -41,7 +41,6 @@ public class AdminController implements Initializable {
                         case BOOK -> {
                             admin_parent.setCenter(Model.getInstance().getViewFactory().getManageBookView());
                             ManageBookController.getInstance().reset();
-                            //ManageBookController.getInstance().resetBookLibrary();
                         }
                         case PROFILE -> {
                             admin_parent.setCenter(Model.getInstance().getViewFactory().getProfileAdminView());

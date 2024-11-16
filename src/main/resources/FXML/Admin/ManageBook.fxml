@@ -16,9 +16,9 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="adminbook_container" stylesheets="@../../Styles/ManageBook.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.ManageBookController">
-   <AnchorPane layoutX="18.0" prefHeight="60.0" prefWidth="814.0">
+   <AnchorPane layoutX="18.0" prefHeight="40.0" prefWidth="814.0">
       <!-- Title -->
-      <Label layoutX="310.0" layoutY="2.0" styleClass="title_container" text=" Manage Books" />
+      <Label layoutX="310.0" layoutY="1.0" styleClass="title_container" text=" Manage Books" />
    </AnchorPane>
    <!-- Add Books View -->
    <VBox fx:id="addBooksView" layoutX="20.0" layoutY="60.0" prefHeight="320.0" prefWidth="810.0" styleClass="surround" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
@@ -61,9 +61,9 @@
          <Insets bottom="20.0" />
       </padding>
    </VBox>
-   <VBox layoutY="402.4" prefHeight="320.0" prefWidth="810.0" styleClass="surround" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="402.0">
+   <VBox layoutY="402.4" prefHeight="345.0" prefWidth="810.0" styleClass="surround" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="402.0">
       <children>
-         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="809.0" styleClass="part_title">
+         <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="809.0" styleClass="part_title">
             <children>
                <FontAwesomeIconView glyphName="ARCHIVE" size="25" />
                <Label text="Books in Library" />
@@ -72,7 +72,7 @@
                <Insets left="20.0" />
             </padding>
          </HBox>
-         <VBox prefHeight="270.0" prefWidth="809.0" spacing="10.0">
+         <VBox prefHeight="298.0" prefWidth="809.0" spacing="10.0">
             <children>
                <AnchorPane prefHeight="38.0" prefWidth="813.0">
                   <TextField fx:id="searchInLib_tf" prefHeight="40.0" prefWidth="767.0" promptText="Search or type a command..." styleClass="search_field" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -86,7 +86,7 @@
                   <Text layoutX="656.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sort_by" text="Sort by:" AnchorPane.leftAnchor="616.0" />
                   <Line endX="15.39996337890625" endY="9.400001525878906" layoutX="633.0" layoutY="22.0" startX="15.39996337890625" startY="-12.200004577636719" styleClass="line" AnchorPane.leftAnchor="608.0" />
                </AnchorPane>
-               <TableView fx:id="tableView" prefHeight="233.0" prefWidth="809.0">
+               <TableView fx:id="tableView" prefHeight="228.0" prefWidth="769.0">
                   <columns>
                      <TableColumn fx:id="ImageCol" prefWidth="92.00000381469727" reorderable="false" resizable="false" text="Image" />
                      <TableColumn fx:id="titleCol" prefWidth="210.40003967285156" reorderable="false" resizable="false" text="Title" />

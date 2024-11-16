@@ -43,14 +43,34 @@ public class ShowListBookFound {
             messageLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #A0A0A0;");
 
             emptyBox.getChildren().addAll(image, messageLabel);
-            resultList_hb.getChildren().add(emptyBox);
+            emptyBox.setPadding(new Insets(10, 0, 0, 0));
+            emptyBox.setPrefHeight(120);
+            resultList_hb.setPrefWidth(730);
+            resultList_hb.setAlignment(Pos.CENTER);
+            resultList_hb.getChildren().addAll(emptyBox);
             return;
         }
 
+        resultList_hb.setAlignment(Pos.TOP_LEFT);
+        // Khởi chạy một luồng cho mỗi sách trong bookList
         for (int i = 0; i < Math.min(bookList.size(), limit); i++) {
             Book book = bookList.get(i);
-            VBox bookBox = createBookBox(book);
-            resultList_hb.getChildren().add(bookBox);
+            Task<Void> task = new Task<>() {
+                @Override
+                protected Void call() {
+                    // Tạo VBox cho mỗi sách
+                    VBox bookBox = createBookBox(book);
+
+                    // Cập nhật giao diện trong luồng chính
+                    Platform.runLater(() -> resultList_hb.getChildren().add(bookBox));
+                    return null;
+                }
+            };
+
+            // Khởi chạy Task trong một luồng mới
+            Thread thread = new Thread(task);
+            thread.setDaemon(true); // Đảm bảo luồng sẽ tự động tắt khi ứng dụng JavaFX kết thúc
+            thread.start();
         }
     }
 
@@ -74,10 +94,16 @@ public class ShowListBookFound {
             messageLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #A0A0A0;");
 
             emptyBox.getChildren().addAll(image, messageLabel);
+
+            emptyBox.setPadding(new Insets(10, 0, 0, 0));
+            emptyBox.setPrefHeight(120);
+            resultList_hb.setPrefWidth(730);
+            resultList_hb.setAlignment(Pos.CENTER);
+
             resultList_hb.getChildren().add(emptyBox);
             return;
         }
-
+        resultList_hb.setAlignment(Pos.TOP_LEFT);
         // Khởi chạy một luồng cho mỗi sách trong bookList
         for (Book book : bookList) {
             Task<Void> task = new Task<>() {

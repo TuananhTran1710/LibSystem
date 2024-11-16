@@ -1,7 +1,9 @@
 package com.jmc.libsystem.Controllers.Admin;
 
+import com.jmc.libsystem.Controllers.Book.BookEditAdmin;
 import com.jmc.libsystem.HandleJsonString.SearchBookAPI;
 import com.jmc.libsystem.Information.Book;
+import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.SuggestionBox.SuggestionBook;
 import com.jmc.libsystem.SuggestionBox.SuggestionBookAPI;
@@ -56,6 +58,8 @@ public class ManageBookController implements Initializable {
     public TableColumn<Map<String, Object>, String> stateCol;
     public TableColumn<Map<String, Object>, Void> actionCol;
     public TableView<Map<String, Object>> tableView;
+
+    public HashMap<String, Book> bookList = new HashMap<>();
 
     public TextField getSearchAddBook_tf() {
         return searchAddBook_tf;
@@ -180,12 +184,9 @@ public class ManageBookController implements Initializable {
 
     private void searchAction() {
         SearchCriteria selectedValue = criteriaSearchLib.getValue();
-        String type = (selectedValue == SearchCriteria.TITLE ? "title" : (selectedValue == SearchCriteria.AUTHORS ? "authors" : "category"));
-        //System.out.println(type);
-
+        String type = selectedValue.toString();
         String text = searchInLib_tf.getText();
-        ResultSet resultSet = QueryBookData.getBookForSearch(text, type);
-        //System.out.println("Can access");
+        ResultSet resultSet = QueryBookData.getBookForSearchV2(text, type);
         data.clear();
         getData(resultSet);
     }
@@ -205,6 +206,54 @@ public class ManageBookController implements Initializable {
             return new SimpleObjectProperty<>(imageView);
         });
 
+        titleCol.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    // Rút gọn nội dung
+                    setText(item.length() > 25 ? item.substring(0, 25) + "..." : item);
+                    Tooltip tooltip = new Tooltip(item);
+                    setTooltip(tooltip); // Hiển thị nội dung đầy đủ khi di chuột
+                }
+            }
+        });
+
+        authorCol.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    // Rút gọn nội dung
+                    setText(item.length() > 25 ? item.substring(0, 25) + "..." : item);
+                    Tooltip tooltip = new Tooltip(item);
+                    setTooltip(tooltip); // Hiển thị nội dung đầy đủ khi di chuột
+                }
+            }
+        });
+
+        categoriesCol.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    // Rút gọn nội dung
+                    setText(item.length() > 25 ? item.substring(0, 25) + "..." : item);
+                    Tooltip tooltip = new Tooltip(item);
+                    setTooltip(tooltip); // Hiển thị nội dung đầy đủ khi di chuột
+                }
+            }
+        });
+
         actionCol.setCellFactory(param -> new TableCell<>() {
             private final Hyperlink editLink = new Hyperlink("Edit");
 
@@ -212,6 +261,23 @@ public class ManageBookController implements Initializable {
                 editLink.setOnAction(event -> {
                     Map<String, Object> rowData = getTableView().getItems().get(getIndex());
                     // Thực hiện hành động chỉnh sửa với dữ liệu hàng tương ứng
+                    String book_id = (String) rowData.get("id");
+                    if (!bookList.containsKey(book_id)) {
+                        ResultSet resultSet = QueryBookData.getBook(book_id);
+                        try {
+                            resultSet.next();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Book book = Book.createBookFromResultSet(resultSet);
+                        bookList.put(book_id, book);
+                    }
+                    Book book = bookList.get(book_id);
+                    AdminController.getInstance().admin_parent.setCenter(Model.getInstance().getViewFactory().getBookEditAdmin());
+                    BookEditAdmin.getInstance().setBook(book);
+                    BookEditAdmin.getInstance().modifyButton();
+                    BookEditAdmin.getInstance().setUpInfo(book);
+
                     System.out.println("Edit: " + rowData.get("id"));
                 });
             }
@@ -254,6 +320,10 @@ public class ManageBookController implements Initializable {
                         String authors = resultSet.getString("authors");
                         String category = resultSet.getString("category");
                         String state = resultSet.getString("state");
+                        if (state.equals("deleted")) {
+                            state = "Deleted";
+                        } else state = "Publishing";
+
                         String id = resultSet.getString("google_book_id");
 
                         Blob thumbnailBlob = resultSet.getBlob("thumbnail"); // Get image as Blob

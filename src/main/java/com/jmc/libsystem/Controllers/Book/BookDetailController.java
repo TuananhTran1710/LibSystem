@@ -62,7 +62,6 @@ public class BookDetailController extends BaseBookDetailController {
     public AnchorPane available_hbox;
     public HBox time_hBox;
     public ScrollPane scrollPane_cmt;
-    public Label borrowing_lbl;
 
 
     private List<Comment> feedbacks;
@@ -375,7 +374,6 @@ public class BookDetailController extends BaseBookDetailController {
     public void setUpInfo(Book book) {
         super.setUpInfo(book);
 
-        borrowing_lbl.setText(book.getNumBorrowing() + "");
         quantity_lbl.setText(String.valueOf(book.getQuantity()));
         totalLoan_lbl.setText(String.valueOf(book.getTotalLoan()) + " times");
 
@@ -418,13 +416,15 @@ public class BookDetailController extends BaseBookDetailController {
             available_hbox.setVisible(false);
             borrow_btn.setDisable(true);
             state_lbl.setText("Deleted");
-            state_lbl.setTextFill(Color.RED);
+            state_hbox.getStyleClass().remove("published");
+            state_hbox.getStyleClass().add("deleted");
             if (QueryBookLoans.isBorrowing(book.getId())) time_hBox.setVisible(true);
             else time_hBox.setVisible(false);
         } else {
             available_hbox.setVisible(true);
             state_lbl.setText("Publishing");
-            state_lbl.setTextFill(Color.web("#32CD32"));
+            state_hbox.getStyleClass().remove("deleted");
+            state_hbox.getStyleClass().add("published");
         }
     }
 

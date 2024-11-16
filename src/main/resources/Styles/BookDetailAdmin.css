@@ -93,7 +93,7 @@
 }
 
 .like_button FontAwesomeIconView {
-    -fx-fill: #FFFFFF;
+    -fx-fill: linear-gradient(to right, rgba(50, 205, 50, 0.3), rgba(34, 139, 34, 0.1));
     -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
 }
 
@@ -105,7 +105,7 @@
 }
 
 .unlike_button FontAwesomeIconView {
-    -fx-fill: red;
+    -fx-fill: linear-gradient(to right, #FF512F, #b91c1c);
     -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
 }
 
@@ -132,25 +132,42 @@
     -fx-background-radius: 5px;
 }
 
-.right_detail .choose_action ToggleButton {
+.right_detail .choose_action .toggle1 {
     -fx-background-color: transparent;
-    -fx-background-radius: 5px;
+    -fx-background-radius: 0 5px 5px 0;
     -fx-text-fill: #132A13;
     -fx-font-family: "Segoe UI";
     -fx-font-size:1.3em;
 }
 
-.right_detail .choose_action FontAwesomeIconView {
-    -fx-fill: #132A13;
-}
-
-.right_detail .choose_action ToggleButton:selected {
+.right_detail .choose_action .toggle1:selected {
     -fx-background-color: linear-gradient(to right, #132A13, #253F25);
     -fx-text-fill: #FFFFFF;
 }
 
-.right_detail .choose_action ToggleButton:selected FontAwesomeIconView {
+.right_detail .choose_action .toggle1:selected FontAwesomeIconView {
     -fx-fill: #FFFFFF;
+}
+
+.right_detail .choose_action .toggle2 {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px 0 0 5px;
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.3em;
+}
+
+.right_detail .choose_action .toggle2:selected {
+    -fx-background-color: linear-gradient(to right, #132A13, #253F25);
+    -fx-text-fill: #FFFFFF;
+}
+
+.right_detail .choose_action .toggle2:selected FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+.right_detail .choose_action FontAwesomeIconView {
+    -fx-fill: #132A13;
 }
 
 /* over view */
@@ -265,12 +282,48 @@
 -fx-background-color: #FFFFFF
 }
 
-.time{
-    -fx-background-color: #EEEEEE;
-    -fx-border-radius: 5px;
-    -fx-padding: 2;
-    -fx-border-color: #132A13;
-    -fx-border-weight: 2px;
+.time {
+    -fx-background-color: linear-gradient(to right, #fee2e2, #fecaca);
+    -fx-background-radius: 15px;
+}
+
+.time Label {
+    -fx-text-fill: #b91c1c;
+}
+
+.time FontAwesomeIconView {
+    -fx-fill: #b91c1c;
+}
+
+.avail {
+    -fx-background-color: linear-gradient(to right, #22c55e, #16a34a);
+    -fx-background-radius: 15px;
+}
+
+.avail Label {
+    -fx-text-fill: #FFFFFF;
+}
+
+.avail FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+.publishing {
+    -fx-background-color: linear-gradient(to right, #f0fdf4, #dcfce7);
+    -fx-background-radius: 15px;
+}
+
+.publishing Label {
+    -fx-text-fill: #15803d;
+}
+
+.deleted {
+    -fx-background-color: linear-gradient(to right, #fee2e2, #fecaca);
+    -fx-background-radius: 15px;
+}
+
+.deleted Label {
+    -fx-text-fill: #b91c1c;
 }
 
 

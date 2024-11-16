@@ -51,6 +51,7 @@
     -fx-padding: 5px;
     -fx-border-radius: 10;
     -fx-background-radius: 11;
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
 }
 
 .button_1:hover{
@@ -71,6 +72,7 @@
     -fx-padding: 5px;
     -fx-border-radius: 10;
     -fx-background-radius: 11;
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
 }
 
 .button_2:hover {
@@ -83,10 +85,33 @@
     -fx-fill: #132A13;
 }
 
+.like_button {
+    -fx-background-color: transparent;
+    -fx-alignment: CENTER;
+    -fx-border-radius: 10;
+    -fx-background-radius: 11;
+}
+
+.like_button FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
+}
+
+.unlike_button {
+    -fx-background-color: transparent;
+    -fx-alignment: CENTER;
+    -fx-border-radius: 10;
+    -fx-background-radius: 11;
+}
+
+.unlike_button FontAwesomeIconView {
+    -fx-fill: red;
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
+}
 
 /* bên phải */
 .right_detail {
-    -fx-padding: 10px;
+    -fx-padding: 20px;
     -fx-background-color: #FFFFFF;
     -fx-border-color: #D3D3D3;
     -fx-border-radius: 10px;
@@ -97,7 +122,7 @@
 .right_detail .title {
     -fx-text-fill: #132A13;
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 2.0em;
+    -fx-font-size: 2.4em;
     -fx-font-weight: bold;
 }
 
@@ -120,7 +145,7 @@
 }
 
 .right_detail .choose_action ToggleButton:selected {
-    -fx-background-color: #132A13;
+    -fx-background-color: linear-gradient(to right, #132A13, #253F25);
     -fx-text-fill: #FFFFFF;
 }
 

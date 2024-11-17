@@ -8,10 +8,13 @@ import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AccountProfileController extends BaseAccountDetailController{
@@ -39,7 +42,30 @@ public class AccountProfileController extends BaseAccountDetailController{
         //statusChoice.setValue("Active");
     }
 
+    private boolean confirmDelete() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Account");
+        alert.setHeaderText("Confirm to delete this account");
+        alert.setContentText("Are you sure?");
+
+        ButtonType buttonTypeContinue = new ButtonType("Continue");
+        ButtonType buttonTypeCancel = new ButtonType("Close");
+
+        // Thêm các ButtonType vào Alert
+        alert.getButtonTypes().setAll(buttonTypeContinue, buttonTypeCancel);
+
+        // Hiển thị Alert và chờ người dùng chọn
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == buttonTypeContinue) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private void deleteAndMoveMenuCurrent() {
+        if(!confirmDelete()) return;
         QueryAccountData.deleteAccount(getCurrent_user().getId());
         moveMenuCurrent();
     }

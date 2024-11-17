@@ -39,7 +39,7 @@ public class AdminController implements Initializable {
                         }
                         case USER -> {
                             admin_parent.setCenter(Model.getInstance().getViewFactory().getManageUserView());
-                            ManageUserController.getInstance().refreshData();
+                            //ManageUserController.getInstance().refreshData();
                         }
                         case BOOK -> {
                             admin_parent.setCenter(Model.getInstance().getViewFactory().getManageBookView());

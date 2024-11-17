@@ -103,6 +103,9 @@ public class DashboardController implements Initializable {
         num_show_reading.valueProperty().addListener(observable -> modifyShowBookReading());
         num_show_popular.valueProperty().addListener(observable -> modifyShowBookPopular());
         //
+        if (SuggestionBook.autoCompletionBinding != null) {
+            SuggestionBook.autoCompletionBinding.dispose();
+        }
         SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.titleSuggest);
         SuggestionBook.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
         //auto completion

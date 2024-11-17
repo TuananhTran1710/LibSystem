@@ -233,7 +233,7 @@ public class ManageBookController implements Initializable {
         //System.out.println(type);
 
         String text = searchInLib_tf.getText();
-        ResultSet resultSet = QueryBookData.getBookForSearch(text, type);
+        ResultSet resultSet = QueryBookData.getBookForSearchAllBook(text, type);
         //System.out.println("Can access");
         data.clear();
         getData(resultSet);

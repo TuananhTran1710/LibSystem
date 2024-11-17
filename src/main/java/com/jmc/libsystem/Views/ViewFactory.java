@@ -34,6 +34,8 @@ public class ViewFactory {
     private AnchorPane bookDetail;
     private AnchorPane bookDetailAPI;
     private AnchorPane bookEditAdmin;
+    //account
+    private AnchorPane accountProfile;
     //
     private ObjectProperty<UserMenuOptions> userSelectedMenuItem;
     private ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
@@ -235,6 +237,17 @@ public class ViewFactory {
             }
         }
         return bookEditAdmin;
+    }
+
+    public AnchorPane getAccountProfile() {
+        if (accountProfile == null) {
+            try {
+                accountProfile = new FXMLLoader(getClass().getResource("/FXML/Account/AccountProfile.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return accountProfile;
     }
 
     // -----------------------------------Function Show Window------------------------------------

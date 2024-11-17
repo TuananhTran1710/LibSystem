@@ -1,4 +1,4 @@
-package com.jmc.libsystem.Controllers.Admin;
+package com.jmc.libsystem.Controllers.Account;
 
 import com.jmc.libsystem.Information.BookLoan;
 import com.jmc.libsystem.Information.User;
@@ -13,14 +13,18 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ProfileUserontroller implements Initializable {
-    private static ProfileUserontroller instance;
+public class BaseAccountDetailController implements Initializable {
+    private static BaseAccountDetailController instance;
+
+    public Button back_btn;
 
     public TextField user_id_fld;
     public TextField fullname_fld;
     public TextField email_fld;
     public TextField password_fld;
     public Button edit_profile_btn;
+    public Button save_profile_btn;
+
     public Label total_borrow_lbl;
     public Label overdue_book_lbl;
     public Label favorite_genre_lbl;
@@ -28,74 +32,55 @@ public class ProfileUserontroller implements Initializable {
     public TextField new_password_fld;
     public TextField confirm_new_password_fld;
     public Button change_password_btn;
-    public Button save_profile_btn;
+
     public TableView bookloan_tbl;
     public TableColumn bookname_clm;
     public TableColumn borroweddate_clm;
     public TableColumn returndate_clm;
     public TableColumn status_clm;
 
-    public ProfileUserontroller() {
+    protected User current_user;
+
+    public User getCurrent_user() {
+        return this.current_user;
+    }
+
+    public void setCurrent_user(User current_user) {
+        this.current_user = current_user;
+    }
+
+    public BaseAccountDetailController() {
         instance = this;
     }
 
-    public static ProfileUserontroller getInstance() {
+    public static BaseAccountDetailController getInstance() {
         return instance;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        refreshProfile();
         InitBorrowHistoryTable();
-        addListensButton();
+        back_btn.setOnAction(event -> moveMenuCurrent());
     }
 
-    private void refreshProfile() {
-        loadUserProfile();
-        loadBorrowingStatistics();
-        loadUserBookLoans();
+    protected void moveMenuCurrent() {
     }
 
     //lấy sự kiện
-    private void addListensButton() {
+    protected void addListensButton(User current_user) {
         edit_profile_btn.setOnAction(event -> onEditButtonClicked());
-        save_profile_btn.setOnAction(event -> onSaveButtonClicked());
-        change_password_btn.setOnAction(event -> onChangePasswordButtonClicked());
-    }
-
-    //cái này là để làm mới dữ liệu, sử dụng ở user controller khi mà case của sự kiện bằng profile
-    public void showProfile() {
-        refreshProfile();
+        save_profile_btn.setOnAction(event -> onSaveButtonClicked(current_user));
+        change_password_btn.setOnAction(event -> onChangePasswordButtonClicked(current_user));
     }
 
     //tải thông tin người dùng
-    private void loadUserProfile() {
-        User current_user = Model.getInstance().getMyUser();
+    protected void loadUserProfile(User current_user) {
 
-        //gán thông tin cho các textfield
-        user_id_fld.setText(current_user.getId());
-        fullname_fld.setText(current_user.getFullName());
-        email_fld.setText(current_user.getEmail());
-        password_fld.setText(current_user.getPassword());
-
-        //đặt các field không được chỉnh sửa
-        user_id_fld.setEditable(false);
-        fullname_fld.setEditable(false);
-        email_fld.setEditable(false);
-        password_fld.setEditable(false);
-
-        //bật nút edit, tắt nút save
-        // Hiện nút Edit và ẩn nút Save
-        edit_profile_btn.setVisible(true);
-        save_profile_btn.setVisible(false);
     }
 
     //cho chỉnh sửa khi bấm edit
-    private void setFieldsEditable(boolean editable) {
-        user_id_fld.setEditable(false);
-        fullname_fld.setEditable(editable);
-        email_fld.setEditable(editable);
-        password_fld.setEditable(false);
+    protected void setFieldsEditable(boolean editable) {
+
     }
 
     //show cửa sổ lỗi
@@ -118,43 +103,14 @@ public class ProfileUserontroller implements Initializable {
     }
 
     //bấm nút save profile
-    public void onSaveButtonClicked() {
-        //lấy thaydodoiri từ field
-        String updatedFullName = fullname_fld.getText();
-        String updatedEmail = email_fld.getText();
-        User current_user = Model.getInstance().getMyUser();
+    public void onSaveButtonClicked(User current_user) {
 
-        //kiểm tra email tồn tại chưa
-        if (!updatedEmail.equals(Model.getInstance().getMyUser().getEmail()) && QueryAccountData.isUserEmailExists(updatedEmail)) {
-            //email tồn tại thì không thay đổi
-            email_fld.setText(current_user.getEmail());
-            QueryAccountData.updateUserInfo(current_user);
-            showAlert("Error", "Oops...", "Email already exists. Please use a different email.");
-            return;
-        }
-
-        //nhập nhật của user
-        current_user.setFullName(updatedFullName);
-        current_user.setEmail(updatedEmail);
-
-        //cập nhật trong database
-        QueryAccountData.updateUserInfo(current_user);
-
-        //đổi trạng thái field
-        setFieldsEditable(false);
-
-        //nút
-        edit_profile_btn.setVisible(true);
-        save_profile_btn.setVisible(false);
-
-        System.out.println("save");
     }
 
     //bấm nút đổi mật khẩu
-    public void onChangePasswordButtonClicked() {
+    public void onChangePasswordButtonClicked(User current_user) {
         String newPassword = new_password_fld.getText();
         String confirmNewPassword = confirm_new_password_fld.getText();
-        User current_user = Model.getInstance().getMyUser();
 
         if (newPassword.equals(confirmNewPassword) && !newPassword.equals(current_user.getPassword())) {
             current_user.setPassword(newPassword);
@@ -171,8 +127,7 @@ public class ProfileUserontroller implements Initializable {
     }
 
     //tải các thông số về sách
-    private void loadBorrowingStatistics() {
-        User current_user = Model.getInstance().getMyUser();
+    protected void loadBorrowingStatistics(User current_user) {
         String userId = current_user.getId();
 
         // Lấy thông tin từ cơ sở dữ liệu và cập nhật giao diện
@@ -202,8 +157,8 @@ public class ProfileUserontroller implements Initializable {
         status_clm.setStyle("-fx-alignment: CENTER;");
     }
 
-    private void loadUserBookLoans() {
-        List<BookLoan> bookLoans = QueryBookLoans.getBookLoansByUserId(Model.getInstance().getMyUser().getId());
+    protected void loadUserBookLoans(User current_user) {
+        List<BookLoan> bookLoans = QueryBookLoans.getBookLoansByUserId(current_user.getId());
         bookloan_tbl.getItems().setAll(bookLoans);
     }
 

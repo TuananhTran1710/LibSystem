@@ -103,6 +103,19 @@ public class QueryAccountData {
         return resultSet;
     }
 
+    public static ResultSet getAccount(String user_id) {
+        ResultSet resultSet = null;
+        String query = "SELECT * FROM user WHERE user_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, user_id);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
     public static void insertAccount(String email, String password, String user_id, String fullName) {
 
         ResultSet resultSet = null;
@@ -168,11 +181,12 @@ public class QueryAccountData {
 
     //cập nhật thông tin user, dùng cho user profile
     public static void updateUserInfo(User user) {
-        String query = "UPDATE user SET fullName = ?, email = ? WHERE user_id = ?";
+        String query = "UPDATE user SET fullName = ?, email = ?, state = ? WHERE user_id = ?";
         try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
             stmt.setString(1, user.getFullName());
             stmt.setString(2, user.getEmail());
-            stmt.setString(3, user.getId());
+            stmt.setString(3, user.getState());
+            stmt.setString(4, user.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -244,4 +258,16 @@ public class QueryAccountData {
         return false;
 
     }
+
+    public static void deleteAccount(String id){
+        String query = "DELETE FROM user WHERE user_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

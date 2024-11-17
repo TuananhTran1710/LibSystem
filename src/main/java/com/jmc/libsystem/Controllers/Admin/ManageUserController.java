@@ -1,6 +1,10 @@
 package com.jmc.libsystem.Controllers.Admin;
 
+import com.jmc.libsystem.Controllers.Account.AccountProfileController;
+import com.jmc.libsystem.Controllers.Book.BookEditAdmin;
 import com.jmc.libsystem.HandleResultSet.EvaluateInfo;
+import com.jmc.libsystem.Information.Book;
+import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
@@ -48,6 +52,7 @@ public class ManageUserController implements Initializable {
     public PasswordField passwordField;
     public Button addUserButton;
 
+    public HashMap<String, User> userList = new HashMap<>();
 
     private ObservableList<Map<String, Object>> data;
 
@@ -137,6 +142,22 @@ public class ManageUserController implements Initializable {
                 editLink.setOnAction(event -> {
                     Map<String, Object> rowData = getTableView().getItems().get(getIndex());
                     // Thực hiện hành động chỉnh sửa với dữ liệu hàng tương ứng
+                    String user_id = (String) rowData.get("id");
+                    if (!userList.containsKey(user_id)) {
+                        ResultSet resultSet = QueryAccountData.getAccount(user_id);
+                        try {
+                            resultSet.next();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        User user = User.createUserFromResultSet(resultSet);
+                        userList.put(user_id, user);
+                    }
+                    User user = userList.get(user_id);
+                    AdminController.getInstance().admin_parent.setCenter(Model.getInstance().getViewFactory().getAccountProfile());
+                    AccountProfileController.getInstance().setCurrent_user(user);
+                    AccountProfileController.getInstance().showProfile(user);
+                    System.out.println("Edit: " + AccountProfileController.getInstance().getCurrent_user());
                     System.out.println("Edit: " + rowData.get("id"));
                 });
             }

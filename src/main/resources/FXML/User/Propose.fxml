@@ -14,8 +14,6 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/Propose.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.ProposeController">
-    <ChoiceBox fx:id="criteriaBox" layoutX="688.2" layoutY="44.0" prefHeight="36.0" prefWidth="90.0" styleClass="type_Search_box" AnchorPane.rightAnchor="71.39999999999998" AnchorPane.topAnchor="44.0" />
-    <Button fx:id="search_btn" layoutX="34.0" layoutY="43.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" styleClass="search_button" AnchorPane.topAnchor="43.0" />
     <VBox layoutX="35.0" layoutY="375.0" prefHeight="250.0" prefWidth="780.0" spacing="10.0" styleClass="part_1" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="380.0">
         <padding>
             <Insets top="7.0" />
@@ -37,15 +35,15 @@
          <AnchorPane prefHeight="50.0" prefWidth="780.0">
             <children>
                <TextField fx:id="search_tf" layoutX="-0.8" layoutY="2.0" prefHeight="45.0" prefWidth="778.0" promptText="Search or type a command..." styleClass="search_field" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-               <Button fx:id="search_btn1" layoutY="3.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" styleClass="search_button" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
+               <Button fx:id="search_btn" layoutY="3.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" styleClass="search_button" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0">
                   <graphic>
                      <FontAwesomeIconView glyphName="SEARCH" rotate="-11.3" size="15" />
                   </graphic>
                </Button>
-               <ChoiceBox fx:id="criteriaBox1" layoutX="668.0" layoutY="5.0" prefHeight="36.0" prefWidth="90.0" styleClass="type_Search_box" AnchorPane.leftAnchor="632.0" AnchorPane.topAnchor="7.0" />
+               <ChoiceBox fx:id="criteriaBox" layoutX="631.0" layoutY="10.0" prefHeight="30.0" prefWidth="90.0" styleClass="type_Search_box" AnchorPane.leftAnchor="631.0" AnchorPane.topAnchor="12.0" />
                <Text layoutX="613.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sort_by" text="Search by:" AnchorPane.leftAnchor="577.0" />
                <Line endX="15.39996337890625" endY="13.0" layoutX="586.0" layoutY="24.0" startX="15.39996337890625" startY="-12.200004577636719" styleClass="line" AnchorPane.leftAnchor="564.0" AnchorPane.topAnchor="12.0" />
-               <FontAwesomeIconView glyphName="SLIDERS" layoutX="749.0" layoutY="32.0" size="20" AnchorPane.leftAnchor="713.0" />
+               <FontAwesomeIconView glyphName="SLIDERS" layoutX="749.0" layoutY="32.0" size="20" AnchorPane.leftAnchor="705.0" />
             </children>
          </AnchorPane>
           <VBox prefHeight="200.0" prefWidth="780.0" spacing="10.0" styleClass="part_2">
@@ -54,6 +52,9 @@
               </padding>
               <ScrollPane fx:id="scrollPane_search" hbarPolicy="ALWAYS" prefHeight="273.0" prefWidth="778.0" vbarPolicy="NEVER">
                   <HBox fx:id="resultSearchList_hb" prefHeight="100.0" prefWidth="200.0" />
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
               </ScrollPane>
           </VBox>
       </children>

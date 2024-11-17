@@ -157,7 +157,6 @@ public class ManageUserController implements Initializable {
                     AdminController.getInstance().admin_parent.setCenter(Model.getInstance().getViewFactory().getAccountProfile());
                     AccountProfileController.getInstance().setCurrent_user(user);
                     AccountProfileController.getInstance().showProfile(user);
-                    System.out.println("Edit: " + AccountProfileController.getInstance().getCurrent_user());
                     System.out.println("Edit: " + rowData.get("id"));
                 });
             }

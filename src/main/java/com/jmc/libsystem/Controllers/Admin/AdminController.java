@@ -37,7 +37,10 @@ public class AdminController implements Initializable {
                             Stage stage = (Stage) admin_parent.getScene().getWindow();
                             Model.getInstance().getViewFactory().closeStage(stage);
                         }
-                        case USER -> admin_parent.setCenter(Model.getInstance().getViewFactory().getManageUserView());
+                        case USER -> {
+                            admin_parent.setCenter(Model.getInstance().getViewFactory().getManageUserView());
+                            ManageUserController.getInstance().refreshData();
+                        }
                         case BOOK -> {
                             admin_parent.setCenter(Model.getInstance().getViewFactory().getManageBookView());
                             ManageBookController.getInstance().reset();

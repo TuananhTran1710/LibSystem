@@ -27,5 +27,6 @@ module com.jmc.libsystem {
     exports com.jmc.libsystem.HandleResultSet;
     exports com.jmc.libsystem.HandleJsonString;
     opens com.jmc.libsystem.Controllers to com.google.gson, javafx.fxml;
+    exports com.jmc.libsystem.Controllers.Account;
 
 }

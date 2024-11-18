@@ -2,7 +2,8 @@ package com.jmc.libsystem.Controllers.User;
 
 import com.jmc.libsystem.HandleJsonString.SearchBookAPI;
 import com.jmc.libsystem.Information.Book;
-import com.jmc.libsystem.SuggestionBox.SuggestionBook;
+import com.jmc.libsystem.QueryDatabase.QueryBookRecommend;
+import com.jmc.libsystem.SuggestionBox.SuggestionBookAPI;
 import com.jmc.libsystem.Views.SearchCriteria;
 import com.jmc.libsystem.Views.ShowListBookFound;
 import javafx.application.Platform;
@@ -53,42 +54,88 @@ public class ProposeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        criteriaBox.setItems(FXCollections.observableArrayList(SearchCriteria.TITLE, SearchCriteria.CATEGORY, SearchCriteria.AUTHORS));
-        criteriaBox.setValue(SearchCriteria.TITLE);
-        //
+        bookPreSuggest = new ArrayList<>();
+        initializePreSuggestControls();
+        showBookSearch();
+        refreshPropose();
+    }
+
+    private void refreshPropose() {
+        resetPreSuggest();
+        resetSearch();
+    }
+
+    public void showPropose() {
+        refreshPropose();
+    }
+
+    private void initializePreSuggestControls() {
         num_show_preSuggest.setItems(FXCollections.observableArrayList(20, 50, 100, "All"));
         num_show_preSuggest.setValue(20);
         limitBookPreSuggest = 20;
+
+        num_show_preSuggest.valueProperty().addListener(observable -> modifyShowBookPreSuggest());
+    }
+
+    // Hiển thị danh sách đề xuất
+    public void showPreSuggest() {
+        bookPreSuggest = QueryBookRecommend.getPreSuggestBooks();
+        updatePreSuggestView();
+    }
+
+    // Làm mới danh sách đề xuất
+    public void resetPreSuggest() {
+        scrollPane_suggest.setHvalue(0.0);
+        showPreSuggest();
+    }
+
+    private void updatePreSuggestView() {
+        if (num_show_preSuggest.getValue().equals("All")) {
+            ShowListBookFound.showAPIFromUser(bookPreSuggest, resultSuggestList_hb, false);
+        } else {
+            int limit = (int) num_show_preSuggest.getValue();
+            ShowListBookFound.showAPIFromUser(bookPreSuggest, resultSuggestList_hb, limit);
+        }
+    }
+
+    private void modifyShowBookPreSuggest() {
+        if (bookPreSuggest == null || bookPreSuggest.isEmpty()) {
+            System.out.println("No books to display in PreSuggest.");
+            return;
+        }
+        updatePreSuggestView();
+    }
+
+    public void showBookSearch() {
+        criteriaBox.setItems(FXCollections.observableArrayList(SearchCriteria.TITLE, SearchCriteria.CATEGORY, SearchCriteria.AUTHORS));
+        criteriaBox.setValue(SearchCriteria.TITLE);
         //
         typeSearch = SearchCriteria.TITLE;
 
         criteriaBox.valueProperty().addListener(observable ->
         {
             typeSearch = criteriaBox.getValue();
-            if (SuggestionBook.autoCompletionBinding != null) {
-                SuggestionBook.autoCompletionBinding.dispose();
+            if (SuggestionBookAPI.autoCompletionBinding != null) {
+                SuggestionBookAPI.autoCompletionBinding.dispose();
             }
             if (typeSearch == SearchCriteria.TITLE) {
-                SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.titleSuggest);
+                SuggestionBookAPI.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBookAPI.titleSuggest);
             } else if (typeSearch == SearchCriteria.AUTHORS) {
-                SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.authorSuggest);
+                SuggestionBookAPI.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBookAPI.authorSuggest);
             } else {
-                SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.categorySuggest);
+                SuggestionBookAPI.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBookAPI.categorySuggest);
             }
-            SuggestionBook.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
+            SuggestionBookAPI.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
         });
         //
         bookSearch = new ArrayList<>();
-        bookPreSuggest = new ArrayList<>();
         //
-        num_show_preSuggest.valueProperty().addListener(observable -> modifyShowBookPreSuggest());
-
-        if (SuggestionBook.autoCompletionBinding != null) {
-            SuggestionBook.autoCompletionBinding.dispose();
+        if (SuggestionBookAPI.autoCompletionBinding != null) {
+            SuggestionBookAPI.autoCompletionBinding.dispose();
         }
         //auto completion
-        SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.titleSuggest);
-        SuggestionBook.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
+        SuggestionBookAPI.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBookAPI.titleSuggest);
+        SuggestionBookAPI.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
         search_tf.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -97,7 +144,7 @@ public class ProposeController implements Initializable {
                         if (search_tf.isFocused() && !search_tf.getText().trim().isEmpty()) {
                             searchBooks();
 
-                            SuggestionBook.autoCompletionLearnWord(search_tf, search_tf.getText().trim(), typeSearch);
+                            SuggestionBookAPI.autoCompletionLearnWord(search_tf, search_tf.getText().trim(), typeSearch);
 
                             resultSearchList_hb.requestFocus();
                         }
@@ -108,13 +155,6 @@ public class ProposeController implements Initializable {
         //
         search_btn.setOnAction(event -> searchBooks());
         data = FXCollections.observableArrayList();
-    }
-
-    public void modifyShowBookPreSuggest() {
-        if (!(num_show_preSuggest.getValue()).equals("All"))
-            limitBookPreSuggest = (int) num_show_preSuggest.getValue();
-        else limitBookPreSuggest = Integer.MAX_VALUE;
-        ShowListBookFound.show(bookPreSuggest, resultSuggestList_hb, limitBookPreSuggest);
     }
 
     private void searchBooks() {
@@ -138,9 +178,14 @@ public class ProposeController implements Initializable {
             // tu day la chay tren luong chinh
             task.setOnSucceeded(e -> {
                 List<Book> list = task.getValue();
-                Platform.runLater(() -> ShowListBookFound.show(list, resultSearchList_hb));
+                Platform.runLater(() -> ShowListBookFound.showAPIFromUser(list, resultSearchList_hb, true));
             });
             new Thread(task).start();
         }
+    }
+
+    private void resetSearch() {
+        search_tf.clear();
+        resultSearchList_hb.getChildren().clear();
     }
 }

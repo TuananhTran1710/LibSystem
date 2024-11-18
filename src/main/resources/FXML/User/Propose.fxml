@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/Propose.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.User.ProposeController">
-    <VBox layoutX="35.0" layoutY="375.0" prefHeight="250.0" prefWidth="780.0" spacing="10.0" styleClass="part_1" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="380.0">
+    <VBox layoutX="35.0" layoutY="375.0" prefHeight="230.0" prefWidth="780.0" spacing="10.0" styleClass="part_1" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="380.0">
         <padding>
             <Insets top="7.0" />
         </padding>
@@ -28,6 +28,9 @@
         </HBox>
         <ScrollPane fx:id="scrollPane_suggest" hbarPolicy="ALWAYS" prefHeight="250.0" prefWidth="778.0" vbarPolicy="NEVER">
             <HBox fx:id="resultSuggestList_hb" prefHeight="100.0" prefWidth="200.0" />
+         <padding>
+            <Insets left="5.0" right="5.0" top="10.0" />
+         </padding>
         </ScrollPane>
     </VBox>
    <VBox layoutX="36.0" layoutY="70.0" prefHeight="290.0" prefWidth="780.0" spacing="10.0" styleClass="search_surround" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="65.0">

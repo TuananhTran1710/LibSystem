@@ -132,19 +132,22 @@ public class ProfileController implements Initializable {
 
     public void onChangePasswordButtonClicked() {
         String new_password = new_password_fld.getText();
+        System.out.println(new_password);
         String confirm_new_password = confirm_new_password_fld.getText();
         Admin current_admin = Model.getInstance().getMyAdmin();
 
-        if(new_password.equals(confirm_new_password) &&
-        !new_password.equals(current_admin.getPassword())) {
+        if (new_password.trim().isEmpty()) {
+            showAlert("Invalid Password", "Oops...", "The new password cannot be empty. Please try again.");
+        } else if (new_password.equals(current_admin.getPassword())) {
+            showAlert("Password Mismatch", "Oops...", "The new password matches current password. Please try again.");
+        } else if (!new_password.equals(confirm_new_password)) {
+            showAlert("Password Mismatch", "Oops...", "The new password and confirmation do not match. Please try again.");
+        } else {
             current_admin.setPassword(new_password);
             QueryAccountData.updateAdminPassword(current_admin);
 
             password_fld.setText(new_password);
-        } else if (!new_password.equals(confirm_new_password)) {
-            showAlert("Password Mismatch", "Oops...", "The new password and confirmation do not match. Please try again.");
-        } else {
-            showAlert("Password Mismatch", "Oops...", "The new password matches current password. Please try again.");
+            showAlert("Success", "Password Changed", "Your password has been successfully updated.");
         }
 
         new_password_fld.clear();

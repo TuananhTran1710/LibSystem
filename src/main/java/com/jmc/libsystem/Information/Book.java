@@ -124,6 +124,19 @@ public class Book {
         this.numBorrowing = numBorrowing;
     }
 
+    public Book(String id, String title, String authors, LocalDate publishDate, String description, byte[] thumbnailImage, int pageCount, String language, String category, String state) {
+        this.id = id;
+        this.title = title;
+        this.authors = authors;
+        this.publishDate = publishDate;
+        this.description = description;
+        this.thumbnailImage = thumbnailImage;
+        this.pageCount = pageCount;
+        this.language = language;
+        this.category = category;
+        this.state = state;
+    }
+
     public String getId() {
         return id;
     }
@@ -206,4 +219,26 @@ public class Book {
             throw new RuntimeException("Error creating Book from ResultSet", e);
         }
     }
+
+    public static Book createBookProposeFromResultSet(ResultSet rs) {
+        try {
+            String id = rs.getString("google_book_id");
+            String title = rs.getString("title");
+            String authors = rs.getString("authors");
+            LocalDate publishedDate = rs.getDate("publishDate") != null ? rs.getDate("publishDate").toLocalDate() : null;
+            String description = rs.getString("description");
+            Blob thumbnailBlob = rs.getBlob("thumbnail"); // Get image as Blob
+            byte[] thumbnailImage = thumbnailBlob != null ? thumbnailBlob.getBytes(1, (int) thumbnailBlob.length()) : null;
+            int pageCount = rs.getInt("page_count");
+            String language = rs.getString("language");
+            String category = rs.getString("category");
+            String state = rs.getString("state");
+
+            return new Book(id, title, authors, publishedDate, description, thumbnailImage,
+                    pageCount, language, category, state);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating Book from ResultSet", e);
+        }
+    }
+
 }

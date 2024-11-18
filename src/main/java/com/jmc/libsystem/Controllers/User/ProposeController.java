@@ -1,8 +1,8 @@
 package com.jmc.libsystem.Controllers.User;
 
 import com.jmc.libsystem.HandleJsonString.SearchBookAPI;
-import com.jmc.libsystem.HandleResultSet.SearchBookDatabase;
 import com.jmc.libsystem.Information.Book;
+import com.jmc.libsystem.QueryDatabase.QueryBookRecommend;
 import com.jmc.libsystem.SuggestionBox.SuggestionBookAPI;
 import com.jmc.libsystem.Views.SearchCriteria;
 import com.jmc.libsystem.Views.ShowListBookFound;
@@ -54,12 +54,61 @@ public class ProposeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        criteriaBox.setItems(FXCollections.observableArrayList(SearchCriteria.TITLE, SearchCriteria.CATEGORY, SearchCriteria.AUTHORS));
-        criteriaBox.setValue(SearchCriteria.TITLE);
-        //
+        bookPreSuggest = new ArrayList<>();
+        initializePreSuggestControls();
+        showBookSearch();
+        refreshPropose();
+    }
+
+    private void refreshPropose() {
+        resetPreSuggest();
+        resetSearch();
+    }
+
+    public void showPropose() {
+        refreshPropose();
+    }
+
+    private void initializePreSuggestControls() {
         num_show_preSuggest.setItems(FXCollections.observableArrayList(20, 50, 100, "All"));
         num_show_preSuggest.setValue(20);
         limitBookPreSuggest = 20;
+
+        num_show_preSuggest.valueProperty().addListener(observable -> modifyShowBookPreSuggest());
+    }
+
+    // Hiển thị danh sách đề xuất
+    public void showPreSuggest() {
+        bookPreSuggest = QueryBookRecommend.getPreSuggestBooks();
+        updatePreSuggestView();
+    }
+
+    // Làm mới danh sách đề xuất
+    public void resetPreSuggest() {
+        scrollPane_suggest.setHvalue(0.0);
+        showPreSuggest();
+    }
+
+    private void updatePreSuggestView() {
+        if (num_show_preSuggest.getValue().equals("All")) {
+            ShowListBookFound.showAPIFromUser(bookPreSuggest, resultSuggestList_hb, false);
+        } else {
+            int limit = (int) num_show_preSuggest.getValue();
+            ShowListBookFound.showAPIFromUser(bookPreSuggest, resultSuggestList_hb, limit);
+        }
+    }
+
+    private void modifyShowBookPreSuggest() {
+        if (bookPreSuggest == null || bookPreSuggest.isEmpty()) {
+            System.out.println("No books to display in PreSuggest.");
+            return;
+        }
+        updatePreSuggestView();
+    }
+
+    public void showBookSearch() {
+        criteriaBox.setItems(FXCollections.observableArrayList(SearchCriteria.TITLE, SearchCriteria.CATEGORY, SearchCriteria.AUTHORS));
+        criteriaBox.setValue(SearchCriteria.TITLE);
         //
         typeSearch = SearchCriteria.TITLE;
 
@@ -80,10 +129,7 @@ public class ProposeController implements Initializable {
         });
         //
         bookSearch = new ArrayList<>();
-        bookPreSuggest = new ArrayList<>();
         //
-        num_show_preSuggest.valueProperty().addListener(observable -> modifyShowBookPreSuggest());
-
         if (SuggestionBookAPI.autoCompletionBinding != null) {
             SuggestionBookAPI.autoCompletionBinding.dispose();
         }
@@ -111,13 +157,6 @@ public class ProposeController implements Initializable {
         data = FXCollections.observableArrayList();
     }
 
-    public void modifyShowBookPreSuggest() {
-        if (!(num_show_preSuggest.getValue()).equals("All"))
-            limitBookPreSuggest = (int) num_show_preSuggest.getValue();
-        else limitBookPreSuggest = Integer.MAX_VALUE;
-        ShowListBookFound.show(bookPreSuggest, resultSuggestList_hb, limitBookPreSuggest);
-    }
-
     private void searchBooks() {
         String keyWord = search_tf.getText();
         keyWord = keyWord.trim();
@@ -139,9 +178,14 @@ public class ProposeController implements Initializable {
             // tu day la chay tren luong chinh
             task.setOnSucceeded(e -> {
                 List<Book> list = task.getValue();
-                Platform.runLater(() -> ShowListBookFound.show(list, resultSearchList_hb));
+                Platform.runLater(() -> ShowListBookFound.showAPIFromUser(list, resultSearchList_hb, true));
             });
             new Thread(task).start();
         }
+    }
+
+    private void resetSearch() {
+        search_tf.clear();
+        resultSearchList_hb.getChildren().clear();
     }
 }

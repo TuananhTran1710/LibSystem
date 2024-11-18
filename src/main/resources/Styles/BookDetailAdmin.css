@@ -166,26 +166,34 @@
     -fx-fill: #FFFFFF;
 }
 
+.right_detail .choose_action .toggle3:selected {
+    -fx-background-color: linear-gradient(to right, #132A13, #253F25);
+    -fx-background-radius: 5px;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.5em;
+    -fx-text-fill: #FFFFFF;
+}
+
 .right_detail .choose_action FontAwesomeIconView {
     -fx-fill: #132A13;
 }
 
 /* over view */
-.overview .level1_content {
+.level1_content {
     -fx-text-fill: #132A13;
     -fx-font-family: "Segoe UI";
     -fx-font-size:1.5em;
     -fx-font-weight: bold;
 }
 
-.overview .level2_content {
+.level2_content {
     -fx-text-fill: #132A13;
     -fx-font-family: "Segoe UI";
     -fx-font-size:1.1em;
     -fx-font-weight: bold;
 }
 
-.overview .level3_content {
+.level3_content {
     -fx-text-fill: #4A6B4A;
     -fx-font-family: "Segoe UI";
     -fx-font-size:1.0em;

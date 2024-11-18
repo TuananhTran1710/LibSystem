@@ -42,7 +42,10 @@ public class UserController implements Initializable {
                             user_parent.setCenter(Model.getInstance().getViewFactory().getProfileView());
                             ProfileController.getInstance().showProfile(); //làm mới nội dung profile
                         }
-                        case PROPOSE -> user_parent.setCenter(Model.getInstance().getViewFactory().getProposeView());
+                        case PROPOSE -> {
+                            user_parent.setCenter(Model.getInstance().getViewFactory().getProposeView());
+                            ProposeController.getInstance().showPropose();
+                        }
                         case MYBOOK -> {
                             user_parent.setCenter(Model.getInstance().getViewFactory().getMyBookView());
                             MyBookController.getInstance().refreshData();

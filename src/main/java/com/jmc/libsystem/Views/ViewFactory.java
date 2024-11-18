@@ -34,6 +34,7 @@ public class ViewFactory {
     private AnchorPane bookDetail;
     private AnchorPane bookDetailAPI;
     private AnchorPane bookEditAdmin;
+    private AnchorPane bookPropose;
     //account
     private AnchorPane accountProfile;
     //
@@ -145,6 +146,17 @@ public class ViewFactory {
             }
         }
         return bookDetail;
+    }
+
+    public AnchorPane getBookPropose() {
+        if(bookPropose == null) {
+            try {
+                bookPropose = new FXMLLoader(getClass().getResource("/FXML/Book/BookProposeDetail.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return bookPropose;
     }
 
     //--------------------------------ANCHOR ADMIN----------------------

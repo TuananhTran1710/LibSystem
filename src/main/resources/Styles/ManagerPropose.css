@@ -1,0 +1,52 @@
+.suggestion-box {
+    -fx-padding: 10px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #fff;
+}
+
+.suggestion-count {
+    -fx-font-size: 50px;
+    -fx-font-weight: bold;
+}
+
+.choice-box {
+    -fx-padding: 5px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #fff;
+}
+
+.list-view {
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #fff;
+    -fx-font-size: 14px;
+}
+
+.lists-cell {
+    -fx-border-radius: 10px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-background-color: #fff;
+    -fx-font-size: 10px;
+}
+
+.button-accept{
+    -fx-border-radius: 10px;
+    -fx-border-color: green;
+    -fx-border-width: 1px;
+    -fx-background-color: #fff;
+    -fx-text-fill: green;
+}
+
+.button-reject{
+    -fx-border-radius: 10px;
+    -fx-border-color: red;
+    -fx-border-width: 1px;
+    -fx-background-color: #fff;
+    -fx-text-fill: red;
+}

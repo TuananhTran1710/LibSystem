@@ -1,9 +1,8 @@
 package com.jmc.libsystem.Controllers.User;
 
 import com.jmc.libsystem.HandleJsonString.SearchBookAPI;
-import com.jmc.libsystem.HandleResultSet.SearchBookDatabase;
 import com.jmc.libsystem.Information.Book;
-import com.jmc.libsystem.SuggestionBox.SuggestionBook;
+import com.jmc.libsystem.SuggestionBox.SuggestionBookAPI;
 import com.jmc.libsystem.Views.SearchCriteria;
 import com.jmc.libsystem.Views.ShowListBookFound;
 import javafx.application.Platform;
@@ -66,17 +65,17 @@ public class ProposeController implements Initializable {
         criteriaBox.valueProperty().addListener(observable ->
         {
             typeSearch = criteriaBox.getValue();
-            if (SuggestionBook.autoCompletionBinding != null) {
-                SuggestionBook.autoCompletionBinding.dispose();
+            if (SuggestionBookAPI.autoCompletionBinding != null) {
+                SuggestionBookAPI.autoCompletionBinding.dispose();
             }
             if (typeSearch == SearchCriteria.TITLE) {
-                SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.titleSuggest);
+                SuggestionBookAPI.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBookAPI.titleSuggest);
             } else if (typeSearch == SearchCriteria.AUTHORS) {
-                SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.authorSuggest);
+                SuggestionBookAPI.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBookAPI.authorSuggest);
             } else {
-                SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.categorySuggest);
+                SuggestionBookAPI.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBookAPI.categorySuggest);
             }
-            SuggestionBook.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
+            SuggestionBookAPI.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
         });
         //
         bookSearch = new ArrayList<>();
@@ -84,8 +83,8 @@ public class ProposeController implements Initializable {
         //
         num_show_preSuggest.valueProperty().addListener(observable -> modifyShowBookPreSuggest());
         //
-        SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBook.titleSuggest);
-        SuggestionBook.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
+        SuggestionBookAPI.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBookAPI.titleSuggest);
+        SuggestionBookAPI.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
         //auto completion
         search_tf.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -95,7 +94,7 @@ public class ProposeController implements Initializable {
                         if (search_tf.isFocused() && !search_tf.getText().trim().isEmpty()) {
                             searchBooks();
 
-                            SuggestionBook.autoCompletionLearnWord(search_tf, search_tf.getText().trim(), typeSearch);
+                            SuggestionBookAPI.autoCompletionLearnWord(search_tf, search_tf.getText().trim(), typeSearch);
 
                             resultSearchList_hb.requestFocus();
                         }

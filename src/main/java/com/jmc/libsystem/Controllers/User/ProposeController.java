@@ -1,6 +1,7 @@
 package com.jmc.libsystem.Controllers.User;
 
 import com.jmc.libsystem.HandleJsonString.SearchBookAPI;
+import com.jmc.libsystem.HandleResultSet.SearchBookDatabase;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.SuggestionBox.SuggestionBookAPI;
 import com.jmc.libsystem.Views.SearchCriteria;
@@ -82,10 +83,13 @@ public class ProposeController implements Initializable {
         bookPreSuggest = new ArrayList<>();
         //
         num_show_preSuggest.valueProperty().addListener(observable -> modifyShowBookPreSuggest());
-        //
+
+        if (SuggestionBookAPI.autoCompletionBinding != null) {
+            SuggestionBookAPI.autoCompletionBinding.dispose();
+        }
+        //auto completion
         SuggestionBookAPI.autoCompletionBinding = TextFields.bindAutoCompletion(search_tf, SuggestionBookAPI.titleSuggest);
         SuggestionBookAPI.autoCompletionBinding.setPrefWidth(search_tf.getWidth() - 160);
-        //auto completion
         search_tf.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {

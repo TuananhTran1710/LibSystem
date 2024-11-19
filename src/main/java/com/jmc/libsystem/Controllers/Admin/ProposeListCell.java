@@ -1,5 +1,6 @@
 package com.jmc.libsystem.Controllers.Admin;
 
+import com.jmc.libsystem.QueryDatabase.QueryBookrcm;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -49,11 +50,13 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
                     reject_bt.setVisible(true);
                 }
                 case "Accept" -> {
+                    System.out.println(book.get("id") + status);
                     reject_bt.setVisible(false);
                     accept_bt.setDisable(true);
                     AnchorPane.setRightAnchor(accept_bt, 30.0);
                 }
                 case "Reject" -> {
+                    System.out.println(book.get("id") + status);
                     accept_bt.setVisible(false);
                     reject_bt.setDisable(true);
                 }
@@ -62,12 +65,14 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
             // Gán các hành động khi bấm nút
             accept_bt.setOnAction(event -> {
                 System.out.println("Accepted: " + book.get("title"));
-                // Thêm logic xử lý
+                QueryBookrcm.updateStatePropose(book.get("id"), "Accept");
+                ResponseController.getInstance().refreshData();
             });
 
             reject_bt.setOnAction(event -> {
                 System.out.println("Rejected: " + book.get("title"));
-                // Thêm logic xử lý
+                QueryBookrcm.updateStatePropose(book.get("id"), "Reject");
+                ResponseController.getInstance().refreshData();
             });
 
             // Hiển thị giao diện

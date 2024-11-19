@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ResponseController implements Initializable {
+    public static ResponseController instance;
 
     public Label total_proposal;
     public Label pending;
@@ -36,20 +37,41 @@ public class ResponseController implements Initializable {
 
     private ObservableList<Map<String, String>> dataBook;
 
+    public ResponseController() {
+        instance = this;
+    }
+
+    public static ResponseController getInstance(){
+        return instance;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataBook = FXCollections.observableArrayList();
+        ObservableList<String> choices = FXCollections.observableArrayList("In queue", "Accept", "Reject");
+        choice_state.setItems(choices);
         refreshData();
     }
 
     public void refreshData() {
         dataBook.clear();
         getData(QueryBookrcm.getAllPropse());
+        choice_state.setOnAction(event -> searchAction());
         UserTable();
     }
 
     private void UserTable(){
         list_propose.setCellFactory(param -> new ProposeListCell());
+        list_propose.setItems(dataBook);
+    }
+
+    private void searchAction(){
+        String selectedValue = choice_state.getSelectionModel().getSelectedItem();
+
+        ResultSet resultSet = QueryBookrcm.getProposeForFilter(selectedValue);
+        //System.out.println("Can access");
+        dataBook.clear();
+        getData(resultSet);
         list_propose.setItems(dataBook);
     }
 

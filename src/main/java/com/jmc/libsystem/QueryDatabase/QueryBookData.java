@@ -211,6 +211,29 @@ public class QueryBookData {
         }
     }
 
+    public static void addBookRcm(Book book, int num) {
+        String query = "INSERT INTO book (google_book_id, title, authors, category, publishDate, page_count, description, language, thumbnail, quantity, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, book.getId());
+            preparedStatement.setString(2, book.getTitle());
+            preparedStatement.setString(3, book.getAuthors());
+            preparedStatement.setString(4, book.getCategory());
+
+            preparedStatement.setDate(5, java.sql.Date.valueOf(book.getPublishDate()));
+
+            preparedStatement.setInt(6, book.getPageCount());
+            preparedStatement.setString(7, book.getDescription());
+            preparedStatement.setString(8, book.getLanguage());
+            preparedStatement.setBytes(9, book.getThumbnailImage());
+            preparedStatement.setInt(10, num);
+            preparedStatement.setString(11, "In queue");
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void updateBook(String book_id, int num) {
         String query = "UPDATE book SET quantity = ? WHERE google_book_id = ?";
         try {

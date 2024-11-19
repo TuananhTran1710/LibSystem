@@ -59,7 +59,7 @@ public class BookProposeDetailController extends BaseBookDetailController{
     @Override
     public void moveMenuCurrent() {
         UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getProposeView());
-        ProposeController.getInstance().showPropose();
+        ProposeController.getInstance().resetPreSuggest();
     }
 
     @Override
@@ -128,7 +128,7 @@ public class BookProposeDetailController extends BaseBookDetailController{
             String state = "In queue";
 
             if (!QueryBookData.isExist(bookId)) {
-                QueryBookData.addBook(book, 1);
+                QueryBookData.addBookRcm(book, 1);
             }
 
             if (QueryBookData.isExist(bookId)) {

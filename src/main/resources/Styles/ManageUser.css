@@ -154,6 +154,12 @@ TableView .column-header .label {
     -fx-alignment: CENTER; /* Căn giữa văn bản trong cell */
 }
 
+.table-row-cell:selected .table-cell {
+    -fx-background-color: #EEFFEE;
+    -fx-border-color: transparent;
+    -fx-text-fill: #132A13;
+}
+
 .user_list {
     -fx-background-color: #FFFFFF;
     -fx-border-color: #D3D3D3;

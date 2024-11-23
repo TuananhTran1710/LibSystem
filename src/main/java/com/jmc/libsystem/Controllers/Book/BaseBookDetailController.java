@@ -123,7 +123,9 @@ public class BaseBookDetailController implements Initializable {
         for (int i = 0; i < authors.size(); i += 2) {
             HBox row = new HBox(5);
             for (int j = i; j < i + 2 && j < authors.size(); j++) {
-                Label authorLabel = new Label(authors.get(j));
+                String author = authors.get(j);
+                author = author.length() > 20 ? author.substring(0, 20) + "..." : author;
+                Label authorLabel = new Label(author);
                 authorLabel.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 5 10; -fx-border-radius: 15; -fx-background-radius: 15;");
                 row.getChildren().add(authorLabel);
             }
@@ -136,7 +138,9 @@ public class BaseBookDetailController implements Initializable {
         for (int i = 0; i < categories.size(); i += 3) {
             HBox row = new HBox(5);
             for (int j = i; j < i + 3 && j < categories.size(); j++) {
-                Label categoryLabel = new Label(categories.get(j).trim());
+                String cate = categories.get(j);
+                cate = cate.length() > 20 ? cate.substring(0, 20) + "..." : cate;
+                Label categoryLabel = new Label(cate);
                 categoryLabel.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 5 10; -fx-border-radius: 15; -fx-background-radius: 15;");
                 row.getChildren().add(categoryLabel);
             }

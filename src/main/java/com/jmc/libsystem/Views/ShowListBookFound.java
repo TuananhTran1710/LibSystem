@@ -145,23 +145,8 @@ public class ShowListBookFound {
         resultList_hb.setAlignment(Pos.TOP_LEFT);
         // Hiển thị tối đa `limit` sách từ danh sách
         for (int i = 0; i < Math.min(bookList.size(), limit); i++) {
-            Book book = bookList.get(i);
-            Task<Void> task = new Task<>() {
-                @Override
-                protected Void call() {
-                    // Tạo VBox cho mỗi sách
-                    VBox bookBox = createBookBoxAPIFromUser(book, false);
-
-                    // Cập nhật giao diện trong luồng chính
-                    Platform.runLater(() -> resultList_hb.getChildren().add(bookBox));
-                    return null;
-                }
-            };
-
-            // Khởi chạy Task trong một luồng mới
-            Thread thread = new Thread(task);
-            thread.setDaemon(true); // Đảm bảo luồng sẽ tự động tắt khi ứng dụng JavaFX kết thúc
-            thread.start();
+            VBox bookBox = createBookBoxAPIFromUser(bookList.get(i), false);
+            resultList_hb.getChildren().add(bookBox);
         }
     }
 
@@ -194,24 +179,9 @@ public class ShowListBookFound {
             return;
         }
         resultList_hb.setAlignment(Pos.TOP_LEFT);
-        // Khởi chạy một luồng cho mỗi sách trong bookList
         for (Book book : bookList) {
-            Task<Void> task = new Task<>() {
-                @Override
-                protected Void call() {
-                    // Tạo VBox cho mỗi sách
-                    VBox bookBox = createBookBoxAPIFromUser(book, allowViewDetailFlag);
-
-                    // Cập nhật giao diện trong luồng chính
-                    Platform.runLater(() -> resultList_hb.getChildren().add(bookBox));
-                    return null;
-                }
-            };
-
-            // Khởi chạy Task trong một luồng mới
-            Thread thread = new Thread(task);
-            thread.setDaemon(true); // Đảm bảo luồng sẽ tự động tắt khi ứng dụng JavaFX kết thúc
-            thread.start();
+            VBox bookBox = createBookBoxAPIFromUser(book, allowViewDetailFlag);
+            resultList_hb.getChildren().add(bookBox);
         }
     }
 
@@ -388,7 +358,6 @@ public class ShowListBookFound {
             bookCoverImageView.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1) {
                     UserController.getInstance().user_parent.setCenter(Model.getInstance().getViewFactory().getBookPropose());
-                    BookProposeDetailController.getInstance().refreshBookProposeDetail();
                     BookProposeDetailController.getInstance().setBook(book);
                     BookProposeDetailController.getInstance().modifyButton();
                     BookProposeDetailController.getInstance().setUpInfo(book);

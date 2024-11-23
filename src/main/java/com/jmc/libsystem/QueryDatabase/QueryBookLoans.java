@@ -180,6 +180,13 @@ public class QueryBookLoans {
                 long daysRemaining = duration.toDays();
                 long hoursRemaining = duration.toHoursPart();
 
+                // Giới hạn tối đa 60 ngày (boi vi trong csdl, cac field trong table bookloan
+                //duoc luu theo kieu Date nen se co truong hop vuot qua 60 ngay 1 xiu)
+                if (daysRemaining > 60 || (daysRemaining == 60 && hoursRemaining > 0)) {
+                    daysRemaining = 60;
+                    hoursRemaining = 0;
+                }
+
                 // Cập nhật Label
                 // Kiểm tra nếu đã quá hạn
                 if (duration.isNegative())

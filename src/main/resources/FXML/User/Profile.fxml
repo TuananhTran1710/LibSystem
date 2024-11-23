@@ -134,10 +134,10 @@
     </VBox>
     <TableView fx:id="bookloan_tbl" layoutX="100.0" layoutY="486.0" prefHeight="200.0" prefWidth="730.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="515.0">
         <columns>
-            <TableColumn fx:id="bookname_clm" editable="false" prefWidth="220.79999542236328" reorderable="false" resizable="false" sortable="false" text="Book Name" />
-            <TableColumn fx:id="borroweddate_clm" editable="false" prefWidth="176.00006103515625" reorderable="false" resizable="false" sortable="false" text="Borrowed Date" />
-            <TableColumn fx:id="returndate_clm" editable="false" prefWidth="184.79995727539062" reorderable="false" resizable="false" sortable="false" text="Return date" />
-            <TableColumn fx:id="status_clm" editable="false" prefWidth="145.60003662109375" reorderable="false" resizable="false" sortable="false" text="Status" />
+            <TableColumn fx:id="bookname_clm" editable="false" prefWidth="247.19995880126953" reorderable="false" resizable="false" text="Book Name" />
+            <TableColumn fx:id="borroweddate_clm" editable="false" prefWidth="170.39996337890625" reorderable="false" resizable="false" text="Borrowed Date" />
+            <TableColumn fx:id="returndate_clm" editable="false" prefWidth="172.80001831054688" reorderable="false" resizable="false" text="Return date" />
+            <TableColumn fx:id="status_clm" editable="false" prefWidth="140.0" reorderable="false" resizable="false" text="Status" />
         </columns>
         <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

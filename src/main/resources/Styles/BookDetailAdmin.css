@@ -297,6 +297,13 @@
     -fx-text-fill: #FFFFFF;
 }
 
+.table-row-cell:selected .table-cell {
+    -fx-background-color: #EEFFEE;
+    -fx-border-color: transparent;
+    -fx-text-fill: #132A13;
+}
+
+
 .cmt{
 -fx-background-color: #FFFFFF
 }

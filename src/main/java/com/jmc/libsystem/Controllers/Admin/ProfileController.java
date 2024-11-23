@@ -38,6 +38,10 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        save_btn.setFocusTraversable(false);
+        change_password_btn.setFocusTraversable(false);
+        edit_btn.setFocusTraversable(false);
+
         refreshProfile();
         addListenButton();
     }
@@ -102,6 +106,10 @@ public class ProfileController implements Initializable {
     }
 
     public void onSaveButtonClicked() {
+        if (fullname_fld.getText().trim().isEmpty()) {
+            showAlert("Invalid Full Name", "Oops...", "The full name cannot be empty. Please try again.");
+            return;
+        }
         fullname_lbl.getStyleClass().remove("edit_text");
         fullname_lbl.getStyleClass().add("bold_text");
 
@@ -109,12 +117,10 @@ public class ProfileController implements Initializable {
         fullname_fontaws.getStyleClass().add("fontaws");
 
         String updatedFullName = fullname_fld.getText();
-        String updatedEmail = email_fld.getText();
         Admin current_admin = Model.getInstance().getMyAdmin();
 
         //nhập nhật của user
         current_admin.setFullName(updatedFullName);
-        current_admin.setEmail(updatedEmail);
 
         //cập nhật trong database
         //QueryAccountData.updateUserInfo(current_user);

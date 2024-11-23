@@ -416,6 +416,7 @@ public class BookDetailController extends BaseBookDetailController {
             available_hbox.setVisible(false);
             borrow_btn.setDisable(true);
             state_lbl.setText("Deleted");
+            state_hbox.getStyleClass().removeAll();
             state_hbox.getStyleClass().remove("published");
             state_hbox.getStyleClass().add("deleted");
             if (QueryBookLoans.isBorrowing(book.getId())) time_hBox.setVisible(true);
@@ -423,6 +424,7 @@ public class BookDetailController extends BaseBookDetailController {
         } else {
             available_hbox.setVisible(true);
             state_lbl.setText("Publishing");
+            state_hbox.getStyleClass().removeAll();
             state_hbox.getStyleClass().remove("deleted");
             state_hbox.getStyleClass().add("published");
         }

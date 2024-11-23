@@ -82,11 +82,9 @@ create table favorite(
 
 -- de xuat cho admin them sach vao
 create table BookRcm (
+	id int auto_increment primary key,
     google_book_id varchar(50),
     user_id varchar(20),
-    primary key(google_book_id, user_id),
-    FOREIGN KEY (google_book_id) REFERENCES Book(google_book_id),
-    FOREIGN KEY (user_id) REFERENCES user(user_id),
     state varchar(20)
     -- state : in queue or accepted or ignored
 )COLLATE utf8mb4_bin;

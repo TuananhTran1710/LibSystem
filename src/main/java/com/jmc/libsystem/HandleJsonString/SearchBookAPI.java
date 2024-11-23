@@ -15,6 +15,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -55,18 +56,25 @@ public class SearchBookAPI {
 
                     String title = volumeInfo.has("title") ? volumeInfo.get("title").asText() : "N/A";
 
-                    // Authors
+                    title = title.length() > 25 ? title.substring(0, 25) + "..." : title;
+
                     String authors;
                     JsonNode authorsNode = volumeInfo.get("authors");
+
                     if (authorsNode != null && authorsNode.isArray()) {
                         List<String> authorsList = new ArrayList<>();
                         for (JsonNode author : authorsNode) {
-                            authorsList.add(author.asText());
+                            // Tách riêng các tác giả nếu trong chuỗi có dấu ', ' hoặc '&'
+                            String[] splitAuthors = author.asText().split(",\\s*|\\s*&\\s*");
+                            Collections.addAll(authorsList, splitAuthors);
                         }
+                        // Loại bỏ khoảng trắng dư thừa và ghép lại thành chuỗi
+                        authorsList = authorsList.stream().map(String::trim).distinct().toList();
                         authors = String.join(", ", authorsList);
                     } else {
                         authors = "N/A";
                     }
+
 
                     // Publish date
                     LocalDate publishDate = null;
@@ -102,15 +110,21 @@ public class SearchBookAPI {
 
                     String cats;
                     JsonNode catsNode = volumeInfo.get("categories");
+
                     if (catsNode != null && catsNode.isArray()) {
                         List<String> catsList = new ArrayList<>();
                         for (JsonNode cat : catsNode) {
-                            catsList.add(cat.asText());
+                            // Tách riêng các danh mục nếu trong chuỗi có dấu ', ' hoặc '&'
+                            String[] splitCategories = cat.asText().split(",\\s*|\\s*&\\s*");
+                            Collections.addAll(catsList, splitCategories);
                         }
+                        // Loại bỏ khoảng trắng dư thừa và loại trừ các phần tử trùng lặp
+                        catsList = catsList.stream().map(String::trim).distinct().toList();
                         cats = String.join(", ", catsList);
                     } else {
                         cats = "N/A";
                     }
+
 
                     int countRating = 0, sumRatingStar = 0, totalLoan = 0, numBorrowing = 0, quantity = 0;
 

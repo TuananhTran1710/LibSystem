@@ -270,4 +270,18 @@ public class QueryAccountData {
         }
     }
 
+    public static void updateState(String id, String state){
+        String query = "update user\n" +
+                "set state = ?\n" +
+                "where user_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, state);
+            preparedStatement.setString(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

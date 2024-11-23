@@ -135,12 +135,14 @@ public class ProfileController implements Initializable {
 
         //lấy thaydodoiri từ field
         String updatedFullName = fullname_fld.getText();
-        String updatedEmail = email_fld.getText();
+        if (updatedFullName.isEmpty()) {
+            showAlert("Empty", "Oops...", "Full name cannot be empty. Please try again.");
+            return;
+        }
         User current_user = Model.getInstance().getMyUser();
 
         //nhập nhật của user
         current_user.setFullName(updatedFullName);
-        current_user.setEmail(updatedEmail);
 
         //cập nhật trong database
         QueryAccountData.updateUserInfo(current_user);
@@ -164,6 +166,11 @@ public class ProfileController implements Initializable {
         String newPassword = new_password_fld.getText();
         String confirmNewPassword = confirm_new_password_fld.getText();
         User current_user = Model.getInstance().getMyUser();
+
+        if(newPassword.isEmpty()) {
+            showAlert("Empty", "Oops...", "Password cannot be empty. Please try again.");
+            return;
+        }
 
         if (newPassword.equals(confirmNewPassword) && !newPassword.equals(current_user.getPassword())) {
             current_user.setPassword(newPassword);

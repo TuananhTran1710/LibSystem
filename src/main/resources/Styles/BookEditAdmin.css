@@ -131,6 +131,12 @@
     -fx-text-fill: #132A13;
 }
 
+.quantity_lbl {
+    -fx-text-fill: #132A13;;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 1.1em;
+}
+
 /* bên phải */
 .right_detail {
     -fx-padding: 20px;
@@ -154,12 +160,43 @@
     -fx-background-radius: 5px;
 }
 
-.right_detail .choose_action .toggle {
-    -fx-background-color: linear-gradient(to right, #132A13, #253F25);
-    -fx-background-radius: 5px;
-    -fx-text-fill: #FFFFFF;
+.right_detail .choose_action .toggle1 {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px 0 0 5px;
+    -fx-text-fill: #132A13;
     -fx-font-family: "Segoe UI";
     -fx-font-size:1.3em;
+}
+
+.right_detail .choose_action .toggle1:selected {
+    -fx-background-color: linear-gradient(to right, #132A13, #253F25);
+    -fx-text-fill: #FFFFFF;
+}
+
+.right_detail .choose_action .toggle2 {
+    -fx-background-color: transparent;
+    -fx-text-fill: #132A13;
+    -fx-background-radius: 0;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.3em;
+}
+
+.right_detail .choose_action .toggle2:selected {
+    -fx-background-color: linear-gradient(to right, #132A13, #253F25);
+    -fx-text-fill: #FFFFFF;
+}
+
+.right_detail .choose_action .toggle3 {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0 5px 5px 0;
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.3em;
+}
+
+.right_detail .choose_action .toggle3:selected {
+    -fx-background-color: linear-gradient(to right, #132A13, #253F25);
+    -fx-text-fill: #FFFFFF;
 }
 
 /* over view */
@@ -270,13 +307,6 @@
     -fx-text-fill: #FFFFFF;
 }
 
-.table-row-cell:selected .table-cell {
-    -fx-background-color: #EEFFEE;
-    -fx-border-color: transparent;
-    -fx-text-fill: #132A13;
-}
-
-
 .cmt{
 -fx-background-color: #FFFFFF
 }
@@ -297,9 +327,6 @@
 .avail {
     -fx-background-color: linear-gradient(to right, #22c55e, #16a34a);
     -fx-background-radius: 15px;
-}
-
-.avail Label {
     -fx-text-fill: #FFFFFF;
 }
 

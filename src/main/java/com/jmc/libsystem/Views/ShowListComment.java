@@ -31,7 +31,7 @@ public class ShowListComment {
 
         // Tạo Label cho user_id
         Label userIdLabel = new Label(comment.getUser_id());
-        userIdLabel.setPrefWidth(300);
+        userIdLabel.setPrefWidth(285);
         userIdLabel.setStyle("-fx-font-weight: bold;" +
                 "-fx-font-size: 1.3em"); // Chữ đậm cho tên người dùng
 
@@ -73,7 +73,7 @@ public class ShowListComment {
                 "-fx-padding: 3px 10px 10px 10px;" +
                 "-fx-border-color: #132A13;" +
                 "-fx-border-weight: 2px;");
-        commentBox.setPrefWidth(330);
+        commentBox.setPrefWidth(400);
         commentBox.setPrefHeight(55);
 
         return commentBox;

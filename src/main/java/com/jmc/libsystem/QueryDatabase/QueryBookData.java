@@ -142,9 +142,11 @@ public class QueryBookData {
                     "        (SELECT 1 n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 \n" +
                     "         UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10) numbers\n" +
                     "        ON CHAR_LENGTH(category) - CHAR_LENGTH(REPLACE(category, ',', '')) >= numbers.n - 1\n" +
+                    "    WHERE \n" +
+                    "        state != 'In queue'\n" +
                     ")\n" +
                     "SELECT \n" +
-                    "    genre as category,\n" +
+                    "    genre AS category,\n" +
                     "    SUM(quantity) AS total_books\n" +
                     "FROM \n" +
                     "    category_split\n" +
@@ -152,7 +154,7 @@ public class QueryBookData {
                     "    genre\n" +
                     "ORDER BY \n" +
                     "    total_books DESC\n" +
-                    "limit 3;\n";
+                    "LIMIT 3;\n";
 
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
 

@@ -15,7 +15,6 @@ import java.util.ResourceBundle;
 public class BookProposeDetailController extends BaseBookDetailController {
     public Button recommend_btn;
     public Text recommend_msg;
-    public ToggleButton overview_btn;
 
     private static BookProposeDetailController instance;
 
@@ -31,7 +30,6 @@ public class BookProposeDetailController extends BaseBookDetailController {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
         back_btn.setOnAction(event -> moveMenuCurrent());
-        overview_btn.setOnAction(event -> overview_btn.setSelected(true));
 
         recommend_btn.setOnAction(event -> {
             toMessage();

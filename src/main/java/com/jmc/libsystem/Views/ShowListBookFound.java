@@ -370,6 +370,13 @@ public class ShowListBookFound {
         Label titleLabel = new Label(shortTitle);
         titleLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12px;");
         titleLabel.setTooltip(new Tooltip(book.getTitle()));
+        // Hiển thị state
+        Label stateLabel = new Label(" " + book.getState() + " ");
+        stateLabel.setStyle("-fx-font-family: 'Calibri Light'; -fx-font-size: 12px;" +
+                            "-fx-background-color: rgba(211, 211, 211, 0.5);" +
+                            "-fx-background-radius: 5px;" +
+                            "-fx-text-fill: #132A13;" +
+                            "-fx-padding: 1px;");
 
         // Hiển thị tên tác giả (giới hạn ký tự)
         String shortAuthor = book.getAuthors().length() > 15 ? book.getAuthors().substring(0, 15) + "..." : book.getAuthors();
@@ -378,7 +385,7 @@ public class ShowListBookFound {
         authorLabel.setTooltip(new Tooltip(book.getAuthors()));
 
         // Thêm các thành phần vào VBox
-        bookBox.getChildren().addAll(bookCoverImageView, titleLabel, authorLabel);
+        bookBox.getChildren().addAll(bookCoverImageView, titleLabel, authorLabel, stateLabel);
         return bookBox;
     }
 }

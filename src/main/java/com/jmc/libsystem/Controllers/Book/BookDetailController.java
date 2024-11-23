@@ -101,7 +101,7 @@ public class BookDetailController extends BaseBookDetailController {
             time_hBox.setVisible(false);
             toBorrowButton();
             available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
-            available_lbl.setTextFill(Color.BLACK);
+            available_lbl.setStyle("-fx-text-fill: #FFFFFF;");
             if (book.getState().equals("deleted")) {
                 borrow_btn.setDisable(true);
                 available_hbox.setVisible(false);
@@ -132,7 +132,7 @@ public class BookDetailController extends BaseBookDetailController {
                 available_lbl.setTextFill(Color.RED);
             } else {
                 available_lbl.setText("Available: " + availableNumber + " copies");
-                available_lbl.setTextFill(Color.BLACK);
+                available_lbl.setStyle("-fx-text-fill: #FFFFFF;");
             }
 
             totalLoan_lbl.setText(String.valueOf(book.getTotalLoan()) + " times");
@@ -385,7 +385,7 @@ public class BookDetailController extends BaseBookDetailController {
             available_lbl.setTextFill(Color.RED);
         } else {
             available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
-            available_lbl.setTextFill(Color.BLACK);
+            available_lbl.setStyle("-fx-text-fill: #FFFFFF;");
         }
     }
 

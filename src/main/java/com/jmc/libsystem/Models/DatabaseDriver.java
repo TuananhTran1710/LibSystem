@@ -10,7 +10,7 @@ public class DatabaseDriver {
     public static Connection getConn() {
         try {
             if (conn == null || conn.isClosed()) {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/lib_system", "root", "tuananh1710");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/lib_system", "cuong", "cuongchelsea");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -22,7 +22,7 @@ public class DatabaseDriver {
         try {
             //ket noi project voi database
 
-            this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/lib_system", "root", "tuananh1710");
+            this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/lib_system", "cuong", "cuongchelsea");
 
         } catch (SQLException e) {
             e.printStackTrace();

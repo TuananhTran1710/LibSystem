@@ -9,9 +9,9 @@ import java.sql.SQLException;
 public class QueryBookrcm {
     public static ResultSet getAllPropse() {
         ResultSet resultSet = null;
+        String query = "SELECT book.google_book_id, title, authors, bookrcm.state FROM bookrcm\n" +
+                "join book on bookrcm.google_book_id = book.google_book_id\n";
         try {
-            String query = "SELECT book.google_book_id, title, authors, bookrcm.state FROM bookrcm\n" +
-                    "join book on bookrcm.google_book_id = book.google_book_id\n";
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
 
             resultSet = preparedStatement.executeQuery();

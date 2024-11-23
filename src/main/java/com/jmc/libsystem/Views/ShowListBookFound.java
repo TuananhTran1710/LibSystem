@@ -55,23 +55,8 @@ public class ShowListBookFound {
         resultList_hb.setAlignment(Pos.TOP_LEFT);
         // Khởi chạy một luồng cho mỗi sách trong bookList
         for (int i = 0; i < Math.min(bookList.size(), limit); i++) {
-            Book book = bookList.get(i);
-            Task<Void> task = new Task<>() {
-                @Override
-                protected Void call() {
-                    // Tạo VBox cho mỗi sách
-                    VBox bookBox = createBookBox(book);
-
-                    // Cập nhật giao diện trong luồng chính
-                    Platform.runLater(() -> resultList_hb.getChildren().add(bookBox));
-                    return null;
-                }
-            };
-
-            // Khởi chạy Task trong một luồng mới
-            Thread thread = new Thread(task);
-            thread.setDaemon(true); // Đảm bảo luồng sẽ tự động tắt khi ứng dụng JavaFX kết thúc
-            thread.start();
+            VBox bookBox = createBookBox(bookList.get(i));
+            resultList_hb.getChildren().add(bookBox);
         }
     }
 
@@ -398,7 +383,7 @@ public class ShowListBookFound {
                         "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);"
         );
 
-        if(allowViewDetailFlag == true) {
+        if (allowViewDetailFlag == true) {
             // Sự kiện click vào ảnh bìa để xem trước sách
             bookCoverImageView.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1) {

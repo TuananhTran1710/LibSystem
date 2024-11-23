@@ -79,9 +79,6 @@ TableView {
     -fx-background-color: rgba(19, 42, 19, 0.035);
 }
 
-TableView .table-cell {
-    -fx-text-fill: #4A6B4A;
-}
 
 .table-row-cell:focused .table-cell {
     -fx-background-color: transparent;
@@ -132,6 +129,23 @@ TableView .scroll-bar .thumb:pressed {
     -fx-opacity: 1.0;
 }
 
+
+.table-view .table-cell {
+    -fx-alignment: CENTER;        /* Căn giữa nội dung */
+    -fx-text-overrun: ellipsis;   /* Hiển thị dấu chấm khi vượt quá chiều rộng */
+    -fx-padding: 5;               /* Khoảng cách nội dung trong cell */
+    -fx-wrap-text: false;         /* Không cho phép xuống dòng */
+    -fx-font-family: "Arial";     /* Font chữ */
+    -fx-font-size: 13px;          /* Kích thước chữ */
+}
+
+.table-view .cell {
+    -fx-alignment: CENTER; /* Căn giữa nội dung */
+    -fx-padding: 0;        /* Xóa padding thừa */
+}
+
+
+//-------------------------------------------------------
 .button-back {
     -fx-background-color: #EEEEEE;
     -fx-text-fill: black;

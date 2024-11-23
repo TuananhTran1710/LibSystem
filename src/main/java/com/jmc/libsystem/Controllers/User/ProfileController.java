@@ -46,6 +46,10 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        save_profile_btn.setFocusTraversable(false);
+        change_password_btn.setFocusTraversable(false);
+        edit_profile_btn.setFocusTraversable(false);
+
         refreshProfile();
         InitBorrowHistoryTable();
         addListensButton();
@@ -192,11 +196,31 @@ public class ProfileController implements Initializable {
         returndate_clm.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
         status_clm.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+
         //căn thẳng nội dung với cột
-        bookname_clm.setStyle("-fx-alignment: CENTER-LEFT;");
         borroweddate_clm.setStyle("-fx-alignment: CENTER;");
         returndate_clm.setStyle("-fx-alignment: CENTER;");
         status_clm.setStyle("-fx-alignment: CENTER;");
+
+
+        // Gắn chức năng rút gọn và tooltip cho cột bookname_clm
+        bookname_clm.setCellFactory(column -> new TableCell<BookLoan, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    // Rút gọn nội dung nếu dài hơn 25 ký tự
+                    setText(item.length() > 25 ? item.substring(0, 25) + "..." : item);
+
+                    // Hiển thị tooltip với nội dung đầy đủ
+                    Tooltip tooltip = new Tooltip(item);
+                    setTooltip(tooltip);
+                }
+            }
+        });
     }
 
     private void loadUserBookLoans() {

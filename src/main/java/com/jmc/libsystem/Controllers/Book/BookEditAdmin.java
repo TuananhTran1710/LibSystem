@@ -99,8 +99,6 @@ public class BookEditAdmin extends BaseBookDetailController {
         });
         borrowHistory_btn.setOnAction(event -> {
             moveToBorrowHistoryVBox();
-
-
         });
 
         editBook_btn.setOnAction(event -> {

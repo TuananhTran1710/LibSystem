@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Map;
 
 public class ProposeListCell extends ListCell<Map<String, String>> {
@@ -93,6 +94,12 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
                         showAccept();
                     }
                 });
+
+                try {
+                    ResponseController.getInstance().updateNumber();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             });
 
             reject_bt.setOnAction(event -> {
@@ -100,6 +107,11 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
                 QueryBookrcm.updateStatePropose(book_id, "Reject");
                 QueryBookData.updateState(book_id, "Reject");
                 showReject();
+                try {
+                    ResponseController.getInstance().updateNumber();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             });
 
             setGraphic(root);

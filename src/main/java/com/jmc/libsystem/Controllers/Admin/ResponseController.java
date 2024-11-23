@@ -104,7 +104,7 @@ public class ResponseController implements Initializable {
         new Thread(loadDataTask).start();
     }
 
-    private void updateNumber() throws SQLException {
+    public void updateNumber() throws SQLException {
         String total = getNumber(QueryBookrcm.getCountAllPropose());
         total_proposal.setText(total);
 

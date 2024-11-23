@@ -166,13 +166,24 @@
     -fx-fill: #FFFFFF;
 }
 
+.right_detail .choose_action .toggle3 {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.3em;
+}
+
 .right_detail .choose_action .toggle3:selected {
     -fx-background-color: linear-gradient(to right, #132A13, #253F25);
-    -fx-background-radius: 5px;
-    -fx-font-family: "Segoe UI";
-    -fx-font-size:1.5em;
     -fx-text-fill: #FFFFFF;
 }
+
+.right_detail .choose_action .toggle3:selected FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+
 
 .right_detail .choose_action FontAwesomeIconView {
     -fx-fill: #132A13;

@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/BookDetailAdmin.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Book.BookProposeDetailController">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/BookDetail.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Book.BookProposeDetailController">
     <AnchorPane prefHeight="50.0" prefWidth="850.0" styleClass="logo_container" AnchorPane.topAnchor="20.0">
         <Button fx:id="back_btn" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="50.0">
             <graphic>
@@ -71,14 +71,14 @@
          <Text fx:id="recommend_msg" layoutX="7.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Book has been recommended successfully!" textAlignment="CENTER" visible="false" wrappingWidth="225.59999999999997" />
         </AnchorPane>
     </VBox>
-    <VBox layoutX="328.0" layoutY="123.2" minWidth="470.0" prefHeight="531.0" prefWidth="480.0" styleClass="right_detail" AnchorPane.leftAnchor="328.0" AnchorPane.topAnchor="130.0">
+    <VBox layoutX="328.0" layoutY="123.2" minWidth="470.0" prefHeight="546.0" prefWidth="480.0" styleClass="right_detail" AnchorPane.leftAnchor="328.0" AnchorPane.topAnchor="130.0">
         <TextFlow>
             <children>
                 <Label fx:id="title" maxHeight="172.0" maxWidth="440.0" styleClass="title" text="Book name" wrapText="true" />
             </children>
         </TextFlow>
-        <HBox alignment="CENTER" prefHeight="35.0" prefWidth="438.0" styleClass="choose_action">
-            <ToggleButton mnemonicParsing="false" prefHeight="35.0" prefWidth="488.0" selected="true" styleClass="toggle3" text="Overview " />
+        <HBox alignment="CENTER" prefHeight="41.0" prefWidth="438.0" styleClass="choose_action">
+            <ToggleButton mnemonicParsing="false" prefHeight="35.0" prefWidth="488.0" selected="true" styleClass="toggle" text="Overview " />
         </HBox>
         <StackPane prefHeight="409.0" prefWidth="441.0">
             <VBox fx:id="overview_vbox" alignment="TOP_LEFT" fillWidth="false" minHeight="399.0" minWidth="450" prefHeight="406.0" prefWidth="450.0" styleClass="overview">

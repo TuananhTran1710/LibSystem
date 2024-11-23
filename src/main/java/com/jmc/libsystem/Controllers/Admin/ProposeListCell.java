@@ -1,5 +1,6 @@
 package com.jmc.libsystem.Controllers.Admin;
 
+import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.QueryDatabase.QueryBookrcm;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -57,23 +58,24 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
             number_tf.setVisible(false);
 
             String status = book.get("state");
+            String book_id = book.get("id");
             switch (status) {
                 case "In queue" -> {
                     showInQueue();
                 }
                 case "Accept" -> {
-                    System.out.println(book.get("id") + status);
+                    //System.out.println(book.get("id") + status);
                     showAccept();
                 }
                 case "Reject" -> {
-                    System.out.println(book.get("id") + status);
+                    //System.out.println(book.get("id") + status);
                     showReject();
                 }
             }
 
             // Gán các hành động khi bấm nút
             accept_bt.setOnAction(event -> {
-                System.out.println("Accepted: " + book.get("title"));
+                //System.out.println("Accepted: " + book.get("title"));
                 accept_bt.setVisible(false);
                 accept_bt.setDisable(true);
                 reject_bt.setVisible(false);
@@ -84,25 +86,22 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
                     public void handle(ActionEvent event) {
                         String text = number_tf.getText();
                         System.out.println("Bạn đã nhập: " + text);
+                        QueryBookData.updateBook(book_id, Integer.parseInt(text));
                         number_tf.setVisible(false);
-                        QueryBookrcm.updateStatePropose(book.get("id"), "Accept");
+                        QueryBookrcm.updateStatePropose(book_id, "Accept");
+                        QueryBookData.updateState(book_id, "publishing");
                         showAccept();
-                        //ResponseController.getInstance().refreshData();
-                        // Thực hiện các hành động khác ở đây, ví dụ: gửi dữ liệu, tìm kiếm, ...
                     }
                 });
-
-                //ResponseController.getInstance().refreshData();
             });
 
             reject_bt.setOnAction(event -> {
-                System.out.println("Rejected: " + book.get("title"));
-                QueryBookrcm.updateStatePropose(book.get("id"), "Reject");
+                //System.out.println("Rejected: " + book_id);
+                QueryBookrcm.updateStatePropose(book_id, "Reject");
+                QueryBookData.updateState(book_id, "Reject");
                 showReject();
-                //ResponseController.getInstance().refreshData();
             });
 
-            // Hiển thị giao diện
             setGraphic(root);
         }
     }

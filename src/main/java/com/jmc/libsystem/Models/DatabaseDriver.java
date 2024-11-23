@@ -8,13 +8,20 @@ public class DatabaseDriver {
     private static Connection conn;
 
     public static Connection getConn() {
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/lib_system", "cuong", "cuongchelsea");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return conn;
     }
 
     public DatabaseDriver() {
         try {
             //ket noi project voi database
-            this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/lib_system", "root", "tuananh1710");
+            this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/lib_system", "cuong", "cuongchelsea");
         } catch (SQLException e) {
             e.printStackTrace();
         }

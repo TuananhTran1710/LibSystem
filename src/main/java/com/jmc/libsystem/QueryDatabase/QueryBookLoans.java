@@ -275,7 +275,7 @@ public class QueryBookLoans {
             while (rs.next()) {
                 String bookName = rs.getString("title");
                 String borrowedDate = rs.getString("borrow_date");
-                String returnDate = rs.getString("return_date") != null ? rs.getString("return_date") : "N/A";
+                String returnDate = rs.getString("return_date") != null ? rs.getString("return_date") : "Not returned";
                 String status = rs.getString("status");
 
                 bookLoans.add(new BookLoan(bookName, borrowedDate, returnDate, status));

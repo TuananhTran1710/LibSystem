@@ -7,21 +7,14 @@ import java.sql.SQLException;
 public class DatabaseDriver {
     private static Connection conn;
 
-    public static Connection getConn() throws SQLException {
-        if (conn == null || conn.isClosed()) {
-            try {
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/lib_system", "cuong", "cuongchelsea");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+    public static Connection getConn() {
         return conn;
     }
 
     public DatabaseDriver() {
         try {
             //ket noi project voi database
-            this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/lib_system", "cuong", "cuongchelsea");
+            this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/lib_system", "root", "tuananh1710");
         } catch (SQLException e) {
             e.printStackTrace();
         }

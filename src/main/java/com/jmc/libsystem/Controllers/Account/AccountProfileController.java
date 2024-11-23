@@ -66,7 +66,7 @@ public class AccountProfileController extends BaseAccountDetailController{
 
     private void deleteAndMoveMenuCurrent() {
         if(!confirmDelete()) return;
-        QueryAccountData.deleteAccount(getCurrent_user().getId());
+        QueryAccountData.updateState(getCurrent_user().getId(), "delete");
         moveMenuCurrent();
     }
 

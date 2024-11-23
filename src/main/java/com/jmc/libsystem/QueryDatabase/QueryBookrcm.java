@@ -48,4 +48,32 @@ public class QueryBookrcm {
         }
         return resultSet;
     }
+
+    public static ResultSet getNumberofState(String state) {
+        ResultSet resultSet = null;
+        // no limit num of book displayed
+        String query = "select count(*) as count from bookrcm\n" +
+                "where state = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, state);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public static ResultSet getCountAllPropose() {
+        ResultSet resultSet = null;
+        // no limit num of book displayed
+        String query = "select count(*) as count from bookrcm";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
 }

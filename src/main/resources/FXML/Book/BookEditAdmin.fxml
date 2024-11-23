@@ -112,7 +112,7 @@
          </HBox>
           <StackPane prefHeight="410.0" prefWidth="438.0">
               <children>
-                  <VBox fx:id="overview_vbox" fillWidth="false" prefHeight="420.0" prefWidth="438.0" styleClass="overview">
+                  <VBox fx:id="overview_vbox" fillWidth="false" prefHeight="420.0" prefWidth="438.0" styleClass="overview" visible="false">
                       <children>
                           <AnchorPane prefHeight="28.0" prefWidth="440.0">
                               <children>
@@ -267,13 +267,13 @@
                           </TableView>
                       </children>
                   </AnchorPane>
-                  <VBox fx:id="comment_vbox" prefHeight="445.0" prefWidth="354.0" spacing="10" styleClass="comments" visible="false">
+                  <VBox fx:id="comment_vbox" prefHeight="445.0" prefWidth="354.0" spacing="10" styleClass="comments">
                       <children>
-                          <ScrollPane fx:id="scrollPane_cmt" hbarPolicy="NEVER" prefHeight="435.0" prefWidth="478.0" vbarPolicy="ALWAYS">
+                          <ScrollPane fx:id="scrollPane_cmt" fitToWidth="true" hbarPolicy="NEVER" prefHeight="435.0" prefWidth="478.0" vbarPolicy="ALWAYS">
                               <content>
-                                  <VBox fx:id="comment_list" alignment="TOP_CENTER" fillWidth="false" prefHeight="102.0" prefWidth="451.0">
+                                  <VBox fx:id="comment_list" alignment="TOP_CENTER" fillWidth="false" prefHeight="516.0" prefWidth="429.0">
                                       <padding>
-                                          <Insets top="10.0" />
+                                          <Insets left="10.0" right="10.0" top="10.0" />
                                       </padding>
                                   </VBox>
                               </content>

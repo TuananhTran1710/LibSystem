@@ -2,12 +2,9 @@ package com.jmc.libsystem.Controllers.Account;
 
 import com.jmc.libsystem.Controllers.Admin.AdminController;
 import com.jmc.libsystem.Controllers.Admin.ManageUserController;
-import com.jmc.libsystem.Controllers.Book.BookDetailAPI;
 import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -17,8 +14,9 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AccountProfileController extends BaseAccountDetailController{
+public class AccountProfileController extends BaseAccountDetailController {
 
+    public Button back_btn;
     public Button deleteBT;
     public ChoiceBox<String> statusChoice;
 
@@ -30,16 +28,17 @@ public class AccountProfileController extends BaseAccountDetailController{
         instance = this;
     }
 
-    public static AccountProfileController getInstance(){
+    public static AccountProfileController getInstance() {
         return instance;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
+        back_btn.setOnAction(event -> moveMenuCurrent());
         deleteBT.setOnAction(event -> deleteAndMoveMenuCurrent());
         statusChoice.getItems().addAll("Active", "Banned");
-        //statusChoice.setValue("Active");
+
     }
 
     private boolean confirmDelete() {
@@ -65,8 +64,8 @@ public class AccountProfileController extends BaseAccountDetailController{
     }
 
     private void deleteAndMoveMenuCurrent() {
-        if(!confirmDelete()) return;
-        QueryAccountData.deleteAccount(getCurrent_user().getId());
+        if (!confirmDelete()) return;
+        QueryAccountData.updateState(getCurrent_user().getId(), "delete");
         moveMenuCurrent();
     }
 

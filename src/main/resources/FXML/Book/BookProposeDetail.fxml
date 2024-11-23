@@ -38,27 +38,27 @@
         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="350.0" spacing="10.0" styleClass="like_button">
             <Label>
                 <graphic>
-                    <FontAwesomeIconView glyphName="HOURGLASS" size="30" />
+                    <FontAwesomeIconView fx:id="star1" glyphName="HOURGLASS" size="30" />
                 </graphic>
             </Label>
             <Label layoutX="10.0" layoutY="10.0">
                 <graphic>
-                    <FontAwesomeIconView glyphName="HOURGLASS_END" size="30" />
+                    <FontAwesomeIconView fx:id="star2" glyphName="HOURGLASS_END" size="30" />
                 </graphic>
             </Label>
             <Label layoutX="21.0" layoutY="10.0">
                 <graphic>
-                    <FontAwesomeIconView glyphName="HOURGLASS" size="30" />
+                    <FontAwesomeIconView fx:id="star3" glyphName="HOURGLASS" size="30" />
                 </graphic>
             </Label>
             <Label layoutX="32.0" layoutY="10.0">
                 <graphic>
-                    <FontAwesomeIconView glyphName="HOURGLASS_END" size="30" />
+                    <FontAwesomeIconView fx:id="star4" glyphName="HOURGLASS_END" size="30" />
                 </graphic>
             </Label>
             <Label layoutX="44.0" layoutY="10.0">
                 <graphic>
-                    <FontAwesomeIconView glyphName="HOURGLASS" size="30" />
+                    <FontAwesomeIconView fx:id="star5" glyphName="HOURGLASS" size="30" />
                 </graphic>
             </Label>
         </HBox>

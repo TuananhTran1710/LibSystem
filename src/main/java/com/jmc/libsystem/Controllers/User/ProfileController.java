@@ -126,6 +126,10 @@ public class ProfileController implements Initializable {
 
     //bấm nút save profile
     public void onSaveButtonClicked() {
+        if (fullname_fld.getText().trim().isEmpty()) {
+            showAlert("Invalid Full Name", "Oops...", "The full name cannot be empty. Please try again.");
+            return;
+        }
         fullname_lbl.getStyleClass().remove("yellow_text");
         fullname_lbl.getStyleClass().add("blur_text");
 
@@ -155,6 +159,10 @@ public class ProfileController implements Initializable {
 
     //bấm nút đổi mật khẩu
     public void onChangePasswordButtonClicked() {
+        if (new_password_fld.getText().trim().isEmpty() || confirm_new_password_fld.getText().trim().isEmpty()) {
+            showAlert("Invalid Password", "Oops...", "The new password and confirmation cannot be empty. Please try again.");
+            return;
+        }
         String newPassword = new_password_fld.getText();
         String confirmNewPassword = confirm_new_password_fld.getText();
         User current_user = Model.getInstance().getMyUser();
@@ -220,7 +228,7 @@ public class ProfileController implements Initializable {
                     setTooltip(null);
                 } else {
                     // Rút gọn nội dung nếu dài hơn 25 ký tự
-                    setText(item.length() > 25 ? item.substring(0, 25) + "..." : item);
+                    setText(item.length() > 40 ? item.substring(0, 40) + "..." : item);
 
                     // Hiển thị tooltip với nội dung đầy đủ
                     Tooltip tooltip = new Tooltip(item);

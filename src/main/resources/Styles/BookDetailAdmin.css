@@ -201,6 +201,112 @@
 -fx-spacing: 10
 }
 
+/* Comments */
+.comments .scroll-pane {
+    -fx-border-color: #132A13;
+    -fx-border-width: 2px;
+   // -fx-border-radius: 5px;
+    -fx-background-color: #FFFFFF;
+}
+
+.comments .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.comments .scroll-pane .scroll-bar:horizontal .thumb,
+.comments .scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #132A13;
+    -fx-background-radius: 10px;
+   // -fx-padding: 5px;
+    -fx-opacity: 0.8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 7, 0.5, 0, 0);
+}
+
+.comments .scroll-pane .scroll-bar:horizontal .thumb:hover,
+.comments .scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #1A4314;
+    -fx-opacity: 1.0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+.comments .scroll-pane .scroll-bar:horizontal,
+.comments .scroll-pane .scroll-bar:vertical {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 2px;
+}
+
+.comments .scroll-pane .scroll-bar:horizontal .thumb:pressed,
+.comments .scroll-pane .scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: #0B4619;
+    -fx-opacity: 1.0;
+}
+
+/* borrow history */
+.borrow_history TableView {
+    -fx-background-color: rgba(19, 42, 19, 0.05);
+    -fx-border-color: transparent;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-table-cell-border-color: transparent;
+
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER;
+}
+
+.table-view .cell {
+    -fx-wrap-text: true; /* Cho phép tự động xuống dòng */
+    -fx-alignment: CENTER; /* Căn giữa văn bản trong cell */
+}
+
+.borrow_history TableView .column-header {
+    -fx-background-color: #132A13;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #d0d0d0;
+}
+
+.borrow_history TableView .column-header .label {
+    -fx-text-fill: #FFFFFF;
+}
+
+.table-row-cell:selected .table-cell {
+    -fx-background-color: #EEFFEE;
+    -fx-border-color: transparent;
+    -fx-text-fill: #132A13;
+}
+
+
+.cmt{
+-fx-background-color: #FFFFFF
+}
+
+.time {
+    -fx-background-color: linear-gradient(to right, #fee2e2, #fecaca);
+    -fx-background-radius: 15px;
+}
+
+.time Label {
+    -fx-text-fill: #b91c1c;
+}
+
+.time FontAwesomeIconView {
+    -fx-fill: #b91c1c;
+}
+
+.avail {
+    -fx-background-color: linear-gradient(to right, #22c55e, #16a34a);
+    -fx-background-radius: 15px;
+}
+
+.avail Label {
+    -fx-text-fill: #FFFFFF;
+}
+
+.avail FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
 .publishing {
     -fx-background-color: linear-gradient(to right, #f0fdf4, #dcfce7);
     -fx-background-radius: 15px;

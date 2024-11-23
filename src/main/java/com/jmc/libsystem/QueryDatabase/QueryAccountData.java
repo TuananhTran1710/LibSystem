@@ -6,7 +6,6 @@ import com.jmc.libsystem.Models.DatabaseDriver;
 import com.jmc.libsystem.Views.AccountType;
 import javafx.scene.control.Alert;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -259,11 +258,25 @@ public class QueryAccountData {
 
     }
 
-    public static void deleteAccount(String id){
+    public static void deleteAccount(String id) {
         String query = "DELETE FROM user WHERE user_id = ?";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateState(String id, String state) {
+        String query = "update user\n" +
+                "set state = ?\n" +
+                "where user_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, state);
+            preparedStatement.setString(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

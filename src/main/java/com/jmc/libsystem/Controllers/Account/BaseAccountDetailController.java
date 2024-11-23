@@ -2,7 +2,6 @@ package com.jmc.libsystem.Controllers.Account;
 
 import com.jmc.libsystem.Information.BookLoan;
 import com.jmc.libsystem.Information.User;
-import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import javafx.fxml.Initializable;
@@ -15,8 +14,6 @@ import java.util.ResourceBundle;
 
 public class BaseAccountDetailController implements Initializable {
     private static BaseAccountDetailController instance;
-
-    public Button back_btn;
 
     public TextField user_id_fld;
     public TextField fullname_fld;
@@ -59,8 +56,12 @@ public class BaseAccountDetailController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        edit_profile_btn.setFocusTraversable(false);
+        save_profile_btn.setFocusTraversable(false);
+        change_password_btn.setFocusTraversable(false);
+
         InitBorrowHistoryTable();
-        back_btn.setOnAction(event -> moveMenuCurrent());
+
     }
 
     protected void moveMenuCurrent() {
@@ -151,7 +152,24 @@ public class BaseAccountDetailController implements Initializable {
         status_clm.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         //căn thẳng nội dung với cột
-        bookname_clm.setStyle("-fx-alignment: CENTER-LEFT;");
+        // Gắn chức năng rút gọn và tooltip cho cột bookname_clm
+        bookname_clm.setCellFactory(column -> new TableCell<BookLoan, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    // Rút gọn nội dung nếu dài hơn 25 ký tự
+                    setText(item.length() > 40 ? item.substring(0, 40) + "..." : item);
+
+                    // Hiển thị tooltip với nội dung đầy đủ
+                    Tooltip tooltip = new Tooltip(item);
+                    setTooltip(tooltip);
+                }
+            }
+        });
         borroweddate_clm.setStyle("-fx-alignment: CENTER;");
         returndate_clm.setStyle("-fx-alignment: CENTER;");
         status_clm.setStyle("-fx-alignment: CENTER;");

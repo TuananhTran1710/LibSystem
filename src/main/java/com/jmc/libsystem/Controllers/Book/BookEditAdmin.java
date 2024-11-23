@@ -405,14 +405,20 @@ public class BookEditAdmin extends BaseBookDetailController {
         if (book.getState().equals("deleted")) {
             available_hbox.setVisible(false);
             state_lbl.setText("Deleted");
-            state_lbl.setTextFill(Color.RED);
+//            state_lbl.setTextFill(Color.RED);
 
+            state_hbox.getStyleClass().removeAll();
+            state_hbox.getStyleClass().remove("published");
+            state_hbox.getStyleClass().add("deleted");
             toRestoreButton();
         } else {
             available_hbox.setVisible(true);
             state_lbl.setText("Publishing");
-            state_lbl.setTextFill(Color.web("#32CD32"));
+//            state_lbl.setTextFill(Color.web("#32CD32"));
 
+            state_hbox.getStyleClass().removeAll();
+            state_hbox.getStyleClass().remove("deleted");
+            state_hbox.getStyleClass().add("published");
             toEditButton();
         }
     }

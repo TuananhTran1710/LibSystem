@@ -8,7 +8,6 @@ import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.SuggestionBox.SuggestionBook;
 import com.jmc.libsystem.Views.SearchCriteria;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
@@ -19,8 +18,8 @@ import java.util.Set;
 public class BookDetailAPI extends BaseBookDetailController {
 
     public Button addBook_btn;
-    public VBox authorsContainer;
-    public VBox categoriesContainer;
+//    public VBox authorsContainer;
+//    public VBox categoriesContainer;
 
     private static BookDetailAPI instance;
     public TextField quantity_tf;

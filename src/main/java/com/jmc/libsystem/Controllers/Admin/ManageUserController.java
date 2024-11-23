@@ -1,14 +1,9 @@
 package com.jmc.libsystem.Controllers.Admin;
 
 import com.jmc.libsystem.Controllers.Account.AccountProfileController;
-import com.jmc.libsystem.Controllers.Book.BookEditAdmin;
-import com.jmc.libsystem.HandleResultSet.EvaluateInfo;
-import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
-import com.jmc.libsystem.QueryDatabase.QueryBookData;
-import com.jmc.libsystem.Views.ShowListBookFound;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -16,14 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
-import java.io.ByteArrayInputStream;
 import java.net.URL;
-import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -78,14 +67,13 @@ public class ManageUserController implements Initializable {
         UserTable();
     }
 
-    private void addButton(){
+    private void addButton() {
         addUserButton.setOnAction(event -> {
             String userId = userIdField.getText();
             String fullName = fullNameField.getText();
             String email = emailField.getText();
             String password = passwordField.getText();
-            if(password.trim().isEmpty()) password = userId;
-            //System.out.println(userId + " " + fullName + " " + email + " " + password);
+            if (password.trim().isEmpty()) password = userId;
             if (!email.trim().isEmpty() && !password.trim().isEmpty()
                     && !userId.trim().isEmpty() && !fullName.trim().isEmpty()) {
                 QueryAccountData.insertAccount(email, password, userId, fullName);
@@ -107,28 +95,20 @@ public class ManageUserController implements Initializable {
 
         search_btn.setOnAction(event -> searchAction());
 
-//        search_tf.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
-//            if (event.getCode() == KeyCode.ENTER) {
-//                searchAction();
-//            }
-//        });
-
         search_tf.setOnKeyReleased(event -> searchAction());
     }
 
-    private void searchAction(){
+    private void searchAction() {
         String selectedValue = criteriaBox.getSelectionModel().getSelectedItem();
-        String type = (selectedValue == "ID" ? "user_id" : (selectedValue == "Name" ? "fullName" : "email"));
-        //System.out.println(type);
+        String type = (selectedValue.equals("ID") ? "user_id" : (selectedValue.equals("Name") ? "fullName" : "email"));
 
         String text = search_tf.getText();
         ResultSet resultSet = QueryAccountData.getAccountForSearch(text, type);
-        //System.out.println("Can access");
         data.clear();
         getData(resultSet);
     }
 
-    private void UserTable(){
+    private void UserTable() {
         userIdColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("id")));
         fullNameColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("name")));
         emailColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("email")));

@@ -107,6 +107,14 @@ TableView .column-header .label {
     -fx-text-fill: #132A13;
 }
 
+.hyperlink {
+    -fx-text-fill: blue; /* Màu chữ mặc định */
+}
+
+.hyperlink:visited {
+    -fx-text-fill: blue; /* Màu chữ sau khi nhấn */
+}
+
 //-----------------------
 
 .part_2 {

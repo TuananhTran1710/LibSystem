@@ -8,10 +8,7 @@ import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.Optional;
@@ -20,7 +17,7 @@ import java.util.ResourceBundle;
 public class AccountProfileController extends BaseAccountDetailController{
 
     public Button deleteBT;
-    public ChoiceBox<String> statusChoice;
+    public TextField status_tfl;
 
     protected User current_user;
 
@@ -38,7 +35,6 @@ public class AccountProfileController extends BaseAccountDetailController{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.initialize(url, resourceBundle);
         deleteBT.setOnAction(event -> deleteAndMoveMenuCurrent());
-        statusChoice.getItems().addAll("Active", "Banned");
         //statusChoice.setValue("Active");
     }
 
@@ -94,14 +90,14 @@ public class AccountProfileController extends BaseAccountDetailController{
         fullname_fld.setText(current_user.getFullName());
         email_fld.setText(current_user.getEmail());
         password_fld.setText(current_user.getPassword());
-        statusChoice.setValue(current_user.getState());
+        status_tfl.setText(current_user.getState());
 
         //đặt các field không được chỉnh sửa
         user_id_fld.setEditable(false);
         fullname_fld.setEditable(false);
         email_fld.setEditable(false);
         password_fld.setEditable(false);
-        statusChoice.setDisable(true);
+        status_tfl.setEditable(false);
 
         //bật nút edit, tắt nút save
         // Hiện nút Edit và ẩn nút Save
@@ -111,7 +107,7 @@ public class AccountProfileController extends BaseAccountDetailController{
 
     @Override
     protected void setFieldsEditable(boolean editable) {
-        statusChoice.setDisable(!editable);
+        status_tfl.setEditable(false);
         user_id_fld.setEditable(false);
         fullname_fld.setEditable(editable);
         email_fld.setEditable(editable);
@@ -120,9 +116,6 @@ public class AccountProfileController extends BaseAccountDetailController{
 
     @Override
     public void onSaveButtonClicked(User current_user) {
-        String status = statusChoice.getValue();
-        current_user.setState(status);
-        //lấy thaydodoiri từ field
         String updatedFullName = fullname_fld.getText();
         String updatedEmail = email_fld.getText();
 

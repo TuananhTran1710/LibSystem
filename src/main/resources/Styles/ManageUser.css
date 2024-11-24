@@ -167,7 +167,13 @@ TableView .column-header .label {
     -fx-background-radius: 0 0 10px 10px;
 }
 
+.hyperlink {
+    -fx-text-fill: blue; /* Màu chữ mặc định */
+}
 
+.hyperlink:visited {
+    -fx-text-fill: blue; /* Màu chữ sau khi nhấn */
+}
 
 
 

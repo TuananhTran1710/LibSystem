@@ -5,15 +5,13 @@ import com.jmc.libsystem.QueryDatabase.QueryBookrcm;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.Optional;
 
 public class ProposeListCell extends ListCell<Map<String, String>> {
 
@@ -75,44 +73,9 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
             }
 
             // Gán các hành động khi bấm nút
-            accept_bt.setOnAction(event -> {
-                //System.out.println("Accepted: " + book.get("title"));
-                accept_bt.setVisible(false);
-                accept_bt.setDisable(true);
-                reject_bt.setVisible(false);
-                reject_bt.setDisable(true);
-                number_tf.setVisible(true);
-                number_tf.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        String text = number_tf.getText();
-                        System.out.println("Bạn đã nhập: " + text);
-                        QueryBookData.updateBook(book_id, Integer.parseInt(text));
-                        number_tf.setVisible(false);
-                        QueryBookrcm.updateStatePropose(book_id, "Accept");
-                        QueryBookData.updateState(book_id, "publishing");
-                        showAccept();
-                    }
-                });
+            accept_bt.setOnAction(event -> onAccept(book_id));
 
-                try {
-                    ResponseController.getInstance().updateNumber();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-            reject_bt.setOnAction(event -> {
-                //System.out.println("Rejected: " + book_id);
-                QueryBookrcm.updateStatePropose(book_id, "Reject");
-                QueryBookData.updateState(book_id, "Reject");
-                showReject();
-                try {
-                    ResponseController.getInstance().updateNumber();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+            reject_bt.setOnAction(event -> onReject(book_id));
 
             setGraphic(root);
         }
@@ -136,5 +99,73 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
         accept_bt.setDisable(false);
         reject_bt.setVisible(true);
         reject_bt.setDisable(false);
+        AnchorPane.setRightAnchor(accept_bt, 100.0);
+    }
+
+    private  void onAccept(String book_id) {
+        //System.out.println("Accepted: " + book.get("title"));
+        accept_bt.setVisible(false);
+        accept_bt.setDisable(true);
+        reject_bt.setVisible(false);
+        reject_bt.setDisable(true);
+        number_tf.setVisible(true);
+        number_tf.setOnAction(event -> {
+            String text = number_tf.getText();
+            if (text.isEmpty()) {
+                if (confirmBack()) {
+                    showInQueue();
+                    number_tf.setVisible(false);
+                }
+                else {
+                    number_tf.requestFocus();
+                }
+            }
+            else {
+                QueryBookData.updateBook(book_id, Integer.parseInt(text));
+                number_tf.setVisible(false);
+                QueryBookrcm.updateStatePropose(book_id, "Accept");
+                QueryBookData.updateState(book_id, "publishing");
+                showAccept();
+                try {
+                    ResponseController.getInstance().updateNumber();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    private void onReject(String book_id) {
+        //System.out.println("Rejected: " + book_id);
+        QueryBookrcm.updateStatePropose(book_id, "Reject");
+        QueryBookData.updateState(book_id, "Reject");
+        showReject();
+        try {
+            ResponseController.getInstance().updateNumber();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private boolean confirmBack() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Back");
+        alert.setHeaderText("You have not added quantity");
+        alert.setContentText("Are you sure you want to come back?");
+
+        ButtonType buttonTypeBack = new ButtonType("Back");
+        ButtonType buttonTypeContinue = new ButtonType("Continue");
+
+        // Thêm các ButtonType vào Alert
+        alert.getButtonTypes().setAll(buttonTypeBack, buttonTypeContinue);
+
+        // Hiển thị Alert và chờ người dùng chọn
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == buttonTypeBack) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -38,12 +38,12 @@ public class ResponseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataBook = FXCollections.observableArrayList();
-        ObservableList<String> choices = FXCollections.observableArrayList("In queue", "Accept", "Reject");
+        ObservableList<String> choices = FXCollections.observableArrayList("In queue", "Accept", "Reject", "All");
         choice_state.setItems(choices);
-        refreshData();
     }
 
     public void refreshData() {
+        choice_state.setValue("All");
         dataBook.clear();
         getDataList(QueryBookrcm.getAllPropse());
         choice_state.setOnAction(event -> searchChoiceAction());
@@ -64,10 +64,16 @@ public class ResponseController implements Initializable {
     private void searchChoiceAction(){
         String selectedValue = choice_state.getSelectionModel().getSelectedItem();
 
-        ResultSet resultSet = QueryBookrcm.getProposeForFilter(selectedValue);
-        //System.out.println("Can access");
-        dataBook.clear();
-        getDataList(resultSet);
+        if(selectedValue == "All") {
+            dataBook.clear();
+            getDataList(QueryBookrcm.getAllPropse());
+        }
+        else {
+            ResultSet resultSet = QueryBookrcm.getProposeForFilter(selectedValue);
+            //System.out.println("Can access");
+            dataBook.clear();
+            getDataList(resultSet);
+        }
         list_propose.setItems(dataBook);
     }
 

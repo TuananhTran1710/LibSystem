@@ -49,7 +49,10 @@ public class AdminController implements Initializable {
                             admin_parent.setCenter(Model.getInstance().getViewFactory().getProfileAdminView());
                             ProfileController.getInstance().showProfile();
                         }
-                        case RESPONSE -> admin_parent.setCenter(Model.getInstance().getViewFactory().getResponseView());
+                        case RESPONSE -> {
+                            admin_parent.setCenter(Model.getInstance().getViewFactory().getResponseView());
+                            ResponseController.getInstance().refreshData();
+                        }
                         default -> {
                             admin_parent.setCenter(Model.getInstance().getViewFactory().getAdminDashboardView());
                             AdminDashboardController.getInstance().refreshData();

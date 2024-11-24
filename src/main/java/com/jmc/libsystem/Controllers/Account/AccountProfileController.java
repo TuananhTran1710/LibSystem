@@ -67,7 +67,7 @@ public class AccountProfileController extends BaseAccountDetailController {
 
     private void deleteAndMoveMenuCurrent() {
         if (!confirmDelete()) return;
-        QueryAccountData.updateState(getCurrent_user().getId(), "delete");
+        QueryAccountData.updateState(getCurrent_user().getId(), "Delete");
         moveMenuCurrent();
     }
 
@@ -123,6 +123,11 @@ public class AccountProfileController extends BaseAccountDetailController {
     public void onSaveButtonClicked(User current_user) {
         String updatedFullName = fullname_fld.getText();
         String updatedEmail = email_fld.getText();
+
+        if (updatedEmail.isEmpty() || updatedFullName.isEmpty()){
+            showAlert("Error", "Information not filled in", "You need to fill in completely");
+            return;
+        }
 
         //kiểm tra email tồn tại chưa
         if (!updatedEmail.equals(current_user.getEmail()) && QueryAccountData.isUserEmailExists(updatedEmail)) {

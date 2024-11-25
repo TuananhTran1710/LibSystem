@@ -123,11 +123,13 @@ public class BookEditAdmin extends BaseBookDetailController {
 
             int availableNumber = book.getQuantity() - book.getNumBorrowing();
             if (availableNumber == 0) {
-                available_lbl.setText("Out of stock");
-                available_lbl.setTextFill(Color.RED);
+                available_lbl.setText("Currently out of stock.");
+                available_hbox.getStyleClass().remove("avail");
+                available_hbox.getStyleClass().add("outofstock");
             } else {
-                available_lbl.setText("Available: " + availableNumber + " copies");
-                available_lbl.setTextFill(Color.BLACK);
+                available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
+                available_hbox.getStyleClass().remove("outofstock");
+                available_hbox.getStyleClass().add("avail");
             }
         });
 
@@ -167,11 +169,13 @@ public class BookEditAdmin extends BaseBookDetailController {
 
                         int availableNumber = book.getQuantity() - book.getNumBorrowing();
                         if (availableNumber == 0) {
-                            available_lbl.setText("Out of stock");
-                            available_lbl.setTextFill(Color.RED);
+                            available_lbl.setText("Currently out of stock.");
+                            available_hbox.getStyleClass().remove("avail");
+                            available_hbox.getStyleClass().add("outofstock");
                         } else {
-                            available_lbl.setText("Available: " + availableNumber + " copies");
-                            available_lbl.setTextFill(Color.BLACK);
+                            available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
+                            available_hbox.getStyleClass().remove("outofstock");
+                            available_hbox.getStyleClass().add("avail");
                         }
                     } else {
                         // Hiển thị thông báo nếu số lượng nhập vào không hợp lệ
@@ -331,11 +335,13 @@ public class BookEditAdmin extends BaseBookDetailController {
 
         int availableNumber = book.getQuantity() - book.getNumBorrowing();
         if (availableNumber == 0) {
-            available_lbl.setText("Out of stock");
-            available_lbl.setTextFill(Color.RED);
+            available_lbl.setText("Currently out of stock.");
+            available_hbox.getStyleClass().remove("avail");
+            available_hbox.getStyleClass().add("outofstock");
         } else {
             available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
-            available_lbl.setTextFill(Color.BLACK);
+            available_hbox.getStyleClass().remove("outofstock");
+            available_hbox.getStyleClass().add("avail");
         }
     }
 

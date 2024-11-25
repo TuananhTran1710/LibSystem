@@ -27,25 +27,29 @@ public class QueryBookRecommend {
         }
     }
 
-    public static List<Book> getPreSuggestBooks() {
-        String query = """ 
-                SELECT b.google_book_id, b.title, b.authors, b.publishDate, b.description, b.thumbnail, b.page_count, b.language, b.category, b.state
-                FROM bookrcm br
-                JOIN book b ON br.google_book_id = b.google_book_id
-                WHERE br.state = 'In queue';""";
+    public static List<Book> getPreSuggestBooks(String userId) {
+        String query = """
+            SELECT b.google_book_id, b.title, b.authors, b.publishDate, b.description, b.thumbnail, b.page_count, b.language, b.category, br.state
+            FROM bookrcm br
+            JOIN book b ON br.google_book_id = b.google_book_id
+            WHERE br.user_id = ?;""";
 
         List<Book> bookList = new ArrayList<>();
         try (Connection conn = DatabaseDriver.getConn();
-             PreparedStatement preparedStatement = conn.prepareStatement(query);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
-            while (resultSet.next()) {
-                Book book = Book.createBookProposeFromResultSet(resultSet);
-                bookList.add(book);
+            preparedStatement.setString(1, userId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Book book = Book.createBookProposeFromResultSet(resultSet);
+                    bookList.add(book);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return bookList;
     }
+
 }

@@ -154,18 +154,24 @@ public class BookEditAdmin extends BaseBookDetailController {
                     // so luong them toi thieu = so nguoi dang muon chua tra
                     if (quantityToAdd >= book.getNumBorrowing()) {
                         book.setQuantity(quantityToAdd);
+                        book.setState("publishing");
                         quantity_lbl.setText(quantityToAdd + "");
                         // Cập nhật thông tin sau khi thêm số lượng
                         toEditButton();
                         state_lbl.setText("Publishing");
-                        state_lbl.setTextFill(Color.web("#32CD32"));
+//                        state_lbl.setTextFill(Color.web("#32CD32"));
+
+                        state_hbox.getStyleClass().removeAll();
+                        state_hbox.getStyleClass().remove("deleted");
+                        state_hbox.getStyleClass().add("publishing");
+
                         available_hbox.setVisible(true);
 
                         notice_lbl.setText("Restore book successfully");
                         notice_lbl.setTextFill(Color.web("#32CD32"));
                         createTimeLine();
 
-                        QueryBookData.updateState(book.getId(), "publishing");
+                        QueryBookData.updateStateAndQuantity(book.getId(), "publishing", quantityToAdd);
 
                         int availableNumber = book.getQuantity() - book.getNumBorrowing();
                         if (availableNumber == 0) {
@@ -201,14 +207,17 @@ public class BookEditAdmin extends BaseBookDetailController {
                 // Xoa sach o day khong phai la xoa khoi database ma la
                 // gan state = deleted
                 QueryBookData.updateState(book.getId(), "deleted");
+                book.setState("deleted");
                 toRestoreButton();
-
+                state_hbox.getStyleClass().removeAll();
+                state_hbox.getStyleClass().remove("publishing");
+                state_hbox.getStyleClass().add("deleted");
                 notice_lbl.setText("Delete book successfully");
                 notice_lbl.setTextFill(Color.web("#32CD32"));
                 createTimeLine();
 
                 state_lbl.setText("Deleted");
-                state_lbl.setTextFill(Color.RED);
+//                state_lbl.setTextFill(Color.RED);
 
                 available_hbox.setVisible(false);
 
@@ -216,6 +225,7 @@ public class BookEditAdmin extends BaseBookDetailController {
                 // Nếu người dùng chọn Cancel, không làm gì cả
                 notice_lbl.setText("Aborted deletion");
                 notice_lbl.setTextFill(Color.web("#FF0000"));
+
                 createTimeLine();
             }
         });
@@ -414,7 +424,7 @@ public class BookEditAdmin extends BaseBookDetailController {
 //            state_lbl.setTextFill(Color.RED);
 
             state_hbox.getStyleClass().removeAll();
-            state_hbox.getStyleClass().remove("published");
+            state_hbox.getStyleClass().remove("publishing");
             state_hbox.getStyleClass().add("deleted");
             toRestoreButton();
         } else {
@@ -424,7 +434,7 @@ public class BookEditAdmin extends BaseBookDetailController {
 
             state_hbox.getStyleClass().removeAll();
             state_hbox.getStyleClass().remove("deleted");
-            state_hbox.getStyleClass().add("published");
+            state_hbox.getStyleClass().add("publishing");
             toEditButton();
         }
     }

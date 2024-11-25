@@ -304,7 +304,8 @@ public class ManageBookController implements Initializable {
         SuggestionBook.autoCompletionBinding.setPrefWidth(searchInLib_tf.getWidth() - 160);
         searchInLib_tf.clear();
         criteriaSearchLib.setValue(SearchCriteria.TITLE);
-
+        
+        refreshDataInLib();
     }
 
     private void getData(ResultSet resultSet) {

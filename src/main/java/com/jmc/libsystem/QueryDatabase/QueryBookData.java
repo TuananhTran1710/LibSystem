@@ -259,12 +259,27 @@ public class QueryBookData {
         }
     }
 
+    public static void updateStateAndQuantity(String book_id, String state, int quantity) {
+        String query = "UPDATE book SET state = ?, quantity = ? WHERE google_book_id = ?";
+        try {
+            PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
+            preparedStatement.setString(1, state);
+            preparedStatement.setInt(2, quantity);
+            preparedStatement.setString(3, book_id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void updateState(String book_id, String state) {
         String query = "UPDATE book SET state = ? WHERE google_book_id = ?";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             preparedStatement.setString(1, state);
             preparedStatement.setString(2, book_id);
+
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

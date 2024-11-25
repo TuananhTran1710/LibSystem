@@ -112,7 +112,7 @@ public class ShowListBookFound {
     }
 
     // không cho lích sử đề xuất bấm vào, cái này chỉ có lịch sử dùng nên k phải gắn flags
-    public static void showAPIFromUser(List<Book> bookList, HBox resultList_hb, int limit) {
+    public static void showAPIFromUser(List<Book> bookList, HBox resultList_hb, int limit, boolean allowShowStateFlag) {
         resultList_hb.getChildren().clear();
 
         // Nếu danh sách sách trống
@@ -145,12 +145,12 @@ public class ShowListBookFound {
         resultList_hb.setAlignment(Pos.TOP_LEFT);
         // Hiển thị tối đa `limit` sách từ danh sách
         for (int i = 0; i < Math.min(bookList.size(), limit); i++) {
-            VBox bookBox = createBookBoxAPIFromUser(bookList.get(i), false);
+            VBox bookBox = createBookBoxAPIFromUser(bookList.get(i), false, allowShowStateFlag);
             resultList_hb.getChildren().add(bookBox);
         }
     }
 
-    public static void showAPIFromUser(List<Book> bookList, HBox resultList_hb, boolean allowViewDetailFlag) {
+    public static void showAPIFromUser(List<Book> bookList, HBox resultList_hb, boolean allowViewDetailFlag, boolean allowShowStateFlag) {
         resultList_hb.getChildren().clear();
         // Nếu danh sách sách trống
         if (bookList.isEmpty()) {
@@ -180,7 +180,7 @@ public class ShowListBookFound {
         }
         resultList_hb.setAlignment(Pos.TOP_LEFT);
         for (Book book : bookList) {
-            VBox bookBox = createBookBoxAPIFromUser(book, allowViewDetailFlag);
+            VBox bookBox = createBookBoxAPIFromUser(book, allowViewDetailFlag, allowShowStateFlag);
             resultList_hb.getChildren().add(bookBox);
         }
     }
@@ -322,7 +322,7 @@ public class ShowListBookFound {
         return bookBox;
     }
 
-    private static VBox createBookBoxAPIFromUser(Book book, boolean allowViewDetailFlag) {
+    private static VBox createBookBoxAPIFromUser(Book book, boolean allowViewDetailFlag, boolean allowShowStateFlag) {
         VBox bookBox = new VBox();
         bookBox.setSpacing(3);
         bookBox.setPadding(new Insets(5));
@@ -370,13 +370,6 @@ public class ShowListBookFound {
         Label titleLabel = new Label(shortTitle);
         titleLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12px;");
         titleLabel.setTooltip(new Tooltip(book.getTitle()));
-        // Hiển thị state
-        Label stateLabel = new Label(" " + book.getState() + " ");
-        stateLabel.setStyle("-fx-font-family: 'Calibri Light'; -fx-font-size: 12px;" +
-                            "-fx-background-color: rgba(211, 211, 211, 0.5);" +
-                            "-fx-background-radius: 5px;" +
-                            "-fx-text-fill: #132A13;" +
-                            "-fx-padding: 1px;");
 
         // Hiển thị tên tác giả (giới hạn ký tự)
         String shortAuthor = book.getAuthors().length() > 15 ? book.getAuthors().substring(0, 15) + "..." : book.getAuthors();
@@ -384,8 +377,37 @@ public class ShowListBookFound {
         authorLabel.setStyle("-fx-font-family: 'Calibri Light'; -fx-font-size: 12px;");
         authorLabel.setTooltip(new Tooltip(book.getAuthors()));
 
-        // Thêm các thành phần vào VBox
-        bookBox.getChildren().addAll(bookCoverImageView, titleLabel, authorLabel, stateLabel);
+        // Hiển thị state
+        if(allowShowStateFlag == true) {
+            Label stateLabel = new Label(" " + book.getState() + " ");
+            if(book.getState().equals("Accept")) {
+                stateLabel.setStyle("-fx-background-color: linear-gradient(to right, #f0fdf4, #dcfce7);" +
+                        "-fx-background-radius: 5px;" +
+                        "-fx-text-fill: #15803d;" +
+                        "-fx-font-family: 'Calibri Light';" +
+                        "-fx-font-size: 12px;" +
+                        "-fx-padding: 1px;");
+            }else if(book.getState().equals("Reject")) {
+                stateLabel.setStyle("-fx-background-color: linear-gradient(to right, #fee2e2, #fecaca);\n" +
+                        "-fx-background-radius: 5px;" +
+                        "-fx-text-fill: #b91c1c;" +
+                        "-fx-font-family: 'Calibri Light';" +
+                        "-fx-font-size: 12px;" +
+                        "-fx-padding: 1px;");
+            } else {
+                stateLabel.setStyle("-fx-background-color: rgba(211, 211, 211, 0.5); " +
+                        "-fx-background-radius: 5px;" +
+                        "-fx-text-fill: #132A13;" +
+                        "-fx-font-family: 'Calibri Light';" +
+                        "-fx-font-size: 12px;" +
+                        "-fx-padding: 1px;");
+            }
+            bookBox.getChildren().addAll(bookCoverImageView, titleLabel, authorLabel, stateLabel);
+        } else {
+            // Thêm các thành phần vào VBox
+            bookBox.getChildren().addAll(bookCoverImageView, titleLabel, authorLabel);
+        }
+
         return bookBox;
     }
 }

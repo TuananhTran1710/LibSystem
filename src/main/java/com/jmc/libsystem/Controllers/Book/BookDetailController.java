@@ -101,7 +101,8 @@ public class BookDetailController extends BaseBookDetailController {
             time_hBox.setVisible(false);
             toBorrowButton();
             available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
-            available_lbl.setStyle("-fx-text-fill: #FFFFFF;");
+            available_hbox.getStyleClass().remove("outofstock");
+            available_hbox.getStyleClass().add("avail");
             if (book.getState().equals("deleted")) {
                 borrow_btn.setDisable(true);
                 available_hbox.setVisible(false);
@@ -128,11 +129,13 @@ public class BookDetailController extends BaseBookDetailController {
 
             int availableNumber = book.getQuantity() - book.getNumBorrowing();
             if (availableNumber == 0) {
-                available_lbl.setText("Out of stock");
-                available_lbl.setTextFill(Color.RED);
+                available_lbl.setText("Currently out of stock");
+                available_hbox.getStyleClass().remove("avail");
+                available_hbox.getStyleClass().add("outofstock");
             } else {
-                available_lbl.setText("Available: " + availableNumber + " copies");
-                available_lbl.setStyle("-fx-text-fill: #FFFFFF;");
+                available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
+                available_hbox.getStyleClass().remove("outofstock");
+                available_hbox.getStyleClass().add("avail");
             }
 
             totalLoan_lbl.setText(String.valueOf(book.getTotalLoan()) + " times");
@@ -381,11 +384,13 @@ public class BookDetailController extends BaseBookDetailController {
 
         int availableNumber = book.getQuantity() - book.getNumBorrowing();
         if (availableNumber == 0) {
-            available_lbl.setText("Out of stock");
-            available_lbl.setTextFill(Color.RED);
+            available_lbl.setText("Currently out of stock.");
+            available_hbox.getStyleClass().remove("avail");
+            available_hbox.getStyleClass().add("outofstock");
         } else {
             available_lbl.setText("Available: " + String.valueOf(book.getQuantity() - book.getNumBorrowing()) + " copies");
-            available_lbl.setStyle("-fx-text-fill: #FFFFFF;");
+            available_hbox.getStyleClass().remove("outofstock");
+            available_hbox.getStyleClass().add("avail");
         }
     }
 

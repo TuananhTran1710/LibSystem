@@ -380,11 +380,28 @@ public class ShowListBookFound {
         // Hiển thị state
         if(allowShowStateFlag == true) {
             Label stateLabel = new Label(" " + book.getState() + " ");
-            stateLabel.setStyle("-fx-font-family: 'Calibri Light'; -fx-font-size: 12px;" +
-                    "-fx-background-color: rgba(211, 211, 211, 0.5);" +
-                    "-fx-background-radius: 5px;" +
-                    "-fx-text-fill: #132A13;" +
-                    "-fx-padding: 1px;");
+            if(book.getState().equals("Accept")) {
+                stateLabel.setStyle("-fx-background-color: linear-gradient(to right, #f0fdf4, #dcfce7);" +
+                        "-fx-background-radius: 5px;" +
+                        "-fx-text-fill: #15803d;" +
+                        "-fx-font-family: 'Calibri Light';" +
+                        "-fx-font-size: 12px;" +
+                        "-fx-padding: 1px;");
+            }else if(book.getState().equals("Reject")) {
+                stateLabel.setStyle("-fx-background-color: linear-gradient(to right, #fee2e2, #fecaca);\n" +
+                        "-fx-background-radius: 5px;" +
+                        "-fx-text-fill: #b91c1c;" +
+                        "-fx-font-family: 'Calibri Light';" +
+                        "-fx-font-size: 12px;" +
+                        "-fx-padding: 1px;");
+            } else {
+                stateLabel.setStyle("-fx-background-color: rgba(211, 211, 211, 0.5); " +
+                        "-fx-background-radius: 5px;" +
+                        "-fx-text-fill: #132A13;" +
+                        "-fx-font-family: 'Calibri Light';" +
+                        "-fx-font-size: 12px;" +
+                        "-fx-padding: 1px;");
+            }
             bookBox.getChildren().addAll(bookCoverImageView, titleLabel, authorLabel, stateLabel);
         } else {
             // Thêm các thành phần vào VBox

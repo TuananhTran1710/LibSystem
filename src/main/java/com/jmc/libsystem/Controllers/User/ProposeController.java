@@ -2,6 +2,8 @@ package com.jmc.libsystem.Controllers.User;
 
 import com.jmc.libsystem.HandleJsonString.SearchBookAPI;
 import com.jmc.libsystem.Information.Book;
+import com.jmc.libsystem.Information.User;
+import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookRecommend;
 import com.jmc.libsystem.SuggestionBox.SuggestionBookAPI;
 import com.jmc.libsystem.Views.SearchCriteria;
@@ -79,7 +81,8 @@ public class ProposeController implements Initializable {
 
     // Hiển thị danh sách đề xuất
     public void showPreSuggest() {
-        bookPreSuggest = QueryBookRecommend.getPreSuggestBooks();
+        User current_user = Model.getInstance().getMyUser();
+        bookPreSuggest = QueryBookRecommend.getPreSuggestBooks(current_user.getId());
         updatePreSuggestView();
     }
 
@@ -91,10 +94,10 @@ public class ProposeController implements Initializable {
 
     private void updatePreSuggestView() {
         if (num_show_preSuggest.getValue().equals("All")) {
-            ShowListBookFound.showAPIFromUser(bookPreSuggest, resultSuggestList_hb, false);
+            ShowListBookFound.showAPIFromUser(bookPreSuggest, resultSuggestList_hb, false, true);
         } else {
             int limit = (int) num_show_preSuggest.getValue();
-            ShowListBookFound.showAPIFromUser(bookPreSuggest, resultSuggestList_hb, limit);
+            ShowListBookFound.showAPIFromUser(bookPreSuggest, resultSuggestList_hb, limit, true);
         }
     }
 
@@ -178,7 +181,7 @@ public class ProposeController implements Initializable {
             // tu day la chay tren luong chinh
             task.setOnSucceeded(e -> {
                 List<Book> list = task.getValue();
-                Platform.runLater(() -> ShowListBookFound.showAPIFromUser(list, resultSearchList_hb, true));
+                Platform.runLater(() -> ShowListBookFound.showAPIFromUser(list, resultSearchList_hb, true, false));
             });
             new Thread(task).start();
         }

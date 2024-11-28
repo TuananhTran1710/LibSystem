@@ -9,10 +9,6 @@
     -fx-background-radius: 10px;
 }
 
-.total .fontaws {
-    -fx-fill: #4A6B4A;
-}
-
 .total TextField {
     -fx-background-color: rgba(19, 42, 19, 0.05);
     -fx-background-radius: 6px;
@@ -70,6 +66,10 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size:1.1em;
     -fx-font-weight: bold;
+}
+
+.fontaws {
+    -fx-fill: #4A6B4A;
 }
 
 .edit_fontaws {

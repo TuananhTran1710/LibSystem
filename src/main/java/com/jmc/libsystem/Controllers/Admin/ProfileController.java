@@ -106,15 +106,16 @@ public class ProfileController implements Initializable {
     }
 
     public void onSaveButtonClicked() {
-        if (fullname_fld.getText().trim().isEmpty()) {
-            showAlert("Invalid Full Name", "Oops...", "The full name cannot be empty. Please try again.");
-            return;
-        }
         fullname_lbl.getStyleClass().remove("edit_text");
         fullname_lbl.getStyleClass().add("bold_text");
 
         fullname_fontaws.getStyleClass().remove("edit_fontaws");
         fullname_fontaws.getStyleClass().add("fontaws");
+
+        if (fullname_fld.getText().trim().isEmpty()) {
+            showAlert("Invalid Full Name", "Oops...", "The full name cannot be empty. Please try again.");
+            return;
+        }
 
         String updatedFullName = fullname_fld.getText();
         Admin current_admin = Model.getInstance().getMyAdmin();

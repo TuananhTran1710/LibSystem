@@ -10,7 +10,9 @@ public class DatabaseDriver {
     public static Connection getConn() {
         try {
             if (conn == null || conn.isClosed()) {
+
                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/lib_system", "cuong", "cuongchelsea");
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

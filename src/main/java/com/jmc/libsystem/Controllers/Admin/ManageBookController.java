@@ -74,7 +74,7 @@ public class ManageBookController implements Initializable {
 
     public static List<Book> bookSearch;
 
-    private ObservableList<Map<String, Object>> data;
+    public ObservableList<Map<String, Object>> data;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -182,7 +182,7 @@ public class ManageBookController implements Initializable {
         searchInLib_tf.setOnKeyReleased(event -> searchAction());
     }
 
-    private void searchAction() {
+    public void searchAction() {
         SearchCriteria selectedValue = criteriaSearchLib.getValue();
         String type = selectedValue.toString();
         String text = searchInLib_tf.getText();
@@ -308,7 +308,7 @@ public class ManageBookController implements Initializable {
         refreshDataInLib();
     }
 
-    private void getData(ResultSet resultSet) {
+    public void getData(ResultSet resultSet) {
         data.clear();
         // Tạo một Task để load
         Task<Void> loadDataTask = new Task<Void>() {

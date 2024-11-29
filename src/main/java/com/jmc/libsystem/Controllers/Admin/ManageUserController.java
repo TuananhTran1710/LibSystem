@@ -43,7 +43,7 @@ public class ManageUserController implements Initializable {
 
     public HashMap<String, User> userList = new HashMap<>();
 
-    private ObservableList<Map<String, Object>> data;
+    public ObservableList<Map<String, Object>> data;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         criteriaBox.getItems().addAll("ID", "Name", "Email");
@@ -98,7 +98,7 @@ public class ManageUserController implements Initializable {
         search_tf.setOnKeyReleased(event -> searchAction());
     }
 
-    private void searchAction() {
+    public void searchAction() {
         String selectedValue = criteriaBox.getSelectionModel().getSelectedItem();
         String type = (selectedValue.equals("ID") ? "user_id" : (selectedValue.equals("Name") ? "fullName" : "email"));
 
@@ -156,7 +156,7 @@ public class ManageUserController implements Initializable {
     }
 
     // lấy dữ liệu từ database
-    private void getData(ResultSet resultSet) {
+    public void getData(ResultSet resultSet) {
         data.clear();
         // Tạo một Task để load
         Task<Void> loadDataTask = new Task<Void>() {

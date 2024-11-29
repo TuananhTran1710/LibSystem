@@ -57,21 +57,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Thêm TestFX dependency vào file pom.xml -->
-        <dependency>
-            <groupId>org.testfx</groupId>
-            <artifactId>testfx-core</artifactId>
-            <version>4.0.18</version> <!-- Thử sử dụng phiên bản này -->
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.testfx</groupId>
-            <artifactId>testfx-junit</artifactId>
-            <version>4.0.18</version> <!-- Thử sử dụng phiên bản này -->
-            <scope>test</scope>
-        </dependency>
-
         <!-- Mockito -->
         <!-- https://mvnrepository.com/artifact/org.mockito/mockito-inline -->
         <dependency>
@@ -193,8 +178,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M8</version>
                 <configuration>
-                    <parallel>all</parallel>
-                    <useUnlimitedThreads>true</useUnlimitedThreads>
                     <argLine>
                         --add-opens javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
                         --add-opens javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED
@@ -202,6 +185,8 @@
                         --add-opens javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
                         -Dnet.bytebuddy.experimental=true
                         -XX:+EnableDynamicAgentLoading
+                        <!-- -->
+                        --add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.controls
                     </argLine>
                 </configuration>
             </plugin>

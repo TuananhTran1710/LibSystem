@@ -22,42 +22,32 @@ class AdminDashboardControllerUITest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        controller = new AdminDashboardController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/AdminDashboard.fxml"));
         Parent root = loader.load();
+        controller = loader.getController();
         stage.setScene(new Scene(root));
         stage.show();
     }
 
     @Test
     void testNumberLabelsDisplayCorrectly() {
-        Label numberUser = lookup("#numberUser").query();
-        Label numberBook = lookup("#numberBook").query();
-        Label numberBookLoan = lookup("#numberBookLoan").query();
-        Label numberOverBook = lookup("#numberOverBook").query();
-
-        // Kiểm tra các giá trị ban đầu của nhãn
-        assertNotNull(numberUser);
-        assertNotNull(numberBook);
-        assertNotNull(numberBookLoan);
-        assertNotNull(numberOverBook);
-
         // Mô phỏng hành động thay đổi dữ liệu
+
         Platform.runLater(() -> {
-            numberUser.setText("5");
-            numberBook.setText("50");
-            numberBookLoan.setText("100");
-            numberOverBook.setText("20");
+            controller.numberUser.setText("5");
+            controller.numberBook.setText("50");
+            controller.numberBookLoan.setText("100");
+            controller.numberOverBook.setText("20");
         });
 
         // Chờ cho đến khi các hành động hoàn tất
         WaitForAsyncUtils.waitForFxEvents();
 
 
-        assertEquals("5", numberUser.getText());
-        assertEquals("50", numberBook.getText());
-        assertEquals("100", numberBookLoan.getText());
-        assertEquals("20", numberOverBook.getText());
+        assertEquals("5", controller.numberUser.getText());
+        assertEquals("50", controller.numberBook.getText());
+        assertEquals("100", controller.numberBookLoan.getText());
+        assertEquals("20", controller.numberOverBook.getText());
     }
 
     @Test

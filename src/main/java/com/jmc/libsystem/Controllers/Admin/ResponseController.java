@@ -25,7 +25,7 @@ public class ResponseController implements Initializable {
     public ChoiceBox<String> choice_state;
     public ListView<Map<String, String>> list_propose;
 
-    private ObservableList<Map<String, String>> dataBook;
+    public ObservableList<Map<String, String>> dataBook;
 
     public ResponseController() {
         instance = this;
@@ -77,7 +77,7 @@ public class ResponseController implements Initializable {
         list_propose.setItems(dataBook);
     }
 
-    private void getDataList(ResultSet resultSet) {
+    public void getDataList(ResultSet resultSet) {
         dataBook.clear();
         // Tạo một Task để load
         Task<Void> loadDataTask = new Task<Void>() {
@@ -124,7 +124,7 @@ public class ResponseController implements Initializable {
         rejected.setText(rj);
     }
 
-    private String getNumber(ResultSet data) throws SQLException {
+    public String getNumber(ResultSet data) throws SQLException {
         if (data.next()) {
             String total = data.getString("count");
             return total;

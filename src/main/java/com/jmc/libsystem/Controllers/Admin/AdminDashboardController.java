@@ -159,14 +159,6 @@ public class AdminDashboardController implements Initializable {
     }
 
     public void getTableList() {
-        listBook = new TableView<>();
-        titleColumn = new TableColumn<>();
-        imageColumn = new TableColumn<>();
-        authorsColumn = new TableColumn<>();
-        quantityColumn = new TableColumn<>();
-        loanedColumn = new TableColumn<>();
-        statusColumn = new TableColumn<>();
-        editColumn = new TableColumn<>();
         /* liên kết các cột */
         titleColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("title")));
         authorsColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("authors")));

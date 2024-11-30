@@ -138,7 +138,6 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
     private void onReject(String book_id) {
         //System.out.println("Rejected: " + book_id);
         QueryBookrcm.updateStatePropose(book_id, "Reject");
-        QueryBookData.updateState(book_id, "Reject");
         showReject();
         try {
             ResponseController.getInstance().updateNumber();

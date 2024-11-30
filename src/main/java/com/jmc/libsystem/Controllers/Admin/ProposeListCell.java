@@ -109,6 +109,20 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
         reject_bt.setVisible(false);
         reject_bt.setDisable(true);
         number_tf.setVisible(true);
+        number_tf.setText("1");
+        number_tf.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Kiểm tra nếu giá trị không phải là số hoặc là số âm
+            try {
+                int quantity = Integer.parseInt(newValue);
+                if (quantity <= 0) {
+                    // Nếu là số âm hoặc bằng 0, đặt lại giá trị về giá trị cũ
+                    number_tf.setText("");
+                }
+            } catch (NumberFormatException e) {
+                // Nếu không phải là số, đặt lại giá trị về giá trị cũ
+                number_tf.setText("");
+            }
+        });
         number_tf.setOnAction(event -> {
             String text = number_tf.getText();
             if (text.isEmpty()) {

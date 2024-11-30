@@ -139,7 +139,7 @@
                             </VBox.margin>
                         </Label>
                         <ProgressBar fx:id="progress1" opacity="0.5" prefHeight="15.0" prefWidth="750.0"
-                                     progress="0.2"/>
+                                     progress="0.0"/>
                     </VBox>
                     <VBox prefHeight="200.0" prefWidth="734.0" GridPane.rowIndex="1">
                         <Label fx:id="category2" styleClass="statistictitle" text="category2"/>

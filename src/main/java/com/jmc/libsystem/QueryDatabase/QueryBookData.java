@@ -118,7 +118,7 @@ public class QueryBookData {
     public static ResultSet getCountBookLoan() {
         ResultSet resultSet = null;
         try {
-            String query = "SELECT sum(totalLoan) as count FROM book;";
+            String query = "SELECT sum(numBorrowing) as count FROM book;";
 
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
 

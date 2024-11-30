@@ -71,7 +71,7 @@ public class EvaluateInfo {
                 Model.getInstance().setLoginFlag(true);
 
                 String queryInsert = "Insert into user (email, password, user_id, fullName) values (?, ?, ?, ?)";
-                Model.getInstance().setMyUser(new User(user_id, fullName, email, password, "active"));
+                Model.getInstance().setMyUser(new User(user_id, fullName, email, password, "Active"));
 
                 try (PreparedStatement preparedStatementInsert = DatabaseDriver.getConn().prepareStatement(queryInsert)) {
                     preparedStatementInsert.setString(1, email);
@@ -94,7 +94,7 @@ public class EvaluateInfo {
                     Model.getInstance().setLoginFlag(true);
 
                     String queryInsert = "update user set password = ?, fullName = ? where user_id = ?";
-                    Model.getInstance().setMyUser(new User(user_id, fullName, email, password, "active"));
+                    Model.getInstance().setMyUser(new User(user_id, fullName, email, password, "Active"));
 
                     try (PreparedStatement preparedStatementInsert = DatabaseDriver.getConn().prepareStatement(queryInsert)) {
                         preparedStatementInsert.setString(1, password);
@@ -131,13 +131,13 @@ public class EvaluateInfo {
                 resultSet.next();
                 if (type == AccountType.USER) {
                     String state = resultSet.getString("state").toLowerCase();
-                    if (state.equals("active")) {
+                    if (state.equals("Active")) {
                         String my_password = resultSet.getString("password");
                         System.out.println("Get password successfully!");
                         Alert notice = new Alert(Alert.AlertType.INFORMATION);
                         notice.setContentText("Your password is " + my_password);
                         notice.show();
-                    } else if (state.equals("deleted")) {
+                    } else if (state.equals("Deleted")) {
                         System.out.println("Account is deleted!");
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText("Account is deteted. Please sign up again with this id and this email to recover your account!");

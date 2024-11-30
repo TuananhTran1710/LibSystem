@@ -323,7 +323,8 @@ public class ManageBookController implements Initializable {
                         String state = resultSet.getString("state");
                         if (state.equals("deleted")) {
                             state = "Deleted";
-                        } else state = "Publishing";
+                        } else if (state.equals("publishing"))
+                            state = "Publishing";
 
                         String id = resultSet.getString("google_book_id");
 

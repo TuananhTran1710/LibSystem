@@ -3,6 +3,8 @@ package com.jmc.libsystem.Controllers.Admin.Test;
 import com.jmc.libsystem.Controllers.Admin.AdminDashboardController;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
@@ -22,6 +24,14 @@ class AdminDashboardControllerTest {
     @BeforeEach
     void setUp() {
         controller = new AdminDashboardController();
+        controller.listBook = new TableView<>();
+        controller.titleColumn = new TableColumn<>();
+        controller.imageColumn = new TableColumn<>();
+        controller.authorsColumn = new TableColumn<>();
+        controller.quantityColumn = new TableColumn<>();
+        controller.loanedColumn = new TableColumn<>();
+        controller.statusColumn = new TableColumn<>();
+        controller.editColumn = new TableColumn<>();
     }
 
     @Test

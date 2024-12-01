@@ -85,7 +85,7 @@
             </AnchorPane>
          </children>
       </GridPane>
-      <ListView fx:id="list_propose" layoutX="54.0" layoutY="255.0" prefHeight="410.0" prefWidth="730.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
+      <ListView fx:id="list_propose" focusTraversable="false" layoutX="54.0" layoutY="255.0" prefHeight="410.0" prefWidth="730.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
       <ChoiceBox fx:id="choice_state" layoutX="607.0" layoutY="253.0" prefHeight="30.0" prefWidth="178.0" />
    </children>
 </AnchorPane>

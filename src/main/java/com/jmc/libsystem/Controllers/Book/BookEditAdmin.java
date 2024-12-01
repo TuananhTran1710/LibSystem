@@ -153,6 +153,7 @@ public class BookEditAdmin extends BaseBookDetailController {
                     // Kiểm tra số lượng nhập vào có hợp lệ không
                     // so luong them toi thieu = so nguoi dang muon chua tra
                     if (quantityToAdd >= book.getNumBorrowing()) {
+                        QueryBookData.updateStateAndQuantity(book.getId(), "publishing", quantityToAdd);
                         book.setQuantity(quantityToAdd);
                         book.setState("publishing");
                         quantity_lbl.setText(quantityToAdd + "");
@@ -161,8 +162,8 @@ public class BookEditAdmin extends BaseBookDetailController {
                         state_lbl.setText("Publishing");
 //                        state_lbl.setTextFill(Color.web("#32CD32"));
 
-                        state_hbox.getStyleClass().removeAll();
                         state_hbox.getStyleClass().remove("deleted");
+                        state_hbox.getStyleClass().removeAll();
                         state_hbox.getStyleClass().add("publishing");
 
                         available_hbox.setVisible(true);
@@ -171,7 +172,6 @@ public class BookEditAdmin extends BaseBookDetailController {
                         notice_lbl.setTextFill(Color.web("#32CD32"));
                         createTimeLine();
 
-                        QueryBookData.updateStateAndQuantity(book.getId(), "publishing", quantityToAdd);
 
                         int availableNumber = book.getQuantity() - book.getNumBorrowing();
                         if (availableNumber == 0) {
@@ -207,16 +207,17 @@ public class BookEditAdmin extends BaseBookDetailController {
                 // Xoa sach o day khong phai la xoa khoi database ma la
                 // gan state = deleted
                 QueryBookData.updateState(book.getId(), "deleted");
+                state_lbl.setText("Deleted");
                 book.setState("deleted");
                 toRestoreButton();
-                state_hbox.getStyleClass().removeAll();
                 state_hbox.getStyleClass().remove("publishing");
+                state_hbox.getStyleClass().removeAll();
                 state_hbox.getStyleClass().add("deleted");
+
                 notice_lbl.setText("Delete book successfully");
                 notice_lbl.setTextFill(Color.web("#32CD32"));
                 createTimeLine();
 
-                state_lbl.setText("Deleted");
 //                state_lbl.setTextFill(Color.RED);
 
                 available_hbox.setVisible(false);

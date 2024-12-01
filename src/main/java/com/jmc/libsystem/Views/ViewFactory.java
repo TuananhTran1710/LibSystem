@@ -138,18 +138,16 @@ public class ViewFactory {
 
 
     public AnchorPane getBookDetail() {
-        if (bookDetail == null) {
-            try {
-                bookDetail = new FXMLLoader(getClass().getResource("/FXML/Book/BookDetail.fxml")).load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            bookDetail = new FXMLLoader(getClass().getResource("/FXML/Book/BookDetail.fxml")).load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return bookDetail;
     }
 
     public AnchorPane getBookPropose() {
-        if(bookPropose == null) {
+        if (bookPropose == null) {
             try {
                 bookPropose = new FXMLLoader(getClass().getResource("/FXML/Book/BookProposeDetail.fxml")).load();
             } catch (IOException e) {
@@ -241,12 +239,10 @@ public class ViewFactory {
     }
 
     public AnchorPane getBookEditAdmin() {
-        if (bookEditAdmin == null) {
-            try {
-                bookEditAdmin = new FXMLLoader(getClass().getResource("/FXML/Book/BookEditAdmin.fxml")).load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            bookEditAdmin = new FXMLLoader(getClass().getResource("/FXML/Book/BookEditAdmin.fxml")).load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return bookEditAdmin;
     }

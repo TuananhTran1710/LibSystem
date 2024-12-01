@@ -7,11 +7,9 @@ import com.jmc.libsystem.QueryDatabase.QueryAccountData;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.QueryDatabase.QueryBookLoans;
 import com.jmc.libsystem.Views.ShowListBookFound;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -85,59 +83,48 @@ public class AdminDashboardController implements Initializable {
         showSortCategory();
     }
 
-    // lấy dữ liệu từ database
     public static ObservableList<Map<String, Object>> getBooks() {
-        // ObservableList để giữ dữ liệu cho UI
         ObservableList<Map<String, Object>> data = FXCollections.observableArrayList();
 
-        // Tạo một Task để load ảnh trong background
-        Task<Void> loadDataTask = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                ResultSet resultSet = QueryBookData.getBookStatistic();
-                try {
-                    while (resultSet.next()) {
-                        Map<String, Object> row = new HashMap<>();
-                        String title = resultSet.getString("title");
-                        Blob thumbnailBlob = resultSet.getBlob("thumbnail"); // Get image as Blob
-                        byte[] thumbnailImage = thumbnailBlob != null ? thumbnailBlob.getBytes(1, (int) thumbnailBlob.length()) : null;
-                        Image bookCoverImage;
-                        if (thumbnailImage != null) {
-                            // Create Image from byte array
-                            bookCoverImage = new Image(new ByteArrayInputStream(thumbnailImage));
-                        } else {
-                            bookCoverImage = ShowListBookFound.DEFAULT_BOOK_COVER;
-                        }
-
-                        String authors = resultSet.getString("authors");
-                        int quantity = resultSet.getInt("total_books");
-                        int loaned = resultSet.getInt("total_borrowed_books");
-                        String status = resultSet.getString("status");
-                        String id = resultSet.getString("google_book_id");
-
-                        row.put("title", title);
-                        row.put("image", bookCoverImage);
-                        row.put("authors", authors);
-                        row.put("quantity", quantity);
-                        row.put("loaned", loaned);
-                        row.put("status", status);
-                        row.put("id", id);
-
-                        // Thêm dữ liệu vào ObservableList trên JavaFX Application Thread
-                        Platform.runLater(() -> data.add(row));
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
+        // Truy vấn dữ liệu trực tiếp trên luồng chính
+        try {
+            ResultSet resultSet = QueryBookData.getBookStatistic();
+            while (resultSet.next()) {
+                Map<String, Object> row = new HashMap<>();
+                String title = resultSet.getString("title");
+                Blob thumbnailBlob = resultSet.getBlob("thumbnail"); // Get image as Blob
+                byte[] thumbnailImage = thumbnailBlob != null ? thumbnailBlob.getBytes(1, (int) thumbnailBlob.length()) : null;
+                Image bookCoverImage;
+                if (thumbnailImage != null) {
+                    // Create Image from byte array
+                    bookCoverImage = new Image(new ByteArrayInputStream(thumbnailImage));
+                } else {
+                    bookCoverImage = ShowListBookFound.DEFAULT_BOOK_COVER;
                 }
-                return null;
-            }
-        };
 
-        // Khởi chạy Task trong background
-        new Thread(loadDataTask).start();
+                String authors = resultSet.getString("authors");
+                int quantity = resultSet.getInt("total_books");
+                int loaned = resultSet.getInt("total_borrowed_books");
+                String status = resultSet.getString("status");
+                String id = resultSet.getString("google_book_id");
+
+                row.put("title", title);
+                row.put("image", bookCoverImage);
+                row.put("authors", authors);
+                row.put("quantity", quantity);
+                row.put("loaned", loaned);
+                row.put("status", status);
+                row.put("id", id);
+
+                data.add(row); // Thêm dữ liệu vào ObservableList
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return data;
     }
+
 
     private void getNumberData() throws SQLException {
 

@@ -180,7 +180,7 @@
                                        <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="221.0">
                                           <children>
                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Total in stock" />
-                                             <Label fx:id="quantity_lbl" styleClass="level3_content" text="Số lượng" />
+                                             <Label fx:id="quantity_lbl" styleClass="level3_content" />
                                           </children>
                                        </VBox>
                                     </children>
@@ -191,7 +191,7 @@
                                        <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="260.0">
                                           <children>
                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level2_content" text="Total Borrowed" />
-                                             <Label fx:id="totalLoan_lbl" styleClass="level3_content" text="Tổng số đã mượn" />
+                                             <Label fx:id="totalLoan_lbl" styleClass="level3_content" />
                                           </children>
                                        </VBox>
                                     </children>

@@ -26,7 +26,7 @@ public class QueryBookData {
     public static ResultSet getBookForSearchV2(String keyWord, String typeSearch) {
         ResultSet resultSet = null;
         // no limit num of book displayed
-        String query = "SELECT * FROM book WHERE " + typeSearch + " COLLATE utf8mb4_general_ci LIKE ?";
+        String query = "SELECT * FROM book WHERE " + typeSearch + " COLLATE utf8mb4_general_ci LIKE ? and state != 'In queue'";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             // Thêm % vào từ khóa tìm kiếm cho LIKE
@@ -118,7 +118,7 @@ public class QueryBookData {
     public static ResultSet getCountBookLoan() {
         ResultSet resultSet = null;
         try {
-            String query = "SELECT sum(totalLoan) as count FROM book;";
+            String query = "SELECT sum(numBorrowing) as count FROM book;";
 
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
 
@@ -167,7 +167,7 @@ public class QueryBookData {
 
     public static ResultSet getAllBook() {
         ResultSet resultSet = null;
-        String query = "SELECT * FROM book";
+        String query = "SELECT * FROM book where state != 'In queue'";
         try {
             PreparedStatement preparedStatement = DatabaseDriver.getConn().prepareStatement(query);
             resultSet = preparedStatement.executeQuery();

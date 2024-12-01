@@ -36,7 +36,7 @@ CREATE TABLE User (
     fullName varchar(50),
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    state VARCHAR(20) DEFAULT 'active'
+    state VARCHAR(20) DEFAULT 'Active'
     -- state : banned, active, deleted
 )COLLATE utf8mb4_bin;
 

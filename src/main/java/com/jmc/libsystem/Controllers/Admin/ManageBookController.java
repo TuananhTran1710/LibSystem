@@ -168,10 +168,12 @@ public class ManageBookController implements Initializable {
         searchAddBook_tf.clear();
         criteriaBoxAddBook.setValue(SearchCriteria.TITLE);
         BookAPI_hb.getChildren().clear();
+
+        refreshDataInLib();
     }
 
-    void refreshDataInLib() {
-        data.clear();
+    public void refreshDataInLib() {
+//        data.clear();
         getData(QueryBookData.getAllBook());
         addButton();
         BookTable();
@@ -192,7 +194,7 @@ public class ManageBookController implements Initializable {
     }
 
     private void BookTable() {
-        data = FXCollections.observableArrayList();
+//        data = FXCollections.observableArrayList();
         titleCol.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("title")));
         authorCol.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("authors")));
         categoriesCol.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("category")));
@@ -293,6 +295,7 @@ public class ManageBookController implements Initializable {
             }
         });
 
+//        getData(QueryBookData.getAllBook());
         tableView.setItems(data);
     }
 
@@ -304,57 +307,50 @@ public class ManageBookController implements Initializable {
         SuggestionBook.autoCompletionBinding.setPrefWidth(searchInLib_tf.getWidth() - 160);
         searchInLib_tf.clear();
         criteriaSearchLib.setValue(SearchCriteria.TITLE);
-        
+
         refreshDataInLib();
     }
 
     public void getData(ResultSet resultSet) {
         data.clear();
-        // Tạo một Task để load
-        Task<Void> loadDataTask = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                try {
-                    while (resultSet.next()) {
-                        Map<String, Object> row = new HashMap<>();
-                        String title = resultSet.getString("title");
-                        String authors = resultSet.getString("authors");
-                        String category = resultSet.getString("category");
-                        String state = resultSet.getString("state");
-                        if (state.equals("deleted")) {
-                            state = "Deleted";
-                        } else state = "Publishing";
+        try {
+            while (resultSet.next()) {
+                Map<String, Object> row = new HashMap<>();
+                String title = resultSet.getString("title");
+                String authors = resultSet.getString("authors");
+                String category = resultSet.getString("category");
+                String state = resultSet.getString("state");
+                if (state.equals("deleted")) {
+                    state = "Deleted";
+                } else if (state.equals("publishing"))
+                    state = "Publishing";
 
-                        String id = resultSet.getString("google_book_id");
+                String id = resultSet.getString("google_book_id");
 
-                        Blob thumbnailBlob = resultSet.getBlob("thumbnail"); // Get image as Blob
-                        byte[] thumbnailImage = thumbnailBlob != null ? thumbnailBlob.getBytes(1, (int) thumbnailBlob.length()) : null;
-                        Image bookCoverImage;
-                        if (thumbnailImage != null) {
-                            // Create Image from byte array
-                            bookCoverImage = new Image(new ByteArrayInputStream(thumbnailImage));
-                        } else {
-                            bookCoverImage = ShowListBookFound.DEFAULT_BOOK_COVER;
-                        }
-
-                        row.put("title", title);
-                        row.put("image", bookCoverImage);
-                        row.put("authors", authors);
-                        row.put("category", category);
-                        row.put("state", state);
-                        row.put("id", id);
-
-                        // Thêm dữ liệu vào ObservableList trên JavaFX Application Thread
-                        Platform.runLater(() -> data.add(row));
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                Blob thumbnailBlob = resultSet.getBlob("thumbnail"); // Get image as Blob
+                byte[] thumbnailImage = thumbnailBlob != null ? thumbnailBlob.getBytes(1, (int) thumbnailBlob.length()) : null;
+                Image bookCoverImage;
+                if (thumbnailImage != null) {
+                    // Create Image from byte array
+                    bookCoverImage = new Image(new ByteArrayInputStream(thumbnailImage));
+                } else {
+                    bookCoverImage = ShowListBookFound.DEFAULT_BOOK_COVER;
                 }
-                return null;
-            }
-        };
 
-        // Khởi chạy Task trong background
-        new Thread(loadDataTask).start();
+                row.put("title", title);
+                row.put("image", bookCoverImage);
+                row.put("authors", authors);
+                row.put("category", category);
+                row.put("state", state);
+                row.put("id", id);
+
+                // Thêm dữ liệu vào ObservableList trong JavaFX Application Thread
+                data.add(row);  // Cập nhật trực tiếp mà không cần Task
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+
 }

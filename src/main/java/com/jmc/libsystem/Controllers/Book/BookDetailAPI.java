@@ -28,6 +28,8 @@ public class BookDetailAPI extends BaseBookDetailController {
     public Button update_btn;
     public Button delete_btn;
     public ToggleButton overview_btn;
+    public Label quantity_lbl;
+    public Label totalLoan_lbl;
 
     public static BookDetailAPI getInstance() {
         return instance;
@@ -42,6 +44,7 @@ public class BookDetailAPI extends BaseBookDetailController {
         super.initialize(url, resourceBundle);
 
         quantity_tf.setText("1");
+        totalLoan_lbl.setText("");
         quantity_tf.textProperty().addListener((observable, oldValue, newValue) -> {
             // Kiểm tra nếu giá trị không phải là số hoặc là số âm
             try {
@@ -64,6 +67,8 @@ public class BookDetailAPI extends BaseBookDetailController {
             int num = Integer.parseInt(quantity_tf.getText());
             QueryBookData.addBook(book, num);
             book.setQuantity(num);
+            book.setState("publishing");
+            quantity_lbl.setText("" + num);
             toUpdateButton();
 
             notice_lbl.setText("Add book successfully");
@@ -87,6 +92,8 @@ public class BookDetailAPI extends BaseBookDetailController {
             int num = Integer.parseInt(quantity_tf.getText());
             if (num != book.getQuantity()) {
                 QueryBookData.updateBook(book.getId(), num);
+                book.setQuantity(num);
+                quantity_lbl.setText("" + num);
                 notice_lbl.setText("Update book successfully");
                 notice_lbl.setTextFill(Color.web("#32CD32"));
             } else {
@@ -107,7 +114,9 @@ public class BookDetailAPI extends BaseBookDetailController {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 // Nếu người dùng chọn OK, tiến hành xóa sách
                 QueryBookData.deleteBook(book.getId());
+                book.setState("deleted");
                 quantity_tf.setText("1");
+                quantity_lbl.setText("Not available");
                 toAddButton();
 
                 notice_lbl.setText("Delete book successfully");

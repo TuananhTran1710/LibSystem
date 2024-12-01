@@ -57,7 +57,7 @@ public class AdminDashboardController implements Initializable {
     public Label category3;
     public Label categoryNumber3;
     public ProgressBar progress3;
-    private final int totalQuantity = 100000;
+    private final int totalQuantity = 10000;
 
     public HashMap<String, Book> bookList = new HashMap<>();
     // luu book_id va ResultSet cua book tu database

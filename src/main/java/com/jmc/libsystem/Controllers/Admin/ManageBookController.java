@@ -170,7 +170,7 @@ public class ManageBookController implements Initializable {
         BookAPI_hb.getChildren().clear();
     }
 
-    void refreshDataInLib() {
+    public void refreshDataInLib() {
         data.clear();
         getData(QueryBookData.getAllBook());
         addButton();
@@ -304,7 +304,7 @@ public class ManageBookController implements Initializable {
         SuggestionBook.autoCompletionBinding.setPrefWidth(searchInLib_tf.getWidth() - 160);
         searchInLib_tf.clear();
         criteriaSearchLib.setValue(SearchCriteria.TITLE);
-        
+
         refreshDataInLib();
     }
 

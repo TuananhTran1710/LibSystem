@@ -22,7 +22,7 @@
                   <Label fx:id="name_lbl" layoutX="40.0" layoutY="7.0" styleClass="section_title" text="Label" />
                   <Button fx:id="notice_btn" layoutX="784.0" layoutY="5.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" AnchorPane.rightAnchor="30.0">
                      <graphic>
-                        <FontAwesomeIconView glyphName="BELL" size="20" />
+                        <FontAwesomeIconView glyphName="BATTERY_3" size="20" />
                      </graphic>
                   </Button>
                </children>

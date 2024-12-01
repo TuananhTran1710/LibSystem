@@ -107,7 +107,7 @@
             <ToggleButton fx:id="overview_btn" mnemonicParsing="false" prefHeight="35.0" prefWidth="235.0" styleClass="toggle2" text="Overview" />
             <ToggleButton fx:id="commentToggle_btn" mnemonicParsing="false" prefHeight="35.0" prefWidth="230.0" selected="true" styleClass="toggle1" text="Comments" />
         </HBox>
-        <StackPane prefHeight="409.0" prefWidth="441.0">
+        <StackPane prefHeight="435.0" prefWidth="450.0">
             <VBox fx:id="overview_vbox" alignment="TOP_LEFT" fillWidth="false" minHeight="399.0" minWidth="450" prefHeight="406.0" prefWidth="450.0" styleClass="overview">
                 <AnchorPane prefHeight="28.0" prefWidth="440.0">
                     <HBox fx:id="state_hbox" alignment="CENTER" layoutX="8.0" prefHeight="28.0" prefWidth="97.0" styleClass="publishing" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -117,7 +117,7 @@
                             </font></Label>
                     </HBox>
                 </AnchorPane>
-                <GridPane prefHeight="60.0" prefWidth="440.0">
+                <GridPane hgap="10.0" prefHeight="60.0" prefWidth="440.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -125,21 +125,24 @@
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level1_content" text="Authors" />
-                        <VBox fx:id="authorsContainer" prefHeight="49.0" prefWidth="226.0" spacing="5.0" />
-                  <GridPane.margin>
-                     <Insets right="5.0" />
-                  </GridPane.margin>
-                    </VBox>
                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level1_content" text="Categories" wrappingWidth="89.7451171875" />
-                        <VBox fx:id="categoriesContainer" prefHeight="54.0" prefWidth="226.0" spacing="5">
+                        <VBox fx:id="categoriesContainer" maxHeight="110.0" prefHeight="54.0" prefWidth="226.0" spacing="5">
                             <padding>
                                 <Insets top="5.0" />
                             </padding>
                         </VBox>
                     </VBox>
+               <VBox layoutX="230.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                     <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level1_content" text="Authors" wrappingWidth="89.7451171875" />
+                     <VBox fx:id="authorsContainer" maxHeight="110.0" prefHeight="54.0" prefWidth="226.0" spacing="5">
+                        <padding>
+                           <Insets top="5.0" />
+                        </padding>
+                     </VBox>
+                  </children>
+               </VBox>
                 </GridPane>
                 <Separator prefWidth="200.0" visible="false" />
                 <VBox prefHeight="90.0" prefWidth="440.0">
@@ -206,7 +209,7 @@
             </AnchorPane>
             </VBox>
             <VBox fx:id="comment_vbox" prefHeight="400.0" prefWidth="436.0" spacing="10" styleClass="comments" visible="false">
-                <ScrollPane fx:id="scrollPane_cmt" fitToWidth="true" hbarPolicy="NEVER" prefHeight="342.0" prefWidth="415.0" vbarPolicy="ALWAYS">
+                <ScrollPane fx:id="scrollPane_cmt" fitToWidth="true" hbarPolicy="NEVER" prefHeight="234.0" prefWidth="450.0" vbarPolicy="ALWAYS">
                     <VBox fx:id="comment_list" alignment="TOP_CENTER" prefHeight="306.0" prefWidth="429.0">
                         <VBox prefHeight="55.0" prefWidth="386.0" styleClass="cmt">
                             <HBox prefHeight="47.0" prefWidth="458.0">
@@ -227,19 +230,19 @@
                         </padding>
                     </VBox>
                 </ScrollPane>
-                <AnchorPane prefHeight="164.0" prefWidth="438.0" styleClass="container">
-                    <Button fx:id="edit_btn" layoutX="344.0" layoutY="4.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="80.0" styleClass="button_1" text="Edit" AnchorPane.topAnchor="5.0" />
-                    <TextArea fx:id="text_cmt" layoutX="5.0" layoutY="43.0" prefHeight="78.0" prefWidth="428.0" promptText="Write your comment" wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                <AnchorPane prefHeight="186.0" prefWidth="450.0" styleClass="new_cmt">
+                    <Button fx:id="edit_btn" layoutX="344.0" layoutY="4.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="80.0" styleClass="button_1" text="Edit" AnchorPane.topAnchor="10.0" />
+                    <TextArea fx:id="text_cmt" layoutX="5.0" layoutY="43.0" prefHeight="78.0" prefWidth="428.0" promptText="Write your comment..." wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
                         <font>
                             <Font size="14.0" />
                         </font>
                     </TextArea>
-                    <Button fx:id="save_btn" layoutX="248.0" layoutY="125.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" styleClass="button_1" text="Save" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="125.0" />
+                    <Button fx:id="save_btn" layoutX="248.0" layoutY="125.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" styleClass="button_1" text="Save" AnchorPane.rightAnchor="145.0" AnchorPane.topAnchor="140.0" />
                     <Button fx:id="comment_btn" layoutX="168.0" layoutY="132.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" styleClass="button_1" text="Send comment" visible="false" />
-                    <Button fx:id="deleted_btn" layoutX="169.0" layoutY="132.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" styleClass="button_1" text="Deleted" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="125.0" />
+                    <Button fx:id="deleted_btn" layoutX="169.0" layoutY="132.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" styleClass="button_1" text="Deleted" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="140.0" />
                <HBox layoutX="10.0" layoutY="22.0" prefHeight="20.0" prefWidth="225.0" spacing="6.0" AnchorPane.topAnchor="20.0">
                   <children>
-                          <Label alignment="TOP_CENTER" prefHeight="11.0" prefWidth="91.0" styleClass="title2" text="Your Rating:">
+                          <Label alignment="TOP_CENTER" prefHeight="11.0" prefWidth="91.0" styleClass="txt" text="Your Rating:">
                               <font>
                                   <Font name="System Bold" size="14.0" />
                               </font>

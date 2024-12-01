@@ -2,16 +2,60 @@
     -fx-background-color: #EEEEEE;
 }
 
-/* SCROLL PANE */
-.scroll-pane {
-    -fx-border-color: #132A13;
-    -fx-border-width: 2px;
-    -fx-border-radius: 5px;
+/* 4 mục thống kê */
+.stat_tbl_view {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px 0 5px 0;
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+
+.stat_tbl {
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 10, 0, 0, 10);
+}
+
+.stat_tbl VBox {
     -fx-background-color: #FFFFFF;
 }
 
+.stat_tbl FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+.stat_tbl_gradient {
+    -fx-background-color: linear-gradient(to right, #132A13, #253F25);
+}
+
+.stat_tbl_title {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Calibri";
+    -fx-font-size: 2.0em;
+    -fx-font-weight: bold;
+}
+
+.stat_tbl_number {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Calibri";
+    -fx-font-size: 1.9em;
+}
+
+/* SCROLL PANE */
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.fix_mau {
+    -fx-background-color: transparent;
+}
+
+.fix_mau2 {
+    -fx-background-color: #EEEEEE;
+}
+
 .scroll-pane .viewport {
-    -fx-background-color: rgba(19, 42, 19, 0.1);
+    -fx-background-color: transparent;
 }
 
 /* con lăn */
@@ -55,27 +99,29 @@
 /* Định dạng cho toàn bộ table view cột */
 .table-view .column-header {
     -fx-background-color: white;
-    -fx-border-width: 0 0.25 1px 0;
-    -fx-border-color: gray;
+    -fx-border-width: 0;
     -fx-font-size: 14px;
 }
 
 .table-view .table-row-cell {
     -fx-background-color: white;
     -fx-text-fill: black;
+    -fx-border-weight: 0;
 }
 .table-view .table-cell {
     -fx-alignment: CENTER;        /* Căn giữa nội dung */
     -fx-text-overrun: ellipsis;   /* Hiển thị dấu chấm khi vượt quá chiều rộng */
-    -fx-padding: 5;               /* Khoảng cách nội dung trong cell */
+    -fx-padding: 10px;               /* Khoảng cách nội dung trong cell */
     -fx-wrap-text: false;         /* Không cho phép xuống dòng */
     -fx-font-family: "Arial";     /* Font chữ */
     -fx-font-size: 13px;          /* Kích thước chữ */
+    -fx-border-color: transparent;
 }
 
 .table-view .cell {
     -fx-alignment: CENTER; /* Căn giữa nội dung */
     -fx-padding: 0;        /* Xóa padding thừa */
+    -fx-border-color: transparent;
 }
 
 
@@ -100,48 +146,58 @@
     -fx-text-fill: white;
 }
 
-/* dòng tiêu đề */
-#Title {
-    -fx-font-family: "Britannic Bold";
-    -fx-font-size: 3em;
-}
-
-.miniTitle{
-    -fx-font-family: "Book Antiqua";
-    -fx-font-size: 2em;
-    -fx-font-weight: bold;
-}
-
+/* thống kê chủ đề */
 .statistic {
-    -fx-background-color: white;
-    -fx-border-color: #cccccc;
-    -fx-border-radius: 10px;
+    -fx-background-color: #FFFFFF;
     -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
-    -fx-border-width: 1px;
+    -fx-padding: 5px 0 5px 0;
+    -fx-alignment: center;
+    -fx-spacing: 10;
 }
 
-.statistictitle {
-    -fx-font-family: "GeistSans";
-    -fx-font-size: 15px;
-    -fx-font-color: black;
-}
-
-.number {
-    -fx-font-family: "GeistSans";
-    -fx-font-size: 20px;
+.statistic .tit {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:2.0em;
     -fx-font-weight: bold;
 }
 
-.number-error {
-    -fx-font-family: "GeistSans";
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-    -fx-text-fill: red;
+.statistic .cont {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.5em;
+}
+
+.statistic .num {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size:1.2em;
 }
 
 .progress-bar {
-    -fx-accent: black;     /* Màu của thanh tiến trình */
-    -fx-control-inner-background: #F7F7F9; /* Màu nền */
+    -fx-control-inner-background: transparent;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.progress-bar .track {
+    -fx-background-color: #D1E2C4;
+    -fx-background-radius: 15px;
+}
+
+.progress-bar .bar {
+    -fx-background-radius: 15px;
+}
+
+.cage1 {
+    -fx-accent: #3A5A40;
+}
+
+.cage2 {
+    -fx-accent: #588157;
+}
+
+.cage3 {
+    -fx-accent: #A3B18A;
 }
 

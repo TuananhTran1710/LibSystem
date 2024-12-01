@@ -264,16 +264,19 @@ public class QueryBookLoans {
     // lấy dữ liệu từ bảng bookloans trả về list, dùng trong user profile
     public static List<BookLoan> getBookLoansByUserId(String userId) {
         List<BookLoan> bookLoans = new ArrayList<>();
-        String query = "SELECT b.title, bl.borrow_date, bl.return_date, " +
-                "CASE " +
-                "  WHEN bl.return_date IS NULL AND bl.due_date < CURDATE() THEN 'Overdue' " +
-                "  WHEN bl.return_date IS NULL THEN 'Borrowing' " +
-                "  ELSE 'Returned' " +
-                "END AS status " +
-                "FROM BookLoans bl " +
-                "JOIN Book b ON bl.google_book_id = b.google_book_id " +
-                "WHERE bl.user_id = ? " +
-                "ORDER BY (bl.return_date IS NULL) DESC, bl.borrow_date DESC";
+        String query = "SELECT b.title, " +
+                " bl.borrow_date," +
+                " bl.return_date," +
+                " CASE" +
+                " WHEN bl.return_date IS NULL AND DATEDIFF(CURDATE(), bl.borrow_date) > 60 THEN 'Overdue'" +
+                " WHEN bl.return_date IS NULL THEN 'Borrowing'" +
+                " WHEN bl.return_date IS NOT NULL AND DATEDIFF(bl.return_date, bl.due_date) <= 0 THEN 'On time'" +
+                " WHEN bl.return_date IS NOT NULL AND DATEDIFF(bl.return_date, bl.due_date) > 0 THEN 'Overdue' " +
+                " END AS status" +
+                " FROM BookLoans bl" +
+                " JOIN Book b ON bl.google_book_id = b.google_book_id " +
+                " WHERE bl.user_id = ?" +
+                " ORDER BY (bl.return_date IS NULL) DESC, bl.borrow_date DESC;";
 
         try (PreparedStatement stmt = DatabaseDriver.getConn().prepareStatement(query)) {
             stmt.setString(1, userId);

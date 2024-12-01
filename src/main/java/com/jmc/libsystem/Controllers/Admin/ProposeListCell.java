@@ -2,10 +2,11 @@ package com.jmc.libsystem.Controllers.Admin;
 
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.QueryDatabase.QueryBookrcm;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
     private AnchorPane root;
 
     public ProposeListCell() {
-        if(root == null) {
+        if (root == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/ProposeCell.fxml"));
                 loader.setController(this); // Liên kết controller
@@ -102,7 +103,7 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
         AnchorPane.setRightAnchor(accept_bt, 100.0);
     }
 
-    private  void onAccept(String book_id) {
+    private void onAccept(String book_id) {
         //System.out.println("Accepted: " + book.get("title"));
         accept_bt.setVisible(false);
         accept_bt.setDisable(true);
@@ -110,43 +111,57 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
         reject_bt.setDisable(true);
         number_tf.setVisible(true);
         number_tf.setText("1");
+        number_tf.setAlignment(Pos.CENTER);
+        number_tf.setStyle("-fx-font-size: 15px;");
+        number_tf.setPrefWidth(80);
         number_tf.textProperty().addListener((observable, oldValue, newValue) -> {
             // Kiểm tra nếu giá trị không phải là số hoặc là số âm
             try {
                 int quantity = Integer.parseInt(newValue);
                 if (quantity <= 0) {
                     // Nếu là số âm hoặc bằng 0, đặt lại giá trị về giá trị cũ
-                    number_tf.setText("");
+                    number_tf.setText(oldValue);
                 }
             } catch (NumberFormatException e) {
                 // Nếu không phải là số, đặt lại giá trị về giá trị cũ
-                number_tf.setText("");
+                number_tf.setText(oldValue);
             }
         });
-        number_tf.setOnAction(event -> {
-            String text = number_tf.getText();
-            if (text.isEmpty()) {
-                if (confirmBack()) {
-                    showInQueue();
-                    number_tf.setVisible(false);
-                }
-                else {
-                    number_tf.requestFocus();
-                }
-            }
-            else {
-                QueryBookData.updateBook(book_id, Integer.parseInt(text));
-                number_tf.setVisible(false);
-                QueryBookrcm.updateStatePropose(book_id, "Accept");
-                QueryBookData.updateState(book_id, "publishing");
-                showAccept();
-                try {
-                    ResponseController.getInstance().updateNumber();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+        number_tf.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                switch (keyEvent.getCode()) {
+                    case ENTER -> {
+                        String text = number_tf.getText().trim(); // Loại bỏ khoảng trắng thừa
+                        if (text.isEmpty()) {
+                            if (confirmBack()) {
+                                showInQueue();
+                                number_tf.setVisible(false);
+                            } else {
+                                number_tf.requestFocus(); // Đặt lại focus nếu người dùng không muốn quay lại
+                            }
+                        } else {
+                            try {
+                                int number = Integer.parseInt(text);
+                                QueryBookData.updateBook(book_id, number);
+                                QueryBookrcm.updateStatePropose(book_id, "Accept");
+                                QueryBookData.updateState(book_id, "publishing");
+                                showAccept();
+                                ResponseController.getInstance().updateNumber();
+                            } catch (NumberFormatException e) {
+                                System.err.println("Input is not a valid number: " + e.getMessage());
+                                number_tf.requestFocus(); // Nhắc nhở người dùng nhập số hợp lệ
+                            } catch (SQLException e) {
+                                throw new RuntimeException("Database update failed", e);
+                            } finally {
+                                number_tf.setVisible(false);
+                            }
+                        }
+                    }
                 }
             }
         });
+
     }
 
     private void onReject(String book_id) {

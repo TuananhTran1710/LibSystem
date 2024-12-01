@@ -414,7 +414,6 @@ public class BookEditAdmin extends BaseBookDetailController {
     @Override
     public void modifyButton() {
         moveToOverviewVBox();
-
         setState();
     }
 
@@ -424,8 +423,8 @@ public class BookEditAdmin extends BaseBookDetailController {
             state_lbl.setText("Deleted");
 //            state_lbl.setTextFill(Color.RED);
 
-            state_hbox.getStyleClass().removeAll();
             state_hbox.getStyleClass().remove("publishing");
+//            state_hbox.getStyleClass().removeAll();
             state_hbox.getStyleClass().add("deleted");
             toRestoreButton();
         } else {
@@ -433,8 +432,8 @@ public class BookEditAdmin extends BaseBookDetailController {
             state_lbl.setText("Publishing");
 //            state_lbl.setTextFill(Color.web("#32CD32"));
 
-            state_hbox.getStyleClass().removeAll();
             state_hbox.getStyleClass().remove("deleted");
+//            state_hbox.getStyleClass().removeAll();
             state_hbox.getStyleClass().add("publishing");
             toEditButton();
         }
@@ -463,11 +462,11 @@ public class BookEditAdmin extends BaseBookDetailController {
                         String status = "on time"; // Mặc định là đúng hạn
 
                         if (returnDate == null && dueDate.isBefore(LocalDate.now())) {
-                            status = "overdue";
+                            status = "Overdue";
                         } else if (returnDate != null && returnDate.isBefore(dueDate)) {
-                            status = "on time";
+                            status = "On time";
                         } else if (returnDate != null && returnDate.isAfter(dueDate)) {
-                            status = "overdue";
+                            status = "Overdue";
                         }
 
                         row.put("user_id", user_id);    // key phai khop voi ten o ham getTableList

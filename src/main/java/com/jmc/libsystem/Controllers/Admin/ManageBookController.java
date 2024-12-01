@@ -168,6 +168,8 @@ public class ManageBookController implements Initializable {
         searchAddBook_tf.clear();
         criteriaBoxAddBook.setValue(SearchCriteria.TITLE);
         BookAPI_hb.getChildren().clear();
+        
+        refreshDataInLib();
     }
 
     public void refreshDataInLib() {

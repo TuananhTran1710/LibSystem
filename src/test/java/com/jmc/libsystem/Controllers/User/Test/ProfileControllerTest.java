@@ -12,12 +12,41 @@ import org.testfx.util.WaitForAsyncUtils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class ProfileControllerTest {
+public class ProfileControllerTest {
+
     private ProfileController profileController;
+
+    private TextField user_id_fld;
+    private TextField fullname_fld;
+    private TextField email_fld;
+    private TextField password_fld;
 
     @BeforeEach
     void setUp() {
-        profileController = new ProfileController(); // Khởi tạo controller
+        // Khởi tạo controller
+        profileController = new ProfileController();
+
+        // Mock các TextField thay vì sử dụng chúng trực tiếp
+        user_id_fld = mock(TextField.class);
+        fullname_fld = mock(TextField.class);
+        email_fld = mock(TextField.class);
+        password_fld = mock(TextField.class);
+
+        // Giả lập hành vi của các phương thức setText và setEditable để tránh NullPointerException
+        doNothing().when(user_id_fld).setText(anyString());
+        doNothing().when(fullname_fld).setText(anyString());
+        doNothing().when(email_fld).setText(anyString());
+        doNothing().when(password_fld).setText(anyString());
+        doNothing().when(user_id_fld).setEditable(false);
+        doNothing().when(fullname_fld).setEditable(false);
+        doNothing().when(email_fld).setEditable(false);
+        doNothing().when(password_fld).setEditable(false);
+
+        // Gán các TextField mock vào controller
+        profileController.user_id_fld = user_id_fld;
+        profileController.fullname_fld = fullname_fld;
+        profileController.email_fld = email_fld;
+        profileController.password_fld = password_fld;
     }
 
     @Test
@@ -34,8 +63,8 @@ class ProfileControllerTest {
             mockedModel.when(Model::getInstance).thenReturn(mock(Model.class));
             when(Model.getInstance().getMyUser()).thenReturn(userMock);
 
-            // Gọi phương thức công khai để kiểm thử logic mà không tác động đến giao diện
-            profileController.showProfile(); // Phương thức này sẽ gọi refreshProfile()
+            // Gọi phương thức loadUserProfile() trực tiếp mà không cần gọi showProfile() hay refreshProfile()
+            profileController.loadUserProfile();
 
             // Kiểm tra xem các giá trị trả về từ User có đúng không
             assertEquals("12345", userMock.getId());
@@ -43,9 +72,17 @@ class ProfileControllerTest {
             assertEquals("john.doe@example.com", userMock.getEmail());
             assertEquals("password123", userMock.getPassword());
 
-            // Kiểm tra nếu các phương thức setText có được gọi đúng với dữ liệu người dùng
-            // (Thông qua mock, không liên quan đến giao diện)
-            verify(Model.getInstance()).getMyUser();
+            // Kiểm tra các trường TextField có nhận đúng giá trị không
+            verify(user_id_fld).setText("12345");
+            verify(fullname_fld).setText("John Doe");
+            verify(email_fld).setText("john.doe@example.com");
+            verify(password_fld).setText("password123");
+
+            // Kiểm tra các trường không chỉnh sửa
+            verify(user_id_fld).setEditable(false);
+            verify(fullname_fld).setEditable(false);
+            verify(email_fld).setEditable(false);
+            verify(password_fld).setEditable(false);
         }
     }
 }

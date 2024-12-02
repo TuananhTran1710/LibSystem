@@ -117,7 +117,7 @@
                             </font></Label>
                     </HBox>
                 </AnchorPane>
-                <GridPane hgap="10.0" prefHeight="60.0" prefWidth="440.0">
+                <GridPane hgap="10.0" prefHeight="90.0" prefWidth="440.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -127,7 +127,7 @@
                     </rowConstraints>
                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level1_content" text="Categories" wrappingWidth="89.7451171875" />
-                        <VBox fx:id="categoriesContainer" maxHeight="110.0" prefHeight="54.0" prefWidth="226.0" spacing="5">
+                        <VBox fx:id="categoriesContainer" maxHeight="110.0" prefHeight="104.0" prefWidth="215.0" spacing="5">
                             <padding>
                                 <Insets top="5.0" />
                             </padding>
@@ -136,7 +136,7 @@
                <VBox layoutX="230.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
                   <children>
                      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="level1_content" text="Authors" wrappingWidth="89.7451171875" />
-                     <VBox fx:id="authorsContainer" maxHeight="110.0" prefHeight="54.0" prefWidth="226.0" spacing="5">
+                     <VBox fx:id="authorsContainer" maxHeight="110.0" prefHeight="70.0" prefWidth="215.0" spacing="5">
                         <padding>
                            <Insets top="5.0" />
                         </padding>

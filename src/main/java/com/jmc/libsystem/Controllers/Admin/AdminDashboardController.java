@@ -58,6 +58,7 @@ public class AdminDashboardController implements Initializable {
     private final int totalQuantity = 100;
 
     public HashMap<String, Book> bookList = new HashMap<>();
+    public ScrollPane scrollPane1;
     // luu book_id va ResultSet cua book tu database
 
     @Override
@@ -74,6 +75,11 @@ public class AdminDashboardController implements Initializable {
     }
 
     public void refreshData() {
+        scrollPane1.setVvalue(0.0);
+        ScrollBar verticalScrollBar = (ScrollBar) listBook.lookup(".scroll-bar:vertical");
+        if (verticalScrollBar != null) {
+            verticalScrollBar.setValue(0); // Đưa thanh cuộn về đầu
+        }
         getTableList();
         try {
             getNumberData();

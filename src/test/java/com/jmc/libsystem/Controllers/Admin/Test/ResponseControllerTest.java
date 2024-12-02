@@ -1,13 +1,13 @@
 package com.jmc.libsystem.Controllers.Admin.Test;
 
 import com.jmc.libsystem.Controllers.Admin.ResponseController;
-import com.jmc.libsystem.QueryDatabase.QueryBookrcm;
+import com.jmc.libsystem.QueryDatabase.QueryBookRecommend;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
-import javafx.application.Platform;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 
@@ -65,11 +65,11 @@ class ResponseControllerTest extends ApplicationTest {
         when(mockResultSet.getString("count")).thenReturn("10");
 
         // Mock QueryBookrcm
-        try (MockedStatic<QueryBookrcm> mockedQuery = mockStatic(QueryBookrcm.class)) {
-            mockedQuery.when(QueryBookrcm::getCountAllPropose).thenReturn(mockResultSet);
-            mockedQuery.when(() -> QueryBookrcm.getNumberofState("In queue")).thenReturn(mockResultSet);
-            mockedQuery.when(() -> QueryBookrcm.getNumberofState("Accept")).thenReturn(mockResultSet);
-            mockedQuery.when(() -> QueryBookrcm.getNumberofState("Reject")).thenReturn(mockResultSet);
+        try (MockedStatic<QueryBookRecommend> mockedQuery = mockStatic(QueryBookRecommend.class)) {
+            mockedQuery.when(QueryBookRecommend::getCountAllPropose).thenReturn(mockResultSet);
+            mockedQuery.when(() -> QueryBookRecommend.getNumberofState("In queue")).thenReturn(mockResultSet);
+            mockedQuery.when(() -> QueryBookRecommend.getNumberofState("Accept")).thenReturn(mockResultSet);
+            mockedQuery.when(() -> QueryBookRecommend.getNumberofState("Reject")).thenReturn(mockResultSet);
 
             // Gọi hàm updateNumber
             Platform.runLater(() -> {

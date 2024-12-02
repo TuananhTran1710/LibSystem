@@ -60,6 +60,10 @@ public class ManageUserController implements Initializable {
     }
 
     public void refreshData() {
+        ScrollBar verticalScrollBar = (ScrollBar) userTable.lookup(".scroll-bar:vertical");
+        if (verticalScrollBar != null) {
+            verticalScrollBar.setValue(0); // Đưa thanh cuộn về đầu
+        }
         data.clear();
         getData(QueryAccountData.getAllAccount());
         criteriaBox.setValue("ID");

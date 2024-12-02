@@ -1,12 +1,15 @@
 package com.jmc.libsystem.Controllers.Admin;
 
-import com.jmc.libsystem.QueryDatabase.QueryBookrcm;
+import com.jmc.libsystem.QueryDatabase.QueryBookRecommend;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollBar;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -31,7 +34,7 @@ public class ResponseController implements Initializable {
         instance = this;
     }
 
-    public static ResponseController getInstance(){
+    public static ResponseController getInstance() {
         return instance;
     }
 
@@ -43,9 +46,13 @@ public class ResponseController implements Initializable {
     }
 
     public void refreshData() {
+        ScrollBar verticalScrollBar = (ScrollBar) list_propose.lookup(".scroll-bar:vertical");
+        if (verticalScrollBar != null) {
+            verticalScrollBar.setValue(0); // Đưa thanh cuộn về đầu
+        }
         choice_state.setValue("All");
         dataBook.clear();
-        getDataList(QueryBookrcm.getAllPropse());
+        getDataList(QueryBookRecommend.getAllPropse());
         choice_state.setOnAction(event -> searchChoiceAction());
         UserTable();
         try {
@@ -55,21 +62,20 @@ public class ResponseController implements Initializable {
         }
     }
 
-    private void UserTable(){
+    private void UserTable() {
         list_propose.setCellFactory(param -> new ProposeListCell());
         list_propose.setSelectionModel(null);
         list_propose.setItems(dataBook);
     }
 
-    private void searchChoiceAction(){
+    private void searchChoiceAction() {
         String selectedValue = choice_state.getSelectionModel().getSelectedItem();
 
-        if(selectedValue == "All") {
+        if (selectedValue == "All") {
             dataBook.clear();
-            getDataList(QueryBookrcm.getAllPropse());
-        }
-        else {
-            ResultSet resultSet = QueryBookrcm.getProposeForFilter(selectedValue);
+            getDataList(QueryBookRecommend.getAllPropse());
+        } else {
+            ResultSet resultSet = QueryBookRecommend.getProposeForFilter(selectedValue);
             //System.out.println("Can access");
             dataBook.clear();
             getDataList(resultSet);
@@ -111,16 +117,16 @@ public class ResponseController implements Initializable {
     }
 
     public void updateNumber() throws SQLException {
-        String total = getNumber(QueryBookrcm.getCountAllPropose());
+        String total = getNumber(QueryBookRecommend.getCountAllPropose());
         total_proposal.setText(total);
 
-        String pd = getNumber(QueryBookrcm.getNumberofState("In queue"));
+        String pd = getNumber(QueryBookRecommend.getNumberofState("In queue"));
         pending.setText(pd);
 
-        String apt = getNumber(QueryBookrcm.getNumberofState("Accept"));
+        String apt = getNumber(QueryBookRecommend.getNumberofState("Accept"));
         accept.setText(apt);
 
-        String rj = getNumber(QueryBookrcm.getNumberofState("Reject"));
+        String rj = getNumber(QueryBookRecommend.getNumberofState("Reject"));
         rejected.setText(rj);
     }
 

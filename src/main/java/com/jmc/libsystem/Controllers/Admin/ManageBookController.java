@@ -173,7 +173,10 @@ public class ManageBookController implements Initializable {
     }
 
     public void refreshDataInLib() {
-//        data.clear();
+        ScrollBar verticalScrollBar = (ScrollBar) tableView.lookup(".scroll-bar:vertical");
+        if (verticalScrollBar != null) {
+            verticalScrollBar.setValue(0); // Đưa thanh cuộn về đầu
+        }
         getData(QueryBookData.getAllBook());
         addButton();
         BookTable();
@@ -295,7 +298,6 @@ public class ManageBookController implements Initializable {
             }
         });
 
-//        getData(QueryBookData.getAllBook());
         tableView.setItems(data);
     }
 

@@ -120,7 +120,7 @@ public class BaseBookDetailController implements Initializable {
         // Hiển thị danh sách tác giả dưới dạng các ô, mỗi dòng chứa 2 ô
         authorsContainer.getChildren().clear();
         List<String> authors = List.of(book.getAuthors().split(", "));
-        for (int i = 0; i < authors.size(); i += 2) {
+        for (int i = 0; i < Math.min(authors.size(), 4); i += 2) {
             HBox row = new HBox(5);
             for (int j = i; j < i + 2 && j < authors.size(); j++) {
                 String author = authors.get(j);

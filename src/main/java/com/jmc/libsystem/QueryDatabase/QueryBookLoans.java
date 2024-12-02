@@ -312,7 +312,7 @@ public class QueryBookLoans {
         return resultSet;
     }
 
-    public List<Book> getLoansForUser(String userId) {
+    public static List<Book> getLoansForUser(String userId) {
         List<Book> books = new ArrayList<>();
         // Giả lập việc lấy sách từ cơ sở dữ liệu dựa trên userId
         books.add(new Book("1", "The Catcher in the Rye", "J.D. Salinger", new byte[] {}));

@@ -61,6 +61,6 @@ class AdminDashboardControllerUITest extends ApplicationTest {
 
         //System.out.println(listBook.getItems().size());
 
-        assertFalse(!listBook.getItems().isEmpty());
+        assertFalse(listBook.getItems().isEmpty());
     }
 }

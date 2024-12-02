@@ -115,7 +115,7 @@ public class MyBookController implements Initializable {
 
     /*-----------------------get data -----------------------*/
 
-    private static int getBorrowBook(String userId) throws SQLException {
+    public static int getBorrowBook(String userId) throws SQLException {
         try (ResultSet resultSet = QueryBookLoans.getTotalLoaned(userId)) {
             if (resultSet.next()) {
                 int totalBorrows = resultSet.getInt("total_borrows");

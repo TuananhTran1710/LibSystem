@@ -74,7 +74,7 @@ public class ProfileController implements Initializable {
     }
 
     //tải thông tin người dùng
-    private void loadUserProfile() {
+    public void loadUserProfile() {
         User current_user = Model.getInstance().getMyUser();
 
         //gán thông tin cho các textfield

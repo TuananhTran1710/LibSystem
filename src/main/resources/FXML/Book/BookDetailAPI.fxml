@@ -33,7 +33,7 @@
         <FontAwesomeIconView glyphName="BOOK" layoutX="766.0" layoutY="34.0" size="30" AnchorPane.leftAnchor="766.0" />
         <Line endX="400.0" layoutX="425.0" layoutY="50.0" startX="-350.0" AnchorPane.leftAnchor="50.0" />
     </AnchorPane>
-    <VBox alignment="CENTER" fillWidth="false" layoutX="51.2" layoutY="110.0" prefHeight="401.0" prefWidth="250.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="170.0">
+    <VBox alignment="CENTER" fillWidth="false" layoutX="51.2" layoutY="110.0" prefHeight="528.0" prefWidth="250.0" spacing="10.0" styleClass="detail" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="170.0">
         <ImageView fx:id="imageView" fitHeight="280.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true" />
         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="350.0" spacing="10.0" styleClass="like_button">
             <Label>
@@ -62,9 +62,15 @@
                 </graphic>
             </Label>
         </HBox>
-        <AnchorPane prefHeight="211.0" prefWidth="200.0">
-            <Button fx:id="addBook_btn" alignment="CENTER" layoutX="34.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="134.0" styleClass="button_1" text="Add to library" textAlignment="CENTER" />
-            <Button fx:id="update_btn" alignment="CENTER" layoutX="34.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="134.0" styleClass="button_1" text="Update quantity" textAlignment="CENTER" />
+        <AnchorPane prefHeight="106.0" prefWidth="200.0">
+            <Button fx:id="addBook_btn" alignment="CENTER" layoutX="21.0" layoutY="10.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="160.0" styleClass="button_1" text="Add to library" textAlignment="CENTER" AnchorPane.topAnchor="10.0">
+            <graphic>
+               <FontAwesomeIconView glyphName="PLUS" size="20" />
+            </graphic></Button>
+            <Button fx:id="update_btn" alignment="CENTER" layoutX="20.0" layoutY="12.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="160.0" styleClass="button_1" text="Update quantity" textAlignment="CENTER" AnchorPane.topAnchor="10.0">
+            <graphic>
+               <FontAwesomeIconView glyphName="ARCHIVE" size="20" />
+            </graphic></Button>
          <HBox layoutX="34.0" layoutY="57.0" prefHeight="30.0" prefWidth="134.0" styleClass="quantity_input">
             <children>
                   <Button fx:id="subtract_btn" mnemonicParsing="false" prefHeight="31.0" prefWidth="35.0" text="-" />
@@ -77,7 +83,10 @@
             </children>
          </HBox>
         </AnchorPane>
-        <Button fx:id="delete_btn" mnemonicParsing="false" prefHeight="32.0" prefWidth="82.0" styleClass="button_1" text="Delete" />
+        <Button fx:id="delete_btn" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" styleClass="button_1" text="Delete">
+         <graphic>
+            <FontAwesomeIconView glyphName="TRASH" size="20" />
+         </graphic></Button>
          <Label fx:id="notice_lbl" alignment="CENTER" prefHeight="32.0" prefWidth="195.0" textFill="#ea0000">
              <font>
                  <Font name="System Bold" size="14.0" />

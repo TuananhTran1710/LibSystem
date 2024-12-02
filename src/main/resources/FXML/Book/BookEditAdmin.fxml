@@ -67,14 +67,23 @@
             <Label fx:id="available_lbl" layoutX="36.0" layoutY="3.0" text="X in stock" />
         </AnchorPane>
         <AnchorPane layoutX="10.0" layoutY="414.0" prefHeight="50.0" prefWidth="250.0">
-            <Button fx:id="restore_btn" layoutX="80.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" styleClass="button_2" text="Restore" AnchorPane.topAnchor="9.0" />
-            <Button fx:id="deleteBook_btn" layoutX="80.0" layoutY="7.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" styleClass="button_1" text="Delete" AnchorPane.topAnchor="9.0" />
+            <Button fx:id="restore_btn" layoutX="70.0" layoutY="8.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" styleClass="button_2" text="Restore" AnchorPane.topAnchor="9.0">
+            <graphic>
+               <FontAwesomeIconView glyphName="UNDO" size="20" />
+            </graphic></Button>
+            <Button fx:id="deleteBook_btn" layoutX="70.0" layoutY="8.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" styleClass="button_1" text="Delete" AnchorPane.topAnchor="9.0">
+            <graphic>
+               <FontAwesomeIconView glyphName="TRASH" size="20" />
+            </graphic></Button>
             <Button fx:id="cancel_btn" layoutX="46.0" layoutY="-6.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="60.0" styleClass="button_2" text="Cancel" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="9.0" />
             <Button fx:id="saveEdit_btn" layoutX="167.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="60.0" styleClass="button_1" text="Save" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="9.0" />
         </AnchorPane>
         <AnchorPane prefHeight="37.0" prefWidth="250.0">
-            <Button fx:id="editBook_btn" layoutX="80.0" layoutY="8.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" styleClass="button_1" text="Edit" AnchorPane.topAnchor="0.0" />
-           <AnchorPane fx:id="quantity_hbox" layoutX="15.0" layoutY="1.0" prefHeight="42.0" prefWidth="219.0">
+            <Button fx:id="editBook_btn" layoutX="70.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" styleClass="button_1" text="Edit" AnchorPane.topAnchor="0.0">
+            <graphic>
+               <FontAwesomeIconView glyphName="EDIT" size="20" />
+            </graphic></Button>
+           <AnchorPane fx:id="quantity_hbox" layoutX="15.0" layoutY="1.0" prefHeight="42.0" prefWidth="219.0" visible="false">
             <HBox layoutX="42.0" layoutY="5.0" prefHeight="30.0" prefWidth="134.0" styleClass="quantity_input" AnchorPane.topAnchor="5.0">
                <children>
                   <Button fx:id="subtract_btn" mnemonicParsing="false" prefHeight="31.0" prefWidth="35.0" text="-" />

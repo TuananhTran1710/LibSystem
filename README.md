@@ -31,3 +31,5 @@ The application is written for educational purposes.
 
 # References:
 * Google Books API Documentation: [https://developers.google.com/books/docs/overview](https://developers.google.com/books/docs/overview)
+* Maven Repository: https://mvnrepository.com/ (Source for searching and managing Java libraries)
+* Images and designs are referenced on Google

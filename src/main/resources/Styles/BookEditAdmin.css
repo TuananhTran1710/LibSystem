@@ -242,7 +242,7 @@
 .comments .scroll-pane {
     -fx-border-color: #132A13;
     -fx-border-width: 2px;
-   // -fx-border-radius: 5px;
+    -fx-border-radius: 5px;
     -fx-background-color: #FFFFFF;
 }
 

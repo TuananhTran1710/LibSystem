@@ -112,7 +112,7 @@
          </HBox>
           <StackPane prefHeight="410.0" prefWidth="438.0">
               <children>
-                  <VBox fx:id="overview_vbox" fillWidth="false" prefHeight="420.0" prefWidth="438.0" styleClass="overview">
+                  <VBox fx:id="overview_vbox" fillWidth="false" prefHeight="420.0" prefWidth="438.0" styleClass="overview" visible="false">
                       <children>
                           <AnchorPane prefHeight="28.0" prefWidth="440.0">
                               <children>
@@ -271,7 +271,7 @@
                           </TableView>
                       </children>
                   </AnchorPane>
-                  <VBox fx:id="comment_vbox" prefHeight="445.0" prefWidth="354.0" spacing="10" styleClass="comments" visible="false">
+                  <VBox fx:id="comment_vbox" prefHeight="445.0" prefWidth="354.0" spacing="10" styleClass="comments">
                       <children>
                           <ScrollPane fx:id="scrollPane_cmt" fitToWidth="true" hbarPolicy="NEVER" prefHeight="435.0" prefWidth="478.0" vbarPolicy="ALWAYS">
                               <content>

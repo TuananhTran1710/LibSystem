@@ -1,69 +1,73 @@
 package com.jmc.libsystem.Controllers.User.UI;
 
 import com.jmc.libsystem.Controllers.User.DashboardController;
-import com.jmc.libsystem.Information.Book;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.*;
-
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.collections.ObservableList;
+import com.jmc.libsystem.Information.User;
+import com.jmc.libsystem.Models.Model;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
 
-public class DashboardControllerUITest {
+import static org.junit.jupiter.api.Assertions.*;
+import static org.testfx.util.WaitForAsyncUtils.waitForFxEvents;
 
-    @Mock
-    private DashboardController dashboardController;
+class DashboardControllerUITest extends ApplicationTest {
 
-    @Mock
-    private TextField search_tf;
+    private DashboardController controller;
 
-    @Mock
-    private Button search_btn;
-
-    @Mock
-    private HBox resultList_hb;
-
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-        dashboardController = new DashboardController();
-    }
-
-//    @Test
-//    public void testSearchBooksUI() {
-//        // Giả lập hành động tìm kiếm sách
-//        String searchTerm = "Java";
-//        ObservableList<Book> resultList = dashboardController.searchBooks(searchTerm);
-//
-//        // Kiểm tra rằng các sách có tên chứa "Java" được hiển thị
-//        assertNotNull(resultList);
-//        assertTrue(resultList.get(0).getTitle().contains("Java"));
-//    }
-
-    @Test
-    public void testPopularBooksUI() {
-        // Giả lập việc hiển thị sách phổ biến
-        HBox popularBox = dashboardController.popular_hbox;
-        assertNotNull(popularBox.getChildren());
+    @Override
+    public void start(Stage stage) throws Exception {
+        User user = new User("12", "hehe", "heke", "dad", "availbe");
+        Model.getInstance().setMyUser(user);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/User/Dashboard.fxml"));
+        Parent root = loader.load();
+        controller = loader.getController();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @Test
-    public void testReadingBooksUI() {
-        // Kiểm tra việc hiển thị sách đang đọc
-        HBox readingBox = dashboardController.reading_hbox;
-        assertNotNull(readingBox.getChildren());
+    void testSearchTextField() {
+        TextField searchTf = lookup("#search_tf").query();
+        assertNotNull(searchTf, "tf không tồn tại");
+
+        clickOn(searchTf).write("Cuong dep trai");
+        assertEquals("Cuong dep trai", searchTf.getText(), "Văn bản không đúng");
     }
 
     @Test
-    public void testNoticeButton() {
-        // Kiểm tra nút thông báo
-        Button noticeButton = dashboardController.notice_btn;
-        noticeButton.fire();
-        verify(noticeButton, times(1)).fire();
+    void testSearchButton() {
+        Button searchBtn = lookup("#search_btn").query();
+        assertNotNull(searchBtn, "nút search không tồn tại");
+
+        clickOn(searchBtn);
+
+        HBox resultListHb = lookup("#resultList_hb").query();
+        assertNotNull(resultListHb, "kết quả không hiển thị");
+    }
+
+    @Test
+    void testUserDataInitialization() {
+        Label nameLbl = lookup("#name_lbl").query();
+        assertNotNull(nameLbl, "không có tên");
+        assertEquals("Hi hehe!", nameLbl.getText(), "tên không chính xác");
+    }
+
+    @Test
+    void testSearchFunctionalityWithValidInput() {
+        TextField searchTf = lookup("#search_tf").query();
+        Button searchBtn = lookup("#search_btn").query();
+
+        clickOn(searchTf).write("cuong xau trai");
+        clickOn(searchBtn);
+
+        HBox resultListHb = lookup("#resultList_hb").query();
+        assertNotNull(resultListHb, "Kết quả tìm kiếm không hiển thị");
+
+        assertTrue(resultListHb.getChildren().size() > 0, "Kết quả tìm kiếm không có dữ liệu");
     }
 }

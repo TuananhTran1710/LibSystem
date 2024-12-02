@@ -202,8 +202,8 @@
 }
 
 .level3_content {
-    -fx-text-fill: #4A6B4A;
-    -fx-font-family: "Segoe UI";
+    -fx-text-fill: #4F772D;
+    -fx-font-family: "sans-serif";
     -fx-font-size:1.0em;
 }
 
@@ -227,9 +227,10 @@
 
 /* Comments */
 .comments .scroll-pane {
-    -fx-border-color: #132A13;
-    -fx-border-width: 2px;
-   // -fx-border-radius: 5px;
+    -fx-border-color: #B8D8B8;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
     -fx-background-color: #FFFFFF;
 }
 
@@ -265,37 +266,18 @@
     -fx-opacity: 1.0;
 }
 
-/* borrow history */
-.borrow_history TableView {
-    -fx-background-color: rgba(19, 42, 19, 0.05);
-    -fx-border-color: transparent;
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
-    -fx-table-cell-border-color: transparent;
-
+.comments .new_cmt {
+    -fx-background-color: #F5FAF5;
+    -fx-background-radius: 5px;
+    -fx-border-color: #B8D8B8;
+    -fx-border-radius: 5px;
 }
 
-.table-view .table-cell {
-    -fx-alignment: CENTER;
-}
-
-.table-view .cell {
-    -fx-wrap-text: true; /* Cho phép tự động xuống dòng */
-    -fx-alignment: CENTER; /* Căn giữa văn bản trong cell */
-}
-
-.borrow_history TableView .column-header {
-    -fx-background-color: #132A13;
-    -fx-border-width: 0 0 1 0;
-    -fx-border-color: #d0d0d0;
-}
-
-.borrow_history TableView .column-header .label {
-    -fx-text-fill: #FFFFFF;
-}
-
-.cmt{
--fx-background-color: #FFFFFF
+.right_detail .txt {
+    -fx-text-fill: #132A13;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bolder;
 }
 
 .time {

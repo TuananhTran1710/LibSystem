@@ -1,5 +1,6 @@
 package com.jmc.libsystem.SuggestionBox;
 
+import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
 import com.jmc.libsystem.Views.SearchCriteria;
 import javafx.scene.control.TextField;
@@ -8,9 +9,7 @@ import org.controlsfx.control.textfield.TextFields;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class SuggestionBook {
 
@@ -51,5 +50,13 @@ public class SuggestionBook {
             String[] cats = resultSet.getString("category").split(", ");
             categorySuggest.addAll(Arrays.asList(cats));
         }
+    }
+
+    public static List<Book> getListRecommend() {
+        List<Book> books = new ArrayList<>();
+        // Giả lập sách phổ biến
+        books.add(new Book("1", "The Great Gatsby", "F. Scott Fitzgerald", new byte[] {}));
+        books.add(new Book("2", "1984", "George Orwell", new byte[] {}));
+        return books;
     }
 }

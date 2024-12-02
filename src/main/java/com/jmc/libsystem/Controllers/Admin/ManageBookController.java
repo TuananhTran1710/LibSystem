@@ -5,7 +5,6 @@ import com.jmc.libsystem.HandleJsonString.SearchBookAPI;
 import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
-import com.jmc.libsystem.SuggestionBox.SuggestionBook;
 import com.jmc.libsystem.SuggestionBox.SuggestionBookAPI;
 import com.jmc.libsystem.Views.SearchCriteria;
 import com.jmc.libsystem.Views.ShowListBookFound;
@@ -302,11 +301,6 @@ public class ManageBookController implements Initializable {
     }
 
     public void resetBookLibrary() {
-        if (SuggestionBook.autoCompletionBinding != null) {
-            SuggestionBook.autoCompletionBinding.dispose();
-        }
-        SuggestionBook.autoCompletionBinding = TextFields.bindAutoCompletion(searchInLib_tf, SuggestionBook.titleSuggest);
-        SuggestionBook.autoCompletionBinding.setPrefWidth(searchInLib_tf.getWidth() - 160);
         searchInLib_tf.clear();
         criteriaSearchLib.setValue(SearchCriteria.TITLE);
 

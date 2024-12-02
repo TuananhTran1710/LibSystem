@@ -4,11 +4,9 @@ import com.jmc.libsystem.Controllers.Account.AccountProfileController;
 import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
@@ -27,7 +25,6 @@ public class ManageUserController implements Initializable {
     public TableColumn<Map<String, Object>, String> userIdColumn;
     public TableColumn<Map<String, Object>, String> fullNameColumn;
     public TableColumn<Map<String, Object>, String> emailColumn;
-    public TableColumn<Map<String, Object>, String> passwordColumn;
     public TableColumn<Map<String, Object>, String> stateColumn;
     public TableColumn<Map<String, Object>, Void> actionColumn;
 
@@ -116,7 +113,6 @@ public class ManageUserController implements Initializable {
         userIdColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("id")));
         fullNameColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("name")));
         emailColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("email")));
-        passwordColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("password")));
         stateColumn.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get("state")));
 
         actionColumn.setCellFactory(param -> new TableCell<>() {
@@ -159,40 +155,28 @@ public class ManageUserController implements Initializable {
         userTable.setItems(data);
     }
 
-    // lấy dữ liệu từ database
     public void getData(ResultSet resultSet) {
         data.clear();
-        // Tạo một Task để load
-        Task<Void> loadDataTask = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                try {
-                    while (resultSet.next()) {
-                        Map<String, Object> row = new HashMap<>();
-                        String id = resultSet.getString("user_id");
-                        String name = resultSet.getString("fullName");
-                        String email = resultSet.getString("email");
-                        String password = resultSet.getString("password");
-                        String state = resultSet.getString("state");
+        try {
+            while (resultSet.next()) {
+                Map<String, Object> row = new HashMap<>();
+                String id = resultSet.getString("user_id");
+                String name = resultSet.getString("fullName");
+                String email = resultSet.getString("email");
+                String state = resultSet.getString("state");
 
-                        row.put("id", id);
-                        row.put("name", name);
-                        row.put("email", email);
-                        row.put("password", password);
-                        row.put("state", state);
+                row.put("id", id);
+                row.put("name", name);
+                row.put("email", email);
+                row.put("state", state);
 
-                        // Thêm dữ liệu vào ObservableList trên JavaFX Application Thread
-                        Platform.runLater(() -> data.add(row));
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                return null;
+                // Thêm dữ liệu vào ObservableList
+                data.add(row);
             }
-        };
-
-        // Khởi chạy Task trong background
-        new Thread(loadDataTask).start();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
 
 }

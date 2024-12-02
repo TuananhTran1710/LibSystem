@@ -5,13 +5,10 @@ import com.jmc.libsystem.Controllers.Admin.ManageUserController;
 import com.jmc.libsystem.Information.User;
 import com.jmc.libsystem.Models.Model;
 import com.jmc.libsystem.QueryDatabase.QueryAccountData;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.Optional;
@@ -22,8 +19,6 @@ public class AccountProfileController extends BaseAccountDetailController {
     public Button back_btn;
     public Button deleteBT;
     public TextField status_tfl;
-
-    protected User current_user;
 
     private static AccountProfileController instance;
 
@@ -67,8 +62,9 @@ public class AccountProfileController extends BaseAccountDetailController {
 
     private void deleteAndMoveMenuCurrent() {
         if (!confirmDelete()) return;
-        QueryAccountData.updateState(getCurrent_user().getId(), "Delete");
+        QueryAccountData.updateState(getCurrent_user().getId(), "Deleted");
         moveMenuCurrent();
+        current_user.setState("Deleted");
     }
 
     @Override
@@ -124,7 +120,7 @@ public class AccountProfileController extends BaseAccountDetailController {
         String updatedFullName = fullname_fld.getText();
         String updatedEmail = email_fld.getText();
 
-        if (updatedEmail.isEmpty() || updatedFullName.isEmpty()){
+        if (updatedEmail.isEmpty() || updatedFullName.isEmpty()) {
             showAlert("Error", "Information not filled in", "You need to fill in completely");
             return;
         }

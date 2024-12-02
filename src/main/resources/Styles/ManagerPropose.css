@@ -1,52 +1,153 @@
-.suggestion-box {
-    -fx-padding: 10px;
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
-    -fx-background-color: #fff;
+.container {
+    -fx-background-color: #EEEEEE;
 }
 
-.suggestion-count {
-    -fx-font-size: 50px;
+.suggestion_view {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px 0 5px 0;
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+
+.suggestion_box1 {
+    -fx-padding: 10px;
+    -fx-background-color: linear-gradient(to bottom right, #6B4E71, #563A5C);
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 10, 0, 0, 10);
+}
+
+.suggestion_box2 {
+    -fx-padding: 10px;
+    -fx-background-color: linear-gradient(to bottom right, #F2994A, #D68636);
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 10, 0, 0, 10);
+}
+
+.suggestion_box3 {
+    -fx-padding: 10px;
+    -fx-background-color: linear-gradient(to bottom right, #2D5A27, #132A13);
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 10, 0, 0, 10);
+}
+
+.suggestion_box4 {
+    -fx-padding: 10px;
+    -fx-background-color: linear-gradient(to bottom right, #E15A5A, #C94A4A);
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 10, 0, 0, 10);
+}
+
+.background_icon {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 5px;
+}
+.icon {
+    -fx-fill: rgba(255, 255, 255, 0.2);
+    -fx-stroke: #FFFFFF;
+    -fx-stroke-width: 3;
+}
+
+.content {
+    -fx-text-fill: rgba(255, 255, 255, 0.2);
+    -fx-font-size: 1.5em;
+}
+
+.num {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 3.5em;
     -fx-font-weight: bold;
 }
 
 .choice-box {
     -fx-padding: 5px;
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
-    -fx-background-color: #fff;
+    -fx-background-radius: 10px;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #132A13;
+}
+
+.choice-box .arrow {
+    -fx-border-color: #132A13;
 }
 
 .list-view {
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
-    -fx-background-color: #fff;
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10px;
     -fx-font-size: 14px;
 }
 
 .lists-cell {
-    -fx-border-radius: 10px;
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-    -fx-background-color: #fff;
+    -fx-background-color: transparent;
     -fx-font-size: 10px;
 }
 
-.button-accept{
-    -fx-border-radius: 10px;
-    -fx-border-color: green;
-    -fx-border-width: 1px;
-    -fx-background-color: #fff;
-    -fx-text-fill: green;
+.list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #132A13;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;
+    -fx-opacity: 0.8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 7, 0.5, 0, 0);
 }
 
-.button-reject{
+.list-view .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #1A4314;
+    -fx-opacity: 1.0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+.list-view .scroll-bar:vertical {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 2px;
+}
+
+.list-view .scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: #0B4619;
+    -fx-opacity: 1.0;
+}
+
+.button-accept {
+    -fx-background-radius: 10px;
+    -fx-background-color: #132A13;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bolder;
+}
+
+.button-accept:hover {
+    -fx-background-color: #4F772D;
+}
+
+.button-reject {
     -fx-border-radius: 10px;
-    -fx-border-color: red;
+    -fx-border-color: #C94A4A;
     -fx-border-width: 1px;
-    -fx-background-color: #fff;
-    -fx-text-fill: red;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #C94A4A;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bolder;
+}
+
+.button-reject:hover {
+    -fx-background-radius: 10px;
+    -fx-background-color: #C94A4A;
+    -fx-text-fill: #FFFFFF;
+}
+
+.edit_num {
+    -fx-background-color: rgba(19, 42, 19, 0.05);
+    -fx-background-radius: 5px;
+    -fx-text-fill: #132A13;
+}
+
+.book_name {
+    -fx-font-family: "sans-serif";
+    -fx-font-size: 1.9em;
+    -fx-font-weight: bolder;
+    -fx-text-fill: #000000;
+}
+
+.author {
+    -fx-font-family: "sans-serif";
+    -fx-font-size: 1.1em;
+    -fx-text-fill: #4F772D;
 }

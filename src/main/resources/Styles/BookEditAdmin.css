@@ -215,8 +215,8 @@
 }
 
 .level3_content {
-    -fx-text-fill: #4A6B4A;
-    -fx-font-family: "Segoe UI";
+    -fx-text-fill: #4F772D;
+    -fx-font-family: "sans-serif";
     -fx-font-size:1.0em;
 }
 
@@ -242,7 +242,7 @@
 .comments .scroll-pane {
     -fx-border-color: #132A13;
     -fx-border-width: 2px;
-   // -fx-border-radius: 5px;
+    -fx-border-radius: 5px;
     -fx-background-color: #FFFFFF;
 }
 

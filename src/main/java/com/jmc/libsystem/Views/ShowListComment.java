@@ -33,7 +33,8 @@ public class ShowListComment {
         Label userIdLabel = new Label(comment.getUser_id());
         userIdLabel.setPrefWidth(285);
         userIdLabel.setStyle("-fx-font-weight: bold;" +
-                "-fx-font-size: 1.3em"); // Chữ đậm cho tên người dùng
+                "-fx-font-size: 1.4em;" +
+                "-fx-text-fill: #132A13;"); // Chữ đậm cho tên người dùng
 
         userIdLabel.setMaxWidth(Double.MAX_VALUE); // Đảm bảo Label dãn theo VBox
         userIdLabel.setMaxHeight(Double.MAX_VALUE);
@@ -64,15 +65,15 @@ public class ShowListComment {
         Text textLabel = new Text(comment.getText());
         textLabel.setWrappingWidth(300); // Điều chỉnh độ rộng của dòng comment
         textLabel.setStyle("-fx-wrap-text: true;" +
-                "-fx-font-size: 1.25em"); // Tự động xuống dòng khi vượt quá kích thước
+                "-fx-font-size: 1.3em;" +
+                "-fx-text-fill: #2C4F2C;"); // Tự động xuống dòng khi vượt quá kích thước
 
         // Thêm các thành phần vào VBox
         commentBox.getChildren().addAll(rating_id, textLabel);
-        commentBox.setStyle("-fx-background-color: #EEEEEE;" +
-                "-fx-border-radius: 5px;" +
+        commentBox.setStyle("-fx-background-color: #E8F3E8;" +
+                "-fx-background-radius: 5px;" +
                 "-fx-padding: 3px 10px 10px 10px;" +
-                "-fx-border-color: #132A13;" +
-                "-fx-border-weight: 2px;");
+                "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 7, 0.4, 0, 0);");
         commentBox.setPrefWidth(400);
         commentBox.setPrefHeight(55);
 

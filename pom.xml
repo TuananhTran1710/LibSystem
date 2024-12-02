@@ -149,7 +149,6 @@
                 <configuration>
                     <source>21</source>
                     <target>21</target>
-                    <compilerArgs></compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -186,6 +185,8 @@
                         --add-opens javafx.graphics/com.sun.glass.ui=ALL-UNNAMED
                         -Dnet.bytebuddy.experimental=true
                         -XX:+EnableDynamicAgentLoading
+                        <!-- -->
+                        --add-exports=javafx.base/com.sun.javafx.event=org.controlsfx.controls
                     </argLine>
                 </configuration>
             </plugin>

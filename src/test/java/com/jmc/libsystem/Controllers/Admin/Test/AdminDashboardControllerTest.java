@@ -8,6 +8,7 @@ import javafx.scene.control.TableView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
+import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class AdminDashboardControllerTest {
+class AdminDashboardControllerTest extends ApplicationTest {
 
     private AdminDashboardController controller;
 

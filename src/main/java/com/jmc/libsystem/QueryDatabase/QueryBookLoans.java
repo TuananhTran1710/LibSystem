@@ -1,5 +1,6 @@
 package com.jmc.libsystem.QueryDatabase;
 
+import com.jmc.libsystem.Information.Book;
 import com.jmc.libsystem.Information.BookLoan;
 import com.jmc.libsystem.Models.DatabaseDriver;
 import com.jmc.libsystem.Models.Model;
@@ -309,6 +310,14 @@ public class QueryBookLoans {
             e.printStackTrace();
         }
         return resultSet;
+    }
+
+    public List<Book> getLoansForUser(String userId) {
+        List<Book> books = new ArrayList<>();
+        // Giả lập việc lấy sách từ cơ sở dữ liệu dựa trên userId
+        books.add(new Book("1", "The Catcher in the Rye", "J.D. Salinger", new byte[] {}));
+        books.add(new Book("2", "Brave New World", "Aldous Huxley", new byte[] {}));
+        return books;
     }
 
 }

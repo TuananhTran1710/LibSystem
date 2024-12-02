@@ -107,6 +107,30 @@ TableView .column-header .label {
     -fx-text-fill: #132A13;
 }
 
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #132A13;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;
+    -fx-opacity: 0.8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 7, 0.5, 0, 0);
+}
+
+.table-view .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #1A4314;
+    -fx-opacity: 1.0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 7, 0.7, 0, 0);
+}
+
+.table-view .scroll-bar:vertical {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 2px;
+}
+
+.table-view .scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: #0B4619;
+    -fx-opacity: 1.0;
+}
+
 .hyperlink {
     -fx-text-fill: blue; /* Màu chữ mặc định */
 }
@@ -162,12 +186,11 @@ TableView .column-header .label {
 .surround {
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 10px;
-    -fx-border-color: #D3D3D3;
-    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 7, 0.5, 0, 0);
 }
 
 .part_title {
-    -fx-background-color: #132A13;
+    -fx-background-color: linear-gradient(to right, #132A13, #253F25);
     -fx-padding: 10px;
     -fx-spacing: 10px;
     -fx-border-radius: 10px 10px 0 0;

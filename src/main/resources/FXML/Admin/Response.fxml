@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="container" stylesheets="@../../Styles/ManagerPropose.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jmc.libsystem.Controllers.Admin.ResponseController">
    <children>
-      <ListView fx:id="list_propose" layoutX="60.0" layoutY="346.0" prefHeight="360.0" prefWidth="730.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+      <ListView fx:id="list_propose" focusTraversable="false" layoutX="60.0" layoutY="346.0" prefHeight="360.0" prefWidth="730.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
          <padding>
             <Insets bottom="10.0" top="10.0" />
          </padding></ListView>

@@ -1,7 +1,7 @@
 package com.jmc.libsystem.Controllers.Admin;
 
 import com.jmc.libsystem.QueryDatabase.QueryBookData;
-import com.jmc.libsystem.QueryDatabase.QueryBookrcm;
+import com.jmc.libsystem.QueryDatabase.QueryBookRecommend;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -29,7 +29,6 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/ProposeCell.fxml"));
                 loader.setController(this); // Liên kết controller
-                //System.out.println(getClass().getResource("/Fxml/Admin/ProposeCell.fxml"));
                 root = loader.load();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -120,11 +119,11 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
                 int quantity = Integer.parseInt(newValue);
                 if (quantity <= 0) {
                     // Nếu là số âm hoặc bằng 0, đặt lại giá trị về giá trị cũ
-                    number_tf.setText(oldValue);
+                    number_tf.setText("");
                 }
             } catch (NumberFormatException e) {
                 // Nếu không phải là số, đặt lại giá trị về giá trị cũ
-                number_tf.setText(oldValue);
+                number_tf.setText("");
             }
         });
         number_tf.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -144,7 +143,7 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
                             try {
                                 int number = Integer.parseInt(text);
                                 QueryBookData.updateBook(book_id, number);
-                                QueryBookrcm.updateStatePropose(book_id, "Accept");
+                                QueryBookRecommend.updateStatePropose(book_id, "Accept");
                                 QueryBookData.updateState(book_id, "publishing");
                                 showAccept();
                                 ResponseController.getInstance().updateNumber();
@@ -166,7 +165,7 @@ public class ProposeListCell extends ListCell<Map<String, String>> {
 
     private void onReject(String book_id) {
         //System.out.println("Rejected: " + book_id);
-        QueryBookrcm.updateStatePropose(book_id, "Reject");
+        QueryBookRecommend.updateStatePropose(book_id, "Reject");
         showReject();
         try {
             ResponseController.getInstance().updateNumber();

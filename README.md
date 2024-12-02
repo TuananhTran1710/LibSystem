@@ -1,6 +1,7 @@
 
 # Library Management Application in Java
 # Author
+TEAM : 3Idiots
 1. Tran Tuan Anh - 23020011
 2. Nguyen Phu Cuong - 23020017
 3. Nguyen Thi Huyen - 23020083
@@ -10,7 +11,7 @@ The application is designed to help users manage books, borrowing and returning 
 1. The application is developed using JavaFX and the JavaFX library.
 2. The application allows users to add, delete, and edit books.
 3. Information in the application is stored in a database, including data about books, book borrowing history, and users.
-4. The application uses Google Books API.
+4. The application utilizes the Google Books API and ChatGPT.
 
 # Installation
 1. Clone the project from the repository.
@@ -32,4 +33,4 @@ The application is written for educational purposes.
 # References:
 * Google Books API Documentation: [https://developers.google.com/books/docs/overview](https://developers.google.com/books/docs/overview)
 * Maven Repository: https://mvnrepository.com/ (Source for searching and managing Java libraries)
-* Images and designs are referenced on Google
+* Some images are taken from websites on Google 

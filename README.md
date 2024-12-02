@@ -1,7 +1,7 @@
 
 # Library Management Application in Java
 # Author
-TEAM : 3Idiots
+TEAM : 3 Idiots
 1. Tran Tuan Anh - 23020011
 2. Nguyen Phu Cuong - 23020017
 3. Nguyen Thi Huyen - 23020083
@@ -9,7 +9,7 @@ TEAM : 3Idiots
 Welcome to the library management application.
 The application is designed to help users manage books, borrowing and returning books in the library.
 1. The application is developed using JavaFX and the JavaFX library.
-2. The application allows users to add, delete, and edit books.
+2. The application provides 2 main interfaces: user and admin. When you logs in as an admin, you will have permissions such as adding, deleting, editing books, and users in the library. If you are a user, you can borrow, return books and track your reading information.
 3. Information in the application is stored in a database, including data about books, book borrowing history, and users.
 4. The application utilizes the Google Books API and ChatGPT.
 

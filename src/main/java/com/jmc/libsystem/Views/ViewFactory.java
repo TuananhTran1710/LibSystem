@@ -248,12 +248,10 @@ public class ViewFactory {
     }
 
     public AnchorPane getAccountProfile() {
-        if (accountProfile == null) {
-            try {
-                accountProfile = new FXMLLoader(getClass().getResource("/FXML/Account/AccountProfile.fxml")).load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            accountProfile = new FXMLLoader(getClass().getResource("/FXML/Account/AccountProfile.fxml")).load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return accountProfile;
     }

@@ -74,7 +74,7 @@ public class ProfileController implements Initializable {
     }
 
     //tải thông tin người dùng
-    public void loadUserProfile() {
+    private void loadUserProfile() {
         User current_user = Model.getInstance().getMyUser();
 
         //gán thông tin cho các textfield
@@ -93,6 +93,10 @@ public class ProfileController implements Initializable {
         // Hiện nút Edit và ẩn nút Save
         edit_profile_btn.setVisible(true);
         save_profile_btn.setVisible(false);
+    }
+
+    public User loadCurrentUser() {
+        return Model.getInstance().getMyUser();
     }
 
     //cho chỉnh sửa khi bấm edit
